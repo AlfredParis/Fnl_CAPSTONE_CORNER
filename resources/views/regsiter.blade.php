@@ -12,7 +12,7 @@
 @section('main')
     <br>
     <div class="container">
-        <form class="" action="{{ route('userCC.store') }}" method="POST">
+        <form action="{{ route('userCC.store') }}" method="POST">
             @csrf
 
             <div class="form-group">
@@ -50,13 +50,19 @@
             <div style="text-align: center">
                 <button type="submit" class="btn btn-primary">Register</button>
                 <br>
-                {{-- <div class="form-group" style="background-color:#f1f1f1"> --}}
+            </div>
+            {{-- <div class="form-group" style="background-color:#f1f1f1"> --}}
 
 
-                <span class="psw">Forgot <a href="#">password?</a></span>
-                {{-- </div> --}}
+            {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
 
+            <div class="line">_____________________________________________________</div>
+
+            {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
+            {{-- </div> --}}
+            <DIV class="sec-btn"><a href="{{ route('root') }}" class="btn btn-secondary">Already have an
+                    account</a>
+            </DIV>
         </form>
-    </div>
     </div>
 @endsection

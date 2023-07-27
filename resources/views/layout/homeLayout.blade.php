@@ -17,23 +17,40 @@
         }
 
         .back {
-            /* background-image: url('https://main.psu.edu.ph/wp-content/uploads/2022/06/psu-loader.gif');
-            background-repeat: no-repeat;
-            background-position: ;
-            background-size: 600px;
-            background-position: left; */
-            /* max-height: auto; */
+
             height: 100vh;
             display: grid;
-            grid-template-columns: 25% 25% 50%;
-            grid-template-rows: 12% 10% 23% 25% 25% 5%;
+            grid-template-columns: 50% 50%;
             grid-template-areas:
-                "logoB logoB logoB"
-                "nav nav nav"
-                "div1 div2 div3"
-                "div4 div4 div3"
-                "div4 div4 div3"
-                "div5 div5 div5"
+                "left right"
+
+            ;
+        }
+
+        .grid_child {
+            display: grid;
+        }
+
+        .grid_child.left {
+            grid-area: left;
+            grid-template-columns: 40% 60%;
+            grid-template-rows: 25% 65% 10%;
+            grid-template-areas:
+                "logoB div2"
+                "div4 div4"
+                "div5 div5"
+            ;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .grid_child.right {
+            grid-area: right;
+
+            grid-template-columns: ;
+            grid-template-rows: 100%;
+            grid-template-areas:
+
+                "div3"
             ;
         }
 
@@ -56,7 +73,7 @@
         .nav {
             grid-area: nav;
             background: linear-gradient(to bottom, #041AA0, #030351);
-            height: 70px;
+            height: auto;
             padding: 10px;
             display: flex;
             justify-content: center;
@@ -99,7 +116,7 @@
             grid-area: div4;
             display: flex;
             justify-content: center;
-            /* align-items: center; */
+
             margin: 20px;
             background-color: #95959500;
             border-radius: 10px;
@@ -108,12 +125,14 @@
 
         }
 
+
+
         .div5 {
             grid-area: div5;
             display: flex;
             justify-content: center;
 
-            background: linear-gradient(to bottom, #041AA0, #030351);
+            /* background: linear-gradient(to bottom, #041AA0, #030351); */
 
             padding: 10px;
 
@@ -122,17 +141,22 @@
         }
 
         .div5 a {
-            color: rgb(255, 255, 255);
+            color: #0D1282;
+            padding: 10px;
             text-decoration: none;
             margin-right: 20px;
             font-family: "Helvetica Neue", Arial, sans-serif;
-            transition: color 0.3s ease;
+
+            border-radius: 25px;
+            transition: color 0.3s ease, border 0.3s ease;
         }
 
         .div5 a:hover {
-            color: #F6A401;
+            color: #082dff;
 
-            border-radius: 4px;
+            border: 3px solid blue;
+
+            border-radius: 25px;
         }
 
 
@@ -176,7 +200,9 @@
             font-weight: bold;
         }
 
-
+        .sec-btn {
+            text-align: center;
+        }
 
 
         @media (max-width: 500px) {
@@ -222,8 +248,7 @@
 
         .logo {
 
-            width: auto;
-            height: auto;
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -232,27 +257,32 @@
         .logo img {
             max-width: auto;
             max-height: auto;
-            height: 150px;
+            height: 100px;
         }
 
 
 
         /* Custom styles for the login form */
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            max-width: 300px;
-            background-color: #b4b4b4e3;
-            border-radius: 10px;
+        .line {
+            color: #DADDE1;
+        }
 
+        .container {
+
+            margin: 0 auto;
+            padding: 15px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .form-group {
-            margin-top: 20px;
+            margin-top: 10px;
+
         }
 
         .form-group label {
@@ -264,6 +294,7 @@
         .form-control {
             width: 100%;
             padding: 10px;
+
             font-size: 16px;
             border-radius: 4px;
             border: 1px solid #ccc;
@@ -274,35 +305,39 @@
         }
 
         .btn-primary {
-            width: 50%;
+            width: 100%;
             padding: 10px;
             font-size: 16px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             margin-top: 10px;
-            background-color: #565656;
+            background-color: #1877F2;
             color: #fff;
+            transition: box-shadow 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #030351;
+            background-color: #1877F2;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
         }
 
         .btn-secondary {
-            width: 50%;
+            width: 75%;
             padding: 10px;
             font-size: 16px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             margin-top: 10px;
-            background-color: #f1f1f1;
-            color: #000;
+            background-color: #42B72A;
+            color: #ffffff;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background-color: #ddd;
+            background-color: #359023;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
         }
 
         .psw {
@@ -348,13 +383,14 @@
             transition: opacity 0.3s ease-in-out;
             font-family: Arial, sans-serif;
             font-size: 16px;
+            font-weight: 600;
             color: rgb(181, 0, 0);
-            max-width: 350px;
+            max-width: 100;
             text-align: center;
         }
 
         .alert-message {
-            margin-bottom: 10px;
+            margn-bottom: 10px;
         }
 
         .alert-close {
@@ -371,14 +407,7 @@
 </head>
 
 <body>
-    {{-- 
-    <script>
-        var msg = '{{ Session::get('alert') }}';
-        var exist = '{{ Session::has('alert') }}';
-        if (exist) {
-            alert(msg);
-        }
-    </script> --}}
+
 
     <div id="alertBox" class="alert">
 
@@ -450,50 +479,61 @@
 
 
     <div class="back">
-        <div class="logoB">
-            <div class="logo">
-                <img src="https://main.psu.edu.ph/wp-content/uploads/2022/07/PSU-LABEL_b.png" alt="PSU Logo">
+        <div class="grid_child left">
+            <div class="logoB">
+                <div class="logo">
+                    <img src="https://main.psu.edu.ph/wp-content/uploads/2022/07/PSU-LABEL_b.png" alt="PSU Logo">
+
+                </div>
+            </div>
+            <div class="div5"> <a href="{{ route('AU') }}">About Us</a></div>
+
+            <div class="div2">
+
+                <p style="text-align: center;">Capstone <br>
+                    Corner</p>
 
             </div>
+
+            <div class="div4">
+                <div class="greet">This is a website is created by Pangasinan State University,San Carlos City students
+                    that provides a
+                    efficient archiving system and a system proposal checker for the students. This website is still
+                    underdevelopment and this is not officially used by the said campus. This is website is for capstone
+                    project.
+                </div>
+            </div>
         </div>
-        <div class="nav">
+
+        <div class="grid_child right">
+            {{-- <div class="nav">
 
 
-            @section('topnav')
-                @parent
-            @show
+                @section('topnav')
+                    @parent
+                @show
 
 
+            </div> --}}
+            <div class="div3">
+                <div class="form">
+                    @section('main')
+
+                        @parent
+
+                    @show </div>
+            </div>
         </div>
-        <div class="div1"><img class="imgikot" src="https://main.psu.edu.ph/wp-content/uploads/2022/06/psu-loader.gif"
+
+        {{-- <div class="div1"><img class="imgikot" src="https://main.psu.edu.ph/wp-content/uploads/2022/06/psu-loader.gif"
                 alt="Psu logo loader">
-        </div>
-
-        <div class="div2">
-
-            <p style="text-align: center;">Capstone <br>
-                Corner</p>
-
-        </div>
-        <div class="div4">
-            <div class="greet">This is a website is created by Pangasinan State University,San Carlos City students
-                that provides a
-                efficient archiving system and a system proposal checker for the students. This website is still
-                underdevelopment and this is not officially used by the said campus. This is website is for capstone
-                project.
-            </div>
-        </div>
-
-        <div class="div3">
-            @section('main')
-
-                @parent
-
-            @show </div>
+        </div> --}}
 
 
 
-        <div class="div5"> <a href="{{ route('AU') }}">About Us</a></div>
+
+
+
     </div>
 
 

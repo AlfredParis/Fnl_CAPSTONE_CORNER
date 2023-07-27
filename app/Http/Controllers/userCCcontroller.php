@@ -119,7 +119,7 @@ class userCCcontroller extends Controller
                 $user->password = encrypt($request->input("password"));
                 $user->acctype = 'student';
                 $user->save();
-                return redirect()->route('userCC.index')->with('alert', 'user succesfully added!');
+                return redirect()->route('userCC.index')->with('alert', 'Account Succesfully Created!');
             } else {
                 return back()->with('alert', 'Password does not match')->withInput();
             }
