@@ -9,8 +9,8 @@
 @endsection
 
 @section('main')
-    <p class="text-style"> Archive Add Form</p>
-    <br>
+    <p class="text-style">Archive Add Form</p>
+
     <div class="container">
         <form class="" action="{{ route('admin.storeArch') }}" method="POST">
             @csrf
@@ -34,7 +34,7 @@
             </div>
 
             <div class="form-group">
-                <label for="pdf">GitHub Repository</label>
+                <label for="pdf">Documentation</label>
                 <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" value="{{ old('gh') }}"
                     id="pdf" required>
 

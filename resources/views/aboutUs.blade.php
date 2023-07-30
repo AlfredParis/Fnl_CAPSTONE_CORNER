@@ -125,13 +125,60 @@
             color: #333333;
             padding: 20px;
         }
+
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            background-color: #1877F2;
+            color: #fff;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #1877F2;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            width: 75%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            background-color: #42B72A;
+            color: #ffffff;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #359023;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        a {
+            text-decoration: none;
+            margin: 20px;
+            font-family: "Arial Black", Arial, sans-serif;
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 1.2;
+            color: #333333;
+        }
     </style>
 
 </head>
 
 <body>
 
-    <div class="top"> <a href="{{ route('root') }}" class="">back</a> <br> <br>
+    <div class="top"> <a href="{{ route('root') }}" class="btn btn-secondary">back</a> <br> <br>
         <div class="title">Capstone Corner</div>
     </div>
     <div class="nav">

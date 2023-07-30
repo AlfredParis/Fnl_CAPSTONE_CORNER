@@ -326,14 +326,13 @@
             align-items: center;
             display: flex;
             flex-direction: column;
-
             background-color: #b4b4b4e3;
             border-radius: 20px;
 
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .form-group label {
@@ -344,7 +343,7 @@
 
         .form-control {
             width: 100%;
-            padding: 10px;
+            padding: 5px;
             font-size: 16px;
             border-radius: 4px;
             border: 1px solid #ccc;
@@ -441,7 +440,7 @@
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #001580d6;
+            background: linear-gradient(to bottom, #041AA0, #030351);
             border: 2px solid #decb1e;
             padding: 15px 20px;
             border-radius: 6px;
@@ -450,7 +449,7 @@
             transition: opacity 0.3s ease-in-out;
             font-family: Arial, sans-serif;
             font-size: 16px;
-            color: #decb1e;
+            color: #ffffff;
             max-width: 350px;
             text-align: center;
         }

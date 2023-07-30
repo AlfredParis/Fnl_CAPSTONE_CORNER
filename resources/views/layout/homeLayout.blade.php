@@ -34,8 +34,10 @@
         .grid_child.left {
             grid-area: left;
             grid-template-columns: 40% 60%;
-            grid-template-rows: 25% 65% 10%;
+            grid-template-rows: 15% 25% 50% 10%;
             grid-template-areas:
+
+                "blank blank"
                 "logoB div2"
                 "div4 div4"
                 "div5 div5"
@@ -131,11 +133,7 @@
             grid-area: div5;
             display: flex;
             justify-content: center;
-
-            /* background: linear-gradient(to bottom, #041AA0, #030351); */
-
             padding: 10px;
-
             align-items: center;
 
         }
