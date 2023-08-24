@@ -12,7 +12,7 @@
     <p class="text-style">Archive Add Form</p>
 
     <div class="container">
-        <form class="" action="{{ route('admin.storeArch') }}" method="POST">
+        <form class="" action="{{ route('admin.storeArch') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
@@ -35,8 +35,8 @@
 
             <div class="form-group">
                 <label for="pdf">Documentation</label>
-                <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" value="{{ old('gh') }}"
-                    id="pdf" required>
+                <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" value="{{ old('pdf_file') }}"
+                    id="pdf">
 
             </div>
 

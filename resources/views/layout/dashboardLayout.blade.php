@@ -510,6 +510,12 @@
         alertClose.addEventListener('click', function() {
             alertBox.style.display = 'none';
         });
+
+
+        function openPDF(pdfPath) {
+            // Open the PDF in a new window
+            window.open(pdfPath, '_blank', 'width=800,height=600,scrollbars=yes');
+        }
     </script>
     {{-- Alert message end --}}
     <script>

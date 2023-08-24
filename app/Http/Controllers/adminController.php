@@ -151,27 +151,23 @@ class adminController extends Controller
     {
         $name = Session::get('fullNs');
         $arch = new archive;
+
         $arch->archID = $request->input("archID");
-        $arch->name = $request->input("name");
+
+         $existingArchive = Archive::where('archID', $request->input('archID'))->first();
+ if ($existingArchive) {
+         return redirect()->back()->with('alert', 'Archive ID already exists.')->withInput();
+    }
+    else{ $arch->name = $request->input("name");
         $arch->author = $request->input("author");
 
-// Check if a file was uploaded
-if ($request->hasFile('pdf_file')) {
-    $pdfFile = $request->file('pdf_file');
-
-    // Move the uploaded file to a directory and generate a unique filename
-    $filename = uniqid().'.'.$pdfFile->getClientOriginalExtension();
-    $pdfFile->move(public_path('pdfs'), $filename);
-
-    // Set the PDF file path in the archive object
-    $arch->pdf_file = 'pdfs/'.$filename;
-} else {
-    $arch->pdf_file = null;
-}
-
-
-        $gh = $request->input("gh");
+  if ($request->hasFile('pdf_file')) {
+        $pdfFile = $request->file('pdf_file');
+        $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+        $pdfFile->storeAs('pdfs', $fileName, 'public');
+$gh = $request->input("gh");
         if (isset($gh)) {
+            $arch->pdf_file =  $fileName;
             $arch->gh = $request->input("gh");
             $arch->save();
             Log::alert("Archive has been added by $name !");
@@ -182,6 +178,16 @@ if ($request->hasFile('pdf_file')) {
             Log::alert("Archive has been added $name !");
             return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
         }
+
+    }
+else{
+   // If they forgot the paper, tell them to bring one
+    return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+}
+}
+
+
+
 
     }
     public function archEdit($id)

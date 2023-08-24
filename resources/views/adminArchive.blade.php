@@ -25,6 +25,7 @@
                     <th>Archive ID</th>
                     <th>Archive Title</th>
                     <th>Author/s</th>
+                    <th> Documentation</th>
                     <th> GitHub Repository</th>
                     <th> View </th>
                     <th> Edit </th>
@@ -38,6 +39,9 @@
                         <td>{{ $archive->archID }}</td>
                         <td>{{ $archive->name }}</td>
                         <td>{{ $archive->author }}</td>
+                        <td><a href="#"
+                                onclick="openPDF('{{ asset('storage/pdfs/' . $archive->pdf_file) }}');">{{ $archive->pdf_file }}</a>
+                        </td>
                         <td>{{ $archive->gh }}</td>
                         <td><a href="/admin/{{ $archive->id }}" class="glowbtn">view</a></td>
 
