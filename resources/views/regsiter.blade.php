@@ -56,8 +56,8 @@
 
             {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
 
-            <div class="line">_____________________________________________________</div>
-
+            <div class="line">____________________________________________________</div>
+            <br>
             {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
             {{-- </div> --}}
             <DIV class="sec-btn"><a href="{{ route('root') }}" class="btn btn-secondary">Already have an

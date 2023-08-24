@@ -49,8 +49,8 @@
                 <br>
             </div>
             {{-- <div class="form-group" style="background-color:#f1f1f1"> --}}
-            <div class="line">_____________________________________________________</div>
-
+            <div class="line">____________________________________________________</div>
+            <br>
             {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
             {{-- </div> --}}
             <DIV class="sec-btn"><a href="{{ route('userCC.create') }}" class="btn btn-secondary">Create an Account</a>

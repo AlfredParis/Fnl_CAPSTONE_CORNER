@@ -66,9 +66,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
     // Admin Tables
 
     // Admin User Crud
-    Route::put('/{id}/updateUser', [adminController::class, 'userUpdate'])->name('update'); //user update 
+    Route::put('/{id}/updateUser', [adminController::class, 'userUpdate'])->name('update'); //user update
     Route::get('/{id}/edit', [adminController::class, 'userEdit'])->name('edit'); //user edit view
-    Route::get('/{user}/addUser', [adminController::class, 'addUser'])->name('addUser'); //user add view 
+    Route::get('/{user}/addUser', [adminController::class, 'addUser'])->name('addUser'); //user add view
     Route::post('/{userac}/storeUser', [adminController::class, 'storeUser'])->name('storeUser'); //user add function
     // Admin User Crud
 

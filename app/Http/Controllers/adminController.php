@@ -77,7 +77,8 @@ class adminController extends Controller
 
         $pass = $request->input("password");
         $exists = userCC::where('userID', $userID)->exists();
-        Log::alert("User has been added!");
+        $name = Session::get('fullNs');
+
         if ($exists) {
             return back()->with('alert', 'Id already exist!')->withInput();
         } else {
@@ -87,15 +88,18 @@ class adminController extends Controller
                 if ($userac == 'admin') {
                     $user->acctype = 'admin';
                     $user->save();
-                    return redirect()->route('userCC.index')->with('alert', 'user succesfully added!');
+                     Log::alert("$name has been added this account: $userID a admin");
+                    return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
                 } elseif ($userac == 'faculty') {
                     $user->acctype = 'faculty';
                     $user->save();
-                    return redirect()->route('userCC.index')->with('alert', 'user succesfully added!');
+                     Log::alert("$name has been added this account: $userID a faculty");
+                    return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
                 } else {
                     $user->acctype = 'student';
                     $user->save();
-                    return redirect()->route('userCC.index')->with('alert', 'user succesfully added!');
+                     Log::alert("$name has been added this account: $userID a student");
+                    return redirect()->route('admin.student')->with('alert', 'Student Account added!');
                 }
 
 
