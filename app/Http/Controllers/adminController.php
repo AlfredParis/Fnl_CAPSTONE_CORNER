@@ -20,7 +20,12 @@ class adminController extends Controller
     // TODO:apply the checker and akso connect it in the database
     public function index()
     {
-        return view('adminDashB');
+        $total_arch=archive::count() ;
+        $total_admin= userCC::where('acctype', 'admin')->count();
+        // $total_student=;
+        // $total_faculty=;
+        // $total_proposal=;
+        return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch);
     }
     public function checker()
     {

@@ -12,10 +12,21 @@
 @endsection
 
 @section('main')
-    <br>
-    <div class="container">
-        dashboard here <br>
-        acctype : {{ $accT = Session::get('fullNs') }}
+    <div class="dashB">
+        <div class="top"> acctype : {{ $accT = Session::get('accT') }}
+            <br> Name: {{ $acc = Session::get('fullNs') }}
+        </div>
+        <div class="admin">Total number of admin:{{ $tl_admin }}</div>
+        <div class="stud">Total number of student:{{ $tl_admin }} </div>
+        <div class="fac">Total number of faculty:{{ $tl_admin }} </div>
+        <div class="arch">Total number of archives:{{ $tl_arch }} </div>
+
+
+
+
+
+
+
     </div>
     </div>
 @endsection

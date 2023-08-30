@@ -316,6 +316,89 @@
         }
 
 
+        .dashB {
+
+
+            height: 75vh;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 20% 40% 40%;
+            grid-template-areas:
+                "top top"
+                "admin stud"
+                "fac arch"
+            ;
+            text-align: center;
+            gap: 10px;
+            margin: 20px;
+
+
+        }
+
+        .top {
+            margin: 0 auto;
+            padding: 40px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            grid-area: top;
+        }
+
+        .admin {
+            margin: 0 auto;
+            padding: 40px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            grid-area: admin;
+        }
+
+        .stud {
+            margin: 0 auto;
+            padding: 40px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            grid-area: stud;
+        }
+
+        .fac {
+            margin: 0 auto;
+            padding: 40px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            grid-area: fac;
+        }
+
+        .arch {
+            margin: 0 auto;
+            padding: 40px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            grid-area: arch;
+        }
 
 
         /* Custom styles for the login form */
