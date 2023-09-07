@@ -70,7 +70,7 @@ class userCCcontroller extends Controller
                 //
             }
         } else {
-            Session::forget('alert');
+            // Session::forget('alert');
             return view('login');
         }
     }

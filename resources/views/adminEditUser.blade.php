@@ -57,8 +57,8 @@
 
                     <option value="">select Account Type</option>
 
-                    <option value="Users" {{ old('acctype', $Users->acctype) == 'user' ? 'selected' : '' }}>
-                        user
+                    <option value="student" {{ old('acctype', $Users->acctype) == 'student' ? 'selected' : '' }}>
+                        student
                     </option>
 
                     <option value="faculty" {{ old('acctype', $Users->acctype) == 'faculty' ? 'selected' : '' }}>

@@ -12,6 +12,33 @@
             margin: 0%;
         }
 
+        .checker {
+            height: 75vh;
+            display: grid;
+            grid-template-columns: 30% 70%;
+            grid-template-rows: 30% 70%;
+            grid-template-areas:
+                "hid frm"
+                "check check"
+
+            ;
+            text-align: center;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .hid {
+            grid-area: hid;
+        }
+
+        .frm {
+            grid-area: frm;
+        }
+
+        .check {
+            grid-area: check;
+        }
+
         h2 {
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -235,6 +262,10 @@
 
         .navbar .right-link {
             margin-left: auto;
+        }
+
+        .p {
+            font-family: "Helvetica Neue", Arial, sans-serif;
         }
 
         @media (max-width: 600px) {
@@ -497,6 +528,14 @@
 
         }
 
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .haha {
+            margin: 50px;
+        }
+
         /* glow button  */
         .glowbtn {
             text-decoration: none;
@@ -558,6 +597,22 @@
         .highlight {
             background-color: yellow;
         }
+
+
+
+
+        /* pop up box css strat */
+        .box {
+            background-color: #565656;
+            width: 90%;
+            height: 90%;
+            color: #E6E4E4;
+            padding: 10px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        /* pop up box css end */
     </style>
 
 
@@ -619,7 +674,23 @@
                 x.type = "password";
             }
         }
+        // var openb = document.getElementById("open");
+        // var box = document.getElementById("box");
+
+        // function open_box() {
+        //     box.style.display = "block";
+        //     openb.style.display = "none";
+        // }
+
+        // function close_box() {
+        //     box.style.display = "none";
+        //     openb.style.display = "block";
+
+
+        // }
     </script>
+
+
 
 
     <div class="navbar">
@@ -637,6 +708,7 @@
     @section('main')
         @parent
     @show
+
 
 </body>
 

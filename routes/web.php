@@ -82,6 +82,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
 
     // Admin Archive Crud
 
+    //views
+
+Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
+
+    //views end
+
 });
 
 Route::get('/logout', function () {

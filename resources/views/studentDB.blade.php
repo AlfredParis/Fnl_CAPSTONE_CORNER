@@ -17,8 +17,8 @@
             <br> Name: {{ $acc = Session::get('fullNs') }}
         </div>
         <div class="admin">Total number of admin:{{ $tl_admin }}</div>
-        <div class="stud">Total number of student:{{ $tl_admin }} </div>
-        <div class="fac">Total number of faculty:{{ $tl_admin }} </div>
+        <div class="stud">Total number of student:{{ $tl_stud }} </div>
+        <div class="fac">Total number of faculty:{{ $tl_fac }} </div>
         <div class="arch">Total number of archives:{{ $tl_arch }} </div>
 
 

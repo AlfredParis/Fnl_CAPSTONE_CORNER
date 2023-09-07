@@ -38,7 +38,9 @@
                         <td>{{ $student->userID }}</td>
                         <td>{{ $student->fullname }}</td>
                         <td>{{ decrypt($student->password) }}</td>
-                        <td><a href="/usercc/{{ $student->id }}" class="glowbtn">view</a></td>
+                        <td><a href="{{ route('admin.view', ['id' => $student->id]) }}" class="glowbtn view-link"
+                                data-student-id="{{ $student->id }}">view</a>
+                        </td>
 
                         <td><a href="{{ route('admin.edit', ['id' => $student->id]) }}" class="glowbtn">edit</a></td>
                         <td>

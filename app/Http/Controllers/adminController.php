@@ -15,17 +15,14 @@ use Validator;
 
 class adminController extends Controller
 {
-    // TODO:design table
-    // TODO:make table of faculty and admin
-    // TODO:apply the checker and akso connect it in the database
     public function index()
     {
         $total_arch=archive::count() ;
         $total_admin= userCC::where('acctype', 'admin')->count();
-        // $total_student=;
-        // $total_faculty=;
+        $total_student=userCC::where('acctype', 'student')->count();
+        $total_faculty=userCC::where('acctype', 'faculty')->count();
         // $total_proposal=;
-        return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch);
+        return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
     }
     public function checker()
     {
@@ -33,7 +30,7 @@ class adminController extends Controller
     }
     public function archives()
     {
-        $archives = archive::paginate(2);
+        $archives = archive::paginate(6);
         return view('adminArchive')->with('arch', $archives);
     }
     public function student()
@@ -224,47 +221,64 @@ else{
         $delete->delete();
         return redirect()->route('admin.archives')->with('alert', 'The Archive has been Deleted Successfully!');
     }
-    public function findSimilarWords(Request $request)
-    {
-        $userInput = $request->input('user_input');
+   public function findSimilarWords(Request $request)
+{
+    $userInput = $request->input('user_input');
 
-        // Retrieve all sentences from the database
-        $sentences = DB::table('archives')->pluck('name');
+    // Split the user input into individual words
+    $inputWords = explode(' ', $userInput);
 
-        $similarSentences = [];
+    // Retrieve all titles from the database
+    $titles = DB::table('archives')->pluck('name');
 
-        // Loop through each sentence and check for similar words
-        foreach ($sentences as $sentence) {
-            $sentenceWords = explode(' ', $sentence);
-            $similarWords = [];
-            $similarWordCount = 0;
+    $similarTitles = [];
 
-            foreach ($sentenceWords as $word) {
-                $distance = levenshtein($userInput, $word);
+    // Loop through each title and check for similarity with any input word
+    foreach ($titles as $title) {
+        $titleWords = explode(' ', $title);
+
+        $similarWords = [];
+
+        foreach ($inputWords as $inputWord) {
+            foreach ($titleWords as $titleWord) {
+                $distance = levenshtein($inputWord, $titleWord);
 
                 // If the distance is below a certain threshold, consider it a similar word
-                if ($distance <= 2) {
-                    $similarWords[] = $word;
-                    $similarWordCount++;
+                if ($distance <= 5  ) { // Adjust the threshold as needed
+                    $similarWords[] = $titleWord;
+                    break; // No need to check the same input word against other title words
                 }
-            }
-
-            // Calculate the percentage of similarity
-            $similarityPercentage = ($similarWordCount / count($sentenceWords)) * 100;
-
-            // If there are similar words, add the sentence to the result
-            if (!empty($similarWords)) {
-                $similarSentences[] = [
-                    'sentence' => $sentence,
-                    'similar_words' => $similarWords,
-                    'similarity_percentage' => $similarityPercentage
-                ];
             }
         }
 
-        return view('adminChecker')->with('similarSentences', $similarSentences);
+        // Calculate the percentage of similarity based on the number of similar words
+        $similarityPercentage = (count($similarWords) / count($titleWords)) * 100;
+
+        // If there are similar words, add the title to the result
+        if (!empty($similarWords)) {
+            $similarTitles[] = [
+                'title' => $title,
+                'similar_words' => $similarWords,
+                'similarity_percentage' => round($similarityPercentage)
+            ];
+        }
     }
 
+    // Sort the results by similarity percentage in descending order
+    usort($similarTitles, function ($a, $b) {
+        return $b['similarity_percentage'] - $a['similarity_percentage'];
+    });
 
+    return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput);
+}
+
+
+public function view($id)
+    {
+         // Fetch student data from the database based on $studentId
+    $show = userCC::find($id);
+
+  return view('adminAccView')->with($show);
+    }
 
 }
