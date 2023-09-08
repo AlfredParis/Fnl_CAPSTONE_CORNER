@@ -224,7 +224,9 @@ else{
    public function findSimilarWords(Request $request)
 {
     $userInput = $request->input('user_input');
-
+  if (empty($userInput) || is_null($userInput)) {
+        return view('adminChecker')->with('similarTitles', []);
+    }
     // Split the user input into individual words
     $inputWords = explode(' ', $userInput);
 
@@ -237,37 +239,62 @@ else{
     foreach ($titles as $title) {
         $titleWords = explode(' ', $title);
 
+        $totalSimilarityPercentage = 0;
+        $wordCount = count($inputWords);
         $similarWords = [];
 
         foreach ($inputWords as $inputWord) {
+            $maxSimilarityPercentage = 0;
+            $inputWordFound = false; // Flag to track if input word is found in the title
+
             foreach ($titleWords as $titleWord) {
                 $distance = levenshtein($inputWord, $titleWord);
 
-                // If the distance is below a certain threshold, consider it a similar word
-                if ($distance <= 5  ) { // Adjust the threshold as needed
-                    $similarWords[] = $titleWord;
-                    break; // No need to check the same input word against other title words
+                // Calculate similarity percentage for this word
+                $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($titleWord))) * 100;
+
+                // If the similarity percentage is higher, update max similarity
+                if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
+                    $maxSimilarityPercentage = $wordSimilarityPercentage;
+
+                    // Check if this input word is already found in the title
+                    if (stripos($titleWord, $inputWord) !== false) {
+                        $inputWordFound = true;
+                    }
                 }
             }
+
+            // Add the similar word to the list only if it is found in the title
+            if ($inputWordFound) {
+                $similarWords[] = $inputWord;
+            }
+
+            $totalSimilarityPercentage += $maxSimilarityPercentage;
         }
 
-        // Calculate the percentage of similarity based on the number of similar words
-        $similarityPercentage = (count($similarWords) / count($titleWords)) * 100;
+        // Calculate the average similarity percentage for the title
+        if ($wordCount > 0) {
+            $averageSimilarityPercentage = $totalSimilarityPercentage / count($inputWords);
+        } else {
+            $averageSimilarityPercentage = 0;
+        }
 
-        // If there are similar words, add the title to the result
-        if (!empty($similarWords)) {
+        // If the average similarity percentage is at least 50%, and there are similar words, add the title to the result
+        if ($averageSimilarityPercentage >= 40 && !empty($similarWords)) {
             $similarTitles[] = [
                 'title' => $title,
-                'similar_words' => $similarWords,
-                'similarity_percentage' => round($similarityPercentage)
+                'average_similarity_percentage' => round($averageSimilarityPercentage, 2),
+                'similar_words' => array_unique($similarWords) // Remove duplicates from the list
             ];
         }
     }
 
-    // Sort the results by similarity percentage in descending order
+    // Sort the results by average similarity percentage in descending order
     usort($similarTitles, function ($a, $b) {
-        return $b['similarity_percentage'] - $a['similarity_percentage'];
+        return $b['average_similarity_percentage'] - $a['average_similarity_percentage'];
     });
+
+
 
     return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput);
 }

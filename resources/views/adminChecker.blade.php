@@ -21,15 +21,14 @@
             <h1 style="text-align:Center;">Title Checker </h1>
         </div>
         <div class="frm">
-            <div class="container">
+            <div class="containier">
                 <form action="{{ route('admin.words') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <div class="formGroup">
                         <label for="user_input">Enter a your title</label>
-                        <input class="form-control" type="text" name="user_input" id="user_input"
-                            >
+                        <input class="formControl" type="text" name="user_input" id="user_input">
                     </div>
-                    <button type="submit" class="btn btn-secondary">Find</button>
+                    <button type="submit" class="btn btnSecondary">Find</button>
                 </form>
             </div>
         </div>
@@ -54,7 +53,7 @@
                             @foreach ($similarTitles as $similarTitle)
                                 <tr>
                                     <th>{{ $similarTitle['title'] }}</th>
-                                    <th>{{ $similarTitle['similarity_percentage'] }}%</th>
+                                    <th>{{ $similarTitle['average_similarity_percentage'] }}%</th>
 
 
                                     <th>

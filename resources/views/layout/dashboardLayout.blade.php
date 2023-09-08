@@ -431,6 +431,40 @@
             grid-area: arch;
         }
 
+        /* container for checker */
+        .containier {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            background-color: #b4b4b4e3;
+            border-radius: 20px;
+
+        }
+
+        .formGroup {
+            margin-bottom: 10px;
+        }
+
+        .formGroup label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .formControl {
+            width: 490px;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-check-label {
+            margin-left: 5px;
+        }
 
         /* Custom styles for the login form */
         .container {
@@ -493,6 +527,22 @@
             margin-top: 10px;
             background-color: #f1f1f1;
             color: #000;
+        }
+
+        .btnSecondary {
+            width: 25%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            background-color: #f1f1f1;
+            color: #000;
+        }
+
+        .btnSecondary:hover {
+            background-color: #ddd;
         }
 
         .btn-secondary:hover {
