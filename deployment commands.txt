@@ -1,0 +1,17 @@
+git hub =
+git clone https://github.com/Godo25/Fnl_CAPSTONE_CORNER.git
+
+git pull origin main
+
+laravel=
+copy the file .env.example and rename the new copied file to .env
+
+composer install
+php artisan migrate -> yes
+php artisan storage:link
+php artisan key:generate
+php artisan db:seed --class=adminAcc
+php artisan db:seed --class=arvhiveSeed
+
+additional=
+composer require barryvdh/laravel-dompdf
