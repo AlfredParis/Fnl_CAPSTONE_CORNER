@@ -433,6 +433,17 @@
             alertBox.style.display = 'none';
         });
     </script>
+    @if (session('alert'))
+        <div class="alert alert-success">
+            {{ session('alert') }}
+            @if (session('pdf_url'))
+                <script>
+                    window.open("{{ session('pdf_url') }}", "_blank");
+                </script>
+            @endif
+        </div>
+    @endif
+
 
 
     <script>

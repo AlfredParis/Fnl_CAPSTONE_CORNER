@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\archiveController;
 use App\Http\Controllers\facultyController;
 use App\Http\Controllers\studentCC;
+use App\Http\Controllers\extraCtrl;
 
 
 use App\Http\Controllers\studentController;
@@ -33,6 +34,7 @@ Route::resource('/usercc', userCCcontroller::class)->names([
 ])->middleware('forQuery');
 
 
+Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF');
 
 
 

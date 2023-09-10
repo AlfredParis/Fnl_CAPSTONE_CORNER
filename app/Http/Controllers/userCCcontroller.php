@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Validator;
+use PDF;
 
 
 class userCCcontroller extends Controller
@@ -88,51 +89,66 @@ class userCCcontroller extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                "userID" => "required|min:2|max:20",
-                "fullname" => "required|min:4|max:50",
-                "password" => "required|min:4|max:100",
+      $validator = Validator::make($request->all(), [
+    "userID" => "required|min:2|max:20",
+    "fullname" => "required|min:4|max:50",
+    "password" => "required|min:4|max:100",
+]);
 
-            ]
-        );
-        if ($validator->fails()) {
+if ($validator->fails()) {
+    return back()->withErrors($validator)->withInput();
+}
 
-            return back()->withErrors($validator)->withInput();
-        }
-        Log::alert("User has been added!");
+Log::alert("User has been added!");
 
-        $user = new userCC;
-        $user->userID = $request->input("userID");
-        $userID = $request->input("userID");
-        $conPass = $request->input("conpassword");
+$user = new userCC;
+$user->userID = $request->input("userID");
+$userID = $request->input("userID");
+$conPass = $request->input("conpassword");
+$pass = $request->input("password");
+$exists = userCC::where('userID', $userID)->exists();
 
-        $pass = $request->input("password");
-        $exists = userCC::where('userID', $userID)->exists();
+if ($exists) {
+    return back()->with('alert', 'ID already exists!')->withInput();
+} else {
+    if ($conPass == $pass) {
+        $user->fullname = $request->input("fullname");
+        $user->password = encrypt($request->input("password"));
+        $user->acctype = 'student';
+        $user->save();
 
-        if ($exists) {
-            return back()->with('alert', 'Id already exist!')->withInput();
-        } else {
-            if ($conPass == $pass) {
-                $user->fullname = $request->input("fullname");
-                $user->password = encrypt($request->input("password"));
-                $user->acctype = 'student';
-                $user->save();
-                return redirect()->route('userCC.index')->with('alert', 'Account Succesfully Created!');
-            } else {
-                return back()->with('alert', 'Password does not match')->withInput();
-            }
+        // Generate the PDF with the same filename as the userID
+        $pdf = PDF::loadView('pdf.template', compact('user'));
+        $pdfFilename = $userID . '.pdf';
 
-        }
+        // Save the PDF to a temporary storage (optional)
+        $pdf->save(storage_path('app/public/' . $pdfFilename));
+
+        // Redirect the user to the 'userCC.index' route with a success message
+        return redirect()->route('userCC.index')->with('alert', 'Account Successfully Created!')
+   ->with('pdf_url', asset('storage/' . $pdfFilename));
+    } else {
+        return back()->with('alert', 'Password does not match')->withInput();
+    }
+}
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+         $data = []; // Replace with your data retrieval logic
+
+        // Generate the PDF
+        $pdf = PDF::loadView('pdf.template', compact('data'));
+
+        // Optionally, you can save the PDF to a file
+        // $pdf->save('pdf_filename.pdf');
+
+        // Return the PDF as a response to the user
+        return $pdf->stream('pdf_filename.pdf');
     }
 
     /**
