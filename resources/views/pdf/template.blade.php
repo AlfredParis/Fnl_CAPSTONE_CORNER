@@ -7,7 +7,7 @@
 
 <body>
     <h1>User Data PDF</h1>
-    <strong>Note: Please right down your user id and password </strong>
+    <strong>Note: Please dowload this PDF or right down your user id and password </strong>
     <p>This is the user data in PDF format:</p>
 
     <table>

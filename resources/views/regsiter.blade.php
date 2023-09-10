@@ -15,11 +15,11 @@
         <form action="{{ route('userCC.store') }}" method="POST">
             @csrf
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="userID">User ID</label>
                 <input type="text" class="form-control" placeholder="Enter ID" name="userID" value="{{ old('userID') }}"
                     required>
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="fullname">Full Name</label>

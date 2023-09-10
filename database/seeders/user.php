@@ -23,14 +23,14 @@ class user extends Seeder
             [
                 'acctype' => 'admin',
                 'userID' => 'admin-1',
-                'fullname' => 'Ralhp Valerio',
+                'fullname' => 'Alfred Paris',
                 'password' => encrypt('admin'),
 
             ],
             [
                 'acctype' => 'faculty',
                 'userID' => 'faculty-1',
-                'fullname' => 'Alfred Paris',
+                'fullname' => 'Rea Santos',
                 'password' => encrypt('faculty'),
 
             ],

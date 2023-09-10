@@ -90,7 +90,7 @@ class userCCcontroller extends Controller
     public function store(Request $request)
     {
       $validator = Validator::make($request->all(), [
-    "userID" => "required|min:2|max:20",
+
     "fullname" => "required|min:4|max:50",
     "password" => "required|min:4|max:100",
 ]);
@@ -101,12 +101,14 @@ if ($validator->fails()) {
 
 Log::alert("User has been added!");
 
-$user = new userCC;
-$user->userID = $request->input("userID");
-$userID = $request->input("userID");
-$conPass = $request->input("conpassword");
-$pass = $request->input("password");
-$exists = userCC::where('userID', $userID)->exists();
+    $user = new userCC;
+   $total_student=userCC::where('acctype', 'student')->count();
+   $latestUser="student-".$total_student + 1;
+    $user->userID = $latestUser;
+    $userID =$latestUser;
+    $conPass = $request->input("conpassword");
+    $pass = $request->input("password");
+    $exists = userCC::where('userID', $userID)->exists();
 
 if ($exists) {
     return back()->with('alert', 'ID already exists!')->withInput();
