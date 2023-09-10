@@ -1,10 +1,7 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="https://www.facebook.com/alfred.gudo.5/"><img src="https://scontent.fcrk2-2.fna.fbcdn.net/v/t39.30808-6/371375282_3591345634470661_3560245869505029687_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a2f6c7&_nc_eui2=AeFHL8iLOXLKipjznXtTDQxf3NxrheUdSizc3GuF5R1KLCXubVg79fY5nwzVHnTMJYL26n9gyfs6AQZRLDGZY0l9&_nc_ohc=YhyiwXSmA-oAX99_i6i&_nc_oc=AQl2oSfpHzca_Bj51tAQOc9byd0M1-2P0f80OsbZacRC2XL6AEFL7-yZcISvT2FqDX57CiLw2j3bG5qIuE8U8Mdq&_nc_ht=scontent.fcrk2-2.fna&oh=00_AfBrd4w_JEkOGRUfEMCZ57WpZJCWuG6_U4GNfSLBqi8AMA&oe=6501F32E" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="" alt="License"></a>
+
 </p>
 
 ## About Capstone Corner
