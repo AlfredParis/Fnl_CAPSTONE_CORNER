@@ -16,8 +16,8 @@
 @section('main')
     <br>
     <div class="dashB">
-        <div class="top"> acctype : {{ $accT = Session::get('accT') }}
-            <br> Name: {{ $acc = Session::get('fullNs') }}
+        <div class="top"> Account Type : <strong>{{ $accT = Session::get('accT') }}</strong>
+            <br> Name:<strong> {{ $acc = Session::get('fullNs') }} </strong>
         </div>
         <div class="admin">Total number of admin:{{ $tl_admin }}</div>
         <div class="stud">Total number of student:{{ $tl_stud }} </div>

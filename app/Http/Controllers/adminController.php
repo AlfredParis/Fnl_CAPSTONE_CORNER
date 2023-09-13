@@ -153,14 +153,10 @@ class adminController extends Controller
     {
         $name = Session::get('fullNs');
         $arch = new archive;
+        $total_arch=archive::count();
+        $arch->archID = "arch-".$total_arch+1;
 
-        $arch->archID = $request->input("archID");
-
-         $existingArchive = Archive::where('archID', $request->input('archID'))->first();
- if ($existingArchive) {
-         return redirect()->back()->with('alert', 'Archive ID already exists.')->withInput();
-    }
-    else{ $arch->name = $request->input("name");
+         $arch->name = $request->input("name");
         $arch->author = $request->input("author");
 
   if ($request->hasFile('pdf_file')) {
@@ -186,7 +182,7 @@ else{
    // If they forgot the paper, tell them to bring one
     return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
 }
-}
+
 
 
 

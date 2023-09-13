@@ -188,7 +188,7 @@
         <div class="box">
 
             <div class="pic"><img class="pics"
-                    src="https://scontent.fcrk2-2.fna.fbcdn.net/v/t39.30808-6/345049655_3001798390115082_388009993369835840_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGVFlvESYlO-Cb_jA4E2IHFWMaXVHegksBYxpdUd6CSwBA0S7YbmuEefIeWp9jlrGAbNkOTSmfMC1lsPj8OWNSs&_nc_ohc=q-_Hm1sxo2kAX-PmxuB&_nc_ht=scontent.fcrk2-2.fna&oh=00_AfDAMiuoZ0KnhYzqjWeJkh2N6Ci6Av9IDMvvWapfxK0LaA&oe=64BD47E9"
+                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                     alt="picture nang pogi"></div>
             <div class="name">Alfred D. Paris</div>
             <div class="txt">Main developer of this project. Responsibile for developing the whole stack of this
@@ -209,7 +209,7 @@
     <div class="div3">
         <div class="box">
             <div class="pic"><img class="pics"
-                    src="https://scontent.fcrk2-2.fna.fbcdn.net/v/t39.30808-6/253805637_401705055028149_2316147403542981105_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_eui2=AeEeOaP0wWDI-vZLQAYrqxhOK2Z3hwfrJ9wrZneHB-sn3LhfWWFKOCv3heh89nirMON0VzDS2V_Qi0Vn9cMICGY5&_nc_ohc=q2beKVFW2u8AX_3lX2F&_nc_ht=scontent.fcrk2-2.fna&oh=00_AfCyIqzDAeGL8kK20a-bc476wLcSX_4oQIH-L-4uaOyRTg&oe=64BD16DB"
+                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                     alt=""></div>
             <div class="name">Jayson Sanchez </div>
             <div class="txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo assumenda reiciendis, sed
@@ -220,7 +220,7 @@
     <div class="div4">
         <div class="box">
             <div class="pic"><img class="pics"
-                    src="https://scontent.fmnl9-4.fna.fbcdn.net/v/t39.30808-6/272787736_1575116106201154_484531836035116220_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHi5zqv_7SfKbRW0iwmtaDK4sbrMl-_wO_ixusyX7_A7zl85yuZvLCijRUdTrmgCKDfYlD8BkYLfr2bFFoYz8tT&_nc_ohc=txVDLS6FAG4AX-b1Wto&_nc_ht=scontent.fmnl9-4.fna&oh=00_AfCzY55ekaTNZlukjRvfNfT8867Jh1Ok7Z4jQ69Xg4xiIA&oe=64BCCF75"
+                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                     alt=""></div>
             <div class="name">Diosdado Devera </div>
             <div class="txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, nesciunt eligendi

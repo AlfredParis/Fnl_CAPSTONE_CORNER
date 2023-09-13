@@ -316,7 +316,7 @@
         .navbar a:hover {
             color: #F6A401;
 
-            border-radius: 10px;
+            border-radius: 4px;
         }
 
 
@@ -573,21 +573,10 @@
         }
 
         .active {
-
-            padding-top: 15px;
-            padding-bottom: 15px;
-            padding-right: 10px;
-            padding-left: 10px;
-            background-color: #ffffff2a;
             color: #f6e201;
-            box-shadow: 0px -2px 2px rgba(255, 255, 255, 0.375);
-            border-radius: 10px;
+
 
         }
-
-
-
-
 
         body {
             font-family: "Helvetica Neue", Arial, sans-serif;
@@ -735,36 +724,12 @@
                 x.type = "password";
             }
         }
-        // var openb = document.getElementById("open");
-        // var box = document.getElementById("box");
-
-        // function open_box() {
-        //     box.style.display = "block";
-        //     openb.style.display = "none";
-        // }
-
-        // function close_box() {
-        //     box.style.display = "none";
-        //     openb.style.display = "block";
-
-
-        // }
     </script>
 
 
 
 
-    <div class="navbar">
-        @section('topnav')
 
-            @parent
-
-        @show
-        @section('logout')
-            <a href="{{ route('logout') }}" class="right-link inactive">Logout</a>
-
-        @show
-    </div>
 
     @section('main')
         @parent

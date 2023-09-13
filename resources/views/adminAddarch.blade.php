@@ -15,11 +15,11 @@
         <form class="" action="{{ route('admin.storeArch') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="archID">Archive ID</label>
                 <input type="text" class="form-control" placeholder="Enter ID" name="archID" value="{{ old('archID') }}"
                     required>
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="name">Archive Title</label>
