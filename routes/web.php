@@ -90,6 +90,7 @@ Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
 
     //views end
 
+    Route::post('/import-excel', [adminController::class, 'importExcel'])->name('import.excel.post');
 });
 
 Route::get('/logout', function () {

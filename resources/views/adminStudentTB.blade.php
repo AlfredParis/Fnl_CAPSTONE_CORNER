@@ -15,12 +15,30 @@
 
 @section('main')
     <br>
+<div class="top-left-anchor"> 
+           
+            
+    <form action="{{ route('admin.import.excel.post') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+     
+            
+            <input type="file" style=" margin-left: 1%;" name="excel_file" id="excel_file" accept=".xlsx, .xls" required>
+        
+        <br> <br>
+            <button type="submit" class="glowbtn">Import Excel Student</button>
+        
+    </form>
+</div><br>
+    
     <div class="table-wrapper">
-
-        <table class="fl-table">
+        
+        <table class="fl-table"><br>
             <a href="{{ route('admin.addUser', ['user' => 'student']) }}" class="glowbtn">Add Student</a>
-
-            <br><br><br>
+         
+         
+            
+            <br><br>
             <thead>
                 <tr>
                     <th>ID</th>

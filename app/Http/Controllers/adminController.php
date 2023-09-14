@@ -303,5 +303,16 @@ public function view($id)
 
   return view('adminAccView')->with($show);
     }
+    public function importExcel(Request $request)
+    {
+        $file = $request->file('excel_file');
+
+        Excel::import(new ExcelDataImport, $file);
+
+        return redirect()->route('import.excel')->with('success', 'Excel data imported successfully.');
+    }
+
+
+
 
 }

@@ -8,6 +8,8 @@
     <title>@yield('title')</title>
 
     <style>
+
+    
         body {
             margin: 0%;
         }
@@ -26,6 +28,16 @@
             gap: 10px;
             margin: 20px;
         }
+
+
+
+        .top-left-anchor {
+    /* position: absolute; */
+    margin-left: 4%;
+    padding: 10px; /* Add padding to create some space around the anchor text */
+    /* background-color: #ccc; Add a background color for visibility */
+    text-decoration: none; /* Remove the default underline on the anchor */
+}
 
         .hid {
             grid-area: hid;
@@ -578,9 +590,9 @@
             padding-bottom: 15px;
             padding-right: 10px;
             padding-left: 10px;
-            background-color: #ffffff2a;
+            background-color: #d9ee1e5a;
             color: #f6e201;
-            box-shadow: 0px -2px 2px rgba(255, 255, 255, 0.375);
+            box-shadow: 0px -2px 2px rgba(212, 231, 12, 0.375);
             border-radius: 10px;
 
         }
@@ -607,7 +619,7 @@
             font-family: "Helvetica Neue", Arial, sans-serif;
             font-weight: bold;
             transition: background-color 0.3s ease, border-radius 0.3s ease, color 0.3s ease;
-
+margin-left: 1%;
         }
 
         .glowbtn:hover {
