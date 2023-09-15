@@ -18,7 +18,7 @@
 <div class="top-left-anchor"> 
            
             
-    <form action="{{ route('admin.import.excel.post') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
      

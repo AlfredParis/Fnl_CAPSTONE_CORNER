@@ -27,6 +27,8 @@ Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
 
+
+
 Route::resource('/usercc', userCCcontroller::class)->names([
     'index' => 'userCC.index',
     'create' => 'userCC.create',
@@ -57,6 +59,9 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin'], function () {
+//Excel imports
+Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
+//excel import end
 
     // Admin Tables
     Route::get('/', [adminController::class, 'index'])->name('index');
@@ -90,7 +95,7 @@ Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
 
     //views end
 
-    Route::post('/import-excel', [adminController::class, 'importExcel'])->name('import.excel.post');
+
 });
 
 Route::get('/logout', function () {

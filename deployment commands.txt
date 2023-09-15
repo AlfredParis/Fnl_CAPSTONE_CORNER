@@ -15,3 +15,11 @@ php artisan db:seed --class=arvhiveSeed
 
 additional=
 composer require barryvdh/laravel-dompdf
+
+
+
+additional steps:
+Remove this is the php.ini of the xampp : ;extension=gd 
+This is for the excel import
+and then run this command in the project 
+composer require phpoffice/phpspreadsheet

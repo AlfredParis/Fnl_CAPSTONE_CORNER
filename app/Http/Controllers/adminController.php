@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\archive;
 use App\Models\userCC;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -303,14 +304,8 @@ public function view($id)
 
   return view('adminAccView')->with($show);
     }
-    public function importExcel(Request $request)
-    {
-        $file = $request->file('excel_file');
 
-        Excel::import(new ExcelDataImport, $file);
 
-        return redirect()->route('import.excel')->with('success', 'Excel data imported successfully.');
-    }
 
 
 
