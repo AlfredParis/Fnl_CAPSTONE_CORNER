@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\STUDENT;
 
 use App\Http\Controllers\userCCcontroller;
 use Validator;
@@ -22,6 +22,7 @@ class adminController extends Controller
         $total_admin= userCC::where('acctype', 'admin')->count();
         $total_student=userCC::where('acctype', 'student')->count();
         $total_faculty=userCC::where('acctype', 'faculty')->count();
+
         // $total_proposal=;
         return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
     }
@@ -37,8 +38,19 @@ class adminController extends Controller
     public function student()
     {
         $studentPage = userCC::where('acctype', 'student')->paginate(2);
+        $studentNew = STUDENT::paginate(2);
 
-        return view('adminStudentTB')->with('students', $studentPage);
+
+        $users = DB::table('USER_ACC_EMPS')
+        ->join('EMPLOYEE', 'USER_ACC_EMPS.EMP_ID', '=', 'EMPLOYEE.EMP_ID')
+        ->select('USER_ACC_EMPS.EMP_ID', 'EMPLOYEE.NAME')
+        ->get();
+
+        return view('adminStudentTB')->with('students', $studentPage)->with('SN', $studentNew);
+
+
+
+
     }
     public function faculty()
     {

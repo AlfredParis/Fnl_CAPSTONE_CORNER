@@ -27,45 +27,47 @@ class extraCtrl extends Controller
     }
     public function importExcelSTUDENT(Request $request)
     {
-       
+
             $this->validate($request, [
                 'excel_file' => 'required|mimes:xlsx,xls',
             ]);
-        
+
             $excelFile = $request->file('excel_file');
-        
+
             $spreadsheet = IOFactory::load($excelFile->getPathname());
             $worksheet = $spreadsheet->getActiveSheet();
-        
+
             // Initialize an empty array to store user data
             $userData = [];
-        
+
             // Start from the second row (assuming the first row contains headers)
-            $rowIndex = 1;
-        
+            $rowIndex = 2;
+
             foreach ($worksheet->getRowIterator() as $row) {
-                // Get user ID from the first column (A)
-                $name = $worksheet->getCellByColumnAndRow(1, $rowIndex)->getValue();
-        
-                // Get user name from the second column (B)
-                $c_id = $worksheet->getCellByColumnAndRow(2, $rowIndex)->getValue();
-        
+
+                $s_id = $worksheet->getCellByColumnAndRow(1, $rowIndex)->getValue();
+
+                $name = $worksheet->getCellByColumnAndRow(2, $rowIndex)->getValue();
+
+                $c_id = $worksheet->getCellByColumnAndRow(3, $rowIndex)->getValue();
+
                 // Check if both ID and name are present
                 if ($name && $c_id) {
                     $userData[] = [
+                        'S_ID' => $s_id,
                         'NAME' => $name,
                         'C_ID' => $c_id,
                     ];
                 }
-        
+
                 $rowIndex++;
             }
-        
+
             // Save user data to the database
             STUDENT::insert($userData);
-        
+
             return redirect()->route('admin.student')->with('alert','Data imported successfully');
-        
-        
+
+
     }
 }
