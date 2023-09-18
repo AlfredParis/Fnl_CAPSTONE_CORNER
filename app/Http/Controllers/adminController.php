@@ -41,12 +41,12 @@ class adminController extends Controller
         $studentNew = STUDENT::paginate(2);
 
 
-        $users = DB::table('USER_ACC_EMPS')
-        ->join('EMPLOYEE', 'USER_ACC_EMPS.EMP_ID', '=', 'EMPLOYEE.EMP_ID')
-        ->select('USER_ACC_EMPS.EMP_ID', 'EMPLOYEE.NAME')
-        ->get();
+        $users = DB::table('s_t_u_d_e_n_t_s')
+        ->join('c_o_u_r_s_e_s', 's_t_u_d_e_n_t_s.C_ID', '=', 'c_o_u_r_s_e_s.C_ID')
+        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')->paginate(2)
+        ;
 
-        return view('adminStudentTB')->with('students', $studentPage)->with('SN', $studentNew);
+        return view('adminStudentTB')->with('students', $studentPage)->with('SN', $users);
 
 
 

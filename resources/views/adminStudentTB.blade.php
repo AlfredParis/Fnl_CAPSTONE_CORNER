@@ -98,7 +98,7 @@
 
                         <td>{{ $student->S_ID }}</td>
                         <td>{{ $student->NAME }}</td>
-                        <td>{{ $student->C_ID }}</td>
+                        <td>{{ $student->C_DESC }}</td>
 
 
 
