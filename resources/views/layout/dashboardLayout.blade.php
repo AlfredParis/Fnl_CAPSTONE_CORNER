@@ -365,9 +365,9 @@
             height: 75vh;
             display: grid;
             grid-template-columns: 50% 50%;
-            grid-template-rows: 20% 40% 40%;
+            grid-template-rows: 50% 50%;
             grid-template-areas:
-                "top top"
+
                 "admin stud"
                 "fac arch"
             ;
@@ -389,6 +389,19 @@
             border-radius: 20px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
             grid-area: top;
+        }
+
+        .accDet {
+            margin: 0 auto;
+            padding: 10px;
+            align-items: center;
+
+            flex-direction: column;
+            width: 375px;
+            color: white;
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+
         }
 
         .admin {
@@ -779,8 +792,16 @@
 
             @parent
 
+
+        @show
+
+        @section('accDetails')
+            <div class="accDet"> Account Type : <strong>{{ $accT = Session::get('accT') }}</strong>
+                <br> Name:<strong> {{ $acc = Session::get('fullNs') }} </strong>
+            </div>
         @show
         @section('logout')
+
             <a href="{{ route('logout') }}" class="right-link inactive" onclick="menuToggle();">Logout</a>
 
         @show
