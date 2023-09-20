@@ -8,8 +8,6 @@
     <title>@yield('title')</title>
 
     <style>
-
-    
         body {
             margin: 0%;
         }
@@ -32,12 +30,14 @@
 
 
         .top-left-anchor {
-    /* position: absolute; */
-    margin-left: 4%;
-    padding: 10px; /* Add padding to create some space around the anchor text */
-    /* background-color: #ccc; Add a background color for visibility */
-    text-decoration: none; /* Remove the default underline on the anchor */
-}
+            /* position: absolute; */
+            margin-left: 4%;
+            padding: 10px;
+            /* Add padding to create some space around the anchor text */
+            /* background-color: #ccc; Add a background color for visibility */
+            text-decoration: none;
+            /* Remove the default underline on the anchor */
+        }
 
         .hid {
             grid-area: hid;
@@ -619,7 +619,7 @@
             font-family: "Helvetica Neue", Arial, sans-serif;
             font-weight: bold;
             transition: background-color 0.3s ease, border-radius 0.3s ease, color 0.3s ease;
-margin-left: 1%;
+            margin-left: 1%;
         }
 
         .glowbtn:hover {
@@ -728,6 +728,14 @@ margin-left: 1%;
             window.open(pdfPath, '_blank', 'width=800,height=600,scrollbars=yes');
         }
     </script>
+    {{-- Log out Animation --}}
+    <script>
+        function menuToggle() {
+            const toggleMenu = document.querySelector('.menu');
+            toggleMenu.classList.toggle('active');
+        }
+    </script>
+    {{-- Log out Animation  END --}}
     {{-- Alert message end --}}
     <script>
         function conPass() {
@@ -773,7 +781,7 @@ margin-left: 1%;
 
         @show
         @section('logout')
-            <a href="{{ route('logout') }}" class="right-link inactive">Logout</a>
+            <a href="{{ route('logout') }}" class="right-link inactive" onclick="menuToggle();">Logout</a>
 
         @show
     </div>
