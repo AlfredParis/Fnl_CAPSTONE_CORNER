@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\userCC;
+use App\Models\student_acc;
+use App\Models\STUDENT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -89,49 +91,53 @@ class userCCcontroller extends Controller
      */
     public function store(Request $request)
     {
-      $validator = Validator::make($request->all(), [
+//       $validator = Validator::make($request->all(), [
 
-    "fullname" => "required|min:4|max:50",
-    "password" => "required|min:4|max:100",
-]);
+//     "fullname" => "required|min:4|max:50",
+//     "password" => "required|min:4|max:100",
+// ]);
 
-if ($validator->fails()) {
-    return back()->withErrors($validator)->withInput();
-}
+// if ($validator->fails()) {
+//     return back()->withErrors($validator)->withInput();
+// }
 
-Log::alert("User has been added!");
+// Log::alert("User has been added!");
 
-    $user = new userCC;
-   $total_student=userCC::where('acctype', 'student')->count();
-   $latestUser="student-".$total_student + 1;
-    $user->userID = $latestUser;
-    $userID =$latestUser;
+    $user = new student_acc;
+
+    $S_ID = $request->input("S_ID");
+    $exists = STUDENT::where('S_ID', $S_ID)->exists();
     $conPass = $request->input("conpassword");
     $pass = $request->input("password");
-    $exists = userCC::where('userID', $userID)->exists();
 
 if ($exists) {
-    return back()->with('alert', 'ID already exists!')->withInput();
-} else {
+
     if ($conPass == $pass) {
-        $user->fullname = $request->input("fullname");
-        $user->password = encrypt($request->input("password"));
-        $user->acctype = 'student';
-        $user->save();
+                $user->S_ID = $request->input("S_ID");
+                $user->password = encrypt($request->input("password"));
+                $user->ACCTYPE = 'student';
+                $user->save();
 
-        // Generate the PDF with the same filename as the userID
-        $pdf = PDF::loadView('pdf.template', compact('user'));
-        $pdfFilename = $userID . '.pdf';
+                // Generate the PDF with the same filename as the userID
+                $pdf = PDF::loadView('pdf.template', compact('user'));
+                $pdfFilename = $userID . '.pdf';
 
-        // Save the PDF to a temporary storage (optional)
-        $pdf->save(storage_path('app/public/' . $pdfFilename));
+                // Save the PDF to a temporary storage (optional)
+                $pdf->save(storage_path('app/public/' . $pdfFilename));
 
-        // Redirect the user to the 'userCC.index' route with a success message
-        return redirect()->route('userCC.index')->with('alert', 'Account Successfully Created!')
-   ->with('pdf_url', asset('storage/' . $pdfFilename));
-    } else {
-        return back()->with('alert', 'Password does not match')->withInput();
-    }
+                // Redirect the user to the 'userCC.index' route with a success message
+                return redirect()->route('userCC.index')->with('alert', 'Account Successfully Created!')
+           ->with('pdf_url', asset('storage/' . $pdfFilename));
+            } else {
+                return back()->with('alert', 'Password does not match')->withInput();
+            }
+
+
+    return back()->with('alert', 'ready for registration')->withInput();
+} else {
+
+
+    return back()->with('alert', 'This User ID is not ready yet!')->withInput();
 }
 
     }

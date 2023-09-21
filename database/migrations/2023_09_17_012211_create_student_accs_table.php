@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("S_ID");
             $table->string("PASSWORD");
+            $table->string("ACCTYPE");
             $table->timestamps();
         });
     }

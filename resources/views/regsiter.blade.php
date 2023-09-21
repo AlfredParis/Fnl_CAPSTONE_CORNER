@@ -22,9 +22,9 @@
             </div> --}}
 
             <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" class="form-control" placeholder="Full Name" name="fullname"
-                    value="{{ old('fullname') }}" required>
+                <label for="S_ID">Student ID</label>
+                <input type="text" class="form-control" placeholder="Student ID" name="S_ID"
+                    value="{{ old('S_ID') }}" required>
             </div>
 
             <div class="form-group">
