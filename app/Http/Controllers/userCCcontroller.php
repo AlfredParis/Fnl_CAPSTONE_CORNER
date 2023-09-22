@@ -114,13 +114,20 @@ if ($exists) {
 
     if ($conPass == $pass) {
                 $user->S_ID = $request->input("S_ID");
-                $user->password = encrypt($request->input("password"));
+                $user->PASSWORD = encrypt($request->input("password"));
                 $user->ACCTYPE = 'student';
                 $user->save();
 
+
+                 $user = DB::table('student_accs')
+        ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
+        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')
+        ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
+    ->get() ;
+
                 // Generate the PDF with the same filename as the userID
                 $pdf = PDF::loadView('pdf.template', compact('user'));
-                $pdfFilename = $userID . '.pdf';
+                $pdfFilename = $S_ID . '.pdf';
 
                 // Save the PDF to a temporary storage (optional)
                 $pdf->save(storage_path('app/public/' . $pdfFilename));
@@ -133,7 +140,7 @@ if ($exists) {
             }
 
 
-    return back()->with('alert', 'ready for registration')->withInput();
+
 } else {
 
 

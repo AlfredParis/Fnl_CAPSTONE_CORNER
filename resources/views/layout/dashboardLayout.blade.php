@@ -603,7 +603,7 @@
             padding-bottom: 15px;
             padding-right: 10px;
             padding-left: 10px;
-            background-color: #d9ee1e5a;
+            background-color: #6b85e35a;
             color: #f6e201;
             box-shadow: 0px -2px 2px rgba(212, 231, 12, 0.375);
             border-radius: 10px;
