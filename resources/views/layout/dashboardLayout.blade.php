@@ -268,8 +268,9 @@
 
             text-decoration: none;
             margin-right: 20px;
-            font-family: "Helvetica Neue", Arial, sans-serif;
-            transition: color 0.3s ease;
+            font-family: Arial, sans-serif;
+            transition: color 0.5s ease-in;
+            font-weight: 700;
         }
 
         .navbar .right-link {
@@ -326,7 +327,7 @@
 
 
         .navbar a:hover {
-            color: #F6A401;
+            color: #eeff00;
 
             border-radius: 10px;
         }
@@ -594,6 +595,27 @@
 
         .inactive {
             color: #fff;
+            background-color: transparent;
+            /* Set initial background color */
+            padding: 5px;
+            /* Set initial padding */
+            box-shadow: none;
+            /* Set initial box shadow */
+            border-radius: 0;
+            /* Set initial border radius */
+            transition: all 1s ease-in-out;
+            /* Smooth transitions for all properties */
+        }
+
+        .inactive:hover {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            padding-right: 5px;
+            padding-left: 5px;
+            background-color: #6385ff79;
+            color: #ffea00;
+            box-shadow: 0px -2px 3px rgba(108, 167, 255, 0.541);
+            border-radius: 0px;
 
         }
 
@@ -601,14 +623,15 @@
 
             padding-top: 15px;
             padding-bottom: 15px;
-            padding-right: 10px;
-            padding-left: 10px;
-            background-color: #6b85e35a;
+            padding-right: 5px;
+            padding-left: 5px;
+            background-color: #6385ff79;
             color: #f6e201;
             box-shadow: 0px -2px 2px rgba(212, 231, 12, 0.375);
             border-radius: 10px;
 
         }
+
 
 
 
@@ -699,6 +722,126 @@
         }
 
         /* pop up box css end */
+
+
+
+
+        /* logout CSS */
+        .action {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+        }
+
+        .action .profile {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .action .profile img {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .action .menu {
+            position: absolute;
+            top: 80px;
+            right: -10px;
+            padding: 10px 20px;
+            background: rgb(138, 124, 124);
+            width: 200px;
+            box-sizing: 0 5px 25px rgb(105, 97, 97);
+            border-radius: 15px;
+            transition: 0.5s;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .action .menu.actives {
+
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .action .menu::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 28px;
+            width: 20px;
+            height: 20px;
+            background: rgb(138, 124, 124);
+            transform: rotate(45deg);
+        }
+
+        .action .menu h3 {
+
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            padding: 20px 0;
+
+            font-weight: 500;
+            color: #041AA0;
+            line-height: 1.2em;
+        }
+
+        .action .menu h3 span {
+
+
+            font-size: 14px;
+
+            font-weight: 400;
+            color: #45485e;
+
+        }
+
+        .action .menu ul li {
+            list-style: none;
+            padding: 10px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+
+        }
+
+        .action .menu ul li img {
+            max-width: 30px;
+            margin-right: 10px;
+            opacity: 0.5;
+            transition: 1s;
+            object-fit: contain;
+        }
+
+        .action .menu ul li:hover img {
+
+            opacity: 1;
+
+        }
+
+        .action .menu ul li a {
+            display: inline-block;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            transition: 0.5s;
+        }
+
+        .action .menu ul li :hover a {
+
+            color: #fffb00;
+
+        }
+
+        /* logout CSS END*/
     </style>
 
 
@@ -745,7 +888,7 @@
     <script>
         function menuToggle() {
             const toggleMenu = document.querySelector('.menu');
-            toggleMenu.classList.toggle('active');
+            toggleMenu.classList.toggle('actives');
         }
     </script>
     {{-- Log out Animation  END --}}
@@ -802,7 +945,21 @@
         @show
         @section('logout')
 
-            <a href="{{ route('logout') }}" class="right-link inactive" onclick="menuToggle();">Logout</a>
+
+
+            <div class="action">
+                <div class="profile"> <a class="alalang" class="right-link inactive" onclick="menuToggle();"><img
+                            src="{{ asset('images/log.png') }}" alt=""></a></div>
+                <div class="menu">
+                    <h3> hakdog</h3> <span> hakdog span</span>
+                    <ul>
+                        <li> <img src="{{ asset('images/log.png') }}" alt=""><a href=" #">Edit Account</a></li>
+                        <li><img src="{{ asset('images/log.png') }}" alt=""><a
+                                href="{{ route('logout') }}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
 
         @show
     </div>

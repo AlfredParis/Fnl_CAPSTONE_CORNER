@@ -14,6 +14,7 @@
             margin: 0%;
             max-height: 100vh;
 
+
         }
 
         .back {
@@ -54,6 +55,7 @@
 
                 "div3"
             ;
+            /* background-image: url('https://main.psu.edu.ph/wp-content/uploads/2022/07/itgo.png'); */
         }
 
         .imgikot {
