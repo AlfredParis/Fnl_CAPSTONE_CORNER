@@ -729,8 +729,9 @@
         /* logout CSS */
         .action {
             position: fixed;
-            top: 20px;
-            right: 30px;
+            top: 0px;
+            right: 1%;
+
         }
 
         .action .profile {
@@ -740,6 +741,7 @@
             border-radius: 50%;
             overflow: hidden;
             cursor: pointer;
+
         }
 
         .action .profile img {
@@ -756,7 +758,8 @@
             top: 80px;
             right: -10px;
             padding: 10px 20px;
-            background: rgb(138, 124, 124);
+            background: rgba(213, 198, 29);
+
             width: 200px;
             box-sizing: 0 5px 25px rgb(105, 97, 97);
             border-radius: 15px;
@@ -778,7 +781,7 @@
             right: 28px;
             width: 20px;
             height: 20px;
-            background: rgb(138, 124, 124);
+            background: rgb(213, 198, 29);
             transform: rotate(45deg);
         }
 
@@ -786,22 +789,21 @@
 
             width: 100%;
             text-align: center;
-            font-size: 18px;
+            font-size: 20px;
             padding: 20px 0;
 
             font-weight: 500;
-            color: #041AA0;
+            color: #6c6c6c;
             line-height: 1.2em;
         }
 
         .action .menu h3 span {
 
 
-            font-size: 14px;
+            font-size: 16px;
 
             font-weight: 400;
-            color: #45485e;
-
+            color: #6c6c6c;
         }
 
         .action .menu ul li {
@@ -939,9 +941,9 @@
         @show
 
         @section('accDetails')
-            <div class="accDet"> Account Type : <strong>{{ $accT = Session::get('accT') }}</strong>
+            {{-- <div class="accDet"> Account Type : <strong>{{ $accT = Session::get('accT') }}</strong>
                 <br> Name:<strong> {{ $acc = Session::get('fullNs') }} </strong>
-            </div>
+            </div> --}}
         @show
         @section('logout')
 
@@ -951,7 +953,10 @@
                 <div class="profile"> <a class="alalang" class="right-link inactive" onclick="menuToggle();"><img
                             src="{{ asset('images/log.png') }}" alt=""></a></div>
                 <div class="menu">
-                    <h3> hakdog</h3> <span> hakdog span</span>
+                    <h3> <strong>Name: </strong>{{ $acc = Session::get('fullNs') }}
+                        <span> <strong>Account Type :</strong>
+                            {{ $accT = Session::get('accT') }}</span>
+                    </h3>
                     <ul>
                         <li> <img src="{{ asset('images/log.png') }}" alt=""><a href=" #">Edit Account</a></li>
                         <li><img src="{{ asset('images/log.png') }}" alt=""><a

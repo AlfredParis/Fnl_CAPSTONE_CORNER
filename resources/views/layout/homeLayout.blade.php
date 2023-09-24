@@ -113,7 +113,8 @@
 
 
         .greet {
-            margin: 10px
+            margin: 10px;
+            transition: 1s;
         }
 
         .div4 {
