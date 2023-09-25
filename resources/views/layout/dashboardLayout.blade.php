@@ -625,9 +625,9 @@
             padding-bottom: 15px;
             padding-right: 5px;
             padding-left: 5px;
-            background-color: #6385ff79;
+            background-color: #0042cfd0;
             color: #f6e201;
-            box-shadow: 0px -2px 2px rgba(212, 231, 12, 0.375);
+            box-shadow: 0px 0px 10px #3575ff;
             border-radius: 10px;
 
         }
@@ -738,7 +738,7 @@
             position: relative;
             width: 60px;
             height: 60px;
-            border-radius: 50%;
+            border-radius: 0;
             overflow: hidden;
             cursor: pointer;
 
@@ -746,10 +746,10 @@
 
         .action .profile img {
             position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 100%;
-            height: 100%;
+            top: 30%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
             object-fit: contain;
         }
 
@@ -951,7 +951,7 @@
 
             <div class="action">
                 <div class="profile"> <a class="alalang" class="right-link inactive" onclick="menuToggle();"><img
-                            src="{{ asset('images/log.png') }}" alt=""></a></div>
+                            src="{{ asset('images/profile.png') }}" alt=""></a></div>
                 <div class="menu">
                     <h3> <strong>Name: </strong>{{ $acc = Session::get('fullNs') }}
                         <span> <strong>Account Type :</strong>
