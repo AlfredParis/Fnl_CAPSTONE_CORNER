@@ -311,13 +311,13 @@
             border: none;
             cursor: pointer;
             margin-top: 10px;
-            background-color: #1877F2;
+            background-color: rgb(10, 39, 216);
             color: #fff;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #1877F2;
+            background-color: rgb(8, 31, 179);
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
         }
 
@@ -329,13 +329,14 @@
             border: none;
             cursor: pointer;
             margin-top: 10px;
-            background-color: #42B72A;
-            color: #ffffff;
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+            background-color: #ffdf46;
+            color: #444444;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3 ease;
         }
 
         .btn-secondary:hover {
-            background-color: #359023;
+            background-color: #ebcf42;
+            color: #4d4d4d;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
         }
 
