@@ -99,6 +99,8 @@
             display: flex;
             justify-content: left;
             align-items: left;
+            /* height: 30vw; */
+            object-fit:fill;
            
         }
 
