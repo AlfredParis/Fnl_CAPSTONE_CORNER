@@ -501,9 +501,7 @@
 
             <div class="div2">
 
-                <p style="text-align: center;">Capstone <br>
-                    Corner</p>
-
+                <img src="{{ asset('images/logo2.png') }}" alt="">
             </div>
 
             <div class="div4">
