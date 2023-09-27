@@ -364,13 +364,14 @@
 
 
             height: 75vh;
-            display: grid;
-            grid-template-columns: 50% 50%;
-            grid-template-rows: 50% 50%;
+            display: grid; 
+             grid-template-rows: 25% 75%;
+            grid-template-columns: 25% 25% 25% 25%;
+          
             grid-template-areas:
 
-                "admin stud"
-                "fac arch"
+                "admin stud fac arch"
+                "blank blank blank blank"
             ;
             text-align: center;
             gap: 10px;
@@ -407,53 +408,65 @@
 
         .admin {
             margin: 0 auto;
-            padding: 40px;
+            padding:0 25%;
             align-items: center;
-
+            
             flex-direction: column;
-            width: 375px;
+
+            width: 25%;
 
             border-radius: 20px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+           
+            box-shadow: -10px 0px 0px rgb(18, 179, 34),0px 0px 10px rgb(0, 0, 0);
+          
             grid-area: admin;
         }
 
-        .stud {
-            margin: 0 auto;
-            padding: 40px;
+.admin p, .stud p, .fac p, .arch p{
+    margin-top: 50%;
+            
+}        .stud {
+    margin: 0 auto;
+            padding:0 25%;
             align-items: center;
-
+            justify-content: center;
+            
             flex-direction: column;
-            width: 375px;
+
+            width: 25%;
 
             border-radius: 20px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: -10px 0px 0px rgb(18, 21, 179),0px 0px 10px rgb(0, 0, 0);
             grid-area: stud;
         }
 
         .fac {
             margin: 0 auto;
-            padding: 40px;
+            padding:0 25%;
             align-items: center;
-
+            justify-content: center;
+            
             flex-direction: column;
-            width: 375px;
+
+            width: 25%;
 
             border-radius: 20px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: -10px 0px 0px rgb(205, 212, 10),0px 0px 10px rgb(0, 0, 0);
             grid-area: fac;
         }
 
         .arch {
             margin: 0 auto;
-            padding: 40px;
+            padding:0 25%;
             align-items: center;
-
+            justify-content: center;
+            
             flex-direction: column;
-            width: 375px;
+
+            width: 25%;
 
             border-radius: 20px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: -10px 0px 0px rgb(203, 17, 17),0px 0px 10px rgb(0, 0, 0);
             grid-area: arch;
         }
 
@@ -671,7 +684,7 @@
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(to bottom, #041AA0, #030351);
+            background: #394ed6;
             border: 2px solid #decb1e;
             padding: 15px 20px;
             border-radius: 6px;
@@ -755,14 +768,15 @@
 
         .action .menu {
             position: absolute;
-            top: 80px;
+            top: 75px;
             right: -10px;
-            padding: 10px 20px;
-            background: rgba(213, 198, 29);
+            padding: 0px 0px;
+            background: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.644);
 
-            width: 200px;
-            box-sizing: 0 5px 25px rgb(105, 97, 97);
-            border-radius: 15px;
+            width: 190px;
+             /* box-sizing: 10px 5px 25px rgb(105, 97, 97);  */
+            border-radius: 10px;
             transition: 0.5s;
             visibility: hidden;
             opacity: 0;
@@ -781,7 +795,7 @@
             right: 28px;
             width: 20px;
             height: 20px;
-            background: rgb(213, 198, 29);
+            background: rgb(255, 255, 255);
             transform: rotate(45deg);
         }
 
@@ -790,10 +804,10 @@
             width: 100%;
             text-align: center;
             font-size: 20px;
-            padding: 20px 0;
+            padding: 0px 0;
 
             font-weight: 500;
-            color: #6c6c6c;
+            color: #000000;
             line-height: 1.2em;
         }
 
@@ -803,13 +817,13 @@
             font-size: 16px;
 
             font-weight: 400;
-            color: #6c6c6c;
+            color: #000000;
         }
 
         .action .menu ul li {
             list-style: none;
-            padding: 10px 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.5);
+            padding: 10px 0px;
+            /* border-top: 2px solid rgb(102, 102, 102); */
             display: flex;
             align-items: center;
 
@@ -817,7 +831,7 @@
 
         .action .menu ul li img {
             max-width: 30px;
-            margin-right: 10px;
+            margin-right: 5px;
             opacity: 0.5;
             transition: 1s;
             object-fit: contain;
@@ -832,14 +846,14 @@
         .action .menu ul li a {
             display: inline-block;
             text-decoration: none;
-            color: #000;
+            color:#414141;
             font-weight: 500;
             transition: 0.5s;
         }
 
         .action .menu ul li :hover a {
 
-            color: #fffb00;
+            color: #4f4f4f;
 
         }
 
@@ -953,8 +967,8 @@
                 <div class="profile"> <a class="alalang" class="right-link inactive" onclick="menuToggle();"><img
                             src="{{ asset('images/profile.png') }}" alt=""></a></div>
                 <div class="menu">
-                    <h3> <strong>Name: </strong>{{ $acc = Session::get('fullNs') }}
-                        <span> <strong>Account Type :</strong>
+                    <h3> <strong> </strong>{{ $acc = Session::get('fullNs') }}
+                        <span> <strong> <br></strong>
                             {{ $accT = Session::get('accT') }}</span>
                     </h3>
                     <ul>

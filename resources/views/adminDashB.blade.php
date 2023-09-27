@@ -17,10 +17,10 @@
     <br>
     <div class="dashB">
 
-        <div class="admin">Total number of admin:{{ $tl_admin }}</div>
-        <div class="stud">Total number of student:{{ $tl_stud }} </div>
-        <div class="fac">Total number of faculty:{{ $tl_fac }} </div>
-        <div class="arch">Total number of archives:{{ $tl_arch }} </div>
+        <div class="admin"><p> Total number of admin: <br> <strong>{{ $tl_admin }}</strong> </p></div>
+        <div class="stud"><p>Total number of student: <br><strong> {{ $tl_stud }}</strong> </p></div>
+        <div class="fac"><p>Total number of faculty: <br> <strong>{{ $tl_fac }}</strong> </p></div>
+        <div class="arch"><p>Total number of archives: <br> <strong>    {{ $tl_arch }} </strong>    </p></div>
 
 
 

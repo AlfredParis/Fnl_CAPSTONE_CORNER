@@ -34,14 +34,14 @@
 
         .grid_child.left {
             grid-area: left;
-            grid-template-columns: 40% 60%;
-            grid-template-rows: 15% 25% 50% 10%;
+            grid-template-columns: 15% 40% 45%;
+            grid-template-rows: 25% 25% 40% 10%;
             grid-template-areas:
 
-                "blank blank"
-                "logoB div2"
-                "div4 div4"
-                "div5 div5"
+                "blank blank blank"
+                "logoB logoB div2"
+                "div4 div4 div4"
+                "div5 div5 div5"
             ;
             background-color: rgba(255, 255, 255, 0);
         }
@@ -69,8 +69,9 @@
 
             grid-area: logoB;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: left;
+            align-items: left;
+            padding-left: 40%;
 
         }
 
@@ -95,12 +96,10 @@
 
         .div2 {
             grid-area: div2;
-            font-size: 4vw;
-            font-weight: bold;
             display: flex;
-            justify-content: center;
-            align-items: center;
-
+            justify-content: left;
+            align-items: left;
+           
         }
 
         .div3 {
@@ -121,8 +120,9 @@
             grid-area: div4;
             display: flex;
             justify-content: center;
+            padding-left: 20%;
 
-            margin: 20px;
+            margin: 10px;
             background-color: #95959500;
             border-radius: 10px;
 
@@ -254,8 +254,8 @@
 
         .logo img {
             max-width: auto;
-            max-height: auto;
-            height: 100px;
+            max-height: 200px;
+            /* height: 100px; */
         }
 
 
@@ -493,7 +493,7 @@
         <div class="grid_child left">
             <div class="logoB">
                 <div class="logo">
-                    <img src="https://main.psu.edu.ph/wp-content/uploads/2022/07/PSU-LABEL_b.png" alt="PSU Logo">
+                    <img src="{{ asset('images/psulogo.png') }}" alt="PSU Logo">
 
                 </div>
             </div>
@@ -503,7 +503,7 @@
 
                 <img src="{{ asset('images/logo2.png') }}" alt="">
             </div>
-
+<DIV class="blank"></DIV>
             <div class="div4">
                 <div class="greet">This is a website is created by Pangasinan State University,San Carlos City students
                     that provides a
