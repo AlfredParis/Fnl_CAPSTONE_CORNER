@@ -44,6 +44,7 @@ Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forSt
     Route::get('/', [studentController::class, 'index'])->name('index');
     Route::get('/my-archive', [studentController::class, 'myArchive'])->name('myArchive');
     Route::get('/checker', [studentController::class, 'Checker'])->name('Checker');
+    Route::post('/find-similar-words', [studentController::class, 'findSimilarWords'])->name('words');
 });
 
 

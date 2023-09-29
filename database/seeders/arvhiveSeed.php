@@ -16,116 +16,117 @@ class arvhiveSeed extends Seeder
 
          $data = [
             [
-                'archID' => 'arch-1',
-                'name' => 'Online E-Learning System',
-                'author' => 'jayson Sanchez',
-                'gh' => 'hahasfasaha.git',
+                'ARCH_ID' => 'arch-1',
+                'ARCH_NAME' => 'Online E-Learning System',
+                'AUTHOR_ID' => 'jayson Sanchez',
+                'GITHUB_LINK' => 'hahasfasaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
+
                 // Add more columns and values as needed
             ],
           [
-                'archID' => 'arch-2',
-                'name' => 'Online E-Learning System',
-                'author' => 'Alfred Paris',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-2',
+                'ARCH_NAME' => 'Online E-Learning System',
+                'AUTHOR_ID' => 'Alfred Paris',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-3',
-                'name' => 'Online Examination System',
-                'author' => 'jayson rosario',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-3',
+                'ARCH_NAME' => 'Online Examination System',
+                'AUTHOR_ID' => 'jayson rosario',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-4',
-                'name' => 'Student Tracking Performance',
-                'author' => 'diosdado the goat',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-4',
+                'ARCH_NAME' => 'Student Tracking Performance',
+                'AUTHOR_ID' => 'diosdado the goat',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-5',
-                'name' => 'Library Information System',
-                'author' => 'fredy pogi',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-5',
+                'ARCH_NAME' => 'Library Information System',
+                'AUTHOR_ID' => 'fredy pogi',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-6',
-                'name' => ' Student Information System',
-                'author' => 'Alexander tamad',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-6',
+                'ARCH_NAME' => ' Student Information System',
+                'AUTHOR_ID' => 'Alexander tamad',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-7',
-                'name' => 'Student Handbook Application',
-                'author' => 'Marco Mangiras',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-7',
+                'ARCH_NAME' => 'Student Handbook Application',
+                'AUTHOR_ID' => 'Marco Mangiras',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-8',
-                'name' => 'Thesis and Capstone Archiving System',
-                'author' => 'Ralhp Rens Valerio',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-8',
+                'ARCH_NAME' => 'Thesis and Capstone Archiving System',
+                'AUTHOR_ID' => 'Ralhp Rens Valerio',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-9',
-                'name' => 'School Portal Application',
-                'author' => 'Marlyn Aquino',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-9',
+                'ARCH_NAME' => 'School Portal Application',
+                'AUTHOR_ID' => 'Marlyn Aquino',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-10',
-                'name' => 'School Events Attendance System',
-                'author' => 'Rea santos',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-10',
+                'ARCH_NAME' => 'School Events Attendance System',
+                'AUTHOR_ID' => 'Rea santos',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-11',
-                'name' => 'Grading System',
-                'author' => 'Michelle fernandez',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-11',
+                'ARCH_NAME' => 'Grading System',
+                'AUTHOR_ID' => 'Michelle fernandez',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-12',
-                'name' => 'Student Council Voting System',
-                'author' => 'hahaha basta ngaran',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-12',
+                'ARCH_NAME' => 'Student Council Voting System',
+                'AUTHOR_ID' => 'hahaha basta ngaran',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-13',
-                'name' => 'Class Scheduling System',
-                'author' => 'ngaran lamet syempre',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-13',
+                'ARCH_NAME' => 'Class Scheduling System',
+                'AUTHOR_ID' => 'ngaran lamet syempre',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-14',
-                'name' => 'Online School Documents Processing with Payment System',
-                'author' => 'hehe ngaran kumatlo la',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-14',
+                'ARCH_NAME' => 'Online School Documents Processing with Payment System',
+                'AUTHOR_ID' => 'hehe ngaran kumatlo la',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-15',
-                'name' => 'Faculty Evaluation System',
-                'author' => 'name ulit ',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-15',
+                'ARCH_NAME' => 'Faculty Evaluation System',
+                'AUTHOR_ID' => 'ARCH_NAME ulit ',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],[
-                'archID' => 'arch-16',
-                'name' => 'Student Profile and Guidance Services with Decision Support',
-                'author' => 'Last na name na to pri',
-                'gh' => 'hahaha.git',
+                'ARCH_ID' => 'arch-16',
+                'ARCH_NAME' => 'Student Profile and Guidance Services with Decision Support',
+                'AUTHOR_ID' => 'Last na ARCH_NAME na to pri',
+                'GITHUB_LINK' => 'hahaha.git',
                 'pdf_file' => 'Wala tong laman This is from prodution seeder',
                 // Add more columns and values as needed
             ],

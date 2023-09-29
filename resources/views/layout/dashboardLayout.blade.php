@@ -15,7 +15,7 @@
         .checker {
             height: 75vh;
             display: grid;
-            grid-template-columns: 30% 70%;
+            grid-template-columns: 50% 50%;
             grid-template-rows: 30% 70%;
             grid-template-areas:
                 "hid frm"
@@ -41,8 +41,20 @@
 
         .hid {
             grid-area: hid;
+            text-align: left;
+            margin-left: 60px; 
         }
-
+        .hid h1{
+            
+            text-align: left;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        .chtitle{
+            color: #3575ff;
+            font-weight: 900;
+            font-size: 40px;
+        }
         .frm {
             grid-area: frm;
         }
@@ -50,7 +62,10 @@
         .check {
             grid-area: check;
         }
-
+.simTitle{
+    /* font-weight: 900; */
+            font-size: 60px;
+}
         h2 {
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -94,7 +109,7 @@
 
         .fl-table {
             border-radius: 10px;
-            font-size: 12px;
+            /* font-size: 15px; */
             font-weight: normal;
             border-collapse: collapse;
             width: 100%;
@@ -107,13 +122,18 @@
         .fl-table td,
         .fl-table th {
             text-align: center;
-            padding: 8px;
+            padding: 10px;
+
+        }
+        .fl-table th {
+            text-align: center;
+            padding: 10px;
 
         }
 
         .fl-table td {
             border-right: 1px solid #f8f8f8;
-            font-size: 12px;
+            font-size: 20px;
         }
 
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use PDF;
-
+use DB;
 
 class userCCcontroller extends Controller
 {
@@ -110,36 +110,67 @@ class userCCcontroller extends Controller
     $conPass = $request->input("conpassword");
     $pass = $request->input("password");
 
+    
+
 if ($exists) {
 
-    if ($conPass == $pass) {
-                $user->S_ID = $request->input("S_ID");
-                $user->PASSWORD = encrypt($request->input("password"));
-                $user->ACCTYPE = 'student';
-                $user->save();
+$accExist = student_acc::where('S_ID', $S_ID)->exists();
+if ($accExist) {
+    return back()->with('alert', 'This student id already has a account.')->withInput();
+}else{if ($conPass == $pass) {
+    $user->S_ID = $request->input("S_ID");
+    $user->PASSWORD = encrypt($request->input("password"));
+    $user->ACCTYPE = 'student';
+    $user->save();
 
 
-                 $user = DB::table('student_accs')
-        ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
-        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')
-        ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
-    ->get() ;
+    $user = DB::table('student_accs')
+    ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
+    ->select('s_t_u_d_e_n_t_s.C_ID','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME', 'student_accs.PASSWORD')
+    ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
+    ->first();
+    
+    $studentCId = DB::table('student_accs')
+    ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
+    ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
+    ->value('s_t_u_d_e_n_t_s.C_ID');
 
-                // Generate the PDF with the same filename as the userID
-                $pdf = PDF::loadView('pdf.template', compact('user'));
-                $pdfFilename = $S_ID . '.pdf';
+    if ($studentCId) {
+        //    $result = DB::table('s_t_u_d_e_n_t_s')
+        // ->join('c_o_u_r_s_e_s', 'c_o_u_r_s_e_s.C_ID', '=',  $studentCId)
+        // ->select('c_o_u_r_s_e_s.C_DESC')->get()
+        // ;
+        // $result = DB::table('c_o_u_r_s_e_s')
+        //     ->join('s_t_u_d_e_n_t_s', 'c_o_u_r_s_e_s.C_ID', '=', DB::raw($studentCId))
+        //     ->select('c_o_u_r_s_e_s.C_DESC')
+        //     ->get();
+    
+            $result = DB::table('c_o_u_r_s_e_s')
+            ->join('s_t_u_d_e_n_t_s', 'c_o_u_r_s_e_s.C_ID', '=',  DB::raw($studentCId))
+            ->where('s_t_u_d_e_n_t_s.C_ID', $studentCId)
+            ->select('c_o_u_r_s_e_s.C_DESC')
+            ->first();
+       
+    } else {
+        // pag walang studentCID
+    }
+// return dd( $user);
+    // Generate the PDF with the same filename as the userID
+    $pdf = PDF::loadView('pdf.template', compact('user','result'));
+    $pdfFilename = $S_ID . '.pdf';
 
-                // Save the PDF to a temporary storage (optional)
-                $pdf->save(storage_path('app/public/' . $pdfFilename));
+    // Save the PDF to a temporary storage (optional)
+    $pdf->save(storage_path('app/public/' . $pdfFilename));
 
-                // Redirect the user to the 'userCC.index' route with a success message
-                return redirect()->route('userCC.index')->with('alert', 'Account Successfully Created!')
-           ->with('pdf_url', asset('storage/' . $pdfFilename));
-            } else {
-                return back()->with('alert', 'Password does not match')->withInput();
-            }
+    // Redirect the user to the 'userCC.index' route with a success message
+return redirect()->route('userCC.index')->with('alert', 'Account Successfully Created!')
+->with('pdf_url', asset('storage/' . $pdfFilename));
+} else {
+    return back()->with('alert', 'Password does not match')->withInput();
+}
 
-
+}
+    
 
 } else {
 

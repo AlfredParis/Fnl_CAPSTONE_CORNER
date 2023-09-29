@@ -18,8 +18,15 @@
 
     <div class="checker">
         <div class="hid">
-            <h1 style="text-align:Center;">Title Checker </h1>
-        </div>
+            <div class="chtitle">Title Checker <br></div>
+      
+                @if (isset($titel))
+                    <h1> <strong>Your title:</strong> {{ $titel }}</h1>
+                @else
+                <h1> <strong>Your title:</strong> No input title.</h1>
+                @endif
+
+  </div>
         <div class="frm">
             <div class="containier">
                 <form action="{{ route('admin.words') }}" method="POST">
@@ -34,9 +41,9 @@
         </div>
         <div class="check">
             <div class="table-wrapper">
-                @if (isset($titel))
+                {{-- @if (isset($titel))
                     <h1>Your Title: {{ $titel }}</h1>
-                @endif
+                @endif --}}
 
 
                 @if (isset($similarTitles) && count($similarTitles) > 0)
@@ -72,7 +79,7 @@
                         </tbody>
                     </table>
                 @else
-                    <strong style="margin-left: 20px;">No similar titles found!</strong>
+                    <strong class="chtitle">No similar titles found!</strong>
                 @endif
             </div>
         </div>

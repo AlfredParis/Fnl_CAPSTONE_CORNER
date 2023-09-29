@@ -17,7 +17,7 @@ class user extends Seeder
                 'acctype' => 'student',
                 'userID' => 'student-1',
                 'fullname' => 'jayson Sanchez',
-                'password' => encrypt('sutdent'),
+                'password' => encrypt('student'),
 
             ],
             [
