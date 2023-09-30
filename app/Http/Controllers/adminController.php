@@ -65,7 +65,15 @@ class adminController extends Controller
     }
     public function admin()
     {
-        $adminPage = USER_ACC_EMP::where('ACCTYPE', 'admin')->paginate(2);
+        // $adminPage = USER_ACC_EMP::where('ACCTYPE', 'admin')->paginate(2);
+
+
+        $adminPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+    ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin') // Add this line
+    ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
+    ->paginate(2);
+
         return view('adminAdminTB')->with('admin', $adminPage);
     }
 

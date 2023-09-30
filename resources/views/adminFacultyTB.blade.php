@@ -37,14 +37,15 @@
                 @foreach ($faculty as $fac)
                     <tr>
 
-                        <td>{{ $fac->userID }}</td>
-                        <td>{{ $fac->fullname }}</td>
-                        <td>{{ decrypt($fac->password) }}</td>
-                        <td><a href="/usercc/{{ $fac->id }}" class="glowbtn">view</a></td>
+                        <td>{{ $fac->EMP_ID }}</td>
+                        {{-- <td>{{ $fac-> }}</td> --}}
+                        <td>{{ decrypt($fac->PASSWORD) }}</td>
+                        <td><a href="/usercc/{{ $fac->USER_ID_EMP }}" class="glowbtn">view</a></td>
 
-                        <td><a href="{{ route('admin.edit', ['id' => $fac->id]) }}" class="glowbtn">edit</a></td>
+                        <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $fac->USER_ID_EMP]) }}"
+                                class="glowbtn">edit</a></td>
                         <td>
-                            <form action="/usercc/{{ $fac->id }}" method="POST">
+                            <form action="/usercc/{{ $fac->USER_ID_EMP }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 

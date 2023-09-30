@@ -75,7 +75,7 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
 
     // Admin User Crud
     Route::put('/{id}/updateUser', [adminController::class, 'userUpdate'])->name('update'); //user update
-    Route::get('/{id}/edit', [adminController::class, 'userEdit'])->name('edit'); //user edit view
+    Route::get('/{USER_ID_EMP}/edit', [adminController::class, 'userEdit'])->name('edit'); //user edit view
     Route::get('/{user}/addUser', [adminController::class, 'addUser'])->name('addUser'); //user add view
     Route::post('/{userac}/storeEmp', [adminController::class, 'storeEmp'])->name('storeEmp'); //user add function
     // Admin User Crud

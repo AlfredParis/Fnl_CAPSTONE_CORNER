@@ -30,27 +30,28 @@
                     <th>Password</th>
                     <th> Views </th>
                     <th> Edit </th>
-                    <th> Delete </th>
+                    {{-- <th> Delete </th> --}}
                 </tr>
             </thead>
             <tbody>
                 @foreach ($admin as $adm)
                     <tr>
 
-                        <td>{{ $adm->userID }}</td>
-                        <td>{{ $adm->fullname }}</td>
-                        <td>{{ decrypt($adm->password) }}</td>
-                        <td><a href="/usercc/{{ $adm->id }}" class="glowbtn">view</a></td>
+                        <td>{{ $adm->EMP_ID }}</td>
+                        <td>{{ $adm->NAME }}</td>
+                        <td>{{ decrypt($adm->PASSWORD) }}</td>
+                        <td><a href="/usercc/{{ $adm->USER_ID_EMP }}" class="glowbtn">view</a></td>
 
-                        <td><a href="{{ route('admin.edit', ['id' => $adm->id]) }}" class="glowbtn">edit</a></td>
-                        <td>
-                            <form action="/usercc/{{ $adm->id }}" method="POST">
+                        <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $adm->USER_ID_EMP]) }}"
+                                class="glowbtn">edit</a></td>
+                        {{-- <td>
+                            <form action="/usercc/{{ $adm->USER_ID_EMP }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 
                                 <input type="submit" name="sumbit" value="Delete" class="glowbtn">
                             </form>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>
