@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('a_r_c_h_i_v_e_s', function (Blueprint $table) {
-            $table->id('ARCH_ID');
+            $table->string('ARCH_ID')->primary();
             $table->string('ARCH_NAME');
-            $table->string('DESCRIPTION');
+            $table->string('ABSTRACT');
             $table->string('AUTHOR_ID');
             $table->string('GITHUB_LINK');
             $table->string('PDF_FILE');

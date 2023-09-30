@@ -13,8 +13,12 @@ php artisan migrate
 php artisan storage:link
 
 php artisan db:seed --class=courseSeed
-php artisan db:seed --class=arvhiveSeed
-php artisan db:seed --class=user
+php artisan db:seed --class=adminAcc
+php artisan db:seed --class=adminDet
+php artisan db:seed --class=archiveSeed
+php artisan db:seed --class=studAcc
+php artisan db:seed --class=studDet
+
 
 additional=
 composer require barryvdh/laravel-dompdf

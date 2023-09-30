@@ -36,24 +36,21 @@
                 @foreach ($arch as $archive)
                     <tr>
 
-                        <td>{{ $archive->archID }}</td>
-                        <td>{{ $archive->name }}</td>
-                        <td>{{ $archive->author }}</td>
+                        <td>{{ $archive->ARCH_ID }}</td>
+                        <td>{{ $archive->ARCH_NAME }}</td>
+                        <td>{{ $archive->ABSTRACT }}</td>
+                        <td>{{ $archive->AUTHOR_ID }}</td>
                         <td><a href="#"
-                                onclick="openPDF('{{ asset('storage/pdfs/' . $archive->pdf_file) }}');">{{ $archive->pdf_file }}</a>
+                                onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILEPDF_FILE }}</a>
                         </td>
-                        <td>{{ $archive->gh }}</td>
-                        <td><a href="/admin/{{ $archive->id }}" class="glowbtn">view</a></td>
+                        <td>{{ $archive->GITHUB_LINK }}</td>
+                        <td><a href="/admin/{{ $archive->ARCH_ID }}" class="glowbtn">view</a></td>
 
-                        <td><a href="{{ route('admin.editArch', ['id' => $archive->id]) }}" class="glowbtn">edit</a></td>
-                        <td>
-                            <form action="{{ route('admin.delArch', ['id' => $archive->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
+                        <td><a href="{{ route('admin.editArch', ['ARCH_ID' => $archive->ARCH_ID]) }}"
+                                class="glowbtn">edit</a></td>
+                        <td>{{ $archive->AUTHOR_ID }}</td>
+                        <td>{{ $archive->IS_APPROVED }}</td>
 
-                                <input type="submit" name="sumbit" value="Delete" class="glowbtn">
-                            </form>
-                        </td>
                     </tr>
                 @endforeach
             </tbody>

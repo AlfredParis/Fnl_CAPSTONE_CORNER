@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\userCC;
 use App\Models\student_acc;
 use App\Models\STUDENT;
+use App\Models\USER_ACC_EMP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -22,60 +23,108 @@ class userCCcontroller extends Controller
     {
         $userID = $request->input('userID');
         if (isset($userID)) {
-
             $userID = $request->input('userID');
-
             $passwordinput = $request->input('password');
+            $isStudent = student_acc::where('S_ID', $userID)->exists();
+            $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
 
-            $us = userCC::where("userID", $userID)->value("fullname");
-
-            $exists = userCC::where('userID', $userID)->exists();
-
-            if ($exists) {
-                $password = userCC::where("fullname", $us)->where("userID", $userID)->value("password");
+            if ($isStudent) {
+                $password = student_acc::where("S_ID", $userID)->value("PASSWORD");
                 $decrypt = decrypt($password);
+                    if ( $passwordinput == $decrypt) {
+                            $fullN = DB::table('student_accs')
+                            ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
+                            ->where('s_t_u_d_e_n_t_s.S_ID', $userID)
+                            ->value('s_t_u_d_e_n_t_s.NAME');
 
-                if ($passwordinput == $decrypt) {
-                    $fullN = userCC::where("userID", $userID)->value("fullname");
-                    $accT = userCC::where("fullname", $us)->where("userID", $userID)->value("acctype");
-
-                    Session::put('fullNs', $fullN);
-
-                    //user level : student , admin , faculty
-
-
-                    if ($accT == 'admin') {
-                        Session::put('accT', $accT);
-                        return redirect('/admin')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
-                    } elseif ($accT == 'faculty') {
-                        Session::put('accT', $accT);
-                        return redirect('/faculty')->with('alert', "Welcome  $fullN!")->with('lrt', 1);
-                    } elseif ($accT == 'student') {
-                        Session::put('accT', $accT);
-                        return redirect('/student')->with('alert', "Welcome  $fullN!")->with('lrt', 1);
-                    } else {
-                        return "gagi aliwa HAHAHAHAHAHA";
-                    }
-                } else {
-                    //Session::put('alert', 'wrong password');
-                    //return view('login')->with('alert', 'wrong password');
-                    return back()->with('messagepass', 'Wrong Password')->withInput();
-                    // return redirect()->route('alertLog');
-
-
-                }
-            } else {
-
-                // Session::put('alert', 'The Id does not exist');
-                //return view('login')->with('alert', 'The Id does not exist');
-                return back()->with('messageid', 'Id does not exist')->withInput();
-                // return redirect()->route('alertLog');
-                //
+                            Session::put('fullNs', $fullN);
+                            Session::put('accT', $accT);
+                            return redirect('/student')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
+                        }else{
+                            return back()->with('messagepass', 'Wrong Password')->withInput();
+                        }
+                // return back()->with('messagepass', 'is student')->withInput();
             }
+
+            if ($isAdmin) {
+                 $accT = USER_ACC_EMP::where("EMP_ID", $userID)->value("ACCTYPE");
+                    if ($accT=="admin"){
+                        $password = USER_ACC_EMP::where("EMP_ID", $userID)->value("PASSWORD");
+                        $decrypt = decrypt($password);
+                        if ( $passwordinput == $decrypt) {
+                            $fullN = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+                            ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+                            ->where('e_m_p_l_o_y_e_e_s.EMP_ID', $userID)
+                            ->value('e_m_p_l_o_y_e_e_s.NAME');
+
+                            Session::put('fullNs', $fullN);
+                            Session::put('accT', $accT);
+                            return redirect('/admin')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
+                        }else{
+                            return back()->with('messagepass', 'Wrong Password')->withInput();
+                        }
+
+                    }
+                    else{
+                         $password = USER_ACC_EMP::where("EMP_ID", $userID)->value("PASSWORD");
+                        $decrypt = decrypt($password);
+                        if ( $passwordinput == $decrypt) {
+                            $fullN = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+                            ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+                            ->where('e_m_p_l_o_y_e_e_s.EMP_ID', $userID)
+                            ->value('e_m_p_l_o_y_e_e_s.NAME');
+
+                            Session::put('fullNs', $fullN);
+                            Session::put('accT', $accT);
+                            return redirect('/faculty')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
+                        }else{
+                            return back()->with('messagepass', 'Wrong Password')->withInput();
+                        }
+
+                    }
+
+            }
+            if($isStudent==null && $isAdmin==null )
+            {
+                 return back()->with('messageid', 'Id does not exist')->withInput();
+            }
+            // if ($exists) {
+            //     $password = userCC::where("fullname", $us)->where("userID", $userID)->value("password");
+            //     $decrypt = decrypt($password);
+
+            //     if ($passwordinput == $decrypt) {
+            //         $fullN = userCC::where("userID", $userID)->value("fullname");
+            //         $accT = userCC::where("fullname", $us)->where("userID", $userID)->value("acctype");
+
+            //         Session::put('fullNs', $fullN);
+
+            //         //user level : student , admin , faculty
+
+
+            //         if ($accT == 'admin') {
+            //             Session::put('accT', $accT);
+            //             return redirect('/admin')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
+            //         } elseif ($accT == 'faculty') {
+            //             Session::put('accT', $accT);
+            //             return redirect('/faculty')->with('alert', "Welcome  $fullN!")->with('lrt', 1);
+            //         } elseif ($accT == 'student') {
+            //             Session::put('accT', $accT);
+            //             return redirect('/student')->with('alert', "Welcome  $fullN!")->with('lrt', 1);
+            //         } else {
+            //             return "gagi aliwa HAHAHAHAHAHA";
+            //         }
+            //     } else {
+            //         return back()->with('messagepass', 'Wrong Password')->withInput();
+            //     }
+            // } else {
+            //     return back()->with('messageid', 'Id does not exist')->withInput();
+            // }
         } else {
-            // Session::forget('alert');
             return view('login');
         }
+
+
+
     }
 
     /**
@@ -110,7 +159,7 @@ class userCCcontroller extends Controller
     $conPass = $request->input("conpassword");
     $pass = $request->input("password");
 
-    
+
 
 if ($exists) {
 
@@ -129,28 +178,20 @@ if ($accExist) {
     ->select('s_t_u_d_e_n_t_s.C_ID','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME', 'student_accs.PASSWORD')
     ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
     ->first();
-    
+
     $studentCId = DB::table('student_accs')
     ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
     ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
     ->value('s_t_u_d_e_n_t_s.C_ID');
 
     if ($studentCId) {
-        //    $result = DB::table('s_t_u_d_e_n_t_s')
-        // ->join('c_o_u_r_s_e_s', 'c_o_u_r_s_e_s.C_ID', '=',  $studentCId)
-        // ->select('c_o_u_r_s_e_s.C_DESC')->get()
-        // ;
-        // $result = DB::table('c_o_u_r_s_e_s')
-        //     ->join('s_t_u_d_e_n_t_s', 'c_o_u_r_s_e_s.C_ID', '=', DB::raw($studentCId))
-        //     ->select('c_o_u_r_s_e_s.C_DESC')
-        //     ->get();
-    
+
             $result = DB::table('c_o_u_r_s_e_s')
             ->join('s_t_u_d_e_n_t_s', 'c_o_u_r_s_e_s.C_ID', '=',  DB::raw($studentCId))
             ->where('s_t_u_d_e_n_t_s.C_ID', $studentCId)
             ->select('c_o_u_r_s_e_s.C_DESC')
             ->first();
-       
+
     } else {
         // pag walang studentCID
     }
@@ -170,7 +211,7 @@ return redirect()->route('userCC.index')->with('alert', 'Account Successfully Cr
 }
 
 }
-    
+
 
 } else {
 

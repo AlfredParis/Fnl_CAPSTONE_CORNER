@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('u_s_e_r__a_c_c__e_m_p_s', function (Blueprint $table) {
             $table->id('USER_ID_EMP');
-            $table->string('USER_NAME');
             $table->string('PASSWORD');
             $table->string('EMP_ID');
             $table->string('ACCTYPE');

@@ -9,7 +9,7 @@
         <a href="{{ route('admin.admin') }}" class="inactive">Return</a>
     @elseif($userAdd == 'faculty')
         <a href="{{ route('admin.faculty') }}" class="inactive">Return</a>
-    @else
+    @elseif($userAdd == 'student')
         <a href="{{ route('admin.student') }}" class="inactive">Return</a>
     @endif
 @endsection
@@ -52,16 +52,12 @@
                 </div>
             </div>
 
-            {{-- <label class="form-check-label" for="remember">Remember me</label>  <input type="checkbox" class="form-check-input" checked="checked" name="remember"> --}}
-
             <div style="text-align: center">
                 <button type="submit" class="btn btn-primary">Register</button>
                 <br>
-                {{-- <div class="form-group" style="background-color:#f1f1f1"> --}}
-
 
                 <span class="psw">Forgot <a href="#">password?</a></span>
-                {{-- </div> --}}
+
 
         </form>
     </div>

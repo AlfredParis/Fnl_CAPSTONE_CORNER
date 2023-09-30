@@ -77,14 +77,14 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
     Route::put('/{id}/updateUser', [adminController::class, 'userUpdate'])->name('update'); //user update
     Route::get('/{id}/edit', [adminController::class, 'userEdit'])->name('edit'); //user edit view
     Route::get('/{user}/addUser', [adminController::class, 'addUser'])->name('addUser'); //user add view
-    Route::post('/{userac}/storeUser', [adminController::class, 'storeUser'])->name('storeUser'); //user add function
+    Route::post('/{userac}/storeEmp', [adminController::class, 'storeEmp'])->name('storeEmp'); //user add function
     // Admin User Crud
 
     // Admin Archive Crud
     Route::get('/addArch', [adminController::class, 'addArch'])->name('addArch');
     Route::post('/storeArch', [adminController::class, 'storeArch'])->name('storeArch');
-    Route::put('/{id}', [adminController::class, 'archUpdate'])->name('updateArch'); //user edit store
-    Route::get('/{id}/editArch', [adminController::class, 'archEdit'])->name('editArch'); //user edit view
+    Route::put('/{ARCH_ID}', [adminController::class, 'archUpdate'])->name('updateArch'); //user edit store
+    Route::get('/{ARCH_ID}/editArch', [adminController::class, 'archEdit'])->name('editArch'); //user edit view
     Route::post('/find-similar-words', [adminController::class, 'findSimilarWords'])->name('words');
     Route::delete('/{id}', [adminController::class, 'delArch'])->name('delArch'); //archive delete
 

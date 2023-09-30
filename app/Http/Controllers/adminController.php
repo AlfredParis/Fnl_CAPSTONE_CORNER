@@ -9,19 +9,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use App\Models\student_acc;
 use App\Models\STUDENT;
+use App\Models\USER_ACC_EMP;
+use App\Models\EMPLOYEE;
+use App\Models\ARCHIVES;
 
 use App\Http\Controllers\userCCcontroller;
+
 use Validator;
 
 class adminController extends Controller
 {
     public function index()
     {
-        $total_arch=archive::count() ;
-        $total_admin= userCC::where('acctype', 'admin')->count();
-        $total_student=userCC::where('acctype', 'student')->count();
-        $total_faculty=userCC::where('acctype', 'faculty')->count();
+        $total_arch=ARCHIVES::count() ;
+        $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student=student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
 
         // $total_proposal=;
         return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
@@ -32,7 +37,7 @@ class adminController extends Controller
     }
     public function archives()
     {
-        $archives = archive::paginate(6);
+        $archives = ARCHIVES::paginate(6);
         return view('adminArchive')->with('arch', $archives);
     }
     public function student()
@@ -54,12 +59,13 @@ class adminController extends Controller
     }
     public function faculty()
     {
-        $facultyPage = userCC::where('acctype', 'faculty')->paginate(2);
+
+        $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
         return view('adminFacultyTB')->with('faculty', $facultyPage);
     }
     public function admin()
     {
-        $adminPage = userCC::where('acctype', 'admin')->paginate(2);
+        $adminPage = USER_ACC_EMP::where('ACCTYPE', 'admin')->paginate(2);
         return view('adminAdminTB')->with('admin', $adminPage);
     }
 
@@ -68,7 +74,8 @@ class adminController extends Controller
 
         return view('adminAdduser')->with('userAdd', $user);
     }
-    public function storeUser(Request $request, $userac)
+
+    public function storeEmp(Request $request, $userac)
     {
         $validator = Validator::make(
             $request->all(),
@@ -85,44 +92,63 @@ class adminController extends Controller
         }
 
 
-        $user = new userCC;
-        $user->userID = $request->input("userID");
         $userID = $request->input("userID");
         $conPass = $request->input("conpassword");
-
         $pass = $request->input("password");
-        $exists = userCC::where('userID', $userID)->exists();
-        $name = Session::get('fullNs');
+        $isStudent = student_acc::where('S_ID', $userID)->exists();
+        $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
 
-        if ($exists) {
-            return back()->with('alert', 'Id already exist!')->withInput();
-        } else {
-            if ($conPass == $pass) {
-                $user->fullname = $request->input("fullname");
-                $user->password = encrypt($request->input("password"));
+        if ($isAdmin==NULL && $isStudent==NULL) {
+             if ($conPass == $pass) {
+
                 if ($userac == 'admin') {
-                    $user->acctype = 'admin';
+
+                    $user = new USER_ACC_EMP;
+                    $user->EMP_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = 'admin';
                     $user->save();
-                     Log::alert("$name has been added this account: $userID a admin");
+                    $EMP = new EMPLOYEE;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->EMP_ID=$request->input("userID");
+                    $EMP->save();
+                    $name = Session::get('fullNs');
+                    Log::alert("$name has been added this account: $userID a admin");
                     return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
                 } elseif ($userac == 'faculty') {
-                    $user->acctype = 'faculty';
+                    $user = new USER_ACC_EMP;
+                    $user->EMP_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = 'faculty';
                     $user->save();
-                     Log::alert("$name has been added this account: $userID a faculty");
+                    $EMP = new EMPLOYEE;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->EMP_ID=$request->input("userID");
+                    $EMP->save();
+                    $name = Session::get('fullNs');
+                   Log::alert("$name has been added this account: $userID a faculty");
                     return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
                 } else {
-                    $user->acctype = 'student';
+
+                    $user = new USER_ACC_EMP;
+                    $user->S_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = 'faculty';
                     $user->save();
-                     Log::alert("$name has been added this account: $userID a student");
+                    $EMP = new EMPLOYEE;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->S_ID=$request->input("userID");
+                    $EMP->C_ID='1';
+                    $EMP->save();
+                    $name = Session::get('fullNs');
+                  Log::alert("$name has been added this account: $userID a student");
                     return redirect()->route('admin.student')->with('alert', 'Student Account added!');
                 }
-
-
-
             } else {
                 return back()->with('alert', 'Password does not match')->withInput();
             }
-
+        } else {
+            return back()->with('alert', 'Id already exist!')->withInput();
         }
     }
 
