@@ -15,16 +15,14 @@
         .checker {
             height: 75vh;
             display: grid;
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 60% 40%;
             grid-template-rows: 30% 70%;
             grid-template-areas:
-                "hid frm"
-                "check check"
-
-            ;
-            text-align: center;
-            gap: 10px;
-            margin: 20px;
+                "frm check"
+                "abstract check"  ;
+            /* text-align: center; */
+            gap: 5px;
+            margin-top: 20px;
         }
 
 
@@ -503,6 +501,35 @@
             background-color: #b4b4b4e3;
             border-radius: 20px;
 
+        }
+        .chkContainier {
+            max-width: auto;
+            /* margin: 0 auto; */
+            padding: 20px;
+            /* align-items: center; */
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+
+        }
+        .abstract{
+            /* width: 490px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    height: auto; 
+    resize: vertical;
+    text-align: left; 
+    height:150PX ;
+    white-space: normal; */
+    width: 80%;
+    height: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    resize: none; /* Prevents resizing of the textarea */
+    vertical-align: top;
         }
 
         .formGroup {

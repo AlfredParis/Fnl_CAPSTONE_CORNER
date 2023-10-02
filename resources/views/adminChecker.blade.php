@@ -17,23 +17,18 @@
 @section('main')
 
     <div class="checker">
-        <div class="hid">
-            <div class="chtitle">Title Checker <br></div>
-      
-                @if (isset($titel))
-                    <h1> <strong>Your title:</strong> {{ $titel }}</h1>
-                @else
-                <h1> <strong>Your title:</strong> No input title.</h1>
-                @endif
-
-  </div>
+        
         <div class="frm">
-            <div class="containier">
+            <div class="chkContainier">
                 <form action="{{ route('admin.words') }}" method="POST">
                     @csrf
                     <div class="formGroup">
-                        <label for="user_input">Enter a your title</label>
+                        <label for="user_input">Enter a your title:</label>
                         <input class="formControl" type="text" name="user_input" id="user_input">
+                    </div>
+                    <div class="formGroup">
+                        <label for="user_input">Enter a your abstract:</label>
+                        <textarea class="abstract" type="text" name="user_input" id="user_input"></textarea>
                     </div>
                     <button type="submit" class="btn btnSecondary">Find</button>
                 </form>
@@ -41,10 +36,7 @@
         </div>
         <div class="check">
             <div class="table-wrapper">
-                {{-- @if (isset($titel))
-                    <h1>Your Title: {{ $titel }}</h1>
-                @endif --}}
-
+             
 
                 @if (isset($similarTitles) && count($similarTitles) > 0)
                     <table class="fl-table">
