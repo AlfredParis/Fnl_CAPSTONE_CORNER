@@ -276,12 +276,13 @@
         /*  */
 
         .navbar {
-            background: linear-gradient(to bottom, #041AA0, #030351);
+            background: linear-gradient(to bottom, #ffffff, #ffffff);
             height: 40px;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .navbar a {
@@ -290,6 +291,7 @@
             margin-right: 20px;
             font-family: Arial, sans-serif;
             transition: color 0.5s ease-in;
+            color: #0A27D8;
             font-weight: 700;
         }
 
@@ -346,11 +348,11 @@
 
 
 
-        .navbar a:hover {
+        /* .navbar a:hover {
             color: #eeff00;
 
             border-radius: 10px;
-        }
+        } */
 
 
 
@@ -636,7 +638,7 @@
             /* Set initial box shadow */
             border-radius: 0;
             /* Set initial border radius */
-            transition: all 1s ease-in-out;
+            transition: all 0.5s ease-in-out;
             /* Smooth transitions for all properties */
         }
 
@@ -645,9 +647,9 @@
             padding-bottom: 15px;
             padding-right: 5px;
             padding-left: 5px;
-            background-color: #6385ff79;
-            color: #ffea00;
-            box-shadow: 0px -2px 3px rgba(108, 167, 255, 0.541);
+            /* background-color: #6385ff79; */
+            color: #1c35d9;
+            /* box-shadow: 0px -2px 3px rgba(108, 167, 255, 0.541); */
             border-radius: 0px;
 
         }
@@ -658,9 +660,9 @@
             padding-bottom: 15px;
             padding-right: 5px;
             padding-left: 5px;
-            background-color: #0042cfd0;
+            background-color: #FFE047;
             color: #f6e201;
-            box-shadow: 0px 0px 10px #3575ff;
+            box-shadow: 0px 0px 10px #FFE047;
             border-radius: 10px;
 
         }
@@ -992,8 +994,8 @@
                             {{ $accT = Session::get('accT') }}</span>
                     </h3>
                     <ul>
-                        <li> <img src="{{ asset('images/log.png') }}" alt=""><a href=" #">Edit Account</a></li>
-                        <li><img src="{{ asset('images/log.png') }}" alt=""><a
+                        <li> <img src="{{ asset('images/settings.png') }}" alt=""><a href=" #">Edit Account</a></li>
+                        <li><img src="{{ asset('images/logout.png') }}" alt=""><a
                                 href="{{ route('logout') }}">Logout</a></li>
                     </ul>
                 </div>
