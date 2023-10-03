@@ -24,7 +24,7 @@
                 <tr>
                     <th>Archive ID</th>
                     <th>Archive Title</th>
-                    <th>Author/s</th>
+                   
                     <th> Documentation</th>
                     <th> GitHub Repository</th>
                     <th> View </th>
@@ -38,7 +38,7 @@
 
                         <td>{{ $archive->ARCH_ID }}</td>
                         <td>{{ $archive->ARCH_NAME }}</td>
-                        <td>{{ $archive->ABSTRACT }}</td>
+                       
                         <td>{{ $archive->AUTHOR_ID }}</td>
                         <td><a href="#"
                                 onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILEPDF_FILE }}</a>

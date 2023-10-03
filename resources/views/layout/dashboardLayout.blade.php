@@ -15,13 +15,13 @@
         .checker {
             height: 75vh;
             display: grid;
-            grid-template-columns: 60% 40%;
+            grid-template-columns: 55% 45%;
             grid-template-rows: 30% 70%;
             grid-template-areas:
                 "frm check"
                 "abstract check"  ;
             /* text-align: center; */
-            gap: 5px;
+            /* gap:5px;  */
             margin-top: 20px;
         }
 
@@ -50,8 +50,10 @@
         }
         .chtitle{
             color: #3575ff;
-            font-weight: 900;
+            font-weight: 700;
             font-size: 40px;
+            margin-left: 10px;
+        
         }
         .frm {
             grid-area: frm;
@@ -513,23 +515,15 @@
 
         }
         .abstract{
-            /* width: 490px;
-    padding: 5px;
-    font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    height: auto; 
-    resize: vertical;
-    text-align: left; 
-    height:150PX ;
-    white-space: normal; */
-    width: 80%;
-    height: 200px;
+               
+    width: 95%;
+    height: 400px;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+   border-radius: 10px;
     resize: none; /* Prevents resizing of the textarea */
     vertical-align: top;
+    border: 2px solid rgb(135, 135, 135);
         }
 
         .formGroup {
@@ -543,11 +537,14 @@
         }
 
         .formControl {
-            width: 490px;
-            padding: 5px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            width: 95%;
+
+    padding: 10px;
+    font-size: 16px;
+   border-radius: 10px;
+    resize: none; /* Prevents resizing of the textarea */
+    vertical-align: top;
+    border: 2px solid rgb(135, 135, 135);
         }
 
         .form-check-label {
@@ -907,6 +904,68 @@
         }
 
         /* logout CSS END*/
+
+ /* Table Styles for checker*/
+
+ .chktable-wrapper {
+            font-family: Helvetica;
+            -webkit-font-smoothing: antialiased;
+
+            margin-right: 10%;
+            margin-top: 40px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3  );
+            width: 95%;
+            border-radius: 10px;
+        }
+
+        .fl-chktable {
+            border-radius: 10px;
+            /* font-size: 15px; */
+            font-weight: normal;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            /* white-space: nowrap; */
+            background-color: white;
+            padding: 20px;
+        }
+
+        .fl-chktable td,
+        .fl-chktable th {
+            text-align: center;
+            padding: 10px;
+
+        }
+        .fl-chktable th {
+            text-align: center;
+            padding: 10px;
+
+        }
+
+        .fl-chktable td {
+            border-right: 1px solid #f8f8f8;
+            font-size: 20px;
+        }
+
+
+
+        .fl-chktable thead th {
+            color: #ffffff;
+            background: #1928c9;
+        }
+
+
+        .fl-chktable thead th:nth-child(odd) {
+            color: #ffffff;
+            background: #1928c9;
+        }
+
+        .fl-chktable tr:nth-child(even) {
+            background: #F8F8F8;
+        }
+
+
+
     </style>
 
 

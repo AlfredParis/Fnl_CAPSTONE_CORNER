@@ -267,6 +267,7 @@ else{
    public function findSimilarWords(Request $request)
 {
     $userInput = $request->input('user_input');
+    $abs = $request->input('abs');
   if (empty($userInput) || is_null($userInput)) {
         return view('adminChecker')->with('similarTitles', []);
     }
@@ -274,11 +275,11 @@ else{
     $inputWords = explode(' ', $userInput);
 
     // Retrieve all titles from the database
-    $titles = DB::table('archives')->pluck('name');
+    $titles = DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
+ 
+     $similarTitles = [];
 
-    $similarTitles = [];
-
-    // Loop through each title and check for similarity with any input word
+    
     foreach ($titles as $title) {
         $titleWords = explode(' ', $title);
 
@@ -292,22 +293,14 @@ else{
 
             foreach ($titleWords as $titleWord) {
                 $distance = levenshtein($inputWord, $titleWord);
-
-                // Calculate similarity percentage for this word
                 $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($titleWord))) * 100;
-
-                // If the similarity percentage is higher, update max similarity
                 if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
                     $maxSimilarityPercentage = $wordSimilarityPercentage;
-
-                    // Check if this input word is already found in the title
-                    if (stripos($titleWord, $inputWord) !== false) {
+                      if (stripos($titleWord, $inputWord) !== false) {
                         $inputWordFound = true;
-                    }
+                         }
                 }
             }
-
-            // Add the similar word to the list only if it is found in the title
             if ($inputWordFound) {
                 $similarWords[] = $inputWord;
             }
@@ -323,7 +316,7 @@ else{
         }
 
         // If the average similarity percentage is at least 50%, and there are similar words, add the title to the result
-        if ($averageSimilarityPercentage >= 40 && !empty($similarWords)) {
+        if ($averageSimilarityPercentage >= 10 && !empty($similarWords)) {
             $similarTitles[] = [
                 'title' => $title,
                 'average_similarity_percentage' => round($averageSimilarityPercentage, 2),
@@ -338,8 +331,7 @@ else{
     });
 
 
-
-    return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput);
+ return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput);
 }
 
 

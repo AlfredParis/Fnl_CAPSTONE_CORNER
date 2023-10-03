@@ -27,23 +27,22 @@
                         <input class="formControl" type="text" name="user_input" id="user_input">
                     </div>
                     <div class="formGroup">
-                        <label for="user_input">Enter a your abstract:</label>
-                        <textarea class="abstract" type="text" name="user_input" id="user_input"></textarea>
+                        <label for="abs">Enter a your abstract:</label>
+                        <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
                     </div>
                     <button type="submit" class="btn btnSecondary">Find</button>
                 </form>
             </div>
         </div>
         <div class="check">
-            <div class="table-wrapper">
+            <div class="chktable-wrapper">
              
 
                 @if (isset($similarTitles) && count($similarTitles) > 0)
-                    <table class="fl-table">
+                    <table class="fl-chktable">
                         <thead>
                             <tr>
                                 <th>Similar Titles</th>
-
                                 <th>Similarity Percentage</th>
                                 <th>Similar Words</th>
                             </tr>
