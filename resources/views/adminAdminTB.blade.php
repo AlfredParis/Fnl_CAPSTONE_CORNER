@@ -22,7 +22,7 @@
         <table class="fl-table">
             <a href="{{ route('admin.addUser', ['user' => 'admin']) }}" class="glowbtn">Add admin</a>
 
-            <br><br><br>
+            <br><br>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -56,6 +56,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $admin->links() }}
+        <div class="pagination">{{ $admin->links() }}</div>
     </div>
 @endsection

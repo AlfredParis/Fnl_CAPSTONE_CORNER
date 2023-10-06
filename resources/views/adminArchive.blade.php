@@ -18,18 +18,21 @@
 
     <div class="table-wrapper">
         <a href="{{ route('admin.addArch') }}" class="glowbtn">Add Archive</a>
-        <br><br><br>
+
+
+
+        <br><br>
         <table class="fl-table">
             <thead>
                 <tr>
                     <th>Archive ID</th>
                     <th>Archive Title</th>
-                   
+
                     <th> Documentation</th>
-                    <th> GitHub Repository</th>
-                    <th> View </th>
+                    <th> Documentation</th>
+                    <th> GitHub Repository </th>
+                    <th> Views </th>
                     <th> Edit </th>
-                    <th> Delete </th>
                 </tr>
             </thead>
             <tbody>
@@ -38,26 +41,20 @@
 
                         <td>{{ $archive->ARCH_ID }}</td>
                         <td>{{ $archive->ARCH_NAME }}</td>
-                       
-                        <td>{{ $archive->AUTHOR_ID }}</td>
                         <td><a href="#"
-                                onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILEPDF_FILE }}</a>
+                                onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILE }}</a>
                         </td>
                         <td>{{ $archive->GITHUB_LINK }}</td>
                         <td><a href="/admin/{{ $archive->ARCH_ID }}" class="glowbtn">view</a></td>
 
                         <td><a href="{{ route('admin.editArch', ['ARCH_ID' => $archive->ARCH_ID]) }}"
-                                class="glowbtn">edit</a></td>
+                                class="glowbtn">edit</a>
+                        </td>
                         <td>{{ $archive->AUTHOR_ID }}</td>
-                        <td>{{ $archive->IS_APPROVED }}</td>
+                        {{-- <td>{{ $archive->IS_APPROVED }}</td> --}}
 
                     </tr>
                 @endforeach
             </tbody>
         </table><br>
-
-    </div>
-
-    <div class="lnk">
-        {{ $arch->links() }}</div>
-@endsection
+    @endsection

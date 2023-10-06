@@ -19,7 +19,7 @@
             grid-template-rows: 30% 70%;
             grid-template-areas:
                 "frm check"
-                "abstract check"  ;
+                "abstract check";
             /* text-align: center; */
             /* gap:5px;  */
             margin-top: 20px;
@@ -40,21 +40,24 @@
         .hid {
             grid-area: hid;
             text-align: left;
-            margin-left: 60px; 
+            margin-left: 60px;
         }
-        .hid h1{
-            
+
+        .hid h1 {
+
             text-align: left;
             font-weight: 500;
             font-size: 30px;
         }
-        .chtitle{
+
+        .chtitle {
             color: #3575ff;
             font-weight: 700;
-            font-size: 40px;
+            font-size: 35px;
             margin-left: 10px;
-        
+
         }
+
         .frm {
             grid-area: frm;
         }
@@ -62,10 +65,12 @@
         .check {
             grid-area: check;
         }
-.simTitle{
-    /* font-weight: 900; */
+
+        .simTitle {
+            /* font-weight: 900; */
             font-size: 60px;
-}
+        }
+
         h2 {
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -125,6 +130,7 @@
             padding: 10px;
 
         }
+
         .fl-table th {
             text-align: center;
             padding: 10px;
@@ -386,10 +392,10 @@
 
 
             height: 75vh;
-            display: grid; 
-             grid-template-rows: 25% 75%;
+            display: grid;
+            grid-template-rows: 25% 75%;
             grid-template-columns: 25% 25% 25% 25%;
-          
+
             grid-template-areas:
 
                 "admin stud fac arch"
@@ -430,65 +436,70 @@
 
         .admin {
             margin: 0 auto;
-            padding:0 25%;
+            padding: 0 25%;
             align-items: center;
-            
+
             flex-direction: column;
 
             width: 25%;
 
             border-radius: 20px;
-           
-            box-shadow: -10px 0px 0px rgb(18, 179, 34),0px 0px 10px rgb(0, 0, 0);
-          
+
+            box-shadow: -10px 0px 0px rgb(18, 179, 34), 0px 0px 10px rgb(0, 0, 0);
+
             grid-area: admin;
         }
 
-.admin p, .stud p, .fac p, .arch p{
-    margin-top: 50%;
-            
-}        .stud {
-    margin: 0 auto;
-            padding:0 25%;
+        .admin p,
+        .stud p,
+        .fac p,
+        .arch p {
+            margin-top: 50%;
+
+        }
+
+        .stud {
+            margin: 0 auto;
+            padding: 0 25%;
             align-items: center;
             justify-content: center;
-            
+
             flex-direction: column;
 
             width: 25%;
 
             border-radius: 20px;
-            box-shadow: -10px 0px 0px rgb(18, 21, 179),0px 0px 10px rgb(0, 0, 0);
+            box-shadow: -10px 0px 0px rgb(18, 21, 179), 0px 0px 10px rgb(0, 0, 0);
             grid-area: stud;
         }
 
         .fac {
             margin: 0 auto;
-            padding:0 25%;
+            padding: 0 25%;
             align-items: center;
             justify-content: center;
-            
+
             flex-direction: column;
 
             width: 25%;
 
             border-radius: 20px;
-            box-shadow: -10px 0px 0px rgb(205, 212, 10),0px 0px 10px rgb(0, 0, 0);
+            box-shadow: -10px 0px 0px rgb(205, 212, 10), 0px 0px 10px rgb(0, 0, 0);
             grid-area: fac;
         }
 
         .arch {
             margin: 0 auto;
-            padding:0 25%;
+            padding: 0 25%;
             align-items: center;
             justify-content: center;
-            
+
             flex-direction: column;
 
             width: 25%;
 
             border-radius: 20px;
-            box-shadow: -10px 0px 0px rgb(203, 17, 17),0px 0px 10px rgb(0, 0, 0);
+            box-shadow: -10px 0px 0px rgb(203, 17, 17), 0px 0px 10px rgb(0, 0, 0);
             grid-area: arch;
         }
 
@@ -504,6 +515,7 @@
             border-radius: 20px;
 
         }
+
         .chkContainier {
             max-width: auto;
             /* margin: 0 auto; */
@@ -514,16 +526,19 @@
             border-radius: 20px;
 
         }
-        .abstract{
-               
-    width: 95%;
-    height: 400px;
-    padding: 10px;
-    font-size: 16px;
-   border-radius: 10px;
-    resize: none; /* Prevents resizing of the textarea */
-    vertical-align: top;
-    border: 2px solid rgb(135, 135, 135);
+
+        .abstract {
+
+            width: 95%;
+            height: 40vh;
+
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            resize: none;
+            /* Prevents resizing of the textarea */
+            vertical-align: top;
+            border: 2px solid rgb(135, 135, 135);
         }
 
         .formGroup {
@@ -539,12 +554,13 @@
         .formControl {
             width: 95%;
 
-    padding: 10px;
-    font-size: 16px;
-   border-radius: 10px;
-    resize: none; /* Prevents resizing of the textarea */
-    vertical-align: top;
-    border: 2px solid rgb(135, 135, 135);
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            resize: none;
+            /* Prevents resizing of the textarea */
+            vertical-align: top;
+            border: 2px solid rgb(135, 135, 135);
         }
 
         .form-check-label {
@@ -759,12 +775,12 @@
 
 
         .lnk {
-            padding-left: 4%;
+            padding-left: 80%;
         }
 
-        .highlight {
-            background-color: yellow;
-        }
+        /* .highlight {
+            background-color: rgba(255, 255, 0, 0.16);
+        } */
 
 
 
@@ -788,8 +804,8 @@
         /* logout CSS */
         .action {
             position: fixed;
-            top: 0px;
-            right: 1%;
+            top: 1px;
+            right: 1px;
 
         }
 
@@ -820,8 +836,8 @@
             background: #ffffff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.644);
 
-            width: 190px;
-             /* box-sizing: 10px 5px 25px rgb(105, 97, 97);  */
+            width: 150px;
+            /* box-sizing: 10px 5px 25px rgb(105, 97, 97);  */
             border-radius: 10px;
             transition: 0.5s;
             visibility: hidden;
@@ -839,7 +855,7 @@
             position: absolute;
             top: -5px;
             right: 28px;
-            width: 20px;
+            width: 15px;
             height: 20px;
             background: rgb(255, 255, 255);
             transform: rotate(45deg);
@@ -848,13 +864,13 @@
         .action .menu h3 {
 
             width: 100%;
-            text-align: center;
-            font-size: 20px;
-            padding: 0px 0;
-
+            text-align: left;
+            font-size: 15px;
+            padding: 5px;
+            margin: 12px;
             font-weight: 500;
             color: #000000;
-            line-height: 1.2em;
+            line-height: 1em;
         }
 
         .action .menu h3 span {
@@ -862,21 +878,21 @@
 
             font-size: 16px;
 
-            font-weight: 400;
+            font-weight: 300;
             color: #000000;
         }
 
         .action .menu ul li {
             list-style: none;
-            padding: 10px 0px;
-            /* border-top: 2px solid rgb(102, 102, 102); */
+            padding: 5px 0px;
+
             display: flex;
             align-items: center;
 
         }
 
         .action .menu ul li img {
-            max-width: 30px;
+            max-width: 25px;
             margin-right: 5px;
             opacity: 0.5;
             transition: 1s;
@@ -892,8 +908,8 @@
         .action .menu ul li a {
             display: inline-block;
             text-decoration: none;
-            color:#414141;
-            font-weight: 500;
+            color: #414141;
+            font-weight: 100;
             transition: 0.5s;
         }
 
@@ -905,15 +921,15 @@
 
         /* logout CSS END*/
 
- /* Table Styles for checker*/
+        /* Table Styles for checker*/
 
- .chktable-wrapper {
+        .chktable-wrapper {
             font-family: Helvetica;
             -webkit-font-smoothing: antialiased;
 
             margin-right: 10%;
             margin-top: 40px;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3  );
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
             width: 95%;
             border-radius: 10px;
         }
@@ -936,6 +952,7 @@
             padding: 10px;
 
         }
+
         .fl-chktable th {
             text-align: center;
             padding: 10px;
@@ -963,9 +980,6 @@
         .fl-chktable tr:nth-child(even) {
             background: #F8F8F8;
         }
-
-
-
     </style>
 
 
@@ -1080,7 +1094,8 @@
                             {{ $accT = Session::get('accT') }}</span>
                     </h3>
                     <ul>
-                        <li> <img src="{{ asset('images/settings.png') }}" alt=""><a href=" #">Edit Account</a></li>
+                        <li> <img src="{{ asset('images/settings.png') }}" alt=""><a href=" #">Edit Account</a>
+                        </li>
                         <li><img src="{{ asset('images/logout.png') }}" alt=""><a
                                 href="{{ route('logout') }}">Logout</a></li>
                     </ul>

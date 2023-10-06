@@ -11,7 +11,7 @@
 @section('main')
     <p class="text-style">Archive Add Form</p>
 
-    <div class="container">
+    <div class="chkContainier">
         <form class="" action="{{ route('admin.storeArch') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -26,7 +26,10 @@
                 <input type="text" class="form-control" placeholder="Enter Title" name="name"
                     value="{{ old('name') }}" required>
             </div>
-
+            <div class="formGroup">
+                <label for="abs">Enter a your abstract:</label>
+                <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
+            </div>
             <div class="form-group">
                 <label for="Author">Author</label>
                 <input type="text" class="form-control" placeholder="Enter Author/s" name="author" id="myInput"
@@ -45,6 +48,18 @@
                 <label for="gh">GitHub Repository</label>
                 <input type="text" class="form-control" placeholder="Enter Link" name="gh" id="gh"
                     value="{{ old('gh') }}">
+
+            </div>
+
+            <div class="form-group">
+                <label for="Status">Status:</label>
+                <select id="stat" name="stat">
+                    <option value="approved">approved</option>
+                    <option value="not approved">not approved</option>
+
+                </select>
+
+
 
             </div>
 

@@ -37,7 +37,7 @@ class adminController extends Controller
     }
     public function archives()
     {
-        $archives = ARCHIVES::paginate(6);
+        $archives = ARCHIVES::paginate(5);
         return view('adminArchive')->with('arch', $archives);
     }
     public function student()
@@ -101,13 +101,13 @@ class adminController extends Controller
 
 
         $userID = $request->input("userID");
-        $conPass = $request->input("conpassword");
-        $pass = $request->input("password");
+        // $conPass = $request->input("conpassword");
+        // $pass = $request->input("password");
         $isStudent = student_acc::where('S_ID', $userID)->exists();
         $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
 
         if ($isAdmin==NULL && $isStudent==NULL) {
-             if ($conPass == $pass) {
+            //  if ($conPass == $pass) {
 
                 if ($userac == 'admin') {
 
@@ -152,9 +152,9 @@ class adminController extends Controller
                   Log::alert("$name has been added this account: $userID a student");
                     return redirect()->route('admin.student')->with('alert', 'Student Account added!');
                 }
-            } else {
-                return back()->with('alert', 'Password does not match')->withInput();
-            }
+            // } else {
+            //     return back()->with('alert', 'Password does not match')->withInput();
+            // }
         } else {
             return back()->with('alert', 'Id already exist!')->withInput();
         }
@@ -199,12 +199,13 @@ class adminController extends Controller
     public function storeArch(Request $request)
     {
         $name = Session::get('fullNs');
-        $arch = new archive;
-        $total_arch=archive::count();
-        $arch->archID = "arch-".$total_arch+1;
+        $arch = new ARCHIVES;
+        $total_arch=ARCHIVES::count();
+        $arch->ARCH_ID = "ARCH-".$total_arch+1;
 
-         $arch->name = $request->input("name");
-        $arch->author = $request->input("author");
+         $arch->ARCH_NAME = $request->input("name");
+         $arch->ABSTRACT = $request->input("abs");
+        $arch->AUTHOR_ID = $request->input("author");
 
   if ($request->hasFile('pdf_file')) {
         $pdfFile = $request->file('pdf_file');
@@ -212,8 +213,10 @@ class adminController extends Controller
         $pdfFile->storeAs('pdfs', $fileName, 'public');
 $gh = $request->input("gh");
         if (isset($gh)) {
-            $arch->pdf_file =  $fileName;
-            $arch->gh = $request->input("gh");
+            $arch->PDF_FILE =  $fileName;
+            $arch->GITHUB_LINK = $request->input("gh");
+            $arch->IS_APPROVED = $request->input("stat");
+
             $arch->save();
             Log::alert("Archive has been added by $name !");
             return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
@@ -276,10 +279,10 @@ else{
 
     // Retrieve all titles from the database
     $titles = DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
- 
+
      $similarTitles = [];
 
-    
+
     foreach ($titles as $title) {
         $titleWords = explode(' ', $title);
 
@@ -292,12 +295,15 @@ else{
             $inputWordFound = false; // Flag to track if input word is found in the title
 
             foreach ($titleWords as $titleWord) {
+
                 $distance = levenshtein($inputWord, $titleWord);
+
                 $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($titleWord))) * 100;
                 if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
                     $maxSimilarityPercentage = $wordSimilarityPercentage;
                       if (stripos($titleWord, $inputWord) !== false) {
                         $inputWordFound = true;
+
                          }
                 }
             }
@@ -311,6 +317,7 @@ else{
         // Calculate the average similarity percentage for the title
         if ($wordCount > 0) {
             $averageSimilarityPercentage = $totalSimilarityPercentage / count($inputWords);
+
         } else {
             $averageSimilarityPercentage = 0;
         }
@@ -330,7 +337,7 @@ else{
         return $b['average_similarity_percentage'] - $a['average_similarity_percentage'];
     });
 
-
+// return dd( $wordSimilarityPercentage);
  return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput);
 }
 
