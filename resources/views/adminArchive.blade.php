@@ -6,7 +6,7 @@
 
 @section('topnav')
     <a href="{{ route('admin.index') }}" class="inactive">Dashboard</a>
-    <a href="{{ route('admin.archives') }}" class="active">Archives</a>
+    <a href="{{ route('admin.archives') }}" class="actives">Archives</a>
     <a href="{{ route('admin.checker') }}" class="inactive">Checker</a>
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
     <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
@@ -56,5 +56,6 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table><br>
-    @endsection
+        </table>
+    </div> {{ $arch->links() }}
+@endsection

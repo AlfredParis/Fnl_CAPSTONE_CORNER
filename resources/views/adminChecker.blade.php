@@ -8,7 +8,7 @@
     <a href="{{ route('admin.index') }}" class="inactive">
         Dashboard</a>
     <a href="{{ route('admin.archives') }}" class="inactive">Archives</a>
-    <a href="{{ route('admin.checker') }}" class="active">Checker</a>
+    <a href="{{ route('admin.checker') }}" class="actives">Checker</a>
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
     <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
     <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
@@ -17,7 +17,7 @@
 @section('main')
 
     <div class="checker">
-        
+
         <div class="frm">
             <div class="chkContainier">
                 <form action="{{ route('admin.words') }}" method="POST">
@@ -36,7 +36,7 @@
         </div>
         <div class="check">
             <div class="chktable-wrapper">
-             
+
 
                 @if (isset($similarTitles) && count($similarTitles) > 0)
                     <table class="fl-chktable">

@@ -59,8 +59,12 @@ class adminController extends Controller
     }
     public function faculty()
     {
-
-        $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
+ $facultyPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+    ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty') // Add this line
+    ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
+    ->paginate(2);
+        // $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
         return view('adminFacultyTB')->with('faculty', $facultyPage);
     }
     public function admin()
@@ -85,19 +89,19 @@ class adminController extends Controller
 
     public function storeEmp(Request $request, $userac)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                "userID" => "required|min:2|max:20",
-                "fullname" => "required|min:4|max:50",
-                "password" => "required|min:4|max:100",
+        // $validator = Validator::make(
+        //     $request->all(),
+        //     [
+        //         "userID" => "required|min:2|max:20",
+        //         "fullname" => "required|min:4|max:50",
+        //         "password" => "required|min:4|max:100",
 
-            ]
-        );
-        if ($validator->fails()) {
+        //     ]
+        // );
+        // if ($validator->fails()) {
 
-            return back()->withErrors($validator)->withInput();
-        }
+        //     return back()->withErrors($validator)->withInput();
+        // }
 
 
         $userID = $request->input("userID");
@@ -133,9 +137,13 @@ class adminController extends Controller
                     $EMP->NAME = $request->input("fullname");
                     $EMP->EMP_ID=$request->input("userID");
                     $EMP->save();
+
                     $name = Session::get('fullNs');
                    Log::alert("$name has been added this account: $userID a faculty");
                     return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
+
+
+
                 } else {
 
                     $user = new USER_ACC_EMP;

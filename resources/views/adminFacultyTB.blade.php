@@ -9,7 +9,7 @@
     <a href="{{ route('admin.archives') }}" class="inactive">Archives</a>
     <a href="{{ route('admin.checker') }}" class="inactive">Checker</a>
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
-    <a href="{{ route('admin.faculty') }}" class="active">Faculty</a>
+    <a href="{{ route('admin.faculty') }}" class="actives">Faculty</a>
     <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
 @endsection
 
@@ -26,11 +26,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Full Name</th>
                     <th>Password</th>
+                    <th>Full Name</th>
                     <th> Views </th>
                     <th> Edit </th>
-                    <th> Delete </th>
+                    {{-- <th> Delete </th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -40,17 +40,18 @@
                         <td>{{ $fac->EMP_ID }}</td>
                         {{-- <td>{{ $fac-> }}</td> --}}
                         <td>{{ decrypt($fac->PASSWORD) }}</td>
+                        <td>{{ $fac->NAME }}</td>
                         <td><a href="/usercc/{{ $fac->USER_ID_EMP }}" class="glowbtn">view</a></td>
 
                         <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $fac->USER_ID_EMP]) }}"
                                 class="glowbtn">edit</a></td>
                         <td>
-                            <form action="/usercc/{{ $fac->USER_ID_EMP }}" method="POST">
+                            {{-- <form action="/usercc/{{ $fac->USER_ID_EMP }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 
                                 <input type="submit" name="sumbit" value="Delete" class="glowbtn">
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach

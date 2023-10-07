@@ -10,7 +10,7 @@
     <a href="{{ route('admin.checker') }}" class="inactive">Checker</a>
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
     <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
-    <a href="{{ route('admin.admin') }}" class="active">Admin</a>
+    <a href="{{ route('admin.admin') }}" class="actives">Admin</a>
 @endsection
 
 @section('main')
@@ -56,6 +56,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="pagination">{{ $admin->links() }}</div>
+
     </div>
+    <div class="pagination">{{ $admin->links() }}</div>
 @endsection

@@ -8,7 +8,7 @@
     <a href="{{ route('admin.index') }}" class="inactive">Dashboard</a>
     <a href="{{ route('admin.archives') }}" class="inactive">Archives</a>
     <a href="{{ route('admin.checker') }}" class="inactive">Checker</a>
-    <a href="{{ route('admin.student') }}" class="active">Student</a>
+    <a href="{{ route('admin.student') }}" class="actives">Student</a>
     <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
     <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
 @endsection

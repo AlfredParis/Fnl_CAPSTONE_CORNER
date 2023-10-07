@@ -241,40 +241,37 @@
             }
         }
 
-        /* Paginator container */
-        ul.pagination {
-            display: inline-block;
-            list-style-type: none;
-            margin: 0;
+        /* Pagination container styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
             padding: 0;
         }
 
-        /* Paginator list item */
-        ul.pagination li {
-            display: inline;
-            margin: 0;
-            padding: 0;
+        /* Individual pagination item styles */
+        .pagination li {
+            margin: 0 5px;
         }
 
-        /* Paginator link */
-        ul.pagination li a {
-            color: #000;
-            padding: 8px 12px;
+        /* Pagination link styles */
+        .pagination li a {
             text-decoration: none;
-            border: 1px solid #ddd;
-            background-color: #f2f2f2;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-        /* Paginator active link */
-        ul.pagination li.active a {
-            background-color: #4CAF50;
-            color: white;
+        /* Hover state for pagination links */
+        .pagination li a:hover {
+            background-color: #0056b3;
         }
 
-        /* Paginator disabled link */
-        ul.pagination li.disabled a {
-            color: #ddd;
-            pointer-events: none;
+        /* Active pagination link styles */
+        .pagination .active a {
+            background-color: #0056b3;
         }
 
 
@@ -694,13 +691,13 @@
 
         }
 
-        .active {
+        .actives {
 
             padding-top: 15px;
             padding-bottom: 15px;
             padding-right: 5px;
             padding-left: 5px;
-            background-color: #FFE047;
+            background-color: #fce15e;
             color: #f6e201;
             box-shadow: 0px 0px 10px #FFE047;
             border-radius: 10px;
