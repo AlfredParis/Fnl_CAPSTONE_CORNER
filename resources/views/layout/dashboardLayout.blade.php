@@ -431,18 +431,24 @@
 
         }
 
-        .admin {
-            margin: 0 auto;
-            padding: 0 25%;
-            align-items: center;
+        .num {
 
+            font-size: 25px;
+            margin-left: 60%;
+        }
+
+        .admin {
+
+            background: rgb(49, 104, 255);
+
+            color: white;
             flex-direction: column;
 
-            width: 25%;
+            width: 90%;
+            text-align: left;
+            border-radius: 10px;
 
-            border-radius: 20px;
-
-            box-shadow: -10px 0px 0px rgb(18, 179, 34), 0px 0px 10px rgb(0, 0, 0);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
 
             grid-area: admin;
         }
@@ -451,52 +457,51 @@
         .stud p,
         .fac p,
         .arch p {
-            margin-top: 50%;
-
+            font-size: 100%;
+            font-weight: 600;
+            margin-left: 55%;
+            margin-top: -20%;
+            width: auto;
         }
 
         .stud {
-            margin: 0 auto;
-            padding: 0 25%;
-            align-items: center;
-            justify-content: center;
+            background: rgb(49, 104, 255);
 
+            color: white;
             flex-direction: column;
 
-            width: 25%;
+            width: 90%;
+            text-align: left;
+            border-radius: 10px;
 
-            border-radius: 20px;
-            box-shadow: -10px 0px 0px rgb(18, 21, 179), 0px 0px 10px rgb(0, 0, 0);
-            grid-area: stud;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
         }
 
         .fac {
-            margin: 0 auto;
-            padding: 0 25%;
-            align-items: center;
-            justify-content: center;
+            background: rgb(49, 104, 255);
 
+            color: white;
             flex-direction: column;
 
-            width: 25%;
+            width: 90%;
+            text-align: left;
+            border-radius: 10px;
 
-            border-radius: 20px;
-            box-shadow: -10px 0px 0px rgb(205, 212, 10), 0px 0px 10px rgb(0, 0, 0);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
             grid-area: fac;
         }
 
         .arch {
-            margin: 0 auto;
-            padding: 0 25%;
-            align-items: center;
-            justify-content: center;
+            background: rgb(49, 104, 255);
 
+            color: white;
             flex-direction: column;
 
-            width: 25%;
+            width: 90%;
+            text-align: left;
+            border-radius: 10px;
 
-            border-radius: 20px;
-            box-shadow: -10px 0px 0px rgb(203, 17, 17), 0px 0px 10px rgb(0, 0, 0);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
             grid-area: arch;
         }
 
@@ -795,7 +800,14 @@
 
         /* pop up box css end */
 
+        .dashimg {
 
+            width: 50%;
+            height: 50%;
+            margin-top: 10%;
+
+            object-fit: contain;
+        }
 
 
         /* logout CSS */

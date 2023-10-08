@@ -18,16 +18,24 @@
     <div class="dashB">
 
         <div class="admin">
-            <p> Total number of admin: <br> <strong>{{ $tl_admin }}</strong> </p>
+            <img class="dashimg" src="{{ asset('images/admin.png') }}" alt="">
+            <p> Admin: </p>
+            <div class="num">{{ $tl_admin }}</div>
         </div>
         <div class="stud">
-            <p>Total number of student: <br><strong> {{ $tl_stud }}</strong> </p>
+            <img class="dashimg" src="{{ asset('images/student.png') }}" alt="">
+            <p> Student: </p>
+            <div class="num">{{ $tl_stud }}</div>
         </div>
         <div class="fac">
-            <p>Total number of faculty: <br> <strong>{{ $tl_fac }}</strong> </p>
+            <img class="dashimg" src="{{ asset('images/fac.png') }}" alt="">
+            <p> Faculty: </p>
+            <div class="num">{{ $tl_fac }}</div>
         </div>
         <div class="arch">
-            <p>Total number of archives: <br> <strong> {{ $tl_arch }} </strong> </p>
+            <img class="dashimg" src="{{ asset('images/arch.png') }}" alt="">
+            <p> Archives: </p>
+            <div class="num">{{ $tl_arch }}</div>
         </div>
 
 
