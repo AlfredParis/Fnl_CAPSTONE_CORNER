@@ -17,7 +17,7 @@ class studAcc extends Seeder
         $data = [
             [
                 'S_ID' => '20-sc-0147',
-                'PASSWORD' => 'student',
+                'PASSWORD' =>encrypt( 'student'),
                 'ACCTYPE' => 'student',
             ],];
 

@@ -5,6 +5,8 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Http\Request;
 use App\Models\STUDENT;
 
+use Illuminate\Support\Facades\DB;
+
 class extraCtrl extends Controller
 {
     public function generatePDF($id)
@@ -70,4 +72,22 @@ class extraCtrl extends Controller
 
 
     }
+
+
+public function getSuggestions(Request $request)
+{
+    $query = $request->input('query');
+
+    $suggestions = DB::table('s_t_u_d_e_n_t_s')
+        ->select('S_ID')
+        ->where('S_ID', 'like', "%$query%")
+        ->get();
+
+    return response()->json($suggestions);
+}
+
+
+
+
+
 }

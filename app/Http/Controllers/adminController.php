@@ -146,10 +146,10 @@ class adminController extends Controller
 
                 } else {
 
-                    $user = new USER_ACC_EMP;
+                    $user = new student_acc;
                     $user->S_ID = $request->input("userID");
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
-                    $user->ACCTYPE = 'faculty';
+
                     $user->save();
                     $EMP = new EMPLOYEE;
                     $EMP->NAME = $request->input("fullname");

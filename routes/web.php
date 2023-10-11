@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
+Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
 
 
 

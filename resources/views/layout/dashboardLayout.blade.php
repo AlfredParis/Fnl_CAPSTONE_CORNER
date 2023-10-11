@@ -1031,6 +1031,56 @@
             window.open(pdfPath, '_blank', 'width=800,height=600,scrollbars=yes');
         }
     </script>
+    {{-- auto complete script --}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let suggestionList = $('#suggestionList');
+            let suggestionInput = $('#suggestionInput');
+
+            suggestionInput.on('input', function() {
+                let query = $(this).val();
+                if (query.length >= 3) {
+                    $.get('/get-suggestions', {
+                        query: query
+                    }, function(data) {
+                        suggestionList.empty();
+
+                        $.each(data, function(index, value) {
+                            // Create a clickable suggestion item
+                            let suggestionItem = $('<div class="suggestion-item">' + value
+                                .value + '</div>');
+
+                            // Handle click event to autofill the input
+                            suggestionItem.click(function() {
+                                suggestionInput.val(value.value);
+                                suggestionList.empty(); // Clear suggestions
+                            });
+
+                            suggestionList.append(suggestionItem);
+                        });
+
+                        suggestionList.show(); // Show the suggestion list
+                    });
+                } else {
+                    suggestionList.empty();
+                    suggestionList.hide(); // Hide the suggestion list when query is too short
+                }
+            });
+
+            // Hide the suggestion list when clicking outside of it
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('#suggestionList').length) {
+                    suggestionList.hide();
+                }
+            });
+        });
+    </script>
+
+
+
+    {{-- auto complete script end --}}
     {{-- Log out Animation --}}
     <script>
         function menuToggle() {
