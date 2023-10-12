@@ -24,11 +24,21 @@
                     @csrf
                     <div class="formGroup">
                         <label for="user_input">Enter a your title:</label>
-                        <input class="formControl" type="text" name="user_input" id="user_input">
+                        @if (!isset($titel))
+                            <input class="formControl" type="text" name="user_input" id="user_input">
+                        @else
+                            <input class="formControl" type="text" name="user_input" id="user_input"
+                                value="{{ $titel }}">
+                        @endif
                     </div>
                     <div class="formGroup">
                         <label for="abs">Enter a your abstract:</label>
-                        <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
+                        @if (!isset($absract))
+                            <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
+                        @else
+                            <textarea class="abstract" type="text" name="abs" id="abs">{{ $absract }}</textarea>
+                        @endif
+
                     </div>
                     <button type="submit" class="btn btnSecondary">Find</button>
                 </form>

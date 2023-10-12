@@ -21,7 +21,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahasfasaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
 
             ],
           [
@@ -31,7 +31,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-3',
                 'ARCH_NAME' => 'Online Examination System',
@@ -39,7 +39,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-4',
                 'ARCH_NAME' => 'Student Tracking Performance',
@@ -47,7 +47,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-5',
                 'ARCH_NAME' => 'Library Information System',
@@ -55,7 +55,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-6',
                 'ARCH_NAME' => ' Student Information System',
@@ -63,7 +63,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-7',
                 'ARCH_NAME' => 'Student Handbook Application',
@@ -71,7 +71,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-8',
                 'ARCH_NAME' => 'Thesis and Capstone Archiving System',
@@ -79,7 +79,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-9',
                 'ARCH_NAME' => 'School Portal Application',
@@ -87,7 +87,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],[
                 'ARCH_ID' => 'arch-10',
                 'ARCH_NAME' => 'School Events Attendance System',
@@ -95,7 +95,7 @@ class archiveSeed extends Seeder
                 'AUTHOR_ID' => '20-SC-0147',
                 'GITHUB_LINK' => 'hahaha.git',
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
-                'IS_APPROVED' => 'APPROVED',
+                'IS_APPROVED' => 'approved',
             ],
         ];
 

@@ -32,10 +32,10 @@
             </div>
             <div class="form-group">
                 <label for="Author">Author</label>
-                {{-- <input type="text" class="form-control" placeholder="Enter Author/s" name="author" id="myInput"
-                    value="{{ old('Author') }}" required> --}}
-                <input type="text" id="suggestionInput" autocomplete="off" name="Author" placeholder="Enter authors">
-                <div id="suggestionList"></div>
+                <input type="text" class="form-control" placeholder="Enter Author/s" name="author" id="myInput"
+                    value="{{ old('Author') }}" required>
+                {{-- <input type="text" id="suggestionInput" autocomplete="off" name="author" placeholder="Enter authors">
+                <div id="suggestionList"></div> --}}
             </div>
 
 

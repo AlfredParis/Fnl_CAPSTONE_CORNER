@@ -5,7 +5,7 @@
 @endsection
 
 @section('topnav')
-    <a href="{{ route('studentt.index') }}" class="active">Dashboard</a>
+    <a href="{{ route('studentt.index') }}" class="actives">Dashboard</a>
     <a href="{{ route('studentt.myArchive') }}" class="inactive">My Archive</a>
     <a href="{{ route('studentt.Checker') }}" class="inactive">Checker</a>
     {{-- <a href="{{ route('logout') }}" class="inactive">Logout</a> --}}
@@ -13,16 +13,26 @@
 
 @section('main')
     <div class="dashB">
-        <div class="top"> acctype : {{ $accT = Session::get('accT') }}
-            <br> Name: {{ $acc = Session::get('fullNs') }}
+        <div class="admin">
+            <img class="dashimg" src="{{ asset('images/admin.png') }}" alt="">
+            <p> Admin: </p>
+            <div class="num">{{ $tl_admin }}</div>
         </div>
-        <div class="admin">Total number of admin:{{ $tl_admin }}</div>
-        <div class="stud">Total number of student:{{ $tl_stud }} </div>
-        <div class="fac">Total number of faculty:{{ $tl_fac }} </div>
-        <div class="arch">Total number of archives:{{ $tl_arch }} </div>
-
-
-
+        <div class="stud">
+            <img class="dashimg" src="{{ asset('images/student.png') }}" alt="">
+            <p> Student: </p>
+            <div class="num">{{ $tl_stud }}</div>
+        </div>
+        <div class="fac">
+            <img class="dashimg" src="{{ asset('images/fac.png') }}" alt="">
+            <p> Faculty: </p>
+            <div class="num">{{ $tl_fac }}</div>
+        </div>
+        <div class="arch">
+            <img class="dashimg" src="{{ asset('images/arch.png') }}" alt="">
+            <p> Archives: </p>
+            <div class="num">{{ $tl_arch }}</div>
+        </div>
 
 
 

@@ -275,6 +275,7 @@ else{
         $delete->delete();
         return redirect()->route('admin.archives')->with('alert', 'The Archive has been Deleted Successfully!');
     }
+
    public function findSimilarWords(Request $request)
 {
     $userInput = $request->input('user_input');
@@ -346,7 +347,7 @@ else{
     });
 
 // return dd( $wordSimilarityPercentage);
- return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput);
+ return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput)->with('absract',$abs);
 }
 
 

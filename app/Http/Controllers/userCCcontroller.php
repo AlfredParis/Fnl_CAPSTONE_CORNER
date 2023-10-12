@@ -32,6 +32,7 @@ class userCCcontroller extends Controller
                 $password = student_acc::where("S_ID", $userID)->value("PASSWORD");
                 $decrypt = decrypt($password);
                     if ( $passwordinput == $decrypt) {
+                        $accT = student_acc::where("S_ID", $userID)->value("ACCTYPE");
                             $fullN = DB::table('student_accs')
                             ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
                             ->where('s_t_u_d_e_n_t_s.S_ID', $userID)

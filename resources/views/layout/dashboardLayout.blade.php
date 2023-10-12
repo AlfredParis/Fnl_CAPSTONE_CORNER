@@ -448,7 +448,7 @@
             text-align: left;
             border-radius: 10px;
 
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
 
             grid-area: admin;
         }
@@ -474,7 +474,7 @@
             text-align: left;
             border-radius: 10px;
 
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
         }
 
         .fac {
@@ -487,7 +487,7 @@
             text-align: left;
             border-radius: 10px;
 
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
             grid-area: fac;
         }
 
@@ -501,7 +501,7 @@
             text-align: left;
             border-radius: 10px;
 
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.678);
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
             grid-area: arch;
         }
 
@@ -814,7 +814,7 @@
         .action {
             position: fixed;
             top: 1px;
-            right: 1px;
+            right: 5px;
 
         }
 
@@ -840,7 +840,7 @@
         .action .menu {
             position: absolute;
             top: 75px;
-            right: -10px;
+            right: 5px;
             padding: 0px 0px;
             background: #ffffff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.644);
@@ -873,10 +873,12 @@
         .action .menu h3 {
 
             width: 100%;
-            text-align: left;
+            text-align: center;
             font-size: 15px;
+            /* margin-left: 5px; */
+            /*
             padding: 5px;
-            margin: 12px;
+            margin: 12px; */
             font-weight: 500;
             color: #000000;
             line-height: 1em;

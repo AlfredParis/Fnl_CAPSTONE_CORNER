@@ -43,7 +43,14 @@ Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
     Route::get('/', [studentController::class, 'index'])->name('index');
+
     Route::get('/my-archive', [studentController::class, 'myArchive'])->name('myArchive');
+    Route::get('/addArch', [studentController::class, 'addArch'])->name('addArch');
+    Route::post('/storeArch', [studentController::class, 'storeArch'])->name('storeArch');
+    Route::put('/{ARCH_ID}', [studentController::class, 'archUpdate'])->name('updateArch'); //user edit store
+    Route::get('/{ARCH_ID}/editArch', [studentController::class, 'archEdit'])->name('editArch');
+    Route::delete('/{id}', [studentController::class, 'delArch'])->name('delArch');
+
     Route::get('/checker', [studentController::class, 'Checker'])->name('Checker');
     Route::post('/find-similar-words', [studentController::class, 'findSimilarWords'])->name('words');
 });
