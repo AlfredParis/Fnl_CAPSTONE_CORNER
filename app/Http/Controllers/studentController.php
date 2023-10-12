@@ -11,18 +11,29 @@ class studentController extends Controller
 {
 
     public function index()
-    {   $total_arch=ARCHIVES::count() ;
+    {
+        $ID = Session::get('userID') ;
+        $total_arch=ARCHIVES::count() ;
   $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
   $total_student=student_acc::where('ACCTYPE', 'student')->count();
   $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-  // $total_proposal=;
+
 
         return view('studentDB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
     }
+
+
     public function myArchive()
     {
-        return view('studMyArchive');
+         $archives = DB::table('ARCHIVES')
+     ->where('ARCHIVES.AUTHOR_ID', '=', $ID)
+    ->select('ARCHIVES.ARCH_ID', 'ARCHIVES.ARCH_NAME', 'ARCHIVES.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
+    ->paginate(2);
+        return view('studMyArchive')->with('arch', $archives);
     }
+
+
+
 
 
    public function findSimilarWords(Request $request)
