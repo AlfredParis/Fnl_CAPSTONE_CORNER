@@ -12,6 +12,26 @@
             margin: 0%;
         }
 
+        .srchInput {
+            width: 75%;
+
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            resize: none;
+            /* Prevents resizing of the textarea */
+            vertical-align: top;
+            border: 2px solid rgb(135, 135, 135);
+        }
+
+        .srchInputBtn img {
+            max-width: 25px;
+
+
+
+            object-fit: contain;
+        }
+
         .checker {
             height: 75vh;
             display: grid;
@@ -25,11 +45,23 @@
             margin-top: 20px;
         }
 
+        .checkers {
+            height: 75vh;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            /* grid-template-rows: 30% 70%; */
+            grid-template-areas:
+                "frm check"
+            ;
+            /* text-align: center; */
+            /* gap:5px;  */
+            margin-top: 20px;
+        }
 
 
         .top-left-anchor {
             /* position: absolute; */
-            margin-left: 4%;
+            margin-left: .5em;
             padding: 10px;
             /* Add padding to create some space around the anchor text */
             /* background-color: #ccc; Add a background color for visibility */
@@ -87,6 +119,8 @@
 
         .text-style {
             font-size: 24px;
+            margin-top: .5em;
+            margin-bottom: unset;
             color: #F9A03F;
             /* Slightly darker color */
             font-weight: bold;
@@ -146,13 +180,13 @@
 
         .fl-table thead th {
             color: #ffffff;
-            background: #1928c9;
+            background: rgb(38, 107, 255);
         }
 
 
         .fl-table thead th:nth-child(odd) {
             color: #ffffff;
-            background: #1928c9;
+            background: rgb(38, 107, 255);
         }
 
         .fl-table tr:nth-child(even) {
@@ -604,6 +638,24 @@
             margin-left: 5px;
         }
 
+        .authorAdd {
+            width: 50%;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            /* margin-top: .2em; */
+            background-color: #565656;
+            color: #fff;
+
+            transition: background-color 0.2s ease-in;
+        }
+
+        .authorAdd:hover {
+            background-color: #838383;
+        }
+
         .btn-primary {
             width: 50%;
             padding: 10px;
@@ -613,6 +665,8 @@
             cursor: pointer;
             margin-top: 10px;
             background-color: #565656;
+            transition: background-color 0.2s ease-in;
+
             color: #fff;
         }
 

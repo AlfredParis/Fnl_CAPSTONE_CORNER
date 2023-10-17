@@ -10,69 +10,82 @@
 
 @section('main')
     <p class="text-style">Archive Add Form</p>
+    <form class="" action="{{ route('admin.storeArch') }}" method="POST" enctype="multipart/form-data">
+        <div class="checkers">
 
-    <div class="chkContainier">
-        <form class="" action="{{ route('admin.storeArch') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+            <div class="frm">
 
-            {{-- <div class="form-group">
+                <div class="chkContainier">
+
+                    @csrf
+
+                    {{-- <div class="formGroup">
                 <label for="archID">Archive ID</label>
-                <input type="text" class="form-control" placeholder="Enter ID" name="archID" value="{{ old('archID') }}"
+                <input type="text" class="formControl" placeholder="Enter ID" name="archID" value="{{ old('archID') }}"
                     required>
             </div> --}}
 
-            <div class="form-group">
-                <label for="name">Archive Title</label>
-                <input type="text" class="form-control" placeholder="Enter Title" name="name"
-                    value="{{ old('name') }}" required>
-            </div>
-            <div class="formGroup">
-                <label for="abs">Enter a your abstract:</label>
-                <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="Author">Author</label>
-                <input type="text" class="form-control" placeholder="Enter Author/s" name="author" id="myInput"
-                    value="{{ old('Author') }}" required>
-                {{-- <input type="text" id="suggestionInput" autocomplete="off" name="author" placeholder="Enter authors">
+                    <div class="formGroup">
+                        <label for="name">Archive Title</label>
+                        <input type="text" class="formControl" placeholder="Enter Title" name="name"
+                            value="{{ old('name') }}" required>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="Author">Author</label>
+                        {{-- <input type="text" class="formControl" placeholder="Enter Author/s" name="author" id="myInput"
+                            value="{{ old('Author') }}" required> --}}
+                        {{-- <input type="text" id="suggestionInput" autocomplete="off" name="author" placeholder="Enter authors">
                 <div id="suggestionList"></div> --}}
+
+                        <a class="authorAdd" name="Author">Add Author</a>
+                    </div>
+
+
+                    <div class="formGroup">
+                        <label for="pdf">Documentation</label>
+                        <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf"
+                            value="{{ old('pdf_file') }}" id="pdf">
+
+                    </div>
+
+
+                    <div class="formGroup">
+                        <label for="gh">GitHub Repository</label>
+                        <input type="text" class="formControl" placeholder="Enter Link" name="gh" id="gh"
+                            value="{{ old('gh') }}">
+
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="Status">Status:</label>
+                        <select id="stat" name="stat">
+                            <option value="approved">approved</option>
+                            <option value="not approved">not approved</option>
+
+                        </select>
+
+
+
+                    </div>
+
+
+                </div>
             </div>
-
-
-            <div class="form-group">
-                <label for="pdf">Documentation</label>
-                <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" value="{{ old('pdf_file') }}"
-                    id="pdf">
-
-            </div>
-
-
-            <div class="form-group">
-                <label for="gh">GitHub Repository</label>
-                <input type="text" class="form-control" placeholder="Enter Link" name="gh" id="gh"
-                    value="{{ old('gh') }}">
-
-            </div>
-
-            <div class="form-group">
-                <label for="Status">Status:</label>
-                <select id="stat" name="stat">
-                    <option value="approved">approved</option>
-                    <option value="not approved">not approved</option>
-
-                </select>
-
-
-
-            </div>
-
-
-            <div style="text-align: center">
-                <button type="submit" class="btn btn-primary">Add Archive</button>
+            <div class="check">
                 <br>
+                <div class="formGroup">
+                    <label for="abs">Enter a your abstract:</label>
+                    <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
+                </div>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-primary">Add Archive</button>
+                    <br>
+
+                </div>
+            </div>
 
 
-        </form>
-    </div>
-    </div>
+        </div>
+    </form>
 @endsection

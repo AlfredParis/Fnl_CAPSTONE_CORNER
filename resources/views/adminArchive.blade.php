@@ -29,10 +29,10 @@
                     <th>Archive Title</th>
 
                     <th> Documentation</th>
-                    <th> Documentation</th>
-                    <th> GitHub Repository </th>
-                    <th> Views </th>
+                    <th> GitHub Repository</th>
+                    <th> View </th>
                     <th> Edit </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -50,8 +50,6 @@
                         <td><a href="{{ route('admin.editArch', ['ARCH_ID' => $archive->ARCH_ID]) }}"
                                 class="glowbtn">edit</a>
                         </td>
-                        <td>{{ $archive->AUTHOR_ID }}</td>
-                        {{-- <td>{{ $archive->IS_APPROVED }}</td> --}}
 
                     </tr>
                 @endforeach

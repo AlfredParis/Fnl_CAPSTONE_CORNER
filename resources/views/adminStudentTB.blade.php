@@ -14,8 +14,7 @@
 @endsection
 
 @section('main')
-    <br>
-    <div class="top-left-anchor">
+    {{-- <div class="top-left-anchor">
 
 
         <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
@@ -29,7 +28,7 @@
             <button type="submit" class="glowbtn">Import Excel Student</button>
 
         </form>
-    </div><br>
+    </div> --}}
 
 
     <div class="table-wrapper">
@@ -39,7 +38,7 @@
 
 
 
-            <br><br>
+            <br><br><br>
             <thead>
                 <tr>
                     <th>ID</th>

@@ -26,8 +26,9 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Password</th>
+
                     <th>Full Name</th>
+                    <th>Password</th>
                     <th> Views </th>
                     <th> Edit </th>
                     {{-- <th> Delete </th> --}}
@@ -39,20 +40,21 @@
 
                         <td>{{ $fac->EMP_ID }}</td>
                         {{-- <td>{{ $fac-> }}</td> --}}
-                        <td>{{ decrypt($fac->PASSWORD) }}</td>
+
                         <td>{{ $fac->NAME }}</td>
+                        <td>{{ decrypt($fac->PASSWORD) }}</td>
                         <td><a href="/usercc/{{ $fac->USER_ID_EMP }}" class="glowbtn">view</a></td>
 
                         <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $fac->USER_ID_EMP]) }}"
                                 class="glowbtn">edit</a></td>
-                        <td>
-                            {{-- <form action="/usercc/{{ $fac->USER_ID_EMP }}" method="POST">
+                        {{-- <td>
+                            <form action="/usercc/{{ $fac->USER_ID_EMP }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 
                                 <input type="submit" name="sumbit" value="Delete" class="glowbtn">
-                            </form> --}}
-                        </td>
+                            </form>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>

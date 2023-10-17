@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\archive;
+
 use App\Models\userCC;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Http\Request;
@@ -151,7 +151,7 @@ class adminController extends Controller
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
 
                     $user->save();
-                    $EMP = new EMPLOYEE;
+                    $EMP = new STUDENT;
                     $EMP->NAME = $request->input("fullname");
                     $EMP->S_ID=$request->input("userID");
                     $EMP->C_ID='1';
@@ -209,7 +209,7 @@ class adminController extends Controller
         $name = Session::get('fullNs');
         $arch = new ARCHIVES;
         $total_arch=ARCHIVES::count();
-        $arch->ARCH_ID = "ARCH-".$total_arch+1;
+        $arch->ARCH_ID = "IT-".$total_arch+1;
 
          $arch->ARCH_NAME = $request->input("name");
          $arch->ABSTRACT = $request->input("abs");
@@ -246,17 +246,20 @@ else{
 
 
     }
-    public function archEdit($id)
+    public function archEdit($ARCH_ID)
     {
-        $arch = archive::find($id);
+        // $arch = ARCHIVES::find($ARCH_ID);
+        $archs =DB::table('a_r_c_h_i_v_e_s')
+    ->where('ARCH_ID', $ARCH_ID)
+    ->first();
 
-        return view('adminEditArch')->with('archive', $arch);
+        return view('adminEditArch')->with('archive', $archs);
     }
     public function archUpdate(Request $request, string $id)
     {
         $name = Session::get('fullNs');
 
-        $arch = archive::find($id);
+        $arch = ARCHIVES::find($id);
         $arch->archID = $request->archID;
         $arch->name = $request->name;
         $arch->author = $request->author;
@@ -358,7 +361,10 @@ public function view($id)
 
   return view('adminAccView')->with($show);
     }
+public function srch(Request $request)
+    {
 
+      }
 
 
 

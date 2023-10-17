@@ -37,7 +37,7 @@ class userCCcontroller extends Controller
                             ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
                             ->where('s_t_u_d_e_n_t_s.S_ID', $userID)
                             ->value('s_t_u_d_e_n_t_s.NAME');
-Session::put('userID', $userID);
+                            Session::put('userID', $userID);
                             Session::put('fullNs', $fullN);
                             Session::put('accT', $accT);
                             return redirect('/student')->with('lrt', 1)->with('alert', "Welcome  $fullN!");

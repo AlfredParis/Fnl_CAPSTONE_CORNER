@@ -16,63 +16,91 @@
 
 @section('main')
     <p class="text-style"> {{ $userAdd }} Add Form</p>
-    <br>
-    <br>
-    <div class="container">
-        <form class="" action="{{ route('admin.storeEmp', ['user' => $userAdd]) }}" method="POST">
+    <div class="top-left-anchor">
+
+
+        <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="form-group">
-                <label for="userID"> {{ $userAdd }} ID</label>
-                <input type="text" class="form-control" placeholder="Enter ID" name="userID" value="{{ old('userID') }}"
-                    required>
-            </div>
 
-            <div class="form-group">
-                <label for="fullname"> {{ $userAdd }} name</label>
-                <input type="text" class="form-control" placeholder="{{ $userAdd }} name" name="fullname"
-                    value="{{ old('fullname') }}" required>
-            </div>
-            @if ($userAdd == 'student')
-                <div class="form-group">
-                    <label for="C_ID">Course ID</label>
-                    <input type="text" class="form-control" placeholder="Enter 1 for BSIT" name="C_ID"
-                        value="{{ old('C_ID') }}" required>
-                </div>
-            @else
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="PASSWORD" id="myInput"
-                        value="{{ old('PASSWORD') }}" required>
-                </div>
-                {{-- <div class="form-group">
-                    <label for="password">Course ID</label>
-                    <input type="password" class="form-control" placeholder="Enter 1 for BSIT" name="password"
-                        id="myInput" value="{{ old('password') }}" required>
-                </div> --}}
-            @endif
-            {{-- <div class="showpass">
-                    <input type="checkbox" onclick="myFunction()"> Show Password
-                </div> --}}
+
+            <input type="file" style=" margin-left: 1%;" name="excel_file" id="excel_file" accept=".xlsx, .xls" required>
+
+            <br>
+            <button type="submit" class="glowbtn">Import Excel Student</button>
+
+        </form>
     </div>
 
-    {{-- <div class="form-group">
+    <div class="checker">
+
+        <div class="frm">
+            <div class="chkContainier">
+                <form action="{{ route('admin.storeEmp', ['user' => $userAdd]) }}" method="POST">
+                    @csrf
+
+                    <div class="formGroup">
+                        <label for="userID"> {{ $userAdd }} ID</label>
+                        <input type="text" class="formControl" placeholder="Enter ID" name="userID"
+                            value="{{ old('userID') }}" required>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="fullname"> {{ $userAdd }} name</label>
+                        <input type="text" class="formControl" placeholder="{{ $userAdd }} name" name="fullname"
+                            value="{{ old('fullname') }}" required>
+                    </div>
+
+                    {{-- <div class="formGroup">
+                        <label for="user_input"> Archive ID</label>
+                        <input class="formControl" type="text" name="user_input" id="user_input">
+                    </div> --}}
+                    @if ($userAdd == 'student')
+                        {{-- <div class="formGroup">
+                            <label for="C_ID">Course ID</label>
+                            <input type="text" class="formControl" placeholder="Enter 1 for BSIT" name="C_ID"
+                                value="{{ old('C_ID') }}" required>
+                        </div> --}}
+                    @else
+                        <div class="formGroup">
+                            <label for="password">Password</label>
+                            <input type="password" class="formControl" placeholder="Password" name="PASSWORD" id="myInput"
+                                value="{{ old('PASSWORD') }}" required>
+                        </div>
+                        {{-- <div class="formGroup">
+                    <label for="password">Course ID</label>
+                    <input type="password" class="formControl" placeholder="Enter 1 for BSIT" name="password"
+                        id="myInput" value="{{ old('password') }}" required>
+                </div> --}}
+                    @endif
+                    {{-- <div class="showpass">
+                    <input type="checkbox" onclick="myFunction()"> Show Password
+                </div> --}}
+                    <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+
+            {{-- <div class="formGroup">
                 <label for="password">Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Confirm Password" name="conpassword" id="conpass"
+                <input type="password" class="formControl" placeholder="Confirm Password" name="conpassword" id="conpass"
                     value="{{ old('conpassword') }}" required>
                 <div class="showpass">
                     <input type="checkbox" onclick="conPass()"> Show Password
                 </div>
             </div> --}}
 
-    <div style="text-align: center">
-        <button type="submit" class="btn btn-primary">Register</button>
-        <br>
+            {{-- <div style="text-align: center"> --}}
 
-        {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
+            <br>
+
+            {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
 
 
-        </form>
+            </form>
+            {{-- </div> --}}
+        </div>
+        <div class="check">
+
+        </div>
     </div>
     </div>
 @endsection

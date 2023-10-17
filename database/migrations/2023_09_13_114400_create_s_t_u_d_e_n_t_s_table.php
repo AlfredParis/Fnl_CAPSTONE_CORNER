@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('S_ID')->primary();
             $table->string('NAME');
             $table->string('C_ID');
+            $table->string('ARCH_ID');
             $table->timestamps();
         });
     }

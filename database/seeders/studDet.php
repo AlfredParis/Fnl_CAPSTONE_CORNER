@@ -17,6 +17,7 @@ class studDet extends Seeder
                 'S_ID' => '20-sc-0147',
                 'NAME' => 'student',
                 'C_ID' => '1',
+                'ARCH_ID' => 'IT-1',
             ],];
 
 

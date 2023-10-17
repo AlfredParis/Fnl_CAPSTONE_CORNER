@@ -5,7 +5,9 @@ use App\Models\ARCHIVES;
 use App\Models\USER_ACC_EMP;
 use App\Models\student_acc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class studentController extends Controller
 {
@@ -25,10 +27,12 @@ class studentController extends Controller
 
     public function myArchive()
     {
-         $archives = DB::table('ARCHIVES')
-     ->where('ARCHIVES.AUTHOR_ID', '=', $ID)
-    ->select('ARCHIVES.ARCH_ID', 'ARCHIVES.ARCH_NAME', 'ARCHIVES.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
-    ->paginate(2);
+        $ID = Session::get('userID') ;
+    //      $archives = DB::table('a_r_c_h_i_v_e_s')
+    //  ->where('a_r_c_h_i_v_e_s.AUTHOR_ID', '=', $ID)
+    // ->select('a_r_c_h_i_v_e_s.ARCH_ID', 'a_r_c_h_i_v_e_s.ARCH_NAME', 'a_r_c_h_i_v_e_s.PASSWORD','a_r_c_h_i_v_e_s.PDF_FILE')
+    // ->paginate(2);
+    $archives= ARCHIVES::where('AUTHOR_ID', $ID)->paginate(2);
         return view('studMyArchive')->with('arch', $archives);
     }
 
@@ -109,9 +113,59 @@ class studentController extends Controller
 // return dd( $wordSimilarityPercentage);
  return view('studChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput)->with('absract',$abs);
 }
-  public function Checker()
+
+public function Checker()
     {
         return view('studChecker');
     }
 
+public function addArch()
+    {
+        return view('studaddArch');
+    }
+
+public function storeArch(Request $request)
+    {
+        $name = Session::get('fullNs');
+        $id = Session::get('userID');
+
+        $arch = new ARCHIVES;
+        $total_arch=ARCHIVES::count();
+        $arch->ARCH_ID = "IT-".$total_arch+1;
+
+         $arch->ARCH_NAME = $request->input("name");
+         $arch->ABSTRACT = $request->input("abs");
+        $arch->AUTHOR_ID = $id;
+
+  if ($request->hasFile('pdf_file')) {
+        $pdfFile = $request->file('pdf_file');
+        $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+        $pdfFile->storeAs('pdfs', $fileName, 'public');
+$gh = $request->input("gh");
+        if (isset($gh)) {
+            $arch->PDF_FILE =  $fileName;
+            $arch->GITHUB_LINK = $request->input("gh");
+            $arch->IS_APPROVED = "not approved";
+
+            $arch->save();
+            Log::alert("Archive has been added by $name !");
+            return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
+        } else {
+            $arch->gh = 'There is no GitHub repository For this archive!';
+            $arch->save();
+            Log::alert("Archive has been added $name !");
+            return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
+        }
+
+    }
+else{
+   // If they forgot the paper, tell them to bring one
+    return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+}
+
+
+
+
+
+    }
 }
