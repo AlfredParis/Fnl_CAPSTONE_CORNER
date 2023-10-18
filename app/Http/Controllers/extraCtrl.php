@@ -52,6 +52,7 @@ class extraCtrl extends Controller
                 $name = $worksheet->getCellByColumnAndRow(2, $rowIndex)->getValue();
 
                 $c_id = $worksheet->getCellByColumnAndRow(3, $rowIndex)->getValue();
+                $ARCH_ID = $worksheet->getCellByColumnAndRow(4, $rowIndex)->getValue();
 
                 // Check if both ID and name are present
                 if ($name && $c_id) {
@@ -59,6 +60,7 @@ class extraCtrl extends Controller
                         'S_ID' => $s_id,
                         'NAME' => $name,
                         'C_ID' => $c_id,
+                        'ARCH_ID' => $ARCH_ID,
                     ];
                 }
 
