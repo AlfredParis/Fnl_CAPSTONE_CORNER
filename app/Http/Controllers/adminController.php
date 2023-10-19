@@ -170,9 +170,28 @@ class adminController extends Controller
 
     public function userEdit($id)
     {
-        $User = userCC::find($id);
+        // $User = USER_ACC_EMP::find($id);
+        $isAdmin = USER_ACC_EMP::where('USER_ID_EMP', $id)->first();
 
-        return view('adminEditUser')->with('Users', $User);
+         $isStudent = student_acc::where('S_ID', $id)->first();
+        // $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
+        if(isset($isStudent)){
+            $Users=$isStudent;
+
+
+            $profile = STUDENT::where('S_ID', $id)->first();
+
+            return view('adminEditUser', compact('Users', 'profile'));
+
+         }
+        else if(isset($isAdmin)){
+            $User=$isAdmin;
+            return view('adminEditUser')->with('Users', $User);
+
+        }
+
+
+
     }
     public function userUpdate(Request $request, string $id)
     {

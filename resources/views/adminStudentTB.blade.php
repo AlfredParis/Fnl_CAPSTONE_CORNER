@@ -54,6 +54,10 @@
                         <td>{{ $student->S_ID }}</td>
                         <td>{{ $student->NAME }}</td>
                         <td>{{ $student->C_DESC }}</td>
+                        <td><a href="/usercc/{{ $student->S_ID }}" class="glowbtn">view</a></td>
+
+                        <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $student->S_ID]) }}" class="glowbtn">edit</a>
+                        </td>
 
 
 
