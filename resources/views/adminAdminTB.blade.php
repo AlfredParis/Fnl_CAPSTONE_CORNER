@@ -42,8 +42,8 @@
                         <td>{{ decrypt($adm->PASSWORD) }}</td>
                         <td><a href="/usercc/{{ $adm->USER_ID_EMP }}" class="glowbtn">view</a></td>
 
-                        <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $adm->USER_ID_EMP]) }}"
-                                class="glowbtn">edit</a></td>
+                        <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $adm->EMP_ID]) }}" class="glowbtn">edit</a>
+                        </td>
                         {{-- <td>
                             <form action="/usercc/{{ $adm->USER_ID_EMP }}" method="POST">
                                 @csrf

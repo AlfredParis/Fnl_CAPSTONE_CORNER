@@ -43,8 +43,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Full Name</th>
-                    <th>Password</th>
-
+                    <th>Course</th>
+                    <th>View</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>

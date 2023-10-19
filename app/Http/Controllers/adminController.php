@@ -89,29 +89,11 @@ class adminController extends Controller
 
     public function storeEmp(Request $request, $userac)
     {
-        // $validator = Validator::make(
-        //     $request->all(),
-        //     [
-        //         "userID" => "required|min:2|max:20",
-        //         "fullname" => "required|min:4|max:50",
-        //         "password" => "required|min:4|max:100",
-
-        //     ]
-        // );
-        // if ($validator->fails()) {
-
-        //     return back()->withErrors($validator)->withInput();
-        // }
-
-
         $userID = $request->input("userID");
-        // $conPass = $request->input("conpassword");
-        // $pass = $request->input("password");
         $isStudent = student_acc::where('S_ID', $userID)->exists();
         $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
 
         if ($isAdmin==NULL && $isStudent==NULL) {
-            //  if ($conPass == $pass) {
 
                 if ($userac == 'admin') {
 
@@ -127,19 +109,22 @@ class adminController extends Controller
                     $name = Session::get('fullNs');
                     Log::alert("$name has been added this account: $userID a admin");
                     return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
+
                 } elseif ($userac == 'faculty') {
+
                     $user = new USER_ACC_EMP;
                     $user->EMP_ID = $request->input("userID");
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
                     $user->ACCTYPE = 'faculty';
                     $user->save();
+
                     $EMP = new EMPLOYEE;
                     $EMP->NAME = $request->input("fullname");
                     $EMP->EMP_ID=$request->input("userID");
                     $EMP->save();
 
                     $name = Session::get('fullNs');
-                   Log::alert("$name has been added this account: $userID a faculty");
+                    Log::alert("$name has been added this account: $userID a faculty");
                     return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
 
 
@@ -156,128 +141,151 @@ class adminController extends Controller
                     $EMP->S_ID=$request->input("userID");
                     $EMP->C_ID='1';
                     $EMP->save();
+
                     $name = Session::get('fullNs');
-                  Log::alert("$name has been added this account: $userID a student");
+                    Log::alert("$name has been added this account: $userID a student");
                     return redirect()->route('admin.student')->with('alert', 'Student Account added!');
                 }
-            // } else {
-            //     return back()->with('alert', 'Password does not match')->withInput();
-            // }
+
         } else {
             return back()->with('alert', 'Id already exist!')->withInput();
         }
     }
-
     public function userEdit($id)
     {
-        // $User = USER_ACC_EMP::find($id);
-        $isAdmin = USER_ACC_EMP::where('USER_ID_EMP', $id)->first();
 
-         $isStudent = student_acc::where('S_ID', $id)->first();
-        // $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
+        $isAdmin = USER_ACC_EMP::where('EMP_ID', $id)->first();
+        $isStudent = student_acc::where('S_ID', $id)->first();
+
         if(isset($isStudent)){
+
             $Users=$isStudent;
-
-
             $profile = STUDENT::where('S_ID', $id)->first();
 
             return view('adminEditUser', compact('Users', 'profile'));
 
          }
         else if(isset($isAdmin)){
-            $User=$isAdmin;
-            return view('adminEditUser')->with('Users', $User);
+
+            $Users=$isAdmin;
+            $profile = EMPLOYEE::where('EMP_ID', $id)->first();
+            return view('adminEditUser', compact('Users', 'profile'));
 
         }
-
-
 
     }
     public function userUpdate(Request $request, string $id)
     {
+
         $name = Session::get('fullNs');
 
-        $user = userCC::find($id);
-        $user->userID = $request->userID;
-        $user->fullname = $request->fullname;
-        $user->password = encrypt($request->password);
-        $user->acctype = $request->acctype;
+        if ($request->ACCTYPE == 'admin') {
+            $studAcc = USER_ACC_EMP::where('EMP_ID', $id)->first();
+            $studAcc->PASSWORD = encrypt($request->PASSWORD);
+            $studAcc->save();
 
-        $user->save();
-        if ($request->acctype == 'admin') {
+            $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
+            $studProf->where('S_ID', $id)->update([
+                'NAME' => $request->NAME,
+                'C_ID' => $request->C_ID,
+                'ARCH_ID' => $request->ARCH_ID,
+            ]);
             Log::alert("Admin account is updated Successfully by: $name!");
             return redirect()->route('admin.admin')->with('alert', "Admin account is updated Successfully by: $name!");
-        } elseif ($request->acctype == 'faculty') {
+
+        } elseif ($request->ACCTYPE == 'faculty') {
+            $studAcc = USER_ACC_EMP::where('EMP_ID', $id)->first();
+            $studAcc->PASSWORD = encrypt($request->PASSWORD);
+            $studAcc->save();
+
+            $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
+            $studProf->where('S_ID', $id)->update([
+                'NAME' => $request->NAME,
+                'C_ID' => $request->C_ID,
+                'ARCH_ID' => $request->ARCH_ID,
+            ]);
             Log::alert("Faculty account is updated Successfully by: $name!");
             return redirect()->route('admin.faculty')->with('alert', "Faculty account is updated Successfully by: $name!");
+
         } else {
+
+            $studAcc = student_acc::where('S_ID', $id)->first();
+            $studAcc->PASSWORD = encrypt($request->PASSWORD);
+            $studAcc->save();
+
+            $studProf = STUDENT::where('S_ID', $id)->first();
+            $studProf->where('S_ID', $id)->update([
+                'NAME' => $request->NAME,
+                'C_ID' => $request->C_ID,
+                'ARCH_ID' => $request->ARCH_ID,
+            ]);
+
             Log::alert("Student account is updated Successfully by: $name!");
             return redirect()->route('admin.student')->with('alert', "Student account is updated Successfully by: $name!");
         }
 
     }
 
-    public function addArch()
-    {
+    public function addArch(){
+
         return view('adminAddarch');
     }
 
+    public function storeArch(Request $request){
 
-    public function storeArch(Request $request)
-    {
         $name = Session::get('fullNs');
         $arch = new ARCHIVES;
         $total_arch=ARCHIVES::count();
         $arch->ARCH_ID = "IT-".$total_arch+1;
 
-         $arch->ARCH_NAME = $request->input("name");
-         $arch->ABSTRACT = $request->input("abs");
+        $arch->ARCH_NAME = $request->input("name");
+        $arch->ABSTRACT = $request->input("abs");
         $arch->AUTHOR_ID = $request->input("author");
 
-  if ($request->hasFile('pdf_file')) {
-        $pdfFile = $request->file('pdf_file');
-        $fileName = time() . '_' . $pdfFile->getClientOriginalName();
-        $pdfFile->storeAs('pdfs', $fileName, 'public');
-$gh = $request->input("gh");
-        if (isset($gh)) {
-            $arch->PDF_FILE =  $fileName;
-            $arch->GITHUB_LINK = $request->input("gh");
-            $arch->IS_APPROVED = $request->input("stat");
+            if ($request->hasFile('pdf_file')) {
 
-            $arch->save();
-            Log::alert("Archive has been added by $name !");
-            return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
-        } else {
-            $arch->gh = 'There is no GitHub repository For this archive!';
-            $arch->save();
-            Log::alert("Archive has been added $name !");
-            return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
-        }
+                    $pdfFile = $request->file('pdf_file');
+                    $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+                    $pdfFile->storeAs('pdfs', $fileName, 'public');
+                    $gh = $request->input("gh");
+
+                    if (isset($gh)) {
+                        $arch->PDF_FILE =  $fileName;
+                        $arch->GITHUB_LINK = $request->input("gh");
+                        $arch->IS_APPROVED = $request->input("stat");
+
+                        $arch->save();
+                        Log::alert("Archive has been added by $name !");
+                        return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
+                    } else {
+                        $arch->gh = 'There is no GitHub repository For this archive!';
+                        $arch->save();
+                        Log::alert("Archive has been added $name !");
+                        return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
+                    }
+
+                }
+            else{
+            // If they forgot the paper, tell them to bring one
+                return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+                }
+
+
+
+
 
     }
-else{
-   // If they forgot the paper, tell them to bring one
-    return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
-}
 
+    public function archEdit($ARCH_ID){
 
-
-
-
-    }
-    public function archEdit($ARCH_ID)
-    {
-        // $arch = ARCHIVES::find($ARCH_ID);
-        $archs =DB::table('a_r_c_h_i_v_e_s')
-    ->where('ARCH_ID', $ARCH_ID)
-    ->first();
+        $archs =DB::table('a_r_c_h_i_v_e_s')->where('ARCH_ID', $ARCH_ID)->first();
 
         return view('adminEditArch')->with('archive', $archs);
     }
-    public function archUpdate(Request $request, string $id)
-    {
-        $name = Session::get('fullNs');
 
+    public function archUpdate(Request $request, string $id){
+
+        $name = Session::get('fullNs');
         $arch = ARCHIVES::find($id);
         $arch->archID = $request->archID;
         $arch->name = $request->name;
@@ -288,8 +296,9 @@ else{
         $arch->save();
         return redirect()->route('admin.archives')->with('alert', 'Archive updated Successfully!');
     }
-    public function delArch($id)
-    {
+
+    public function delArch($id){
+
         $name = Session::get('fullNs');
         Log::alert("$name has been Deleted!");
 

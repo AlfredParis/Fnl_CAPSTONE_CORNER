@@ -5,6 +5,7 @@ use App\Models\ARCHIVES;
 use App\Models\USER_ACC_EMP;
 use App\Models\student_acc;
 use Illuminate\Http\Request;
+use App\Models\STUDENT;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Illuminate\Support\Facades\Log;
@@ -27,12 +28,15 @@ class studentController extends Controller
 
     public function myArchive()
     {
-        $ID = Session::get('userID') ;
+        $ID = Session::get('userID');
+
+
     //      $archives = DB::table('a_r_c_h_i_v_e_s')
-    //  ->where('a_r_c_h_i_v_e_s.AUTHOR_ID', '=', $ID)
-    // ->select('a_r_c_h_i_v_e_s.ARCH_ID', 'a_r_c_h_i_v_e_s.ARCH_NAME', 'a_r_c_h_i_v_e_s.PASSWORD','a_r_c_h_i_v_e_s.PDF_FILE')
+    //  ->where('a_r_c_h_i_v_e_s.ARCH_ID', '=', $ID)
+    // ->select('a_r_c_h_i_v_e_s.ARCH_ID', 'a_r_c_h_i_v_e_s.ARCH_NAME', )
     // ->paginate(2);
-    $archives= ARCHIVES::where('AUTHOR_ID', $ID)->paginate(2);
+    $archId = STUDENT::where("S_ID", $ID)->value("ARCH_ID");
+     $archives= ARCHIVES::where('ARCH_ID',$archId )->paginate(2);
         return view('studMyArchive')->with('arch', $archives);
     }
 

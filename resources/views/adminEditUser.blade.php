@@ -17,46 +17,37 @@
 @endsection
 
 @section('main')
-    <p class="text-style">{{ $Users->ACCTYPE }} Edit Form for {{ $Users->S_ID }}</p>
-
     <br>
     @if ($Users->ACCTYPE == 'student')
+        <p class="text-style">{{ $Users->ACCTYPE }} Edit Form for {{ $Users->S_ID }}</p>
         <div class="container">
-            <form action="{{ route('admin.update', ['id' => $Users->id]) }}" method="POST">
+            <form action="{{ route('admin.update', ['S_ID' => $Users->S_ID]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="username">Student name</label>
-                    <input class="form-control" type="text" id="username" name="userID"
-                        value="{{ old('userID', $Users->userID) }} " required>
-                </div>
+
                 @error('')
                     <span> {{ $message }}</span>
                 @enderror
-                <div class="form-group">
+                <div class="formGroup">
                     <label for="fullname">Full name</label>
-                    <input class="form-control" type="text" name="fullname" value="{{ old('', $profile->NAME) }}"
+                    <input class="formControl" type="text" name="NAME" value="{{ old('NAME', $profile->NAME) }}"
                         id="fullname" required>
                 </div>
                 @error('')
                     <span> {{ $message }}</span>
                 @enderror
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input class="form-control" type="text" name="password"
-                        value="{{ decrypt(old('', $Users->PASSWORD)) }}" id="password" required>
+                <div class="formGroup">
+                    <label for="PASSWORD">Password</label>
+                    <input class="formControl" type="text" name="PASSWORD"
+                        value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}" id="PASSWORD" required>
                 </div>
                 @error('')
                     <span> {{ $message }}</span>
                 @enderror
-                <div class="form-group">
+                {{-- <div class="formGroup">
                     <label for="accountType">Account Type</label>
-                    <select class="form-control" name="ACCTYPE" value="{{ old('ACCTYPE', $profile->ARCH_ID) }}"
-                        id="accountType" requiredw>
-
-
-                        <option value="">select Account Type</option>
+                    <select class="formControl" name="ACCTYPE" id="accountType" requiredw>
 
                         <option value="student" {{ old('ACCTYPE', $Users->ACCTYPE) == 'student' ? 'selected' : '' }}>
                             student
@@ -71,11 +62,20 @@
                         </option>
 
                     </select>
-                </div>
+                </div> --}}
                 @error('ACCTYPE')
                     <span> {{ $message }}</span>
                 @enderror
-
+                <div class="formGroup">
+                    <label for="archId">Archive ID</label>
+                    <input class="formControl" type="text" id="archId" name="ARCH_ID"
+                        value="{{ old('ARCH_ID', $profile->ARCH_ID) }} " required>
+                </div>
+                <div class="formGroup">
+                    <label for="courseId">Course ID</label>
+                    <input class="formControl" type="text" id="courseId" name="C_ID"
+                        value="{{ old('C_ID', $profile->C_ID) }} " required>
+                </div>
                 <br><br><br>
                 <div style="text-align: center">
                     <input class="btn btn-primary" type="submit" name="submit" value="SAVE"><br>
@@ -84,46 +84,42 @@
         </div>
         </div>
     @else
+        <p class="text-style">{{ $Users->ACCTYPE }} Edit Form for {{ $Users->EMP_ID }}</p>
         <div class="container">
-            <form action="{{ route('admin.update', ['id' => $Users->id]) }}" method="POST">
+            <form action="{{ route('admin.update', ['S_ID' => $Users->EMP_ID]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
+                {{-- <div class="formGroup">
                     <label for="username">User name</label>
-                    <input class="form-control" type="text" id="username" name="userID"
+                    <input class="formControl" type="text" id="username" name="userID"
                         value="{{ old('userID', $Users->userID) }} " required>
                 </div>
                 @error('')
                     <span> {{ $message }}</span>
-                @enderror
-                <div class="form-group">
-                    <label for="fullname">Full name</label>
-                    <input class="form-control" type="text" name="fullname" value="{{ old('', $Users->fullname) }}"
+                @enderror --}}
+                <div class="formGroup">
+                    <label for="fullname">{{ $Users->ACCTYPE }} name</label>
+                    <input class="formControl" type="text" name="fullname" value="{{ old('NAME', $profile->NAME) }}"
                         id="fullname" required>
                 </div>
                 @error('')
                     <span> {{ $message }}</span>
                 @enderror
 
-                <div class="form-group">
+                <div class="formGroup">
                     <label for="password">Password</label>
-                    <input class="form-control" type="text" name="password"
-                        value="{{ decrypt(old('', $Users->PASSWORD)) }}" id="password" required>
+                    <input class="formControl" type="text" name="PASSWORD"
+                        value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}" id="password" required>
                 </div>
                 @error('')
                     <span> {{ $message }}</span>
                 @enderror
-                <div class="form-group">
+                <div class="formGroup">
                     <label for="accountType">Account Type</label>
-                    <select class="form-control" name="ACCTYPE" value="{{ old('ACCTYPE', $Users->ACCTYPE) }}"
+                    <select class="formControl" name="ACCTYPE" value="{{ old('ACCTYPE', $Users->ACCTYPE) }}"
                         id="accountType" requiredw>
 
 
-                        <option value="">select Account Type</option>
-
-                        <option value="student" {{ old('ACCTYPE', $Users->ACCTYPE) == 'student' ? 'selected' : '' }}>
-                            student
-                        </option>
 
                         <option value="faculty" {{ old('ACCTYPE', $Users->ACCTYPE) == 'faculty' ? 'selected' : '' }}>
                             faculty
