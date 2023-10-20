@@ -96,6 +96,7 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
     Route::post('/find-similar-words', [adminController::class, 'findSimilarWords'])->name('words');
     Route::delete('/{id}', [adminController::class, 'delArch'])->name('delArch'); //archive delete
 
+ Route::put('/{AUTH_ID}', [adminController::class, 'addAuth'])->name('addAuth');
     // Admin Archive Crud
 
     //views

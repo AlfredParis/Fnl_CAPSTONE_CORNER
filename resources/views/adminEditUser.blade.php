@@ -99,7 +99,7 @@
                 @enderror --}}
                 <div class="formGroup">
                     <label for="fullname">{{ $Users->ACCTYPE }} name</label>
-                    <input class="formControl" type="text" name="fullname" value="{{ old('NAME', $profile->NAME) }}"
+                    <input class="formControl" type="text" name="NAME" value="{{ old('NAME', $profile->NAME) }}"
                         id="fullname" required>
                 </div>
                 @error('')

@@ -39,6 +39,35 @@
                 <div id="suggestionList"></div> --}}
 
                         <a class="authorAdd" name="Author">Add Author</a>
+                        <div class="table-wrapper">
+
+                            <table class="fl-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>NAME</th>
+
+                                        <th> add</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($authFetch as $auth)
+                                        <tr>
+
+                                            <td>{{ $auth->S_ID }}</td>
+                                            <td>{{ $auth->NAME }}</td>
+                                            <td><a href="{{ route('admin.addAuth', ['AUTH_ID' => $auth->S_ID]) }}"
+                                                    class="glowbtn">Add</a>
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $authFetch->links() }}
+                        </div>
                     </div>
 
 

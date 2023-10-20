@@ -61,7 +61,7 @@ class adminController extends Controller
     {
  $facultyPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
     ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
-    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty') // Add this line
+    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty')
     ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
     ->paginate(2);
         // $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
@@ -74,7 +74,7 @@ class adminController extends Controller
 
         $adminPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
     ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
-    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin') // Add this line
+    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
     ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
     ->paginate(2);
 
@@ -130,17 +130,36 @@ class adminController extends Controller
 
 
                 } else {
-
+                    if ($request->input("ARCH_ID") == null) {
                     $user = new student_acc;
                     $user->S_ID = $request->input("userID");
+                    $user->ACCTYPE = $userac;
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
 
                     $user->save();
+
                     $EMP = new STUDENT;
                     $EMP->NAME = $request->input("fullname");
                     $EMP->S_ID=$request->input("userID");
                     $EMP->C_ID='1';
+                    $EMP->ARCH_ID='N/A';
                     $EMP->save();
+                    }else{
+                    $user = new student_acc;
+                    $user->S_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = $userac;
+
+                    $user->save();
+
+                    $EMP = new STUDENT;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->S_ID=$request->input("userID");
+                    $EMP->C_ID='1';
+                    $EMP->ARCH_ID=$request->input("ARCH_ID");
+                    $EMP->save();
+                    }
+
 
                     $name = Session::get('fullNs');
                     Log::alert("$name has been added this account: $userID a student");
@@ -181,14 +200,16 @@ class adminController extends Controller
 
         if ($request->ACCTYPE == 'admin') {
             $studAcc = USER_ACC_EMP::where('EMP_ID', $id)->first();
-            $studAcc->PASSWORD = encrypt($request->PASSWORD);
-            $studAcc->save();
+
+            $studAcc->where('EMP_ID', $id)->update([
+                'PASSWORD' =>  encrypt($request->PASSWORD),
+             'ACCTYPE' => $request->ACCTYPE,
+            ]);
 
             $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
-            $studProf->where('S_ID', $id)->update([
+            $studProf->where('EMP_ID', $id)->update([
                 'NAME' => $request->NAME,
-                'C_ID' => $request->C_ID,
-                'ARCH_ID' => $request->ARCH_ID,
+
             ]);
             Log::alert("Admin account is updated Successfully by: $name!");
             return redirect()->route('admin.admin')->with('alert', "Admin account is updated Successfully by: $name!");
@@ -227,8 +248,9 @@ class adminController extends Controller
     }
 
     public function addArch(){
+  $authFetchs = $profile = STUDENT::where('ARCH_ID','N/A' )->paginate(10);
 
-        return view('adminAddarch');
+        return view('adminAddarch')->with('authFetch',$authFetchs);
     }
 
     public function storeArch(Request $request){

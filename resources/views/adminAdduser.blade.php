@@ -16,27 +16,33 @@
 
 @section('main')
     <p class="text-style"> {{ $userAdd }} Add Form</p>
-    <div class="top-left-anchor">
+    @if ($userAdd == 'student')
+        <div class="top-left-anchor">
+
+            <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
 
-        <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+
+                <input type="file" style=" margin-left: 1%;" name="excel_file" id="excel_file" accept=".xlsx, .xls"
+                    required>
+
+                <br> <br>
+                <button type="submit" class="glowbtn">Import Excel Student</button>
+
+            </form>
+        </div>
+    @elseif ($userAdd == 'admin')
+    @else
+    @endif
 
 
+    <form action="{{ route('admin.storeEmp', ['user' => $userAdd]) }}" method="POST">
+        <div class="checker">
 
-            <input type="file" style=" margin-left: 1%;" name="excel_file" id="excel_file" accept=".xlsx, .xls" required>
+            <div class="frm">
+                <div class="chkContainier">
 
-            <br>
-            <button type="submit" class="glowbtn">Import Excel Student</button>
-
-        </form>
-    </div>
-
-    <div class="checker">
-
-        <div class="frm">
-            <div class="chkContainier">
-                <form action="{{ route('admin.storeEmp', ['user' => $userAdd]) }}" method="POST">
                     @csrf
 
                     <div class="formGroup">
@@ -61,25 +67,24 @@
                             <input type="text" class="formControl" placeholder="Enter 1 for BSIT" name="C_ID"
                                 value="{{ old('C_ID') }}" required>
                         </div> --}}
+                        <div class="formGroup">
+                            <label for="fullname"> Archive ID</label>
+                            <input type="text" class="formControl" placeholder="archive id" name="ARCH_ID"
+                                value="{{ old('ARCH_ID') }}">
+                        </div>
                     @else
                         <div class="formGroup">
                             <label for="password">Password</label>
                             <input type="password" class="formControl" placeholder="Password" name="PASSWORD" id="myInput"
                                 value="{{ old('PASSWORD') }}" required>
                         </div>
-                        {{-- <div class="formGroup">
-                    <label for="password">Course ID</label>
-                    <input type="password" class="formControl" placeholder="Enter 1 for BSIT" name="password"
-                        id="myInput" value="{{ old('password') }}" required>
-                </div> --}}
+                        <button type="submit" class="btn btn-primary">Register</button>
                     @endif
-                    {{-- <div class="showpass">
-                    <input type="checkbox" onclick="myFunction()"> Show Password
-                </div> --}}
-                    <button type="submit" class="btn btn-primary">Register</button>
-            </div>
 
-            {{-- <div class="formGroup">
+
+                </div>
+
+                {{-- <div class="formGroup">
                 <label for="password">Confirm Password</label>
                 <input type="password" class="formControl" placeholder="Confirm Password" name="conpassword" id="conpass"
                     value="{{ old('conpassword') }}" required>
@@ -88,19 +93,35 @@
                 </div>
             </div> --}}
 
-            {{-- <div style="text-align: center"> --}}
+                {{-- <div style="text-align: center"> --}}
 
-            <br>
+                <br>
 
-            {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
+                {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
 
 
-            </form>
-            {{-- </div> --}}
+
+                {{-- </div> --}}
+            </div>
+            <div class="check">
+                @if ($userAdd == 'student')
+                    <div class="formGroup">
+                        <br>
+                        <label for="password">Student Password</label>
+                        <input type="password" class="formControl" placeholder="Enter student password" name="PASSWORD"
+                            id="myInput" value="{{ old('PASSWORD') }}" required>
+                    </div>
+                    <div class="showpass">
+                        <input type="checkbox" onclick="myFunction()"> Show Password
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                @else
+                @endif
+
+            </div>
+
         </div>
-        <div class="check">
 
-        </div>
-    </div>
+    </form>
     </div>
 @endsection
