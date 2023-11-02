@@ -21,15 +21,31 @@ use Validator;
 
 class adminController extends Controller
 {
-    public function index()
-    {
-        $total_arch=ARCHIVES::count() ;
-        $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
-        $total_student=student_acc::where('ACCTYPE', 'student')->count();
-        $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
 
-        // $total_proposal=;
-        return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
+
+    public function index(Request $request)
+    {
+        // if (isset($request)) {
+
+        //     $selectedCountries = $request->input('countries', []);
+
+        //     $total_arch=ARCHIVES::count() ;
+        //     $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        //     $total_student=student_acc::where('ACCTYPE', 'student')->count();
+        //     $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+        //     $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        //     // $total_proposal=;
+        //     return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty)->with( 'auths',$auth)->with( 'contries',$selectedCountries);
+        // }else{
+            $total_arch=ARCHIVES::count() ;
+            $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+            $total_student=student_acc::where('ACCTYPE', 'student')->count();
+            $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+            // $total_proposal=;
+            return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty)->with( 'auths',$auth);
+        // }
+
     }
     public function checker()
     {
@@ -42,13 +58,13 @@ class adminController extends Controller
     }
     public function student()
     {
-        $studentPage = userCC::where('acctype', 'student')->paginate(2);
-        $studentNew = STUDENT::paginate(2);
+        $studentPage = userCC::where('acctype', 'student')->paginate(5);
+        $studentNew = STUDENT::paginate(5);
 
 
         $users = DB::table('s_t_u_d_e_n_t_s')
         ->join('c_o_u_r_s_e_s', 's_t_u_d_e_n_t_s.C_ID', '=', 'c_o_u_r_s_e_s.C_ID')
-        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')->paginate(2)
+        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')->paginate(5)
         ;
 
         return view('adminStudentTB')->with('students', $studentPage)->with('SN', $users);
@@ -63,7 +79,7 @@ class adminController extends Controller
     ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
     ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty')
     ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
-    ->paginate(2);
+    ->paginate(5);
         // $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
         return view('adminFacultyTB')->with('faculty', $facultyPage);
     }
@@ -175,8 +191,17 @@ class adminController extends Controller
 
         $isAdmin = USER_ACC_EMP::where('EMP_ID', $id)->first();
         $isStudent = student_acc::where('S_ID', $id)->first();
+        $isDontAcc = STUDENT::where('S_ID', $id)->first();
 
-        if(isset($isStudent)){
+      if (!isset($isStudent)&&isset($isDontAcc)) {
+
+
+          $profile = STUDENT::where('S_ID', $id)->first();
+
+          return view('adminEditUser', compact('profile'));
+        }
+
+        else if(isset($isStudent)){
 
             $Users=$isStudent;
             $profile = STUDENT::where('S_ID', $id)->first();
@@ -249,8 +274,9 @@ class adminController extends Controller
 
     public function addArch(){
   $authFetchs = $profile = STUDENT::where('ARCH_ID','N/A' )->paginate(10);
+  $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
-        return view('adminAddarch')->with('authFetch',$authFetchs);
+        return view('adminAddarch')->with('authFetch',$authFetchs)->with( 'auths',$auth);
     }
 
     public function storeArch(Request $request){
@@ -258,11 +284,16 @@ class adminController extends Controller
         $name = Session::get('fullNs');
         $arch = new ARCHIVES;
         $total_arch=ARCHIVES::count();
-        $arch->ARCH_ID = "IT-".$total_arch+1;
+        $archID=  "IT-".$total_arch+1;
+        $arch->ARCH_ID =$archID;
+
+        $selectedCountries  = $request->input("countries");
+
+
 
         $arch->ARCH_NAME = $request->input("name");
         $arch->ABSTRACT = $request->input("abs");
-        $arch->AUTHOR_ID = $request->input("author");
+        $arch->IS_APPROVED = $request->input("stat");
 
             if ($request->hasFile('pdf_file')) {
 
@@ -275,7 +306,17 @@ class adminController extends Controller
                         $arch->PDF_FILE =  $fileName;
                         $arch->GITHUB_LINK = $request->input("gh");
                         $arch->IS_APPROVED = $request->input("stat");
+                        if (is_array($selectedCountries)) {
+                        foreach ($selectedCountries as $ID) {
 
+                            $country = STUDENT::where('S_ID', $ID)->first();
+
+
+                                $country->ARCH_ID = $archID;
+                                $country->save();
+
+                        }
+                    }
                         $arch->save();
                         Log::alert("Archive has been added by $name !");
                         return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');

@@ -37,37 +37,12 @@
                             value="{{ old('Author') }}" required> --}}
                         {{-- <input type="text" id="suggestionInput" autocomplete="off" name="author" placeholder="Enter authors">
                 <div id="suggestionList"></div> --}}
+                        <select name="countries" id="countries" multiple>
+                            @foreach ($auths as $archive)
+                                <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }}</option>
+                            @endforeach
+                        </select>
 
-                        <a class="authorAdd" name="Author">Add Author</a>
-                        <div class="table-wrapper">
-
-                            <table class="fl-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>NAME</th>
-
-                                        <th> add</th>
-
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($authFetch as $auth)
-                                        <tr>
-
-                                            <td>{{ $auth->S_ID }}</td>
-                                            <td>{{ $auth->NAME }}</td>
-                                            <td><a href="{{ route('admin.addAuth', ['AUTH_ID' => $auth->S_ID]) }}"
-                                                    class="glowbtn">Add</a>
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $authFetch->links() }}
-                        </div>
                     </div>
 
 
@@ -117,4 +92,7 @@
 
         </div>
     </form>
+    <script>
+        new MultiSelectTag('countries') // id
+    </script>
 @endsection

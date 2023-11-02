@@ -104,7 +104,7 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
 Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
 Route::post('/srch', [adminController::class, 'srch'])->name('srch');
     //views end
-
+    Route::post('/test', [adminController::class, 'test'])->name('test');
 
 });
 

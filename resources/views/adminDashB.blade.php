@@ -37,13 +37,21 @@
             <p> Archives: </p>
             <div class="num">{{ $tl_arch }}</div>
         </div>
+        {{--
+        <form action="{{ route('admin.test') }}" method="post">
+            @csrf
+            <select name="countries" id="countries" multiple>
+                @foreach ($auths as $archive)
+                    <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }}</option>
+                @endforeach
+            </select>
+            <input type="submit" value="submit">
+        </form>
 
+        <script>
+            new MultiSelectTag('countries') // id
+        </script>
+ --}}
 
-
-
-
-
-
-    </div>
     </div>
 @endsection
