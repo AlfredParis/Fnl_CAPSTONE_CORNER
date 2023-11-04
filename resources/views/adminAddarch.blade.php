@@ -37,7 +37,7 @@
                             value="{{ old('Author') }}" required> --}}
                         {{-- <input type="text" id="suggestionInput" autocomplete="off" name="author" placeholder="Enter authors">
                 <div id="suggestionList"></div> --}}
-                        <select name="countries" id="countries" multiple>
+                        <select name="countries[]" id="countries" multiple>
                             @foreach ($auths as $archive)
                                 <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }}</option>
                             @endforeach

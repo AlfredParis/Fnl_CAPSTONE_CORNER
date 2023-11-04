@@ -310,10 +310,11 @@ class adminController extends Controller
                         foreach ($selectedCountries as $ID) {
 
                             $country = STUDENT::where('S_ID', $ID)->first();
+                $country->where('S_ID', $ID)->update([
+                      'ARCH_ID' => $archID,
 
+                  ]);
 
-                                $country->ARCH_ID = $archID;
-                                $country->save();
 
                         }
                     }
