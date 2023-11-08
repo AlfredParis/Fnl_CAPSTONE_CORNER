@@ -9,6 +9,7 @@
 @endsection
 
 @section('main')
+<br> <br> <br> <br>
     <p class="text-style">Archive Add Form</p>
     <form class="" action="{{ route('admin.storeArch') }}" method="POST" enctype="multipart/form-data">
         <div class="checkers">
@@ -19,11 +20,6 @@
 
                     @csrf
 
-                    {{-- <div class="formGroup">
-                <label for="archID">Archive ID</label>
-                <input type="text" class="formControl" placeholder="Enter ID" name="archID" value="{{ old('archID') }}"
-                    required>
-            </div> --}}
 
                     <div class="formGroup">
                         <label for="name">Archive Title</label>

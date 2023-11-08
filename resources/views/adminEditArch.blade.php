@@ -9,6 +9,7 @@
 @endsection
 
 @section('main')
+<br><br><br>
     <p class="text-style">Archive Edit Form</p>
     <form action="{{ route('admin.updateArch', ['ARCH_ID' => $archive->ARCH_ID]) }}" method="POST">
 

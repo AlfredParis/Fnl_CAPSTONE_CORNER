@@ -11,6 +11,7 @@
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
     <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
     <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
+    <a href="{{ route('admin.audit') }}" class="active">Audit</a>
 @endsection
 {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add archives --}}
 @section('main')

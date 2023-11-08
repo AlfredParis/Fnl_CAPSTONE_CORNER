@@ -11,6 +11,7 @@
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
     <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
     <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
+    <a href="{{ route('admin.audit') }}" class="active">Audit</a>
 @endsection
 
 @section('main')
@@ -19,23 +20,23 @@
 
         <div class="admin">
             <img class="dashimg" src="{{ asset('images/admin.png') }}" alt="">
-            <p> Admin: </p>
-            <div class="num">{{ $tl_admin }}</div>
+            <p> {{ $tl_admin }} </p>
+            <div class="num">Admin</div>
         </div>
         <div class="stud">
             <img class="dashimg" src="{{ asset('images/student.png') }}" alt="">
-            <p> Student: </p>
-            <div class="num">{{ $tl_stud }}</div>
+            <p> {{ $tl_stud }} </p>
+            <div class="num">Student</div>
         </div>
         <div class="fac">
             <img class="dashimg" src="{{ asset('images/fac.png') }}" alt="">
-            <p> Faculty: </p>
-            <div class="num">{{ $tl_fac }}</div>
+            <p>  {{ $tl_fac }}</p>
+            <div class="num">Faculty</div>
         </div>
         <div class="arch">
             <img class="dashimg" src="{{ asset('images/arch.png') }}" alt="">
-            <p> Archives: </p>
-            <div class="num">{{ $tl_arch }}</div>
+            <p> {{ $tl_arch }}</p>
+            <div class="num"> Archives</div>
         </div>
         {{--
         <form action="{{ route('admin.test') }}" method="post">

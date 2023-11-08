@@ -22,9 +22,9 @@
 @endsection
 
 @section('main')
-    <br>
+    <br><br><br> <br>
     @if (!isset($Users))
-        <p class="text-style"> student edit form for {{ $profile->S_ID }}</p>
+        <p class="text-style"> student edit form for {{ $profile->S_ID }}</p><br>
         <div class="container">
 
             <form action="{{ route('admin.update', ['S_ID' => $profile->S_ID]) }}" method="POST">

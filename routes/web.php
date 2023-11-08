@@ -99,6 +99,12 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
  Route::put('/{AUTH_ID}', [adminController::class, 'addAuth'])->name('addAuth');
     // Admin Archive Crud
 
+
+
+
+
+    Route::get('/audit', [adminController::class, 'audit'])->name('audit');
+
     //views
 
 Route::get('/show/{id}', [adminController::class, 'view'])->name('view');

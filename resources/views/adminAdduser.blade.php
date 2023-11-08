@@ -15,18 +15,16 @@
 @endsection
 
 @section('main')
+<br> <br> <br>  <br>
+<div style="overflow: hidden;">
     <p class="text-style"> {{ $userAdd }} Add Form</p>
     @if ($userAdd == 'student')
         <div class="top-left-anchor">
 
             <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
-
-
                 <input type="file" style=" margin-left: 1%;" name="excel_file" id="excel_file" accept=".xlsx, .xls"
                     required>
-
                 <br> <br>
                 <button type="submit" class="glowbtn">Import Excel Student</button>
 
@@ -62,11 +60,7 @@
                         <input class="formControl" type="text" name="user_input" id="user_input">
                     </div> --}}
                     @if ($userAdd == 'student')
-                        {{-- <div class="formGroup">
-                            <label for="C_ID">Course ID</label>
-                            <input type="text" class="formControl" placeholder="Enter 1 for BSIT" name="C_ID"
-                                value="{{ old('C_ID') }}" required>
-                        </div> --}}
+
                         <div class="formGroup">
                             <label for="fullname"> Archive ID</label>
                             <input type="text" class="formControl" placeholder="archive id" name="ARCH_ID"
@@ -84,24 +78,6 @@
 
                 </div>
 
-                {{-- <div class="formGroup">
-                <label for="password">Confirm Password</label>
-                <input type="password" class="formControl" placeholder="Confirm Password" name="conpassword" id="conpass"
-                    value="{{ old('conpassword') }}" required>
-                <div class="showpass">
-                    <input type="checkbox" onclick="conPass()"> Show Password
-                </div>
-            </div> --}}
-
-                {{-- <div style="text-align: center"> --}}
-
-                <br>
-
-                {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
-
-
-
-                {{-- </div> --}}
             </div>
             <div class="check">
                 @if ($userAdd == 'student')
@@ -124,4 +100,5 @@
 
     </form>
     </div>
+</div>
 @endsection

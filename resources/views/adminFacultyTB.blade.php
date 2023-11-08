@@ -11,6 +11,7 @@
     <a href="{{ route('admin.student') }}" class="inactive">Student</a>
     <a href="{{ route('admin.faculty') }}" class="actives">Faculty</a>
     <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
+    <a href="{{ route('admin.audit') }}" class="active">Audit</a>
 @endsection
 
 @section('main')

@@ -14,6 +14,7 @@ use App\Models\STUDENT;
 use App\Models\USER_ACC_EMP;
 use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
+use App\Models\notif;
 
 use App\Http\Controllers\userCCcontroller;
 
@@ -56,6 +57,13 @@ class adminController extends Controller
         $archives = ARCHIVES::paginate(5);
         return view('adminArchive')->with('arch', $archives);
     }
+    public function audit()
+    {
+        $not = notif::paginate(500);
+        return view('adminAudit')->with('notif', $not);
+    }
+
+
     public function student()
     {
         $studentPage = userCC::where('acctype', 'student')->paginate(5);
@@ -112,8 +120,10 @@ class adminController extends Controller
         if ($isAdmin==NULL && $isStudent==NULL) {
 
                 if ($userac == 'admin') {
+$name = Session::get('fullNs');
 
                     $user = new USER_ACC_EMP;
+
                     $user->EMP_ID = $request->input("userID");
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
                     $user->ACCTYPE = 'admin';
@@ -122,7 +132,14 @@ class adminController extends Controller
                     $EMP->NAME = $request->input("fullname");
                     $EMP->EMP_ID=$request->input("userID");
                     $EMP->save();
-                    $name = Session::get('fullNs');
+                    $added=$request->input("userID");
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content="$name added $added";
+                    $notif->suspect=$name ;
+
+                    $notif->save();
+
                     Log::alert("$name has been added this account: $userID a admin");
                     return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
 

@@ -11,7 +11,8 @@
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
     <style>
         body {
-            margin: 0%;
+            margin: 0;
+            overflow: auto;
         }
 
         .srchInput {
@@ -35,7 +36,7 @@
         }
 
         .checker {
-            height: 75vh;
+            height: 85vh;
             display: grid;
             grid-template-columns: 55% 45%;
             grid-template-rows: 30% 70%;
@@ -44,7 +45,7 @@
                 "abstract check";
             /* text-align: center; */
             /* gap:5px;  */
-            margin-top: 20px;
+            padding-top: 8vh;
         }
 
         .checkers {
@@ -57,7 +58,7 @@
             ;
             /* text-align: center; */
             /* gap:5px;  */
-            margin-top: 20px;
+            margin-top: 1vh;
         }
 
 
@@ -140,11 +141,12 @@
         /* Table Styles */
 
         .table-wrapper {
+
             font-family: Helvetica;
             -webkit-font-smoothing: antialiased;
             margin: 10px 70px 70px;
             box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
-
+            margin-top: 10vh;
             border-radius: 10px;
         }
 
@@ -318,6 +320,9 @@
             background: linear-gradient(to bottom, #ffffff, #ffffff);
             height: 40px;
             padding: 10px;
+            margin-top: 0;
+            width: 100vw;
+            position: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -423,8 +428,8 @@
 
         .dashB {
 
-
-            height: 75vh;
+            margin:0;
+            height: 80vh;
             display: grid;
             grid-template-rows: 25% 75%;
             grid-template-columns: 25% 25% 25% 25%;
@@ -435,9 +440,9 @@
                 "blank blank blank blank"
             ;
             text-align: center;
-            gap: 10px;
-            margin: 20px;
-
+            gap: 5px;
+            padding-top: 15vh;
+            padding-left: 3vw;
 
         }
 
@@ -469,20 +474,20 @@
 
         .num {
 
-            font-size: 25px;
-            margin-left: 60%;
+            font-size: 85%;
+            margin-left: 45%;
         }
 
         .admin {
 
-            background: rgb(49, 104, 255);
+            background: rgb(123, 157, 250);
 
-            color: white;
+            color: rgb(0, 0, 0);
             flex-direction: column;
-
-            width: 90%;
+            /* margin-left: 2vw; */
+            width: 85%;
             text-align: left;
-            border-radius: 10px;
+            border-radius: 5px;
 
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
 
@@ -495,47 +500,50 @@
         .arch p {
             font-size: 100%;
             font-weight: 600;
-            margin-left: 55%;
+            margin-left: 45%;
+            margin-right: 10%;
             margin-top: -20%;
+            margin-bottom: 0px;
+            text-align: left;
             width: auto;
         }
 
         .stud {
-            background: rgb(49, 104, 255);
+            background: rgb(123, 157, 250);
 
-            color: white;
+            color: rgb(0, 0, 0);
             flex-direction: column;
 
-            width: 90%;
+            width: 85%;
             text-align: left;
-            border-radius: 10px;
+            border-radius: 5px;
 
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
         }
 
         .fac {
-            background: rgb(49, 104, 255);
+            background: rgb(123, 157, 250);
 
-            color: white;
+            color: rgb(0, 0, 0);
             flex-direction: column;
 
-            width: 90%;
+            width: 85%;
             text-align: left;
-            border-radius: 10px;
+            border-radius: 5px;
 
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
             grid-area: fac;
         }
 
         .arch {
-            background: rgb(49, 104, 255);
+            background: rgb(123, 157, 250);
 
-            color: white;
+            color: rgb(0, 0, 0);
             flex-direction: column;
 
-            width: 90%;
+            width: 85%;
             text-align: left;
-            border-radius: 10px;
+            border-radius: 5px;
 
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.678);
             grid-area: arch;
@@ -557,7 +565,9 @@
         .chkContainier {
             max-width: auto;
             /* margin: 0 auto; */
-            padding: 20px;
+            padding-top: 5%;
+            margin-left: 1vw;
+            margin-right: 1vw;
             /* align-items: center; */
             display: flex;
             flex-direction: column;
@@ -995,8 +1005,8 @@
             -webkit-font-smoothing: antialiased;
 
             margin-right: 10%;
-            margin-top: 40px;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 10.7%;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
             width: 95%;
             border-radius: 10px;
         }
@@ -1226,7 +1236,6 @@
     @section('main')
         @parent
     @show
-
 
 </body>
 

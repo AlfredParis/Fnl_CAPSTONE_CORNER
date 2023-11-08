@@ -12,9 +12,11 @@
 @endsection
 
 @section('main')
-    <p class="text-style">Archive Add Form</p>
+
+
 
     <div class="chkContainier">
+        <p class="text-style">Archive Add Form</p>
         <form class="" action="{{ route('studentt.storeArch') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -57,25 +59,12 @@
 
             </div>
 
-            {{-- <div class="form-group">
-                <label for="Status">Status:</label>
-                <select id="stat" name="stat">
-                    <option value="approved">approved</option>
-                    <option value="not approved">not approved</option>
-
-                </select>
-
-
-
-            </div> --}}
-
-
             <div style="text-align: center">
                 <button type="submit" class="btn btn-primary">Add Archive</button>
                 <br>
-
+  </div>
 
         </form>
     </div>
-    </div>
+<br>
 @endsection
