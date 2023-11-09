@@ -1,0 +1,59 @@
+.nav-pills li a:hover{
+background-color: blue;
+}
+.alert {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #394ed6;
+    border: 2px solid #decb1e;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    max-width: 350px;
+    text-align: center;
+}
+
+.alert-message {
+    margin-bottom: 10px;
+}
+
+.alert-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+
+.lnk {
+    padding-left: 80%;
+}
+
+/* .highlight {
+    background-color: rgba(255, 255, 0, 0.16);
+} */
+
+
+
+
+/* pop up box css strat */
+.box {
+    background-color: #565656;
+    width: 90%;
+    height: 90%;
+    color: #E6E4E4;
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+}
+
+/* pop up box css end */

@@ -5,85 +5,118 @@
 @endsection
 
 @section('topnav')
-    <a href="{{ route('admin.index') }}" class="inactive">
-        Dashboard</a>
-    <a href="{{ route('admin.archives') }}" class="inactive">Archives</a>
-    <a href="{{ route('admin.checker') }}" class="actives">Checker</a>
-    <a href="{{ route('admin.student') }}" class="inactive">Student</a>
-    <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
-    <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
-    <a href="{{ route('admin.audit') }}" class="active">Audit</a>
-@endsection
+    <ul class="nav nav-pills flex-column mt-4">
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.index') }}">
+                <i class="fs-5 fa fa-house"></i><span class="fs-4 d-none ms-2 d-sm-inline">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.archives') }}">
+                <i class="fs-5 fa fa-box-archive"></i><span class="fs-4 d-none ms-2 d-sm-inline">Archives</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white active" aria-current="true" href="{{ route('admin.checker') }}">
+                <i class="fs-5 fa fa-check"></i><span class="fs-4 d-none ms-2 d-sm-inline">Checker</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.student') }}">
+                <i class="fs-5 fa fa-user-graduate"></i><span class="fs-4 d-none ms-2 d-sm-inline">Student</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.faculty') }}">
+                <i class="fs-5 fa fa-users"></i><span class="fs-4 d-none ms-2 d-sm-inline">Faculty</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.admin') }}">
+                <i class="fs-5 fa fa-user-gear"></i><span class="fs-4 d-none ms-2 d-sm-inline">Admin</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.audit') }}">
+                <i class="fs-5 fa fa-clipboard"></i><span class="fs-4 d-none ms-2    d-sm-inline">Audit</span>
+            </a>
+        </li>
+    @endsection
 
-@section('main')
+    @section('main')
 
-    <div class="checker">
+        <form action="{{ route('admin.words') }}" method="POST">
+            @csrf
+            <div class="form-group">
 
-        <div class="frm">
-            <div class="chkContainier">
-                <form action="{{ route('admin.words') }}" method="POST">
-                    @csrf
-                    <div class="formGroup">
-                        <label for="user_input">Enter a your title:</label>
-                        @if (!isset($titel))
-                            <input class="formControl" type="text" name="user_input" id="user_input">
-                        @else
-                            <input class="formControl" type="text" name="user_input" id="user_input"
-                                value="{{ $titel }}">
-                        @endif
-                    </div>
-                    <div class="formGroup">
-                        <label for="abs">Enter a your abstract:</label>
-                        @if (!isset($absract))
-                            <textarea class="abstract" type="text" name="abs" id="abs"></textarea>
-                        @else
-                            <textarea class="abstract" type="text" name="abs" id="abs">{{ $absract }}</textarea>
-                        @endif
-
-                    </div>
-                    <button type="submit" class="btn btnSecondary">Find</button>
-                </form>
-            </div>
-        </div>
-        <div class="check">
-            <div class="chktable-wrapper">
-
-
-                @if (isset($similarTitles) && count($similarTitles) > 0)
-                    <table class="fl-chktable">
-                        <thead>
-                            <tr>
-                                <th>Similar Titles</th>
-                                <th>Similarity Percentage</th>
-                                <th>Similar Words</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($similarTitles as $similarTitle)
-                                <tr>
-                                    <th>{{ $similarTitle['title'] }}</th>
-                                    <th>{{ $similarTitle['average_similarity_percentage'] }}%</th>
-
-
-                                    <th>
-                                        @if (count($similarTitle['similar_words']) > 0)
-                                            <ul>
-                                                @foreach ($similarTitle['similar_words'] as $similarWord)
-                                                    <li>{{ $similarWord }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            No similar words found.
-                                        @endif
-                                    </th>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <label for="user_input">Enter a your title:</label>
+                @if (!isset($titel))
+                    <input class="form-control" type="text" name="user_input" id="user_input">
                 @else
-                    <strong class="chtitle">No similar titles found!</strong>
+                    <input class="form-control" type="text" name="user_input" id="user_input" value="{{ $titel }}">
                 @endif
             </div>
+
+
+            <div class="form-group">
+
+                <label for="abs">Enter a your abstract:</label>
+                @if (!isset($absract))
+                    <textarea class="form-control" type="text" name="abs" id="abs" rows="3"></textarea>
+                @else
+                    <textarea class="form-control" type="text" name="abs" id="abs" rows="3">{{ $absract }}</textarea>
+                @endif
+
+            </div>
+
+
+
+
+
+
+
+<br>
+
+        <button type="submit" class="btn btn-primary ">Find</button>
+        </form>
+
+
+<br>
+        @if (isset($similarTitles) && count($similarTitles) > 0)
+            <table class="fl-chktable">
+                <thead>
+                    <tr>
+                        <th>Similar Titles</th>
+                        <th>Similarity Percentage</th>
+                        <th>Similar Words</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($similarTitles as $similarTitle)
+                        <tr>
+                            <th>{{ $similarTitle['title'] }}</th>
+                            <th>{{ $similarTitle['average_similarity_percentage'] }}%</th>
+
+
+                            <th>
+                                @if (count($similarTitle['similar_words']) > 0)
+                                    <ul>
+                                        @foreach ($similarTitle['similar_words'] as $similarWord)
+                                            <li>{{ $similarWord }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    No similar words found.
+                                @endif
+                            </th>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <strong class="chtitle">No similar titles found!</strong>
+        @endif
         </div>
-    </div>
-@endsection
+        </div>
+        </div>
+    @endsection

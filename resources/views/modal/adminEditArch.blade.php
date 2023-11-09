@@ -1,17 +1,54 @@
-@extends('layout.dashboardLayout')
+<div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Sale</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <p class="text-style">Archive Edit Form</p>
+        <form action="{{ route('admin.updateArch', ['ARCH_ID' => $archive->ARCH_ID]) }}" method="POST">
+            @csrf
+            @method('PUT')
+          <div class="modal-body">
 
-@section('title')
-    Admin Dashboard
-@endsection
+            <div class="form-group">
+              <label> Product Name </label>
+              <input type="text" name="product_name" class="form-control" placeholder="Enter Product Name" required>
+            </div>
+            <div class="form-group">
+              <label>Customer Name</label>
+              <input type="text" name="customer_name" class="form-control" placeholder="Enter Customer Name" required>
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity" required>
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Unit Price</label>
+              <input type="number" name="unit_price" class="form-control" placeholder="Enter Price" required>
+            </div>
+            <div class="form-group">
+              <label>Upload Image</label>
+              <input type="file" name="sale_image" id="sale_image" class="form-control" required>
+            </div>
 
-@section('topnav')
-    <a href="{{ route('admin.archives') }}" class="inactive">Return</a>
-@endsection
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" name="save_sale" class="btn btn-primary">Save</button>
+          </div>
+        </form>
 
-@section('main')
-<br><br><br>
-
-
+      </div>
+    </div>
+  </div>
+{{--
     <p class="text-style">Archive Edit Form</p>
     <form action="{{ route('admin.updateArch', ['ARCH_ID' => $archive->ARCH_ID]) }}" method="POST">
 
@@ -80,5 +117,4 @@
 
 
         </div>
-    </form>
-@endsection
+    </form> --}}

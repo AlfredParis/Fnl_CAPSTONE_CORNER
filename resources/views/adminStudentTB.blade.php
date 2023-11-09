@@ -5,45 +5,71 @@
 @endsection
 
 @section('topnav')
-    <a href="{{ route('admin.index') }}" class="inactive">Dashboard</a>
-    <a href="{{ route('admin.archives') }}" class="inactive">Archives</a>
-    <a href="{{ route('admin.checker') }}" class="inactive">Checker</a>
-    <a href="{{ route('admin.student') }}" class="actives">Student</a>
-    <a href="{{ route('admin.faculty') }}" class="inactive">Faculty</a>
-    <a href="{{ route('admin.admin') }}" class="inactive">Admin</a>
-    <a href="{{ route('admin.audit') }}" class="active">Audit</a>
-@endsection
+<ul class="nav nav-pills flex-column mt-4">
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('admin.index') }}">
+            <i class="fs-5 fa fa-house"></i><span class="fs-4 d-none ms-2 d-sm-inline">Dashboard</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('admin.archives') }}">
+            <i class="fs-5 fa fa-box-archive"></i><span class="fs-4 d-none ms-2 d-sm-inline">Archives</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('admin.checker') }}">
+            <i class="fs-5 fa fa-check"></i><span class="fs-4 d-none ms-2 d-sm-inline">Checker</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white active" aria-current="true" href="{{ route('admin.student') }}">
+            <i class="fs-5 fa fa-user-graduate"></i><span class="fs-4 d-none ms-2 d-sm-inline">Student</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('admin.faculty') }}">
+            <i class="fs-5 fa fa-users"></i><span class="fs-4 d-none ms-2 d-sm-inline">Faculty</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('admin.admin') }}">
+            <i class="fs-5 fa fa-user-gear"></i><span class="fs-4 d-none ms-2 d-sm-inline">Admin</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('admin.audit') }}">
+            <i class="fs-5 fa fa-clipboard"></i><span class="fs-4 d-none ms-2    d-sm-inline">Audit</span>
+        </a>
+    </li>@endsection
 
 @section('main')
 <br>
 
-    <div class="table-wrapper">
-
-        <table class="fl-table"><br>
-            <a href="{{ route('admin.addUser', ['user' => 'student']) }}" class="glowbtn">Add Student</a>
+        <table  class="table table-striped"><br>
+          <a class="btn btn-primary" href="{{ route('admin.addUser', ['user' => 'student']) }}" class="glowbtn">Add Student</a>
 
 
 
             <br><br><br>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Full Name</th>
-                    <th>Course</th>
-                    <th>View</th>
-                    <th>Edit</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">View</th>
+                    <th scope="col">Edit</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($SN as $student)
                     <tr>
 
-                        <td>{{ $student->S_ID }}</td>
-                        <td>{{ $student->NAME }}</td>
-                        <td>{{ $student->C_DESC }}</td>
-                        <td><a href="/usercc/{{ $student->S_ID }}" class="glowbtn">view</a></td>
+                        <td scope="row">{{ $student->S_ID }}</td>
+                        <td scope="row">{{ $student->NAME }}</td>
+                        <td scope="row">{{ $student->C_DESC }}</td>
+                        <td scope="row"><a href="/usercc/{{ $student->S_ID }}" class="glowbtn"><i class="fs-5 fa fa-eye"></i></a></td>
 
-                        <td><a href="{{ route('admin.edit', ['USER_ID_EMP' => $student->S_ID]) }}" class="glowbtn">edit</a>
+                        <td scope="row"><a href="{{ route('admin.edit', ['USER_ID_EMP' => $student->S_ID]) }}"><i class="fs-5 fa fa-pen-to-square"></i></a>
                         </td>
 
 
@@ -53,6 +79,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+
     {{ $SN->links() }}
 @endsection

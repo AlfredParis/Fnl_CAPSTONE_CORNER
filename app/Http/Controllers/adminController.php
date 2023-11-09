@@ -54,8 +54,12 @@ class adminController extends Controller
     }
     public function archives()
     {
-        $archives = ARCHIVES::paginate(5);
-        return view('adminArchive')->with('arch', $archives);
+        // $archives = ARCHIVES::paginate(10);
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+
+
+        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+        return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
     }
     public function audit()
     {
@@ -66,13 +70,13 @@ class adminController extends Controller
 
     public function student()
     {
-        $studentPage = userCC::where('acctype', 'student')->paginate(5);
-        $studentNew = STUDENT::paginate(5);
+        $studentPage = userCC::where('acctype', 'student')->paginate(10);
+        $studentNew = STUDENT::paginate(10);
 
 
         $users = DB::table('s_t_u_d_e_n_t_s')
         ->join('c_o_u_r_s_e_s', 's_t_u_d_e_n_t_s.C_ID', '=', 'c_o_u_r_s_e_s.C_ID')
-        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')->paginate(5)
+        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')->paginate(10)
         ;
 
         return view('adminStudentTB')->with('students', $studentPage)->with('SN', $users);
@@ -87,7 +91,7 @@ class adminController extends Controller
     ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
     ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty')
     ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
-    ->paginate(5);
+    ->paginate(10);
         // $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
         return view('adminFacultyTB')->with('faculty', $facultyPage);
     }
@@ -100,7 +104,7 @@ class adminController extends Controller
     ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
     ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
     ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
-    ->paginate(2);
+    ->paginate(10);
 
         return view('adminAdminTB')->with('admin', $adminPage);
     }
@@ -135,7 +139,7 @@ $name = Session::get('fullNs');
                     $added=$request->input("userID");
                     $notif = new notif;
                     $notif->category = "Add";
-                    $notif->content="$name added $added";
+                    $notif->content="$name has been added this account: $added a admin";
                     $notif->suspect=$name ;
 
                     $notif->save();
@@ -144,7 +148,7 @@ $name = Session::get('fullNs');
                     return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
 
                 } elseif ($userac == 'faculty') {
-
+                    $name = Session::get('fullNs');
                     $user = new USER_ACC_EMP;
                     $user->EMP_ID = $request->input("userID");
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
@@ -156,7 +160,14 @@ $name = Session::get('fullNs');
                     $EMP->EMP_ID=$request->input("userID");
                     $EMP->save();
 
-                    $name = Session::get('fullNs');
+                    $added=$request->input("userID");
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content="$name has been added this account: $added a faculty ";
+                    $notif->suspect=$name ;
+
+                    $notif->save();
+
                     Log::alert("$name has been added this account: $userID a faculty");
                     return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
 
@@ -177,7 +188,10 @@ $name = Session::get('fullNs');
                     $EMP->C_ID='1';
                     $EMP->ARCH_ID='N/A';
                     $EMP->save();
+
+
                     }else{
+
                     $user = new student_acc;
                     $user->S_ID = $request->input("userID");
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
@@ -191,10 +205,21 @@ $name = Session::get('fullNs');
                     $EMP->C_ID='1';
                     $EMP->ARCH_ID=$request->input("ARCH_ID");
                     $EMP->save();
+
+
                     }
 
 
                     $name = Session::get('fullNs');
+
+                    $added=$request->input("userID");
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content="$name has been added this account: $added a student ";
+                    $notif->suspect=$name ;
+
+                    $notif->save();
+
                     Log::alert("$name has been added this account: $userID a student");
                     return redirect()->route('admin.student')->with('alert', 'Student Account added!');
                 }
@@ -248,11 +273,21 @@ $name = Session::get('fullNs');
              'ACCTYPE' => $request->ACCTYPE,
             ]);
 
+
             $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
             $studProf->where('EMP_ID', $id)->update([
                 'NAME' => $request->NAME,
 
             ]);
+
+
+
+            $notif = new notif;
+            $notif->category = "Update";
+            $notif->content="$name has been updated this account: $id a admin ";
+            $notif->suspect=$name ;
+
+            $notif->save();
             Log::alert("Admin account is updated Successfully by: $name!");
             return redirect()->route('admin.admin')->with('alert', "Admin account is updated Successfully by: $name!");
 
@@ -267,6 +302,13 @@ $name = Session::get('fullNs');
                 'C_ID' => $request->C_ID,
                 'ARCH_ID' => $request->ARCH_ID,
             ]);
+
+            $notif = new notif;
+            $notif->category = "Update";
+            $notif->content="$name has been updated this account: $id a faculty ";
+            $notif->suspect=$name ;
+
+            $notif->save();
             Log::alert("Faculty account is updated Successfully by: $name!");
             return redirect()->route('admin.faculty')->with('alert', "Faculty account is updated Successfully by: $name!");
 
@@ -282,7 +324,12 @@ $name = Session::get('fullNs');
                 'C_ID' => $request->C_ID,
                 'ARCH_ID' => $request->ARCH_ID,
             ]);
+            $notif = new notif;
+            $notif->category = "Update";
+            $notif->content="$name has been updated this account: $id a student ";
+            $notif->suspect=$name ;
 
+            $notif->save();
             Log::alert("Student account is updated Successfully by: $name!");
             return redirect()->route('admin.student')->with('alert', "Student account is updated Successfully by: $name!");
         }
@@ -293,7 +340,9 @@ $name = Session::get('fullNs');
   $authFetchs = $profile = STUDENT::where('ARCH_ID','N/A' )->paginate(10);
   $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
+
         return view('adminAddarch')->with('authFetch',$authFetchs)->with( 'auths',$auth);
+
     }
 
     public function storeArch(Request $request){
@@ -366,12 +415,20 @@ $name = Session::get('fullNs');
 
     public function archUpdate(Request $request, string $id){
 
+        $arch = ARCHIVES::where('ARCH_ID', $id)->first();
+
+        $arch->where('ARCH_ID', $id)->update([
+
+         'ARCH_ID' => $request->ARCH_ID,
+         'ARCH_NAME' => $request->ARCH_NAME,
+         'ABSTRACT' => $request->ABSTRACT,
+         'GITHUB_LINK' => $request->GITHUB_LINK,
+         'IS_APPROVED' => $request->IS_APPROVED,
+         'PDF_FILE' => $request->pdf_file,
+        ]);
+
         $name = Session::get('fullNs');
-        $arch = ARCHIVES::find($id);
-        $arch->archID = $request->archID;
-        $arch->name = $request->name;
-        $arch->author = $request->author;
-        $arch->gh = $request->gh;
+
 
         Log::alert("Archive has been Edited by $name!");
         $arch->save();
