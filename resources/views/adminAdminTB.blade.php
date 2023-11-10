@@ -32,7 +32,7 @@
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white active" aria-current="true" href="{{ route('admin.admin') }}">
+        <a class="nav-link text-white actidsve" aria-current="true" href="{{ route('admin.admin') }}">
             <i class="fs-5 fa fa-user-gear"></i><span class="fs-4 d-none ms-2 d-sm-inline">Admin</span>
         </a>
     </li>
@@ -46,13 +46,16 @@
 
 @section('main')
     <br>
-
+@php
+    $userAdd='admin';
+@endphp
 
 
         <table class="table table-striped">
-            {{-- <img class="tbimg" src="{{ asset('images/admin.png') }}" alt="">  --}}
-            <a href="{{ route('admin.addUser', ['user' => 'admin']) }}" class="btn btn-primary">Add admin</a>
 
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
+                Add admin
+            </button>
             <br><br>
             <thead>
                 <tr>
@@ -61,7 +64,7 @@
                     <th scope="col">Password</th>
                     <th scope="col"> Views </th>
                     <th scope="col"> Edit </th>
-                    {{-- <th> Delete </th> --}}
+
                 </tr>
             </thead>
             <tbody>
@@ -84,3 +87,4 @@
 
     <div class="pagination">{{ $admin->links() }}</div>
 @endsection
+@include('modal.adminAdduser')

@@ -14,6 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
     <script src="https://kit.fontawesome.com/aed3a8e08c.js" crossorigin="anonymous"></script>
 
@@ -156,7 +162,7 @@
                     <a href="" class="d-flex text-decoration-none align-items-center text-white">
                         <span class="fs-4 d-none d-sm-inline"></span> <img style="height: 8vh;"
                             src="	https://main.psu.edu.ph/wp-content/uploads/2022/06/logo.png" alt="">
-                        <p class="ms-2 fs-4"> CAPSTONE CORNER</p>
+                        <p class="ms-2 fs-5"> CAPSTONE CORNER</p>
                     </a>
                     @section('topnav')
 

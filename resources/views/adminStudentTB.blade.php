@@ -5,52 +5,54 @@
 @endsection
 
 @section('topnav')
-<ul class="nav nav-pills flex-column mt-4">
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.index') }}">
-            <i class="fs-5 fa fa-house"></i><span class="fs-4 d-none ms-2 d-sm-inline">Dashboard</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.archives') }}">
-            <i class="fs-5 fa fa-box-archive"></i><span class="fs-4 d-none ms-2 d-sm-inline">Archives</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.checker') }}">
-            <i class="fs-5 fa fa-check"></i><span class="fs-4 d-none ms-2 d-sm-inline">Checker</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white active" aria-current="true" href="{{ route('admin.student') }}">
-            <i class="fs-5 fa fa-user-graduate"></i><span class="fs-4 d-none ms-2 d-sm-inline">Student</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.faculty') }}">
-            <i class="fs-5 fa fa-users"></i><span class="fs-4 d-none ms-2 d-sm-inline">Faculty</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.admin') }}">
-            <i class="fs-5 fa fa-user-gear"></i><span class="fs-4 d-none ms-2 d-sm-inline">Admin</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.audit') }}">
-            <i class="fs-5 fa fa-clipboard"></i><span class="fs-4 d-none ms-2    d-sm-inline">Audit</span>
-        </a>
-    </li>@endsection
+    <ul class="nav nav-pills flex-column mt-4">
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.index') }}">
+                <i class="fs-5 fa fa-house"></i><span class="fs-4 d-none ms-2 d-sm-inline">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.archives') }}">
+                <i class="fs-5 fa fa-box-archive"></i><span class="fs-4 d-none ms-2 d-sm-inline">Archives</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.checker') }}">
+                <i class="fs-5 fa fa-check"></i><span class="fs-4 d-none ms-2 d-sm-inline">Checker</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white active" aria-current="true" href="{{ route('admin.student') }}">
+                <i class="fs-5 fa fa-user-graduate"></i><span class="fs-4 d-none ms-2 d-sm-inline">Student</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.faculty') }}">
+                <i class="fs-5 fa fa-users"></i><span class="fs-4 d-none ms-2 d-sm-inline">Faculty</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.admin') }}">
+                <i class="fs-5 fa fa-user-gear"></i><span class="fs-4 d-none ms-2 d-sm-inline">Admin</span>
+            </a>
+        </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white" href="{{ route('admin.audit') }}">
+                <i class="fs-5 fa fa-clipboard"></i><span class="fs-4 d-none ms-2    d-sm-inline">Audit</span>
+            </a>
+        </li>
+    @endsection
 
-@section('main')
-<br>
+    @section('main')
+        @php
+            $userAdd = 'student';
+        @endphp
+        <table class="table table-striped">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
+                Add student
+            </button>
 
-        <table  class="table table-striped"><br>
-          <a class="btn btn-primary" href="{{ route('admin.addUser', ['user' => 'student']) }}" class="glowbtn">Add Student</a>
 
-
-
-            <br><br><br>
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -67,9 +69,17 @@
                         <td scope="row">{{ $student->S_ID }}</td>
                         <td scope="row">{{ $student->NAME }}</td>
                         <td scope="row">{{ $student->C_DESC }}</td>
-                        <td scope="row"><a href="/usercc/{{ $student->S_ID }}" class="glowbtn"><i class="fs-5 fa fa-eye"></i></a></td>
+                        <td scope="row"><a href="/usercc/{{ $student->S_ID }}" class="glowbtn"><i
+                                    class="fs-5 fa fa-eye"></i></a></td>
 
-                        <td scope="row"><a href="{{ route('admin.edit', ['USER_ID_EMP' => $student->S_ID]) }}"><i class="fs-5 fa fa-pen-to-square"></i></a>
+                        <td scope="row">
+                            @php
+                                $id=$student->S_ID;
+                            @endphp
+                            <a href="#editUser_{{$id}}" data-bs-toggle="modal">
+                                <i class="fs-5 fa fa-pen-to-square"></i></a>
+
+                            @include('modal.editUser')
                         </td>
 
 
@@ -80,5 +90,7 @@
             </tbody>
         </table>
 
-    {{ $SN->links() }}
-@endsection
+        {{ $SN->links() }}
+    @endsection
+
+    @include('modal.adminAdduser')

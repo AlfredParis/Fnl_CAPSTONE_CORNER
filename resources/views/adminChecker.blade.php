@@ -83,22 +83,22 @@
 
 <br>
         @if (isset($similarTitles) && count($similarTitles) > 0)
-            <table class="fl-chktable">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Similar Titles</th>
-                        <th>Similarity Percentage</th>
-                        <th>Similar Words</th>
+                        <th scope="col">Similar Titles</th>
+                        <th scope="col">Similarity Percentage</th>
+                        <th scope="col">Similar Words</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($similarTitles as $similarTitle)
                         <tr>
-                            <th>{{ $similarTitle['title'] }}</th>
-                            <th>{{ $similarTitle['average_similarity_percentage'] }}%</th>
+                            <th scope="row">{{ $similarTitle['title'] }}</th>
+                            <th scope="row">{{ $similarTitle['average_similarity_percentage'] }}%</th>
 
 
-                            <th>
+                            <th scope="row">
                                 @if (count($similarTitle['similar_words']) > 0)
                                     <ul>
                                         @foreach ($similarTitle['similar_words'] as $similarWord)

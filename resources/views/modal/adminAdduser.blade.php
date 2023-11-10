@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Form</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $userAdd }} Add Form</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -28,14 +28,14 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="userID" class="form-label">  ID</label>
+                        <label for="userID" class="form-label"> {{ $userAdd }} ID</label>
                         <input type="text" class="form-control" placeholder="Enter ID" name="userID"
                             value="{{ old('userID') }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="fullname" class="form-label">  name</label>
-                        <input type="text" class="form-control" placeholder=" name"
+                        <label for="fullname" class="form-label"> {{ $userAdd }} name</label>
+                        <input type="text" class="form-control" placeholder="{{ $userAdd }} name"
                             name="fullname" value="{{ old('fullname') }}" required>
                     </div>
 
@@ -78,7 +78,3 @@
         </div>
     </div>
 </div>
-
-
-
-@endsection

@@ -121,14 +121,6 @@
                                     value="{{ old('ARCH_NAME', $archive->ARCH_NAME) }}" id="name" required>
 
 
-                                {{-- <label for="Author" class="form-label">Author</label>
-
-                                <select name="countries[]" id="countries" multiple>
-                                    @foreach ($auths as $archive)
-                                        <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }}</option>
-                                    @endforeach
-                                </select> --}}
-
                             </div>
 
 
