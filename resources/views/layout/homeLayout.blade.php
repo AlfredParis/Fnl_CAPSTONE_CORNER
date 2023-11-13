@@ -100,8 +100,8 @@
             justify-content: left;
             align-items: left;
             /* height: 30vw; */
-            object-fit:fill;
-           
+            object-fit: fill;
+
         }
 
         .div3 {
@@ -451,7 +451,6 @@
     @endif
 
 
-
     <script>
         setTimeout(function() {
             var overlay = document.querySelector('.loading-overlay');
@@ -479,11 +478,8 @@
             }
         }
     </script>
-    {{-- <div class="loading-overlay">
 
-        <img src="https://main.psu.edu.ph/wp-content/uploads/2022/06/psu-loader.gif" alt="Loading...">
 
-    </div> --}}
     {{-- <img src="	https://psu362.campus-erp.com/portal/images/myHAUBannerV1.gif" alt=""> --}}
 
 
@@ -505,7 +501,7 @@
 
                 <img src="{{ asset('images/logo2.png') }}" alt="">
             </div>
-<DIV class="blank"></DIV>
+            <DIV class="blank"></DIV>
             <div class="div4">
                 <div class="greet">This is a website is created by Pangasinan State University,San Carlos City students
                     that provides a

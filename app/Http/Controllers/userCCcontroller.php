@@ -60,6 +60,7 @@ class userCCcontroller extends Controller
 
                             Session::put('fullNs', $fullN);
                             Session::put('accT', $accT);
+                            Session::put('userID', $userID);
                             return redirect('/admin')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
                         }else{
                             return back()->with('messagepass', 'Wrong Password')->withInput();
@@ -74,7 +75,7 @@ class userCCcontroller extends Controller
                             ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
                             ->where('e_m_p_l_o_y_e_e_s.EMP_ID', $userID)
                             ->value('e_m_p_l_o_y_e_e_s.NAME');
-
+                            Session::put('userID', $userID);
                             Session::put('fullNs', $fullN);
                             Session::put('accT', $accT);
                             return redirect('/faculty')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
@@ -89,37 +90,7 @@ class userCCcontroller extends Controller
             {
                  return back()->with('messageid', 'Id does not exist')->withInput();
             }
-            // if ($exists) {
-            //     $password = userCC::where("fullname", $us)->where("userID", $userID)->value("password");
-            //     $decrypt = decrypt($password);
 
-            //     if ($passwordinput == $decrypt) {
-            //         $fullN = userCC::where("userID", $userID)->value("fullname");
-            //         $accT = userCC::where("fullname", $us)->where("userID", $userID)->value("acctype");
-
-            //         Session::put('fullNs', $fullN);
-
-            //         //user level : student , admin , faculty
-
-
-            //         if ($accT == 'admin') {
-            //             Session::put('accT', $accT);
-            //             return redirect('/admin')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
-            //         } elseif ($accT == 'faculty') {
-            //             Session::put('accT', $accT);
-            //             return redirect('/faculty')->with('alert', "Welcome  $fullN!")->with('lrt', 1);
-            //         } elseif ($accT == 'student') {
-            //             Session::put('accT', $accT);
-            //             return redirect('/student')->with('alert', "Welcome  $fullN!")->with('lrt', 1);
-            //         } else {
-            //             return "gagi aliwa HAHAHAHAHAHA";
-            //         }
-            //     } else {
-            //         return back()->with('messagepass', 'Wrong Password')->withInput();
-            //     }
-            // } else {
-            //     return back()->with('messageid', 'Id does not exist')->withInput();
-            // }
         } else {
             return view('login');
         }

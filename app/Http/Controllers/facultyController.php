@@ -28,8 +28,18 @@ class facultyController extends Controller
 
         return view('facultyDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty)->with( 'auths',$auth);
      }
-    public function myArchive()
+    public function myArchive(Request $request)
     {
+
+
+
+        $yearToSearch=$request->input("search");
+        if(isset($yearToSearch)){
+            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+            return view('facultyArchive')->with('arch', $archives) ->with( 'auths',$auth);
+        }
+
 
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
@@ -38,6 +48,9 @@ class facultyController extends Controller
 
         return view('facultyArchive')->with('arch', $archives) ->with( 'auths',$auth);;
     }
+
+
+
     public function Checker()
     {
         return view('facultyChecker');
@@ -148,6 +161,7 @@ class facultyController extends Controller
         $arch->ARCH_NAME = $request->input("name");
         $arch->ABSTRACT = $request->input("abs");
         $arch->IS_APPROVED = $request->input("stat");
+        $arch->YEAR_PUB = $request->input("pubYear");
 
             if ($request->hasFile('pdf_file')) {
 

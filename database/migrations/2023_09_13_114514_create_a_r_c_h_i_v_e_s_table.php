@@ -15,10 +15,11 @@ return new class extends Migration
             $table->string('ARCH_ID')->primary();
             $table->string('ARCH_NAME');
             $table->string('ABSTRACT');
-            // $table->string('AUTHOR_ID');
+
             $table->string('GITHUB_LINK');
             $table->string('PDF_FILE');
             $table->string('IS_APPROVED');
+            $table->string('YEAR_PUB');
             $table->timestamps();
         });
     }

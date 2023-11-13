@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+// library for year
+use Carbon\Carbon;
 
 use App\Models\userCC;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -41,12 +42,18 @@ class adminController extends Controller
     {
         return view('adminChecker');
     }
-    public function archives()
+    public function archives(Request $request)
     {
-        // $archives = ARCHIVES::paginate(10);
+        $yearToSearch=$request->input("search");
+if(isset($yearToSearch)){
+    $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+    $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+    return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
+}
+
+
+
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-
-
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
     }
@@ -349,6 +356,7 @@ $name = Session::get('fullNs');
         $arch->ARCH_NAME = $request->input("name");
         $arch->ABSTRACT = $request->input("abs");
         $arch->IS_APPROVED = $request->input("stat");
+        $arch->YEAR_PUB = $request->input("pubYear");
 
             if ($request->hasFile('pdf_file')) {
 
@@ -365,10 +373,7 @@ $name = Session::get('fullNs');
                         foreach ($selectedCountries as $ID) {
 
                             $country = STUDENT::where('S_ID', $ID)->first();
-                $country->where('S_ID', $ID)->update([
-                      'ARCH_ID' => $archID,
-
-                  ]);
+                              $country->where('S_ID', $ID)->update(['ARCH_ID' => $archID,]);
 
 
                         }

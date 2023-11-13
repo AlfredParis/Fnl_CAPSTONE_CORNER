@@ -5,36 +5,51 @@
 @endsection
 
 @section('topnav')
-    <ul class="nav nav-pills flex-column mt-4">
+    <ul class="nav nav-pills flex-column mt-4" style="gap: 1vh;">
         <li class="nav-item py-2 py-sm-0">
             <a class="nav-link text-white" href="{{ route('faculty.index') }}">
-                <i class="fs-7 fa fa-house"></i><span class="fs-7 d-none ms-2 d-sm-inline">Dashboard</span>
+                <i class="fs-7 fa fa-house"></i><span class="fs-6 d-none ms-2 d-sm-inline">Dashboard</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
             <a class="nav-link text-white active" aria-current="true" href="{{ route('faculty.myArchive') }}">
-                <i class="fs-7 fa fa-box-archive"></i><span class="fs-7 d-none ms-2 d-sm-inline">Archives</span>
+                <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
             <a class="nav-link text-white " href="{{ route('faculty.Checker') }}">
-                <i class="fs-7 fa fa-check"></i><span class="fs-7 d-none ms-2 d-sm-inline">Checker</span>
+                <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
             <a class="nav-link text-white " href="{{ route('faculty.student') }}">
-                <i class="fs-7 fa fa-user-graduate"></i><span class="fs-7 d-none ms-2 d-sm-inline">Student</span>
+                <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
             </a>
         </li>
     </ul>
 @endsection
 
 @section('main')
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-        Add Archive
-    </button>
+    <div class="container" style="margin-left: 0;">
+        <div class="row">
+            <div class="col auto">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    Add Archive
+                </button>
+            </div>
+            <div class="col">
+                <form action="{{ route('faculty.myArchive') }}" method="get">
+                    <div class="input-group">
 
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                            aria-describedby="search-addon" name="search" />
+                        <button type="submit" class="btn btn-outline-primary">Search</button>
 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -132,8 +147,8 @@
                                                 <p>{{ old('PDF_FILE') }}</p>
                                                 <label for="pdf_file" class="form-label">Documentation</label>
                                                 <input type="file" id="pdf_file" name="pdf_file"
-                                                    accept="application/pdf" value="{{ old('PDF_FILE') }}" id="pdf"
-                                                    class="form-control">
+                                                    accept="application/pdf" value="{{ old('PDF_FILE') }}"
+                                                    id="pdf" class="form-control">
 
                                             </div>
                                             <div class="dropdown">

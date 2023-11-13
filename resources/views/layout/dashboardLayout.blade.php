@@ -16,8 +16,12 @@
     </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
@@ -34,19 +38,42 @@
 
     <style>
         body {}
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .blur {
+            filter: blur(5px);
+        }
     </style>
 
 </head>
 
 <body>
-
-
-
+    {{--
     <div id="alertBox" class="alert">
         <span id="alertMessage" class="alert-message">{{ Session::get('alert') }}</span>
         <span id="alertClose" class="alert-close">&times;</span>
-    </div>
+    </div> --}}
 
+
+    <script>
+        // Simulate loading delay (remove this in your actual implementation)
+        setTimeout(function() {
+            // Remove loading overlay after loading is complete
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }, 2000); // Change 2000 to the actual loading time in milliseconds
+    </script>
 
 
 
@@ -153,17 +180,22 @@
         }
     </script>
 
-
+    @php
+        $name = Session::get('fullNs');
+    @endphp
 
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="bg-dark col-auto col-md-4 col-lg-2 min-vh-100 d-flex flex-column justify-content-between ">
+            <div
+                class="bg-dark col-auto col-sm-6 col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
                 <div class="bg-dark p-2">
                     <a href="" class="d-flex text-decoration-none align-items-center text-white">
                         <span class="fs-4 d-none d-sm-inline"></span> <img style="height: 8vh;"
-                            src="	https://main.psu.edu.ph/wp-content/uploads/2022/06/logo.png" alt="">
-                        <p class="ms-2 fs-5"> CAPSTONE CORNER</p>
+                            src="https://main.psu.edu.ph/wp-content/uploads/2022/06/logo.png" alt="">
+                        <p class="ms-2 fs-5"> {{ $name }}</p>
                     </a>
+
+
                     @section('topnav')
 
                         @parent
@@ -175,27 +207,47 @@
 
                     @section('logout')
 
+                        <br>
 
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                OTHERS
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-white">
-                                <li><a class="dropdown-item active" href="#">Account:
-                                        {{ $accT = Session::get('accT') }}</a></li>
-                                <li><a class="dropdown-item" href="#">Edit Account</a></li>
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container-fluid">
 
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}"> <i
-                                            class="fs-5 fa fa-right-from-bracket"></i> Logout </a></li>
-                            </ul>
-                        </div>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown">
+                                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Dropdown
+                                            </button>
+                                            @php
+                                                $id = Session::get('userID');
+
+                                            @endphp
+                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                                <li><a class="dropdown-item" href="#">Account:
+                                                        {{ $accT = Session::get('accT') }}</a></li>
+                                                <li><a class="dropdown-item" href="#editUser_{{ $id }}"
+                                                        data-bs-toggle="modal"> <i class="fs-5 fa fa-pen-to-square"></i>Edit
+                                                        Account</a></li>
 
 
-
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="{{ route('logout') }}"> <i
+                                                            class="fs-5 fa fa-right-from-bracket" alt="sadf"> </i>
+                                                        Logout </a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
                     @show
                 </div>
 
@@ -211,7 +263,7 @@
     </div>
 
 
-
+    @include('modal.editUser')
 </body>
 
 </html>
