@@ -32,12 +32,12 @@
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white actidsve" aria-current="true" href="{{ route('admin.admin') }}">
+        <a class="nav-link text-white active" aria-current="true" href="{{ route('admin.admin') }}">
             <i class="fs-5 fa fa-user-gear"></i><span class="fs-4 d-none ms-2 d-sm-inline">Admin</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.audit') }}">
+        <a class="nav-link text-white " href="{{ route('admin.audit') }}">
             <i class="fs-5 fa fa-clipboard"></i><span class="fs-4 d-none ms-2    d-sm-inline">Audit</span>
         </a>
     </li>
@@ -45,7 +45,7 @@
 @endsection
 
 @section('main')
-    <br>
+
 @php
     $userAdd='admin';
 @endphp
@@ -56,7 +56,7 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
                 Add admin
             </button>
-            <br><br>
+
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -75,9 +75,16 @@
                         <td scope="row">{{ $adm->NAME }}</td>
                         <td scope="row">{{ decrypt($adm->PASSWORD) }}</td>
                         <td scope="row"><a href="/usercc/{{ $adm->USER_ID_EMP }}" class="glowbtn"><i class="fs-5 fa fa-eye"></i></a></td>
+                        <td scope="row">
+                            @php
+                                $id=$adm->EMP_ID;
+                            @endphp
+                            <a href="#editUser_{{$id}}" data-bs-toggle="modal">
+                                <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                        <td scope="row"><a href="{{ route('admin.edit', ['USER_ID_EMP' => $adm->EMP_ID]) }}" class="glowbtn"><i class="fs-5 fa fa-pen-to-square"></i></a>
+                            @include('modal.editUser')
                         </td>
+
 
                     </tr>
                 @endforeach

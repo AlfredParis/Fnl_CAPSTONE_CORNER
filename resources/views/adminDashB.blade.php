@@ -41,55 +41,56 @@
                 <i class="fs-5 fa fa-clipboard"></i><span class="fs-4 d-none ms-2    d-sm-inline">Audit</span>
             </a>
         </li>
-    @endsection
+    </ul>
+@endsection
 
-    @section('main')
-        <div class="container text-center">
-            <div class="row row-cols-2">
-                <div class="col p-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ asset('images/18771.jpg') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $tl_admin }}</h5>
-                            <p class="card-text">ADMIN</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
+@section('main')
+    <div class="container text-center">
+        <div class="row row-cols-2">
+            <div class="col p-2">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('images/18771.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $tl_admin }}</h5>
+                        <p class="card-text">ADMIN</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ asset('images/students_09.jpg') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $tl_stud }}</h5>
-                            <p class="card-text">STUDENT</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ asset('images/fac.jpg') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $tl_fac }}</h5>
-                            <p class="card-text">FACULTY</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ asset('images/829.jpg') }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $tl_arch }}</h5>
-                            <p class="card-text">ARCHIVES</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
+            <div class="col p-2">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('images/students_09.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $tl_stud }}</h5>
+                        <p class="card-text">STUDENT</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('images/fac.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $tl_fac }}</h5>
+                        <p class="card-text">FACULTY</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('images/829.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $tl_arch }}</h5>
+                        <p class="card-text">ARCHIVES</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-    @endsection
+    </div>
+@endsection

@@ -49,7 +49,7 @@ class studentController extends Controller
     $userInput = $request->input('user_input');
     $abs = $request->input('abs');
   if (empty($userInput) || is_null($userInput)) {
-        return view('adminChecker')->with('similarTitles', []);
+        return view('studChecker')->with('similarTitles', []);
     }
     // Split the user input into individual words
     $inputWords = explode(' ', $userInput);

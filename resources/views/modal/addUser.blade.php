@@ -61,22 +61,7 @@
             </div>
 
         </div>
-        <div class="check">
-            @if ($userAdd == 'student')
-                <div class="formGroup">
-                    <br>
-                    <label for="password">Student Password</label>
-                    <input type="password" class="formControl" placeholder="Enter student password" name="PASSWORD"
-                        id="myInput" value="{{ old('PASSWORD') }}" required>
-                </div>
-                <div class="showpass">
-                    <input type="checkbox" onclick="myFunction()"> Show Password
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            @else
-            @endif
 
-        </div>
 
     </div>
 

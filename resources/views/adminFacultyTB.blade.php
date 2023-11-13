@@ -43,13 +43,17 @@
     </li>@endsection
 
 @section('main')
-    <br>
+@php
+    $userAdd='faculty';
+@endphp
 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
+    Add Faculty
+</button>
 
         <table class="table table-striped">
-            <a href="{{ route('admin.addUser', ['user' => 'faculty']) }}" class="glowbtn">Add Faculty</a>
 
-            <br><br><br>
+
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -66,22 +70,21 @@
                     <tr>
 
                         <td scope="row">{{ $fac->EMP_ID }}</td>
-                        {{-- <td>{{ $fac-> }}</td> --}}
 
                         <td scope="row">{{ $fac->NAME }}</td>
                         <td scope="row">{{ decrypt($fac->PASSWORD) }}</td>
                         <td scope="row"><a href="/usercc/{{ $fac->USER_ID_EMP }}" class="glowbtn"><i class="fs-5 fa fa-eye"></i></a></td>
+                        <td scope="row">
+                            @php
+                                $id=$fac->EMP_ID;
+                            @endphp
+                            <a href="#editUser_{{$id}}" data-bs-toggle="modal">
+                                <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                        <td scope="row"><a href="{{ route('admin.edit', ['USER_ID_EMP' => $fac->EMP_ID]) }}" class="glowbtn"><i class="fs-5 fa fa-pen-to-square"></i></a>
+                            @include('modal.editUser')
                         </td>
-                        {{-- <td>
-                            <form action="/usercc/{{ $fac->USER_ID_EMP }}" method="POST">
-                                @csrf
-                                @method('DELETE')
 
-                                <input type="submit" name="sumbit" value="Delete" class="glowbtn">
-                            </form>
-                        </td> --}}
+
                     </tr>
                 @endforeach
             </tbody>
@@ -89,3 +92,4 @@
 
     {{ $faculty->links() }}
 @endsection
+@include('modal.adminAdduser')

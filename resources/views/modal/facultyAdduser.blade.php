@@ -8,7 +8,7 @@
             <div class="modal-body">
 
                 @if ($userAdd == 'student')
-                    <form action="{{ route('admin.import.excel') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('faculty.import.excel') }}" method="POST" enctype="multipart/form-data">
                         @csrf <div class="mb-3">
 
                             <label for="excel_file" class="form-label">Import Student</label>
@@ -23,7 +23,7 @@
                 @endif
 
 
-                <form action="{{ route('admin.storeEmp', ['user' => $userAdd]) }}" method="POST">
+                <form action="{{ route('faculty.storeEmp', ['user' => $userAdd]) }}" method="POST">
 
                     @csrf
 

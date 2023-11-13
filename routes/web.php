@@ -5,8 +5,8 @@ use App\Http\Controllers\archiveController;
 use App\Http\Controllers\facultyController;
 use App\Http\Controllers\studentCC;
 use App\Http\Controllers\extraCtrl;
-
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeEmail;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\userCCcontroller;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/testmail', [extraCtrl::class,'mail'])->name('testMail');
+
 Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
@@ -63,6 +66,12 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::get('/facArchive', [facultyController::class, 'myArchive'])->name('myArchive');
     Route::get('/facChecker', [facultyController::class, 'Checker'])->name('Checker');
     Route::get('/facStudTB', [facultyController::class, 'student'])->name('student');
+    Route::get('/facArch', [facultyController::class, 'storeArch'])->name('storeArch');
+    Route::post('/imprt-excel', [extraCtrl::class,'importExcelSTUDENTFac'])->name('import.excel');
+
+    Route::post('/find-similar', [facultyController::class, 'findSimilarWords'])->name('words');
+    Route::post('/{user}/storeEmps', [adminController::class, 'storeEmp'])->name('storeEmp'); //user add function
+
 });
 
 

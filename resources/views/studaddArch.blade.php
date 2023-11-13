@@ -8,7 +8,7 @@
     <a href="{{ route('studentt.index') }}" class="inactive">Dashboard</a>
     <a href="{{ route('studentt.myArchive') }}" class="actives">My Archive</a>
     <a href="{{ route('studentt.Checker') }}" class="inactive">Checker</a>
-    {{-- <a href="{{ route('logout') }}" class="inactive">Logout</a> --}}
+
 @endsection
 
 @section('main')
