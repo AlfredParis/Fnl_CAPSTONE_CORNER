@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('a_r_c_h_i_v_e_s', function (Blueprint $table) {
             $table->string('ARCH_ID')->primary();
             $table->string('ARCH_NAME');
-            $table->string('ABSTRACT');
+            $table->text('ABSTRACT');
 
             $table->string('GITHUB_LINK');
             $table->string('PDF_FILE');

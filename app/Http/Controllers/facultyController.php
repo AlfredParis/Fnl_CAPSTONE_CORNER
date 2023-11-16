@@ -198,7 +198,7 @@ class facultyController extends Controller
 
                 }
             else{
-            // If they forgot the paper, tell them to bring one
+
                 return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
                 }
 
@@ -216,25 +216,108 @@ class facultyController extends Controller
     }
 
     public function archUpdate(Request $request, string $id){
-
         $arch = ARCHIVES::where('ARCH_ID', $id)->first();
 
-        $arch->where('ARCH_ID', $id)->update([
+        if ($request->hasFile('pdf_file')) {
 
-         'ARCH_ID' => $request->ARCH_ID,
-         'ARCH_NAME' => $request->ARCH_NAME,
-         'ABSTRACT' => $request->ABSTRACT,
-         'GITHUB_LINK' => $request->GITHUB_LINK,
-         'IS_APPROVED' => $request->IS_APPROVED,
-         'PDF_FILE' => $request->pdf_file,
-        ]);
+            $pdfFile = $request->file('pdf_file');
+            $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfFile->storeAs('pdfs', $fileName, 'public');
+
+            $arch->where('ARCH_ID', $id)->update([
+                'PDF_FILE' => $fileName,
+               ]);
+            }
+
+
+        if (isset($gh) && isset($request->PDF_FILE)) {
+            $arch->where('ARCH_ID', $id)->update([
+
+            'ARCH_ID' => $request->ARCH_ID,
+            'ARCH_NAME' => $request->ARCH_NAME,
+            'ABSTRACT' => $request->ABSTRACT,
+            'GITHUB_LINK' => $request->GITHUB_LINK,
+            'IS_APPROVED' => $request->IS_APPROVED,
+            'PDF_FILE' => $request->PDF_FILE,
+           ]);
+
+
+        }elseif(isset($gh) && !isset($request->PDF_FILE) ){
+            $arch->where('ARCH_ID', $id)->update([
+
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+                'GITHUB_LINK' => $request->GITHUB_LINK,
+                'IS_APPROVED' => $request->IS_APPROVED,
+
+               ]);
+           }elseif (!isset($gh) && isset($request->PDF_FILE)) {
+            $arch->where('ARCH_ID', $id)->update([
+
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+
+                'IS_APPROVED' => $request->IS_APPROVED,
+                'PDF_FILE' => $request->PDF_FILE,
+               ]);
+           }else{
+            $arch->where('ARCH_ID', $id)->update([
+
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+
+                'IS_APPROVED' => $request->IS_APPROVED,
+
+               ]);
+           }
+           $selectedCountries  = $request->input("countries");
+
+
+
+           if (isset($selectedCountries)) {
+            $auth = STUDENT::where('ARCH_ID', $id)->get();
+
+            foreach ($auth as $a) {
+                // Update ARCH_ID directly without the need for a second query
+                $idNga = $a->S_ID;
+                $a->where('S_ID', $idNga)->update([
+
+                    'ARCH_ID' => 'N/A',
+
+                   ]);
+
+
+            }
+
+            if (is_array($selectedCountries)) {
+                foreach ($selectedCountries as $ID) {
+
+                    $student = STUDENT::where('S_ID', $ID)->first();
+                    $idNga = $student->S_ID;
+                    $student->where('S_ID', $idNga)->update([
+
+                        'ARCH_ID' => $request->ARCH_ID
+
+                       ]);
+
+                }
+            }
+        }
 
         $name = Session::get('fullNs');
+        Log::alert("Archive has been added $name !");
+        $notif = new notif;
+        $notif->category = "Update";
+        $notif->content="$name has been updated this archive: $id  ";
+        $notif->suspect=$name ;
 
 
-        Log::alert("Archive has been Edited by $name!");
-        $arch->save();
-        return redirect()->route('faculty.archives')->with('alert', 'Archive updated Successfully!');
+        $notif->save();
+
+        return redirect()->route('faculty.myArchive')->with('alert', 'Archive updated Successfully!');
     }
 
     public function storeEmp(Request $request, $userac)
@@ -350,4 +433,86 @@ $name = Session::get('fullNs');
             return back()->with('alert', 'Id already exist!')->withInput();
         }
     }
+
+
+    public function userUpdate(Request $request, string $id)
+    {
+
+        $name = Session::get('fullNs');
+
+        if ($request->ACCTYPE == 'admin') {
+            $studAcc = USER_ACC_EMP::where('EMP_ID', $id)->first();
+
+            $studAcc->where('EMP_ID', $id)->update([
+                'PASSWORD' =>  encrypt($request->PASSWORD),
+             'ACCTYPE' => $request->ACCTYPE,
+            ]);
+
+
+            $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
+            $studProf->where('EMP_ID', $id)->update([
+                'NAME' => $request->NAME,
+
+            ]);
+
+
+
+            $notif = new notif;
+            $notif->category = "Update";
+            $notif->content="$name has been updated this account: $id a admin ";
+            $notif->suspect=$name ;
+
+            $notif->save();
+            Log::alert("Admin account is updated Successfully by: $name!");
+            return redirect()->route('admin.admin')->with('alert', "Admin account is updated Successfully by: $name!");
+
+        } elseif ($request->ACCTYPE == 'faculty') {
+            $studAcc = USER_ACC_EMP::where('EMP_ID', $id)->first();
+            $studAcc->PASSWORD = encrypt($request->PASSWORD);
+            $studAcc->save();
+
+            $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
+            $studProf->where('S_ID', $id)->update([
+                'NAME' => $request->NAME,
+                'C_ID' => $request->C_ID,
+                'ARCH_ID' => $request->ARCH_ID,
+            ]);
+
+            $notif = new notif;
+            $notif->category = "Update";
+            $notif->content="$name has been updated this account: $id a faculty ";
+            $notif->suspect=$name ;
+
+            $notif->save();
+            Log::alert("Faculty account is updated Successfully by: $name!");
+            return redirect()->route('admin.faculty')->with('alert', "Faculty account is updated Successfully by: $name!");
+
+        } else {
+
+            $studAcc = student_acc::where('S_ID', $id)->first();
+            $studAcc->PASSWORD = encrypt($request->PASSWORD);
+            $studAcc->save();
+
+            $studProf = STUDENT::where('S_ID', $id)->first();
+            $studProf->where('S_ID', $id)->update([
+                'NAME' => $request->NAME,
+                'C_ID' => $request->C_ID,
+                'ARCH_ID' => $request->ARCH_ID,
+            ]);
+            $notif = new notif;
+            $notif->category = "Update";
+            $notif->content="$name has been updated this account: $id a student ";
+            $notif->suspect=$name ;
+
+            $notif->save();
+            Log::alert("Student account is updated Successfully by: $name!");
+            return redirect()->route('faculty.student')->with('alert', "Student account is updated Successfully by: $name!");
+        }
+
+    }
+
+
+
+
+
 }

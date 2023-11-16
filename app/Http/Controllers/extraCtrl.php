@@ -22,13 +22,10 @@ class extraCtrl extends Controller
             return abort(404); // Handle the case where the user doesn't exist
         }
 
-        // Generate the PDF
+
         $pdf = PDF::loadView('pdf.template', compact('user'));
 
-        // Optionally, you can save the PDF to a file
-        // $pdf->save('pdf_filename.pdf');
 
-        // Return the PDF as a response to the user
         return $pdf->stream('pdf_filename.pdf');
     }
     public function importExcelSTUDENT(Request $request)
@@ -116,7 +113,7 @@ public function importExcelSTUDENTFac(Request $request)
     // Save user data to the database
     STUDENT::insert($userData);
 
-    return redirect()->route('admin.student')->with('alert', 'Data imported successfully');
+    return redirect()->route('faculty.student')->with('alert', 'Data imported successfully');
 }
 
 public function getSuggestions(Request $request)

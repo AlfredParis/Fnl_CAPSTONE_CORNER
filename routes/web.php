@@ -66,12 +66,12 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::get('/facArchive', [facultyController::class, 'myArchive'])->name('myArchive');
     Route::get('/facChecker', [facultyController::class, 'Checker'])->name('Checker');
     Route::get('/facStudTB', [facultyController::class, 'student'])->name('student');
-    Route::get('/facArch', [facultyController::class, 'storeArch'])->name('storeArch');
+    Route::post('/facArch', [facultyController::class, 'storeArch'])->name('storeArch');
     Route::post('/imprt-excel', [extraCtrl::class,'importExcelSTUDENTFac'])->name('import.excel');
-
+    Route::put('/{ARCH_ID}', [facultyController::class, 'archUpdate'])->name('updateArch'); //user edit store
     Route::post('/find-similar', [facultyController::class, 'findSimilarWords'])->name('words');
-    Route::post('/{user}/storeEmps', [adminController::class, 'storeEmp'])->name('storeEmp'); //user add function
-
+    Route::post('/{user}/storeEmps', [facultyController::class, 'storeEmp'])->name('storeEmp'); //user add function
+    Route::put('/{S_ID}/updateUser', [facultyController::class, 'userUpdate'])->name('update');
 });
 
 

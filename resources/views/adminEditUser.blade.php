@@ -63,13 +63,7 @@
                     <input class="formControl" type="text" id="courseId" name="C_ID"
                         value="{{ old('C_ID', $profile->C_ID) }} " required>
                 </div>
-                <br><br><br>
-                <div style="text-align: center">
-                    <input class="btn btn-primary" type="submit" name="submit" value="SAVE"><br>
 
-            </form>
-        </div>
-        </div>
     @else
         @if ($Users->ACCTYPE == 'student')
             <p class="text-style">{{ $Users->ACCTYPE }} Edit Form for {{ $Users->S_ID }}</p>
@@ -96,27 +90,13 @@
                         <input class="formControl" type="text" name="PASSWORD"
                             value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}" id="PASSWORD" required>
                     </div>
+                    <div class="showpass">
+                                        <input type="checkbox" onclick="myFunction()"> Show Password
+                                    </div>
                     @error('')
                         <span> {{ $message }}</span>
                     @enderror
-                    {{-- <div class="formGroup">
-                    <label for="accountType">Account Type</label>
-                    <select class="formControl" name="ACCTYPE" id="accountType" requiredw>
 
-                        <option value="student" {{ old('ACCTYPE', $Users->ACCTYPE) == 'student' ? 'selected' : '' }}>
-                            student
-                        </option>
-
-                        <option value="faculty" {{ old('ACCTYPE', $Users->ACCTYPE) == 'faculty' ? 'selected' : '' }}>
-                            faculty
-                        </option>
-
-                        <option value="admin" {{ old('ACCTYPE', $Users->ACCTYPE) == 'admin' ? 'selected' : '' }}>
-                            admin
-                        </option>
-
-                    </select>
-                </div> --}}
                     @error('ACCTYPE')
                         <span> {{ $message }}</span>
                     @enderror
@@ -130,27 +110,14 @@
                         <input class="formControl" type="text" id="courseId" name="C_ID"
                             value="{{ old('C_ID', $profile->C_ID) }} " required>
                     </div>
-                    <br><br><br>
-                    <div style="text-align: center">
-                        <input class="btn btn-primary" type="submit" name="submit" value="SAVE"><br>
 
-                </form>
-            </div>
-            </div>
         @else
             <p class="text-style">{{ $Users->ACCTYPE }} Edit Form for {{ $Users->EMP_ID }}</p>
             <div class="container">
                 <form action="{{ route('admin.update', ['S_ID' => $Users->EMP_ID]) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    {{-- <div class="formGroup">
-                    <label for="username">User name</label>
-                    <input class="formControl" type="text" id="username" name="userID"
-                        value="{{ old('userID', $Users->userID) }} " required>
-                </div>
-                @error('')
-                    <span> {{ $message }}</span>
-                @enderror --}}
+
                     <div class="formGroup">
                         <label for="fullname">{{ $Users->ACCTYPE }} name</label>
                         <input class="formControl" type="text" name="NAME" value="{{ old('NAME', $profile->NAME) }}"
@@ -189,12 +156,16 @@
                         <span> {{ $message }}</span>
                     @enderror
 
-                    <br><br><br>
-                    <div style="text-align: center">
-                        <input class="btn btn-primary" type="submit" name="submit" value="SAVE"><br>
 
-                </form>
+
             </div>
+            <br><br><br>
+            <div style="text-align: center">
+                <input class="btn btn-primary" type="submit" name="submit" value="SAVE"><br>
+
+        </form>
+    </div>
+    </div>
             </div>
         @endif
     @endif

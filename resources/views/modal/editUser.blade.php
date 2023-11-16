@@ -21,9 +21,9 @@
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
                     @if (isset($Users))
-                        {{ $Users->ACCTYPE }} Edit Form for {{ $Users->S_ID }}
+                        {{ ucfirst($Users->ACCTYPE) }} Edit Form
                     @else
-                        {{ $userAdd }} Edit Form
+                        Edit Form
                     @endif
 
                 </h1>
@@ -34,147 +34,16 @@
 
 
                 @if (!isset($Users))
+                @include('modal.togglePasswordEdit1')
 
-
-                    <form action="{{ route('admin.update', ['S_ID' => $profile->S_ID]) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        @error('')
-                            <span> {{ $message }}</span>
-                        @enderror
-                        <div class="form-group">
-                            <label for="fullname">Full name</label>
-                            <input class="form-control" type="text" name="NAME"
-                                value="{{ old('NAME', $profile->NAME) }}" id="fullname" required>
-                        </div>
-                        @error('')
-                            <span> {{ $message }}</span>
-                        @enderror
-
-                        <div class="form-group">
-                            <label for="PASSWORD">Password</label>
-                            <input class="form-control" type="text" name="PASSWORD" value="" id="PASSWORD"
-                                required>
-                        </div>
-                        @error('')
-                            <span> {{ $message }}</span>
-                        @enderror
-                        @error('ACCTYPE')
-                            <span> {{ $message }}</span>
-                        @enderror
-                        <div class="form-group">
-                            <label for="archId">Archive ID</label>
-                            <input class="form-control" type="text" id="archId" name="ARCH_ID"
-                                value="{{ old('ARCH_ID', $profile->ARCH_ID) }} " required>
-                        </div>
-                        <div class="form-group">
-                            <label for="courseId">Course ID</label>
-                            <input class="form-control" type="text" id="courseId" name="C_ID"
-                                value="{{ old('C_ID', $profile->C_ID) }} " required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" name="submit" class="btn btn-primary">Save</button>
-                        </div>
                     @else
                         @if ($Users->ACCTYPE == 'student')
-                            <p class="text-style"></p>
-                            <div class="container">
-
-                                <form action="{{ route('admin.update', ['S_ID' => $Users->S_ID]) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-
-                                    @error('')
-                                        <span> {{ $message }}</span>
-                                    @enderror
-                                    <div class="form-group">
-                                        <label for="fullname">Full name</label>
-                                        <input class="form-control" type="text" name="NAME"
-                                            value="{{ old('NAME', $profile->NAME) }}" id="fullname" required>
-                                    </div>
-                                    @error('')
-                                        <span> {{ $message }}</span>
-                                    @enderror
-
-                                    <div class="form-group">
-                                        <label for="PASSWORD">Password</label>
-                                        <input class="form-control" type="text" name="PASSWORD"
-                                            value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}" id="PASSWORD"
-                                            required>
-                                    </div>
-                                    @error('')
-                                        <span> {{ $message }}</span>
-                                    @enderror
-
-                                    @error('ACCTYPE')
-                                        <span> {{ $message }}</span>
-                                    @enderror
-                                    <div class="form-group">
-                                        <label for="archId">Archive ID</label>
-                                        <input class="form-control" type="text" id="archId" name="ARCH_ID"
-                                            value="{{ old('ARCH_ID', $profile->ARCH_ID) }} " required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="courseId">Course ID</label>
-                                        <input class="form-control" type="text" id="courseId" name="C_ID"
-                                            value="{{ old('C_ID', $profile->C_ID) }} " required>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" name="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                @else
-                                    <p class="text-style">{{ $Users->ACCTYPE }} Edit Form for {{ $Users->EMP_ID }}</p>
-
-                                    <form action="{{ route('admin.update', ['S_ID' => $Users->EMP_ID]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-group">
-                                            <label for="fullname">{{ $Users->ACCTYPE }} name</label>
-                                            <input class="form-control" type="text" name="NAME"
-                                                value="{{ old('NAME', $profile->NAME) }}" id="fullname" required>
-                                        </div>
-                                        @error('')
-                                            <span> {{ $message }}</span>
-                                        @enderror
-
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input class="form-control" type="text" name="PASSWORD"
-                                                value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}"
-                                                id="password" required>
-                                        </div>
-                                        @error('')
-                                            <span> {{ $message }}</span>
-                                        @enderror
-                                        <div class="form-group">
-                                            <label for="accountType">Account Type</label>
-                                            <select class="form-control" name="ACCTYPE"
-                                                value="{{ old('ACCTYPE', $Users->ACCTYPE) }}" id="accountType"
-                                                requiredw>
-
-
-
-                                                <option value="faculty"
-                                                    {{ old('ACCTYPE', $Users->ACCTYPE) == 'faculty' ? 'selected' : '' }}>
-                                                    faculty
-                                                </option>
-
-                                                <option value="admin"
-                                                    {{ old('ACCTYPE', $Users->ACCTYPE) == 'admin' ? 'selected' : '' }}>
-                                                    admin
-                                                </option>
-
-                                            </select>
-                                        </div>
-                                        @error('ACCTYPE')
-                                            <span> {{ $message }}</span>
-                                        @enderror
+                            @include('modal.togglePasswordEdit2')
+                        @else
+                        @include('modal.togglePasswordEdit3')
+                                @error('ACCTYPE')
+                                    <span> {{ $message }}</span>
+                                @enderror
                         @endif
                 @endif
 
@@ -182,7 +51,7 @@
 
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" name="submit" class="btn btn-primary">Save</button>
             </div>
             </form>
@@ -191,3 +60,28 @@
 
 
 </div>
+<script>
+    function togglePasswordEdit1() {
+        var x = document.querySelector("#passwordA{{ $id }}");
+        console.log(x);
+        if (x) {
+            x.type = (x.type === "password") ? "text" : "password";
+        }
+    }
+
+    function togglePasswordEdit2() {
+        var x = document.querySelector("#passwordB{{ $id }}");
+        console.log(x);
+        if (x) {
+            x.type = (x.type === "password") ? "text" : "password";
+        }
+    }
+
+    function togglePasswordEdit3() {
+        var x = document.querySelector("#passwordC{{ $id }}");
+        console.log(x);
+        if (x) {
+            x.type = (x.type === "password") ? "text" : "password";
+        }
+    }
+</script>

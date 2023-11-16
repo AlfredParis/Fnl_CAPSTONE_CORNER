@@ -45,10 +45,10 @@ class adminController extends Controller
     public function archives(Request $request)
     {
         $yearToSearch=$request->input("search");
-if(isset($yearToSearch)){
-    $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
-    $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-    return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
+        if(isset($yearToSearch)){
+            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+                return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
 }
 
 
@@ -59,7 +59,7 @@ if(isset($yearToSearch)){
     }
     public function audit()
     {
-        $not = notif::paginate(500);
+        $not = notif::paginate(15);
         return view('adminAudit')->with('notif', $not);
     }
 
@@ -363,7 +363,9 @@ $name = Session::get('fullNs');
                     $pdfFile = $request->file('pdf_file');
                     $fileName = time() . '_' . $pdfFile->getClientOriginalName();
                     $pdfFile->storeAs('pdfs', $fileName, 'public');
-                    $gh = $request->input("gh");
+
+                    $selectedCountries  = $request->input("countries");
+
 
                     if (isset($gh)) {
                         $arch->PDF_FILE =  $fileName;
@@ -379,18 +381,27 @@ $name = Session::get('fullNs');
                         }
                     }
                         $arch->save();
-                        Log::alert("Archive has been added by $name !");
+
+                        $notif = new notif;
+                        $notif->category = "Add";
+                        $notif->content="$name has been added this archive: $archID ";
+                        $notif->suspect=$name ;
                         return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
                     } else {
                         $arch->gh = 'There is no GitHub repository For this archive!';
                         $arch->save();
+
                         Log::alert("Archive has been added $name !");
+                        $notif = new notif;
+                        $notif->category = "Add";
+                        $notif->content="$name has been added this archive: $archID  ";
+                        $notif->suspect=$name ;
                         return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
                     }
 
                 }
             else{
-            // If they forgot the paper, tell them to bring one
+
                 return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
                 }
 
@@ -411,21 +422,104 @@ $name = Session::get('fullNs');
 
         $arch = ARCHIVES::where('ARCH_ID', $id)->first();
 
-        $arch->where('ARCH_ID', $id)->update([
+        if ($request->hasFile('pdf_file')) {
 
-         'ARCH_ID' => $request->ARCH_ID,
-         'ARCH_NAME' => $request->ARCH_NAME,
-         'ABSTRACT' => $request->ABSTRACT,
-         'GITHUB_LINK' => $request->GITHUB_LINK,
-         'IS_APPROVED' => $request->IS_APPROVED,
-         'PDF_FILE' => $request->pdf_file,
-        ]);
+            $pdfFile = $request->file('pdf_file');
+            $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfFile->storeAs('pdfs', $fileName, 'public');
+
+            $arch->where('ARCH_ID', $id)->update([
+                'PDF_FILE' => $fileName,
+               ]);
+            }
+
+
+        if (isset($gh) && isset($request->PDF_FILE)) {
+            $arch->where('ARCH_ID', $id)->update([
+
+            'ARCH_ID' => $request->ARCH_ID,
+            'ARCH_NAME' => $request->ARCH_NAME,
+            'ABSTRACT' => $request->ABSTRACT,
+            'GITHUB_LINK' => $request->GITHUB_LINK,
+            'IS_APPROVED' => $request->IS_APPROVED,
+            'PDF_FILE' => $request->PDF_FILE,
+           ]);
+
+
+        }elseif(isset($gh) && !isset($request->PDF_FILE) ){
+            $arch->where('ARCH_ID', $id)->update([
+
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+                'GITHUB_LINK' => $request->GITHUB_LINK,
+                'IS_APPROVED' => $request->IS_APPROVED,
+
+               ]);
+           }elseif (!isset($gh) && isset($request->PDF_FILE)) {
+            $arch->where('ARCH_ID', $id)->update([
+
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+
+                'IS_APPROVED' => $request->IS_APPROVED,
+                'PDF_FILE' => $request->PDF_FILE,
+               ]);
+           }else{
+            $arch->where('ARCH_ID', $id)->update([
+
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+
+                'IS_APPROVED' => $request->IS_APPROVED,
+
+               ]);
+           }
+           $selectedCountries  = $request->input("countries");
+
+
+
+           if (isset($selectedCountries)) {
+            $auth = STUDENT::where('ARCH_ID', $id)->get();
+
+            foreach ($auth as $a) {
+                // Update ARCH_ID directly without the need for a second query
+                $idNga = $a->S_ID;
+                $a->where('S_ID', $idNga)->update([
+
+                    'ARCH_ID' => 'N/A',
+
+                   ]);
+
+
+            }
+
+            if (is_array($selectedCountries)) {
+                foreach ($selectedCountries as $ID) {
+
+                    $student = STUDENT::where('S_ID', $ID)->first();
+                    $idNga = $student->S_ID;
+                    $student->where('S_ID', $idNga)->update([
+
+                        'ARCH_ID' => $request->ARCH_ID
+
+                       ]);
+
+                }
+            }
+        }
 
         $name = Session::get('fullNs');
+        Log::alert("Archive has been added $name !");
+        $notif = new notif;
+        $notif->category = "Update";
+        $notif->content="$name has been updated this archive: $id  ";
+        $notif->suspect=$name ;
 
 
-        Log::alert("Archive has been Edited by $name!");
-        $arch->save();
+        $notif->save();
         return redirect()->route('admin.archives')->with('alert', 'Archive updated Successfully!');
     }
 

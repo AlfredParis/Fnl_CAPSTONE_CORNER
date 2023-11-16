@@ -63,14 +63,29 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $i = 0;
+                @endphp
                 @foreach ($SN as $student)
                     <tr>
+                        @php
 
+                            $i = $i + 1;
+
+                        @endphp
                         <td scope="row">{{ $student->S_ID }}</td>
                         <td scope="row">{{ $student->NAME }}</td>
                         <td scope="row">{{ $student->C_DESC }}</td>
-                        <td scope="row"><a href="/usercc/{{ $student->S_ID }}" class="glowbtn"><i
-                                    class="fs-5 fa fa-eye"></i></a></td>
+                        <td scope="row">
+                            @php
+                                $id = $student->S_ID;
+                            @endphp
+                            <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
+                                <i class="fs-5 fa fa-eye"></i></a>
+
+                            @include('modal.studentView')
+
+                        </td>
 
                         <td scope="row">
                             @php
@@ -80,6 +95,7 @@
                                 <i class="fs-5 fa fa-pen-to-square"></i></a>
 
                             @include('modal.editUser')
+
                         </td>
 
 

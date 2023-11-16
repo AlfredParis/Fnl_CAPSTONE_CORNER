@@ -86,21 +86,30 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $i = 0;
+                @endphp
                 @foreach ($arch as $archive)
                     <tr>
+                        @php
 
+                            $i = $i + 1;
+
+                        @endphp
                         <td scope="row">{{ $archive->ARCH_ID }}</td>
                         <td scope="row">{{ $archive->ARCH_NAME }}</td>
                         <td scope="row"><a href="#"
                                 onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILE }}</a>
                         </td>
                         <td scope="row">{{ $archive->GITHUB_LINK }}</td>
-                        <td scope="row"><a href="/admin/{{ $archive->ARCH_ID }}"><i class="fs-5 fa fa-eye"></i></a></td>
-
+                        <td scope="row"><a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"><i
+                                    class="fs-5 fa fa-eye"></i></a></td>
+                        @include('modal.ViewArch')
                         <td scope="row">
                             {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_{{ $archive->id }}">
                                 EDIT Archive
                             </button> --}}
+
                             <a href="#edit_{{ $archive->ARCH_ID }}" data-bs-toggle="modal">
                                 <i class="fs-5 fa fa-pen-to-square"></i></a>
 
@@ -110,6 +119,11 @@
 
 
                             {{-- modal for edit archive --}}
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    new MultiSelectTag("countries{{ $i }}");
+                                });
+                            </script>
                             <div class="modal fade" id="edit_{{ $archive->ARCH_ID }}" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -118,7 +132,10 @@
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Archive update</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
-                                        </div>
+                                        </div> @php
+                                            $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
+                                        @endphp
+
                                         <div class="modal-body">
 
                                             <form class=""
@@ -150,57 +167,78 @@
                                                 <div class="mb-3">
 
 
-                                                    {{-- <label for="pdf_file" class="form-label">Documentation</label>
-                                <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf"
-                                    value="{{ old('pdf_file') }}" id="pdf" class="form-control"> --}}
+                                                    <div class="mb-3">
+                                                        <label for="gh" class="form-label">GitHub Repository</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter Link" name="GITHUB_LINK" id="gh"
+                                                            value="{{ old('GITHUB_LINK', $archive->GITHUB_LINK) }}">
 
-                                                </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="pdf_file" class="form-label">Current
+                                                            Documentation</label>
+                                                        <a class="form-control" href="#"
+                                                            onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILE }}</a>
+
+                                                        <label for="pdf_file" class="form-label">Documentation</label>
+                                                        <input type="file" id="pdf_file" name="pdf_file"
+                                                            accept="application/pdf" value="{{ old('PDF_FILE') }}"
+                                                            id="pdf" class="form-control">
+
+                                                    </div>
+
+                                                    <div class="dropdown">
+                                                        <label for="Status" class="form-label">Status:</label>
+                                                        <select id="stat" name="IS_APPROVED" class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option value="approved">approved</option>
+                                                            <option value="not approved">not approved</option>
+
+                                                        </select>
 
 
-                                                <div class="mb-3">
-                                                    <label for="gh" class="form-label">GitHub Repository</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Link"
-                                                        name="GITHUB_LINK" id="gh"
-                                                        value="{{ old('GITHUB_LINK', $archive->GITHUB_LINK) }}">
+                                                        <br>
+                                                    </div>
 
-                                                </div>
-                                                <div class="mb-3">
+                                                    <div class="form-floating">
 
-                                                    <p>{{ old('PDF_FILE') }}</p>
-                                                    <label for="pdf_file" class="form-label">Documentation</label>
-                                                    <input type="file" id="pdf_file" name="pdf_file"
-                                                        accept="application/pdf" value="{{ old('PDF_FILE') }}"
-                                                        id="pdf" class="form-control">
+                                                        <textarea class="form-control" placeholder="Leave a abstract here" name="ABSTRACT" rows="3">{{ old('ABSTRACT', $archive->ABSTRACT) }}</textarea>
+                                                        <label for="floatingTextarea2">Abstract</label>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="form-label">Authors</label>
+                                                        @foreach ($auth as $item)
+                                                            <p class="form-control">{{ $item->S_ID }} ||
+                                                                {{ $item->NAME }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                    <label for="Author" class="form-label">Author</label>
 
-                                                </div>
-                                                <div class="dropdown">
-                                                    <label for="Status" class="form-label">Status:</label>
-                                                    <select id="stat" name="IS_APPROVED" class="form-select"
-                                                        aria-label="Default select example">
-                                                        <option value="approved">approved</option>
-                                                        <option value="not approved">not approved</option>
-
+                                                    <select name="countries[]" id="countries{{ $i }}"
+                                                        multiple>
+                                                        @foreach ($auths as $archive)
+                                                            <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }} ||
+                                                                {{ $archive->NAME }}</option>
+                                                        @endforeach
                                                     </select>
 
 
-                                                    <br>
-                                                </div>
-                                                <div class="form-floating">
 
-                                                    <textarea class="form-control" placeholder="Leave a abstract here" name="ABSTRACT" id="floatingTextarea2"
-                                                        rows="3">{{ old('ABSTRACT', $archive->ABSTRACT) }}</textarea>
-                                                    <label for="floatingTextarea2">Abstract</label>
+
                                                 </div>
 
 
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Update Archive</button>
-                                                </div>
-                                            </form>
+
+
                                         </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Update Archive</button>
+                                        </div>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -245,7 +283,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="Author" class="form-label">Author</label>
+                                <label for="Author" class="form-label">Authors</label>
 
                                 <select name="countries[]" id="countries" multiple>
                                     @foreach ($auths as $archive)
@@ -317,9 +355,4 @@
 
 
         </div> {{-- end modal for add archive --}}
-
-
-        <script>
-            new MultiSelectTag('countries') // id
-        </script>
     @endsection

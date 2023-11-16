@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $userAdd }} Add Form</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ ucfirst($userAdd) }} Add Form</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -18,8 +18,6 @@
                         <button type="submit" class="btn btn-primary">Import Excel</button>
 
                     </form>
-                @elseif ($userAdd == 'admin')
-                @else
                 @endif
 
 
@@ -28,14 +26,14 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="userID" class="form-label"> {{ $userAdd }} ID</label>
+                        <label for="userID" class="form-label"> {{ ucfirst($userAdd) }} ID</label>
                         <input type="text" class="form-control" placeholder="Enter ID" name="userID"
                             value="{{ old('userID') }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="fullname" class="form-label"> {{ $userAdd }} name</label>
-                        <input type="text" class="form-control" placeholder="{{ $userAdd }} name"
+                        <label for="fullname" class="form-label"> {{ ucfirst($userAdd) }} name</label>
+                        <input type="text" class="form-control" placeholder="{{ ucfirst($userAdd) }} name"
                             name="fullname" value="{{ old('fullname') }}" required>
                     </div>
 
@@ -52,7 +50,9 @@
                             <input type="password" class="form-control" placeholder="Password" name="PASSWORD"
                                 id="myInput" value="{{ old('PASSWORD') }}" >
                         </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <div class="showpass">
+                            <input type="checkbox" onclick="myFunction()"> Show Password
+                        </div>
                     @endif
 
 
@@ -66,14 +66,18 @@
                         <div class="showpass">
                             <input type="checkbox" onclick="myFunction()"> Show Password
                         </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
+
                     @else
                     @endif
 
 
-                </form>
-            </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save</button>
+            </div>
+            </form>
 
         </div>
     </div>

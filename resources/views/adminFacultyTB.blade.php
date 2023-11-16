@@ -67,15 +67,34 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $i = 0;
+                @endphp
                 @foreach ($faculty as $fac)
+                    @php
+
+                        $i = $i + 1;
+
+                    @endphp
                     <tr>
 
                         <td scope="row">{{ $fac->EMP_ID }}</td>
 
                         <td scope="row">{{ $fac->NAME }}</td>
                         <td scope="row">{{ decrypt($fac->PASSWORD) }}</td>
-                        <td scope="row"><a href="/usercc/{{ $fac->USER_ID_EMP }}" class="glowbtn"><i
-                                    class="fs-5 fa fa-eye"></i></a></td>
+
+
+
+                        <td scope="row">
+                            @php
+                                $id = $fac->EMP_ID;
+                            @endphp
+                            <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
+                                <i class="fs-5 fa fa-eye"></i></a>
+
+                            @include('modal.studentView')
+
+                        </td>
                         <td scope="row">
                             @php
                                 $id = $fac->EMP_ID;

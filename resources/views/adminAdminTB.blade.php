@@ -65,24 +65,39 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody> @php
+                $i = 0;
+            @endphp
                 @foreach ($admin as $adm)
                     <tr>
+                        @php
 
+                            $i = $i + 1;
+
+                        @endphp
                         <td scope="row">{{ $adm->EMP_ID }}</td>
                         <td scope="row">{{ $adm->NAME }}</td>
                         <td scope="row">{{ decrypt($adm->PASSWORD) }}</td>
-                        <td scope="row"><a href="/usercc/{{ $adm->USER_ID_EMP }}" class="glowbtn"><i
-                                    class="fs-5 fa fa-eye"></i></a></td>
-                        <td scope="row">
-                            @php
-                                $id = $adm->EMP_ID;
-                            @endphp
-                            <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
-                                <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                            @include('modal.editUser')
-                        </td>
+                                    <td scope="row">
+                                        @php
+                                            $id = $adm->EMP_ID;
+                                        @endphp
+                                        <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
+                                            <i class="fs-5 fa fa-eye"></i></a>
+
+                                        @include('modal.studentView')
+
+                                    </td>
+                                    <td scope="row">
+                                        @php
+                                            $id = $adm->EMP_ID;
+                                        @endphp
+                                        <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
+                                            <i class="fs-5 fa fa-pen-to-square"></i></a>
+
+                                        @include('modal.editUser')
+                                    </td>
 
 
                     </tr>
