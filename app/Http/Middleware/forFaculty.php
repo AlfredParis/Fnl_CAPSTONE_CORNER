@@ -25,6 +25,12 @@ class forFaculty
         } elseif ($accT == 'student') {
             return redirect()->route('studentt.index');
         }
+          elseif ($accT == 'superAdmin') {
+            return redirect()->route('superAdmin.index');
+        }
+         elseif ($accT == 'subAdmin') {
+            return redirect()->route('subAdmin.index');
+        }
         return $next($request);
     }
 }

@@ -67,6 +67,42 @@ class userCCcontroller extends Controller
                         }
 
                     }
+                    elseif ($accT=="subAdmin") {
+                        $password = USER_ACC_EMP::where("EMP_ID", $userID)->value("PASSWORD");
+                        $decrypt = decrypt($password);
+                        if ( $passwordinput == $decrypt) {
+                            $fullN = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+                            ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+                            ->where('e_m_p_l_o_y_e_e_s.EMP_ID', $userID)
+                            ->value('e_m_p_l_o_y_e_e_s.NAME');
+
+                            Session::put('fullNs', $fullN);
+                            Session::put('accT', $accT);
+                            Session::put('userID', $userID);
+                            return redirect()->route('subAdmin.index')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
+                        }else{
+                            return back()->with('messagepass', 'Wrong Password')->withInput();
+                        }
+
+                    }
+                     elseif ($accT=="superAdmin") {
+                        $password = USER_ACC_EMP::where("EMP_ID", $userID)->value("PASSWORD");
+                        $decrypt = decrypt($password);
+                        if ( $passwordinput == $decrypt) {
+                            $fullN = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+                            ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+                            ->where('e_m_p_l_o_y_e_e_s.EMP_ID', $userID)
+                            ->value('e_m_p_l_o_y_e_e_s.NAME');
+
+                            Session::put('fullNs', $fullN);
+                            Session::put('accT', $accT);
+                            Session::put('userID', $userID);
+                            return redirect('/superAdmin')->with('lrt', 1)->with('alert', "Welcome  $fullN!");
+                        }else{
+                            return back()->with('messagepass', 'Wrong Password')->withInput();
+                        }
+
+                    }
                     else{
                          $password = USER_ACC_EMP::where("EMP_ID", $userID)->value("PASSWORD");
                         $decrypt = decrypt($password);

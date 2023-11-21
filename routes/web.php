@@ -3,6 +3,8 @@ use App\Http\Controllers\additional;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\archiveController;
 use App\Http\Controllers\facultyController;
+use App\Http\Controllers\superAdmin;
+use App\Http\Controllers\subAdmin;
 use App\Http\Controllers\studentCC;
 use App\Http\Controllers\extraCtrl;
 use Illuminate\Support\Facades\Mail;
@@ -122,6 +124,46 @@ Route::post('/srch', [adminController::class, 'srch'])->name('srch');
     Route::post('/test', [adminController::class, 'test'])->name('test');
 
 });
+
+
+
+Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => 'forSuperAdmin'], function () {
+    Route::get('/', [superAdmin::class, 'index'])->name('index');
+
+    Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
+    Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
+    Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
+    Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch'); //user edit store
+    Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
+    Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
+
+    Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
+    Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
+});
+
+
+
+
+Route::group(['prefix' => 'subAdmin', 'as' => 'subAdmin.', 'middleware' => 'forSubAdmin'], function () {
+    Route::get('/dashSubAdmin', [subAdmin::class, 'index'])->name('index');
+
+    Route::get('/my-archive', [subAdmin::class, 'myArchive'])->name('myArchive');
+    Route::get('/addArch', [subAdmin::class, 'addArch'])->name('addArch');
+    Route::post('/storeArch', [subAdmin::class, 'storeArch'])->name('storeArch');
+    Route::put('/{ARCH_ID}', [subAdmin::class, 'archUpdate'])->name('updateArch'); //user edit store
+    Route::get('/{ARCH_ID}/editArch', [subAdmin::class, 'archEdit'])->name('editArch');
+    Route::delete('/{id}', [subAdmin::class, 'delArch'])->name('delArch');
+
+    Route::get('/checker', [subAdmin::class, 'Checker'])->name('Checker');
+    Route::post('/find-similar-words', [subAdmin::class, 'findSimilarWords'])->name('words');
+});
+
+
+
+
+
+
+
 
 Route::get('/logout', function () {
     Session::forget('fullNs');

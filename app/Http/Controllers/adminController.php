@@ -38,10 +38,13 @@ class adminController extends Controller
 
 
     }
+
     public function checker()
     {
         return view('adminChecker');
     }
+
+
     public function archives(Request $request)
     {
         $yearToSearch=$request->input("search");

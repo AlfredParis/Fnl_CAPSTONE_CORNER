@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-
-class forQuery
+class forSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,20 +17,22 @@ class forQuery
     public function handle(Request $request, Closure $next): Response
     {
         $accT = Session::get('accT');
-        if ($accT == 'student') {
+        $acc = Session::get('fullNs');
+        if ($acc == '') {
+            return redirect()->route('root');
+        }elseif ($accT == 'student') {
             return redirect()->route('studentt.index');
-        } elseif ($accT == 'faculty') {
+        }
+        elseif ($accT == 'faculty')
+        {
             return redirect()->route('faculty.index');
         } elseif ($accT == 'admin') {
             return redirect()->route('admin.index');
         }
-         elseif ($accT == 'superAdmin') {
-            return redirect()->route('superAdmin.index');
-        }
-         elseif ($accT == 'subAdmin') {
+        elseif ($accT == 'subAdmin') {
             return redirect()->route('subAdmin.index');
         }
-        return $next($request);
 
+        return $next($request);
     }
 }
