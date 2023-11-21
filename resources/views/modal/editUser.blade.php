@@ -34,17 +34,16 @@
 
 
                 @if (!isset($Users))
-                @include('modal.togglePasswordEdit1')
-
+                    @include('modal.togglePasswordEdit1')
+                @else
+                    @if ($Users->ACCTYPE == 'student')
+                        @include('modal.togglePasswordEdit2')
                     @else
-                        @if ($Users->ACCTYPE == 'student')
-                            @include('modal.togglePasswordEdit2')
-                        @else
                         @include('modal.togglePasswordEdit3')
-                                @error('ACCTYPE')
-                                    <span> {{ $message }}</span>
-                                @enderror
-                        @endif
+                        @error('ACCTYPE')
+                            <span> {{ $message }}</span>
+                        @enderror
+                    @endif
                 @endif
 
             </div>

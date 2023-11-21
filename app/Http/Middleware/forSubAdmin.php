@@ -20,18 +20,19 @@ class forSubAdmin
         $accT = Session::get('accT');
         $acc = Session::get('fullNs');
 
-        if ($acc == null) {
-            return redirect()->route('root');}
-        // } elseif ($accT == 'faculty') {
-        //     return redirect()->route('faculty.index');
-        // } elseif ($accT == 'admin') {
-        //     return redirect()->route('admin.index');
-        // }
-        // elseif ($accT == 'superAdmin') {
-        //     return redirect()->route('superAdmin.index');
-        // }elseif ($accT == 'student') {
-        //     return redirect()->route('studentt.index');
-        // }
+        if ($accT == null) {
+            // return redirect()->route('root');
+            return dd($accT );
+        } elseif ($accT == 'faculty') {
+            return redirect()->route('faculty.index');
+        } elseif ($accT == 'admin') {
+            return redirect()->route('admin.index');
+        }
+        elseif ($accT == 'superAdmin') {
+            return redirect()->route('superAdmin.index');
+        }elseif ($accT == 'student') {
+            return redirect()->route('studentt.index');
+        }
 
         return $next($request);
 

@@ -144,18 +144,9 @@ Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => '
 
 
 
-Route::group(['prefix' => 'subAdmin', 'as' => 'subAdmin.', 'middleware' => 'forSubAdmin'], function () {
+Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' => 'forSubAdmin'], function () {
     Route::get('/dashSubAdmin', [subAdmin::class, 'index'])->name('index');
 
-    Route::get('/my-archive', [subAdmin::class, 'myArchive'])->name('myArchive');
-    Route::get('/addArch', [subAdmin::class, 'addArch'])->name('addArch');
-    Route::post('/storeArch', [subAdmin::class, 'storeArch'])->name('storeArch');
-    Route::put('/{ARCH_ID}', [subAdmin::class, 'archUpdate'])->name('updateArch'); //user edit store
-    Route::get('/{ARCH_ID}/editArch', [subAdmin::class, 'archEdit'])->name('editArch');
-    Route::delete('/{id}', [subAdmin::class, 'delArch'])->name('delArch');
-
-    Route::get('/checker', [subAdmin::class, 'Checker'])->name('Checker');
-    Route::post('/find-similar-words', [subAdmin::class, 'findSimilarWords'])->name('words');
 });
 
 

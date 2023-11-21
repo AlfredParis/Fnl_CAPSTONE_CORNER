@@ -12,32 +12,32 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('subAdmin.archives') }}">
+            <a class="nav-link text-white" href="#">
                 <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('subAdmin.checker') }}">
+            <a class="nav-link text-white" href="#">
                 <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('subAdmin.student') }}">
+            <a class="nav-link text-white" href="#">
                 <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('subAdmin.faculty') }}">
+            <a class="nav-link text-white" href="#">
                 <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Faculty</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('subAdmin.admin') }}">
+            <a class="nav-link text-white" href="#">
                 <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Admin</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('subAdmin.audit') }}">
+            <a class="nav-link text-white" href="#">
                 <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Audit</span>
             </a>
         </li>

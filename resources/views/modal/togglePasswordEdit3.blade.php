@@ -1,6 +1,9 @@
 <form action="{{ route('admin.update', ['S_ID' => $Users->EMP_ID]) }}" method="POST">
     @csrf
     @method('PUT')
+    @php
+        return dd($profile);
+    @endphp
     <div class="form-group">
         <label for="fullname">ID</label>
         <p class="form-control"> {{ $Users->EMP_ID }}</p>
@@ -47,7 +50,7 @@
     <script>
         function togglePasswordEdit3() {
 
-    var x = document.getElementById("");
+            var x = document.getElementById("");
             if (x.type === "password") {
                 x.type = "text";
             } else {
