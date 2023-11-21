@@ -321,10 +321,12 @@
 
 
 
-
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                new MultiSelectTag("countries");
+            });
+        </script>
 
 
     </div> {{-- end modal for add archive --}}
-
-
 @endsection

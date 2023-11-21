@@ -350,7 +350,7 @@ $name = Session::get('fullNs');
         $arch->ARCH_ID =$archID;
 
         $selectedCountries  = $request->input("countries");
-
+        $gh= $request->input("gh");
 
 
         $arch->ARCH_NAME = $request->input("name");

@@ -58,7 +58,7 @@
                     <form action="{{ route('admin.archives') }}" method="get">
                         <div class="input-group">
 
-                            <input type="search" class="form-control rounded" placeholder="Published Year"
+                            <input type="search" class="form-control rounded" placeholder="Approved Year"
                                 aria-label="Search" aria-describedby="search-addon" name="search" />
                             <button type="submit" class="btn btn-outline-primary">Search</button>
 
@@ -127,6 +127,7 @@
                             <div class="modal fade" id="edit_{{ $archive->ARCH_ID }}" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
+
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Archive update</h1>
@@ -147,9 +148,7 @@
 
                                                 <div class="mb-3">
                                                     <label for="archID" class="form-label">Archive ID</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter Archive ID" id="archID" name="ARCH_ID"
-                                                        value="{{ old('ARCH_ID', $archive->ARCH_ID) }}" required>
+                                                    <p type="text" class="form-control">{{ $archive->ARCH_ID }} </p>
 
                                                 </div>
 
@@ -304,7 +303,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="pubYear" class="form-label">Publish Year</label>
+                                <label for="pubYear" class="form-label">Approved Year</label>
                                 <input type="text" class="form-control" placeholder="Ex: JUNE 2023" name="pubYear"
                                     value="{{ old('pubYear') }}" required>
 
@@ -349,7 +348,11 @@
                 </div>
             </div>
 
-
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    new MultiSelectTag("countries");
+                });
+            </script>
 
 
 
