@@ -36,6 +36,18 @@ class adminAcc extends Seeder
                 'ACCTYPE' => 'faculty',
 
             ],
+            [
+                'PASSWORD' => encrypt('subAdmin'),
+                'EMP_ID' => 'subAdmin',
+                'ACCTYPE' => 'subAdmin',
+
+            ],
+            [
+                'PASSWORD' => encrypt('superAdmin'),
+                'EMP_ID' => 'superAdmin',
+                'ACCTYPE' => 'superAdmin',
+
+            ],
         ];
 
 

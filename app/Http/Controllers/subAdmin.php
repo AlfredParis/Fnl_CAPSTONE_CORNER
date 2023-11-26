@@ -17,6 +17,7 @@ use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\notif;
 
+
 use App\Http\Controllers\userCCcontroller;
 
 
@@ -25,6 +26,11 @@ class subAdmin extends Controller
  public function index(Request $request)
     {
 
+        $total_arch=ARCHIVES::count() ;
+        $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student=student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
             return view('subAdmin.dashboard');
 

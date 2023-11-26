@@ -2,7 +2,7 @@
     @csrf
     @method('PUT')
     @php
-        return dd($profile);
+        return dd($id);
     @endphp
     <div class="form-group">
         <label for="fullname">ID</label>

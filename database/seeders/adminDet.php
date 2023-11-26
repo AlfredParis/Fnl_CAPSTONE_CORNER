@@ -28,6 +28,18 @@ class adminDet extends Seeder
                 'NAME' => 'faculty1 name',
 
             ],
+            [
+
+                'EMP_ID' => 'subAdmin',
+                'NAME' => 'subAdmin',
+
+            ],
+            [
+
+                'EMP_ID' => 'superAdmin',
+                'NAME' => 'superAdmin',
+
+            ],
         ];
 
 
