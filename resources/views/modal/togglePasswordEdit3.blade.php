@@ -2,7 +2,7 @@
     @csrf
     @method('PUT')
     @php
-        return dd($id);
+        // return dd($id);
     @endphp
     <div class="form-group">
         <label for="fullname">ID</label>
@@ -43,6 +43,13 @@
 
             <option value="admin" {{ old('ACCTYPE', $Users->ACCTYPE) == 'admin' ? 'selected' : '' }}>
                 admin
+            </option>
+            <option value="subAdmin" {{ old('ACCTYPE', $Users->ACCTYPE) == 'subAdmin' ? 'selected' : '' }}>
+                subAdmin
+            </option>
+
+            <option value="superAdmin" {{ old('ACCTYPE', $Users->ACCTYPE) == 'superAdmin' ? 'selected' : '' }}>
+                superAdmin
             </option>
 
         </select>
