@@ -7,7 +7,7 @@
 @section('topnav')
     <ul class="nav nav-pills flex-column mt-4" style="gap: 1vh;">
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white active" aria-current="true" href="{{ route('subAdmin.index') }}">
+            <a class="nav-link text-white active" aria-current="true" href="{{ route('superAdmin.index') }}">
                 <i class="fs-7 fa fa-house"></i><span class="fs-6 d-none ms-2 d-sm-inline">Dashboard</span>
             </a>
         </li>
@@ -32,7 +32,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="#">
+            <a class="nav-link text-white" href="{{ route('superAdmin.adminTB') }}">
                 <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Admin</span>
             </a>
         </li>

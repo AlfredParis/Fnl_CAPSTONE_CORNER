@@ -40,4 +40,26 @@ class superAdmin extends Controller
 
 
     }
+    public function adminTB(){
+
+
+        $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student=student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+
+
+
+        $adminPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+        ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+        ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
+        ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
+        ->paginate(10);
+   
+
+            return view('superAdmin.adminTB')->with('admin', $adminPage);
+
+
+
+    }
 }

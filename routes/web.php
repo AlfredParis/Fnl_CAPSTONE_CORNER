@@ -129,6 +129,10 @@ Route::post('/srch', [adminController::class, 'srch'])->name('srch');
 
 Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => 'forSuperAdmin'], function () {
     Route::get('/', [superAdmin::class, 'index'])->name('index');
+    Route::get('/adminTable', [superAdmin::class, 'adminTB'])->name('adminTB');
+
+
+
 
     Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
     Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
