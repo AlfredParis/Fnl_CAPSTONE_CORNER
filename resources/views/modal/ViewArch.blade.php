@@ -13,16 +13,15 @@
 
                 <div class="mb-3">
                     <label for="archID" class="form-label">Archive ID</label>
-                    <input type="text" class="form-control" placeholder="Enter Archive ID" id="archID"
-                        name="ARCH_ID" value="{{ old('ARCH_ID', $archive->ARCH_ID) }}" required>
+                    <p type="text" class="form-control" placeholder="Enter Archive ID" id="archID" name="ARCH_ID">
+                        {{ $archive->ARCH_ID }} </p>
 
                 </div>
 
                 <div class="mb-3">
 
                     <label for="name" class="form-label">Archive name</label>
-                    <input class="form-control" type="text" name="ARCH_NAME"
-                        value="{{ old('ARCH_NAME', $archive->ARCH_NAME) }}" id="name" required>
+                    <p class="form-control" type="text" name="ARCH_NAME"> {{ $archive->ARCH_NAME }}</p>
 
 
                 </div>
@@ -58,13 +57,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="form-label">Abstract</label>
-                    <textarea class="form-control" read-only=true>{{ $archive->ABSTRACT }}</textarea>
+                    <p class="form-control" read-only=true>{{ $archive->ABSTRACT }}</p>
 
                 </div>
                 <div class="mb-3">
                     <label for="form-label">Authors</label>
                     @foreach ($auth as $item)
-                    <p class="form-control">{{ $item->S_ID }} || {{ $item->NAME }}</p>
+                        <p class="form-control">{{ $item->S_ID }} || {{ $item->NAME }}</p>
                     @endforeach
                 </div>
             </div>

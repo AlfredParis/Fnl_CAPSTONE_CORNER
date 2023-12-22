@@ -477,8 +477,6 @@
                 x.type = "password";
             }
         }
-
-
     </script>
 
 
@@ -505,11 +503,15 @@
             </div>
             <DIV class="blank"></DIV>
             <div class="div4">
-                <div class="greet">This is a website is created by Pangasinan State University,San Carlos City students
+                <div class="greet">
+                    CAPSTONE CORNER: A SECURE AND USER-FRIENDLY ARCHIVING SYSTEM
+                    {{-- This is a website is created by Pangasinan State University,San Carlos City students
                     that provides a
                     efficient archiving system and a system proposal checker for the students. This website is still
                     underdevelopment and this is not officially used by the said campus. This is website is for capstone
-                    project.
+                    project. --}}
+
+
                 </div>
             </div>
         </div>

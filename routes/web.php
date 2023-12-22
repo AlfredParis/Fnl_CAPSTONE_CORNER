@@ -102,12 +102,11 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
     // Admin Archive Crud
     Route::get('/addArch', [adminController::class, 'addArch'])->name('addArch');
     Route::post('/storeArch', [adminController::class, 'storeArch'])->name('storeArch');
-    Route::put('/{ARCH_ID}', [adminController::class, 'archUpdate'])->name('updateArch'); //user edit store
+    Route::put('/{ARCH_ID}', [adminController::class, 'archUpdate'])->name('updateArch'); //Archive edit store
     Route::get('/{ARCH_ID}/editArch', [adminController::class, 'archEdit'])->name('editArch'); //user edit view
     Route::post('/find-similar-words', [adminController::class, 'findSimilarWords'])->name('words');
     Route::delete('/{id}', [adminController::class, 'delArch'])->name('delArch'); //archive delete
-
- Route::put('/{AUTH_ID}', [adminController::class, 'addAuth'])->name('addAuth');
+    Route::put('/{AUTH_ID}', [adminController::class, 'addAuth'])->name('addAuth');
     // Admin Archive Crud
 
 
@@ -127,23 +126,24 @@ Route::post('/srch', [adminController::class, 'srch'])->name('srch');
 
 
 
-Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => 'forSuperAdmin'], function () {
-    Route::get('/', [superAdmin::class, 'index'])->name('index');
-    Route::get('/adminTable', [superAdmin::class, 'adminTB'])->name('adminTB');
+    Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => 'forSuperAdmin'], function () {
+        Route::get('/', [superAdmin::class, 'index'])->name('index');
+        Route::get('/adminTable', [superAdmin::class, 'adminTB'])->name('adminTB');
+        Route::get('/audit', [superAdmin::class, 'audit'])->name('audit');
+        Route::get('/archives', [superAdmin::class, 'archives'])->name('archives');
+        Route::get('/student', [superAdmin::class, 'student'])->name('student');
 
+        Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
+        Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
+        Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
+        Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch');
 
+        Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
+        Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
 
-
-    Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
-    Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
-    Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
-    Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch'); //user edit store
-    Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
-    Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
-
-    Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
-    Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
-});
+        Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
+        Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
+    });
 
 
 

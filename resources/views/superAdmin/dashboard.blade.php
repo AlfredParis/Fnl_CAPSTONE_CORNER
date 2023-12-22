@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-    Substitute Admin Dashboard
+    Super Admin Dashboard
 @endsection
 
 @section('topnav')
@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="#">
+            <a class="nav-link text-white" href="{{ route('superAdmin.archives') }}">
                 <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
             </a>
         </li>
@@ -22,7 +22,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="#">
+            <a class="nav-link text-white" href="{{ route('superAdmin.student') }}">
                 <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
             </a>
         </li>
@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="#">
+            <a class="nav-link text-white" href="{{ route('superAdmin.audit') }}">
                 <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Audit</span>
             </a>
         </li>

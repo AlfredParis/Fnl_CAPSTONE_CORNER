@@ -15,7 +15,6 @@ return new class extends Migration
             $table->string('ARCH_ID')->primary();
             $table->string('ARCH_NAME');
             $table->text('ABSTRACT');
-
             $table->string('GITHUB_LINK');
             $table->string('PDF_FILE');
             $table->string('IS_APPROVED');
