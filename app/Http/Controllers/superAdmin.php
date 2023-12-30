@@ -62,9 +62,19 @@ class superAdmin extends Controller
 
         if(isset($yearToSearch)){
             $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+
+                if(isset($archives)){
+                    $ret=$archives;
+                }elseif(isset($title)){
+                    $ret=$title;
+                }
+                else{
+
+                }
             $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
-            return view('superAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
+            return view('superAdmin.ArchiveTB')->with('arch', $ret) ->with( 'auths',$auth);
         }
 
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
