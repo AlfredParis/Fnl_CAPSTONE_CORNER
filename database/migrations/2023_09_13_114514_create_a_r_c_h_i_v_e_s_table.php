@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('PDF_FILE');
             $table->string('IS_APPROVED');
             $table->string('YEAR_PUB');
+            $table->bigInteger('viewCount');
             $table->timestamps();
         });
     }

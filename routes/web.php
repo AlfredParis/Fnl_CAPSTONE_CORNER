@@ -137,10 +137,14 @@ Route::post('/srch', [adminController::class, 'srch'])->name('srch');
         Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
         Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
         Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch');
-
+        Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
+        Route::post('/{user}/storeEmp', [adminController::class, 'storeEmp'])->name('storeEmp'); //user add function
+    
         Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
         Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
+        Route::get('/faculty', [superAdmin::class, 'faculty'])->name('faculty');
 
+        Route::get('/{ARCH_ID}', [superAdmin::class, 'viewCnt'])->name('viewCnt');
         Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
         Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
     });

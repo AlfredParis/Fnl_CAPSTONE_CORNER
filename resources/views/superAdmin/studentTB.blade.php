@@ -109,4 +109,4 @@
         {{ $SN->links() }}
     @endsection
 
-    @include('modal.adminAdduser')
+    @include('modal.supAdminAdduser')

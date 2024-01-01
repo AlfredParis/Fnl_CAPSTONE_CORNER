@@ -81,7 +81,24 @@ class superAdmin extends Controller
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('superAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
     }
+    
 
+
+
+    public function viewCnt(string $ARCH_ID){
+        $arch = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
+        $view = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('viewCount');
+
+        $arch->where('ARCH_ID', $ARCH_ID)->update([
+
+            'viewCount' => $view+1,
+        ]);
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+        return view('superAdmin.ArchiveTB')->with('arch', $archives)->with( 'auths',$auth);
+    
+    }
+    
     public function student(){
         $studentPage = userCC::where('acctype', 'student')->paginate(10);
         $studentNew = STUDENT::paginate(10);
@@ -179,6 +196,182 @@ class superAdmin extends Controller
         $notif->save();
         return redirect()->route('superAdmin.archives')->with('alert', 'Archive updated Successfully!');
     }
+    public function storeArch(Request $request){
+
+        $name = Session::get('fullNs');
+        $arch = new ARCHIVES;
+        $total_arch=ARCHIVES::count();
+        $archID=  "IT-".$total_arch+1;
+        $arch->ARCH_ID =$archID;
+
+        $selectedCountries  = $request->input("countries");
+        $gh= $request->input("gh");
 
 
+        $arch->ARCH_NAME = $request->input("name");
+        $arch->ABSTRACT = $request->input("abs");
+        $arch->IS_APPROVED = $request->input("stat");
+        $arch->YEAR_PUB = $request->input("pubYear");
+
+            if ($request->hasFile('pdf_file')) {
+
+                    $pdfFile = $request->file('pdf_file');
+                    $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+                    $pdfFile->storeAs('pdfs', $fileName, 'public');
+
+                    $selectedCountries  = $request->input("countries");
+
+
+                    if (isset($gh)) {
+                        $arch->PDF_FILE =  $fileName;
+                        $arch->GITHUB_LINK = $request->input("gh");
+                        $arch->IS_APPROVED = $request->input("stat");
+                        if (is_array($selectedCountries)) {
+                        foreach ($selectedCountries as $ID) {
+
+                            $country = STUDENT::where('S_ID', $ID)->first();
+                              $country->where('S_ID', $ID)->update(['ARCH_ID' => $archID,]);
+
+
+                        }
+                    }
+                        $arch->save();
+
+                        $notif = new notif;
+                        $notif->category = "Add";
+                        $notif->content="$name has been added this archive: $archID ";
+                        $notif->suspect=$name ;
+                           } else {
+                        $arch->gh = 'There is no GitHub repository For this archive!';
+                        $arch->save();
+
+                        Log::alert("Archive has been added $name !");
+                        $notif = new notif;
+                        $notif->category = "Add";
+                        $notif->content="$name has been added this archive: $archID  ";
+                        $notif->suspect=$name ;
+                         }
+
+                }
+            else{
+
+                return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+                }
+
+
+                $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+                $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+                return view('superAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
+            
+
+
+    }
+
+    public function storeEmp(Request $request, $userac)
+    {
+        $userID = $request->input("userID");
+        $isStudent = student_acc::where('S_ID', $userID)->exists();
+        $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
+
+        if ($isAdmin==NULL && $isStudent==NULL) {
+
+                if ($userac == 'admin') {
+                    $name = Session::get('fullNs');
+
+                    $user = new USER_ACC_EMP;
+
+                    $user->EMP_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = 'admin';
+                    $user->save();
+                    $EMP = new EMPLOYEE;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->EMP_ID=$request->input("userID");
+                    $EMP->save();
+                    $added=$request->input("userID");
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content="$name has been added this account: $added a admin";
+                    $notif->suspect=$name ;
+
+                    $notif->save();
+
+                    Log::alert("$name has been added this account: $userID a admin");
+                    return redirect()->route('superAdmin.admin')->with('alert', 'Admin account succesfully added!');
+
+                } elseif ($userac == 'faculty') {
+                    $name = Session::get('fullNs');
+                    $user = new USER_ACC_EMP;
+                    $user->EMP_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = 'faculty';
+                    $user->save();
+
+                    $EMP = new EMPLOYEE;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->EMP_ID=$request->input("userID");
+                    $EMP->save();
+
+                    $added=$request->input("userID");
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content="$name has been added this account: $added a faculty ";
+                    $notif->suspect=$name ;
+
+                    $notif->save();
+
+                    Log::alert("$name has been added this account: $userID a faculty");
+                    return redirect()->route('superAdmin.faculty')->with('alert', 'Faculty account succesfully added!');
+
+                } else {
+                    if ($request->input("ARCH_ID") == null) {
+                    $user = new student_acc;
+                    $user->S_ID = $request->input("userID");
+                    $user->ACCTYPE = $userac;
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+
+                    $user->save();
+
+                    $EMP = new STUDENT;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->S_ID=$request->input("userID");
+                    $EMP->C_ID='1';
+                    $EMP->ARCH_ID='N/A';
+                    $EMP->save();
+
+
+                    }else{
+
+                    $user = new student_acc;
+                    $user->S_ID = $request->input("userID");
+                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                    $user->ACCTYPE = $userac;
+                    $user->save();
+
+                    $EMP = new STUDENT;
+                    $EMP->NAME = $request->input("fullname");
+                    $EMP->S_ID=$request->input("userID");
+                    $EMP->C_ID='1';
+                    $EMP->ARCH_ID=$request->input("ARCH_ID");
+                    $EMP->save();
+                    }
+
+
+                    $name = Session::get('fullNs');
+                    $added=$request->input("userID");
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content="$name has been added this account: $added a student ";
+                    $notif->suspect=$name ;
+
+                    $notif->save();
+
+                    Log::alert("$name has been added this account: $userID a student");
+                    return redirect()->route('superAdmin.student')->with('alert', 'Student Account added!');
+                }
+
+        } else {
+            return back()->with('alert', 'Id already exist!')->withInput();
+        }
+    }
 }

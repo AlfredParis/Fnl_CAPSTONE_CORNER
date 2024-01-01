@@ -198,6 +198,8 @@
                     </a>
 
 
+                 
+
                     @section('topnav')
 
                         @parent
@@ -206,6 +208,50 @@
                     @show
 
                     </ul>
+
+@if( $accT = Session::get('accT') == "superAdmin")
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container-fluid">
+
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown">
+                                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                insamo
+                                            </button>
+                                            @php
+                                                $id = Session::get('userID');
+
+                                            @endphp
+                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                                <li><a class="dropdown-item" href="#">Account:
+                                                        {{ $accT = Session::get('accT') }}</a></li>
+                                                <li><a class="dropdown-item" href="#editUser_{{ $id }}"
+                                                        data-bs-toggle="modal"> <i class="fs-5 fa fa-pen-to-square"></i>Edit
+                                                        Account</a></li>
+
+
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="{{ route('logout') }}"> <i
+                                                            class="fs-5 fa fa-right-from-bracket" alt="sadf"> </i>
+                                                        Logout </a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+
+@endif
 
                     @section('logout')
 

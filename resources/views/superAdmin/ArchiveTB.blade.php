@@ -44,7 +44,7 @@
     @endsection
     {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add archives --}}
     @section('main')
-        {{-- <a href="{{ route('admin.addArch') }}" class="btn btn-primary">Add Archive</a> --}}
+        {{-- <a href="{{ route('superAdmin.addArch') }}" class="btn btn-primary">Add Archive</a> --}}
 
 
         <div class="container" style="margin-left: 0;">
@@ -77,7 +77,6 @@
                 <tr>
                     <th scope="col">Archive ID</th>
                     <th scope="col">Archive Title</th>
-
                     <th scope="col"> Documentation</th>
                     <th scope="col"> GitHub Repository</th>
                     <th scope="col"> View </th>
@@ -102,8 +101,15 @@
                                 onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILE }}</a>
                         </td>
                         <td scope="row">{{ $archive->GITHUB_LINK }}</td>
-                        <td scope="row"><a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"><i
-                                    class="fs-5 fa fa-eye"></i></a></td>
+                        <td scope="row">
+                        <!-- <form action="{{ route('superAdmin.viewCnt', ['ARCH_ID' => $archive->ARCH_ID]) }}" > 
+                            <button type="submit" >   -->
+                                <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal">
+                                    <i class="fs-5 fa fa-eye"> VIEW</i >  
+                                </a>
+                            <!-- </button> -->
+</form>
+                        </td>
                         @include('modal.ViewArch')
                         <td scope="row">
                             {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_{{ $archive->id }}">
@@ -268,7 +274,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form class="" action="{{ route('admin.storeArch') }}" method="POST"
+                        <form class="" action="{{ route('superAdmin.storeArch') }}" method="POST"
                             enctype="multipart/form-data">
 
                             @csrf

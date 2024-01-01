@@ -23,6 +23,8 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2018',
+                'viewCount'=> 0,
+                
             ],
           [
                 'ARCH_ID' => 'IT-2',
@@ -33,6 +35,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2019',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-3',
                 'ARCH_NAME' => 'Online Examination System',
@@ -42,6 +45,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2020',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-4',
                 'ARCH_NAME' => 'Student Tracking Performance',
@@ -51,6 +55,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2021',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-5',
                 'ARCH_NAME' => 'Library Information System',
@@ -60,6 +65,7 @@ class archiveSeed extends Seeder
                'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2022',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-6',
                 'ARCH_NAME' => ' Student Information System',
@@ -69,6 +75,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2023',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-7',
                 'ARCH_NAME' => 'Student Handbook Application',
@@ -78,6 +85,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2023',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-8',
                 'ARCH_NAME' => 'Thesis and Capstone Archiving System',
@@ -87,6 +95,7 @@ class archiveSeed extends Seeder
                'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2022',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-9',
                 'ARCH_NAME' => 'School Portal Application',
@@ -96,6 +105,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2023',
+                'viewCount'=> 0,
             ],[
                 'ARCH_ID' => 'IT-10',
                 'ARCH_NAME' => 'School Events Attendance System',
@@ -105,6 +115,7 @@ class archiveSeed extends Seeder
                 'PDF_FILE' => 'Wala tong laman This is from prodution seeder',
                 'IS_APPROVED' => 'approved',
                 'YEAR_PUB'=> 'JUNE 2017',
+                'viewCount'=> 0,
             ],
         ];
 
