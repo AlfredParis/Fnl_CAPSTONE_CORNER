@@ -198,7 +198,7 @@
                     </a>
 
 
-                 
+
 
                     @section('topnav')
 
@@ -209,9 +209,8 @@
 
                     </ul>
 
-@if( $accT = Session::get('accT') == "superAdmin")
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    @if ($accT = Session::get('accT') == 'superAdmin')
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                             <div class="container-fluid">
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -224,7 +223,7 @@
                                         <li class="nav-item dropdown">
                                             <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
-                                                insamo
+                                                Program
                                             </button>
                                             @php
                                                 $id = Session::get('userID');
@@ -234,7 +233,8 @@
                                                 <li><a class="dropdown-item" href="#">Account:
                                                         {{ $accT = Session::get('accT') }}</a></li>
                                                 <li><a class="dropdown-item" href="#editUser_{{ $id }}"
-                                                        data-bs-toggle="modal"> <i class="fs-5 fa fa-pen-to-square"></i>Edit
+                                                        data-bs-toggle="modal"> <i
+                                                            class="fs-5 fa fa-pen-to-square"></i>Edit
                                                         Account</a></li>
 
 
@@ -250,8 +250,7 @@
                                 </div>
                             </div>
                         </nav>
-
-@endif
+                    @endif
 
                     @section('logout')
 

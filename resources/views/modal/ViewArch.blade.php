@@ -9,19 +9,7 @@
             <div class="modal-body">
                 @php
 
-                if("fasdf"){
                     $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
-                    
-    
-                    $arch = App\Models\ARCHIVES::where('ARCH_ID',$archive->ARCH_ID)->first();
-                    $view = App\Models\ARCHIVES::where('ARCH_ID', $archive->ARCH_ID)->value('viewCount');
-
-                    $arch->where('ARCH_ID', $archive->ARCH_ID)->update([
-
-                        'viewCount' => $view+1,
-                    ]);
-                }
-                   
 
                 @endphp
 

@@ -87,8 +87,13 @@
             <tbody>
                 @php
                     $i = 0;
+
                 @endphp
                 @foreach ($arch as $archive)
+                    @include('modal.ViewArch')
+
+
+
                     <tr>
                         @php
 
@@ -102,15 +107,33 @@
                         </td>
                         <td scope="row">{{ $archive->GITHUB_LINK }}</td>
                         <td scope="row">
-                        <!-- <form action="{{ route('superAdmin.viewCnt', ['ARCH_ID' => $archive->ARCH_ID]) }}" > 
-                            <button type="submit" >   -->
-                                <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal">
-                                    <i class="fs-5 fa fa-eye"> VIEW</i >  
-                                </a>
-                            <!-- </button> -->
-</form>
+                            {{-- <a href="{{ route('superAdmin.viewCnt', ['ARCH_ID' => $archive->ARCH_ID]) }}"
+                                class="open-modal">
+                            --}}
+
+
+                            <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                onclick="incrementViewCount('{{ $archive->ARCH_ID }}')"><i class="fs-5 fa fa-eye">
+                                </i> </a>
+
+                            <script>
+                                function incrementViewCount(archiveId) {
+                                    // Make an AJAX request to increment the view count
+                                    $.ajax({
+                                        url: `/superAdmin/viewCnt/${archiveId}`,
+                                        type: 'GET',
+                                        success: function(response) {
+                                            console.log(response);
+                                        },
+                                        error: function(error) {
+                                            console.error(error);
+                                        }
+                                    });
+                                }
+                            </script>
+
                         </td>
-                        @include('modal.ViewArch')
+
                         <td scope="row">
                             {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_{{ $archive->id }}">
                                 EDIT Archive
@@ -260,8 +283,6 @@
             </tbody>
         </table>
         {{ $arch->links() }}
-
-
 
         {{-- modal for add archive --}}
         <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"

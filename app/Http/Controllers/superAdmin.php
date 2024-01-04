@@ -34,7 +34,11 @@ class superAdmin extends Controller
         $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
-        return view('superAdmin.dashboard');
+
+        $archDesc=ARCHIVES::orderBy('viewCount', 'desc')->get();
+ $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+
+        return view('superAdmin.dashboard')->with('arch',$archDesc) ->with( 'auths',$auth)->with('ttlStud',$total_student)->with('ttlArch',$total_arch);
     }
 
     public function adminTB(){
@@ -81,24 +85,43 @@ class superAdmin extends Controller
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('superAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
     }
-    
 
 
 
-    public function viewCnt(string $ARCH_ID){
-        $arch = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
-        $view = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('viewCount');
 
-        $arch->where('ARCH_ID', $ARCH_ID)->update([
+   public function viewCnt(string $ARCH_ID)
+{
+    \Log::info("Received ARCH_ID: $ARCH_ID");
 
-            'viewCount' => $view+1,
+    $archNW = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
+    $id=ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('ARCH_ID');
+    $total=ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('viewCount');
+
+    // return dd($ARCH_ID);
+    if ($archNW) {
+//  return dd($archNW);
+        // Check if $arch is not null before proceeding
+
+        // Increment the viewCount directly in the update statement
+        $archNW->where('ARCH_ID', $ARCH_ID)->update([
+            'viewCount' => $total + 1,
+            'updated_at' => now(), // or use a specific timestamp if needed
         ]);
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('superAdmin.ArchiveTB')->with('arch', $archives)->with( 'auths',$auth);
-    
+
+        $success = true;
+        $auths = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $arch = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+
+        // return response()->json(['success' => true]);
+        // return view('superAdmin.ArchiveTB', compact('success', 'arch', 'auths'));
+    } else {
+        // Handle the case where the archive is not found
+        abort(404);
     }
-    
+}
+
+
+
     public function student(){
         $studentPage = userCC::where('acctype', 'student')->paginate(10);
         $studentNew = STUDENT::paginate(10);
@@ -262,7 +285,7 @@ class superAdmin extends Controller
                 $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
                 $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
                 return view('superAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
-            
+
 
 
     }
