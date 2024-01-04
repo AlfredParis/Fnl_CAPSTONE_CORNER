@@ -27,13 +27,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/testmail', [extraCtrl::class,'mail'])->name('testMail');
-
 Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
 Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
-
-
 
 Route::resource('/usercc', userCCcontroller::class)->names([
     'index' => 'userCC.index',
@@ -41,27 +38,21 @@ Route::resource('/usercc', userCCcontroller::class)->names([
     'store' => 'userCC.store',
 ])->middleware('forQuery');
 
-
 Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF');
-
-
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
     Route::get('/', [studentController::class, 'index'])->name('index');
-
     Route::get('/my-archive', [studentController::class, 'myArchive'])->name('myArchive');
+    Route::get('/archives', [studentController::class, 'archives'])->name('archives');
+    Route::get('/viewCnt/{ARCH_ID}', [studentController::class, 'viewCnt'])->name('viewCnt');
     Route::get('/addArch', [studentController::class, 'addArch'])->name('addArch');
     Route::post('/storeArch', [studentController::class, 'storeArch'])->name('storeArch');
     Route::put('/{ARCH_ID}', [studentController::class, 'archUpdate'])->name('updateArch'); //user edit store
     Route::get('/{ARCH_ID}/editArch', [studentController::class, 'archEdit'])->name('editArch');
     Route::delete('/{id}', [studentController::class, 'delArch'])->name('delArch');
-
     Route::get('/checker', [studentController::class, 'Checker'])->name('Checker');
     Route::post('/find-similar-words', [studentController::class, 'findSimilarWords'])->name('words');
 });
-
-
-
 
 Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFaculty'], function () {
     Route::get('/', [facultyController::class, 'index'])->name('index');
@@ -76,12 +67,10 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::put('/{S_ID}/updateUser', [facultyController::class, 'userUpdate'])->name('update');
 });
 
-
-
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin'], function () {
-//Excel imports
-Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
-//excel import end
+    //Excel imports
+    Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
+    //excel import end
 
     // Admin Tables
     Route::get('/', [adminController::class, 'index'])->name('index');
@@ -108,20 +97,12 @@ Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('imp
     Route::delete('/{id}', [adminController::class, 'delArch'])->name('delArch'); //archive delete
     Route::put('/{AUTH_ID}', [adminController::class, 'addAuth'])->name('addAuth');
     // Admin Archive Crud
-
-
-
-
-
     Route::get('/audit', [adminController::class, 'audit'])->name('audit');
-
     //views
-
-Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
-Route::post('/srch', [adminController::class, 'srch'])->name('srch');
+    Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
+    Route::post('/srch', [adminController::class, 'srch'])->name('srch');
     //views end
     Route::post('/test', [adminController::class, 'test'])->name('test');
-
 });
 
 

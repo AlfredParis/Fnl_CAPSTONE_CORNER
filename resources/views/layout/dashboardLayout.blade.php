@@ -230,6 +230,7 @@
 
                                             @endphp
                                             <ul class="dropdown-menu dropdown-menu-dark">
+                                                <li></li>
                                                 <li><a class="dropdown-item" href="#">Account:
                                                         {{ $accT = Session::get('accT') }}</a></li>
                                                 <li><a class="dropdown-item" href="#editUser_{{ $id }}"

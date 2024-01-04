@@ -18,6 +18,10 @@
             <a href="{{ route('studentt.Checker') }}" class="nav-link text-white active" aria-current="true"><i
                     class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span></a>
         </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a href="{{ route('studentt.archives') }}" class="nav-link text-white"><i class="fs-7 fa fa-check"></i><span
+                    class="fs-6 d-none ms-2 d-sm-inline">archives</span></a>
+        </li>
     </ul>
 @endsection
 
@@ -92,7 +96,7 @@
             </tbody>
         </table>
     @else
-        <strong >No similar titles found!</strong>
+        <strong>No similar titles found!</strong>
     @endif
     </div>
     </div>

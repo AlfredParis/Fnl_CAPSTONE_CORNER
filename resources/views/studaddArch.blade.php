@@ -8,13 +8,13 @@
     <a href="{{ route('studentt.index') }}" class="inactive">Dashboard</a>
     <a href="{{ route('studentt.myArchive') }}" class="actives">My Archive</a>
     <a href="{{ route('studentt.Checker') }}" class="inactive">Checker</a>
-
+    <li class="nav-item py-2 py-sm-0">
+        <a href="{{ route('studentt.archives') }}" class="nav-link text-white active"><i class="fs-7 fa fa-check"></i><span
+                class="fs-6 d-none ms-2 d-sm-inline">archives</span></a>
+    </li>
 @endsection
 
 @section('main')
-
-
-
     <div class="chkContainier">
         <p class="text-style">Archive Add Form</p>
         <form class="" action="{{ route('studentt.storeArch') }}" method="POST" enctype="multipart/form-data">
@@ -62,9 +62,9 @@
             <div style="text-align: center">
                 <button type="submit" class="btn btn-primary">Add Archive</button>
                 <br>
-  </div>
+            </div>
 
         </form>
     </div>
-<br>
+    <br>
 @endsection
