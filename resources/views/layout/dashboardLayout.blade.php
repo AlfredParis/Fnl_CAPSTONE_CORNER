@@ -66,9 +66,14 @@
         }
 
         .DD:hover>.DDhover {
-            left: 16.5vh;
+            left: 10rem;
             top: 0vh;
             display: inline;
+
+        }
+
+        .hihi {
+            width: 10rem;
 
         }
     </style>
@@ -233,7 +238,7 @@
                                                 Programs
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                            <ul class="dropdown-menu dropdown-menu-dark hihi">
                                                 <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
                                                         data-bs-toggle="dropdown" href="#">CHMBAC</a>
                                                     <ul class="dropdown-menu dropdown-menu-dark DDhover">
