@@ -64,6 +64,13 @@
         .blur {
             filter: blur(5px);
         }
+
+        .DD:hover>.DDhover {
+            left: 16.5vh;
+            top: 0vh;
+            display: inline;
+
+        }
     </style>
 
 </head>
@@ -222,29 +229,49 @@
                                     <ul class="navbar-nav">
                                         <li class="nav-item dropdown">
                                             <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
+                                                data-bs-auto-close="outside" aria-expanded="false">
                                                 Programs
                                             </button>
-                                            @php
-                                                $id = Session::get('userID');
 
-                                            @endphp
                                             <ul class="dropdown-menu dropdown-menu-dark">
-                                                <li></li>
-                                                <li><a class="dropdown-item" href="#">Account:
-                                                        {{ $accT = Session::get('accT') }}</a></li>
-                                                <li><a class="dropdown-item" href="#editUser_{{ $id }}"
-                                                        data-bs-toggle="modal"> <i
-                                                            class="fs-5 fa fa-pen-to-square"></i>Edit
-                                                        Account</a></li>
-
-
-                                                <li>
-                                                    <hr class="dropdown-divider">
+                                                <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
+                                                        data-bs-toggle="dropdown" href="#">CHMBAC</a>
+                                                    <ul class="dropdown-menu dropdown-menu-dark DDhover">
+                                                        <li>
+                                                            <a href="" class="dropdown-item">BS in Bussiness
+                                                                Administration</a>
+                                                            <a href="" class="dropdown-item">BS in Information
+                                                                Technology</a>
+                                                            <a href="" class="dropdown-item">BS in Hospitality
+                                                                Management</a>
+                                                        </li>
+                                                    </ul>
                                                 </li>
-                                                <li><a class="dropdown-item" href="{{ route('logout') }}"> <i
-                                                            class="fs-5 fa fa-right-from-bracket" alt="sadf"> </i>
-                                                        Logout </a></li>
+
+                                                <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
+                                                        href="" data-bs-toggle="dropdown"></i>CED
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-dark DDhover">
+                                                        <li>
+                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
+                                                        href="" data-bs-toggle="dropdown"></i>College of Agri
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-dark DDhover">
+                                                        <li>
+                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+
                                             </ul>
                                         </li>
                                     </ul>
@@ -280,7 +307,8 @@
                                                 <li><a class="dropdown-item" href="#">Account:
                                                         {{ $accT = Session::get('accT') }}</a></li>
                                                 <li><a class="dropdown-item" href="#editUser_{{ $id }}"
-                                                        data-bs-toggle="modal"> <i class="fs-5 fa fa-pen-to-square"></i>Edit
+                                                        data-bs-toggle="modal"> <i
+                                                            class="fs-5 fa fa-pen-to-square"></i>Edit
                                                         Account</a></li>
 
 
