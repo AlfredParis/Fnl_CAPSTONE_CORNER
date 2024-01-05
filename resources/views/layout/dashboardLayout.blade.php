@@ -269,16 +269,10 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
-                                                        href="" data-bs-toggle="dropdown"></i>College of Agri
+                                                <li class="dropend "><a class="dropdown-item "
+                                                        href="" data-bs-toggle="modal"></i>College of Agri
                                                     </a>
-                                                    <ul class="dropdown-menu dropdown-menu-dark DDhover">
-                                                        <li>
-                                                            <a href="" class="dropdown-item">BE Elemtary</a>
-                                                            <a href="" class="dropdown-item">BE Elemtary</a>
-                                                            <a href="" class="dropdown-item">BE Elemtary</a>
-                                                        </li>
-                                                    </ul>
+                                                    
                                                 </li>
 
 
