@@ -47,12 +47,27 @@ class adminController extends Controller
 
     public function archives(Request $request)
     {
-        $yearToSearch=$request->input("search");
-        if(isset($yearToSearch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+        $srch=$request->input("search");
+
+        if(isset($srch)){
+            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
+            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
+
+                if (!$archives->isEmpty()) {
+
+                    $ret = $archives;
+                } elseif (!$title->isEmpty()) {
+
+                    $ret = $title;
+                } else {
+                    $ret = collect();
+                }
+
+
             $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-                return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
-}
+
+            return view('adminArchive')->with('arch', $ret) ->with( 'auths',$auth);
+        }
 
 
 

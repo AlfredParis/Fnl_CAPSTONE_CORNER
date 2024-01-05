@@ -33,10 +33,8 @@ class superAdmin extends Controller
         $total_student=student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-
-
         $archDesc=ARCHIVES::orderBy('viewCount', 'desc')->get();
- $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
         return view('superAdmin.dashboard')->with('arch',$archDesc) ->with( 'auths',$auth)->with('ttlStud',$total_student)->with('ttlArch',$total_arch);
     }
@@ -46,7 +44,6 @@ class superAdmin extends Controller
         $total_student=student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-
         $adminPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
         ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
         ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
@@ -62,20 +59,31 @@ class superAdmin extends Controller
     }
 
     public function archives(Request $request){
-        $yearToSearch=$request->input("search");
+        $srch=$request->input("search");
 
-        if(isset($yearToSearch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
-            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+        if(isset($srch)){
+            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
+            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
 
-                if(isset($archives)){
-                    $ret=$archives;
-                }elseif(isset($title)){
-                    $ret=$title;
+                // if(isset($archives)){
+                //     $ret=$archives;
+                // }elseif(isset($title)){
+                //     $ret=$title;
+                // }
+                // else{
+
+                // }
+
+
+                if (!$archives->isEmpty()) {
+                    $ret = $archives;
+                } elseif (!$title->isEmpty()) {
+                    $ret = $title;
+                } else {
+                    $ret = collect(); // Create an empty collection if both are empty
                 }
-                else{
 
-                }
+
             $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
             return view('superAdmin.ArchiveTB')->with('arch', $ret) ->with( 'auths',$auth);

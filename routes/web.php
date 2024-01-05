@@ -119,7 +119,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
         Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch');
         Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
-        Route::post('/{user}/storeEmp', [adminController::class, 'storeEmp'])->name('storeEmp'); //user add function
+        Route::post('/{user}/storeEmp', [superAdmin::class, 'storeEmp'])->name('storeEmp'); //user add function
 
         Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
         Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');

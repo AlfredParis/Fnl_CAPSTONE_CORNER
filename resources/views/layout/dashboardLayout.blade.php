@@ -258,9 +258,14 @@
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-dark DDhover">
                                                         <li>
-                                                            <a href="" class="dropdown-item">BE Elemtary</a>
-                                                            <a href="" class="dropdown-item">BE Elemtary</a>
-                                                            <a href="" class="dropdown-item">BE Elemtary</a>
+                                                            <a href="" class="dropdown-item">Bachelor in
+                                                                Elementary Education</a>
+                                                            <a href="" class="dropdown-item">BSE major in
+                                                                Filipino</a>
+                                                            <a href="" class="dropdown-item">BSE major in Social
+                                                                Studies</a>
+                                                            <a href="" class="dropdown-item">Bachelor of
+                                                                Technology and Livelihood Education</a>
                                                         </li>
                                                     </ul>
                                                 </li>
