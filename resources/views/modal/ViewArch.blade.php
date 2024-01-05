@@ -55,7 +55,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="Status" class="form-label">Status:</label>
-                    {{ $archive->ABSTRACT }}
+                   NON FUNCTION PA PO 
 
                 </div>
                 <div class="mb-3">

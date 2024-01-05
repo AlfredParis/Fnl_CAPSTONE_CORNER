@@ -249,12 +249,13 @@ class superAdmin extends Controller
                     $pdfFile = $request->file('pdf_file');
                     $fileName = time() . '_' . $pdfFile->getClientOriginalName();
                     $pdfFile->storeAs('pdfs', $fileName, 'public');
-
+                    
                     $selectedCountries  = $request->input("countries");
 
 
                     if (isset($gh)) {
                         $arch->PDF_FILE =  $fileName;
+                        $arch->viewCount =  0;
                         $arch->GITHUB_LINK = $request->input("gh");
                         $arch->IS_APPROVED = $request->input("stat");
                         if (is_array($selectedCountries)) {
@@ -273,7 +274,9 @@ class superAdmin extends Controller
                         $notif->content="$name has been added this archive: $archID ";
                         $notif->suspect=$name ;
                            } else {
-                        $arch->gh = 'There is no GitHub repository For this archive!';
+                            $arch->PDF_FILE =  $fileName;
+                            $arch->viewCount =  0;
+                        $arch->GITHUB_LINK= 'There is no GitHub repository For this archive!';
                         $arch->save();
 
                         Log::alert("Archive has been added $name !");
