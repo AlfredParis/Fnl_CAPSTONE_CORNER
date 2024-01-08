@@ -53,15 +53,15 @@ class adminController extends Controller
             $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
             $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
 
-                if (!$archives->isEmpty()) {
+            if (!$archives->isEmpty()) {
+                $ret = $archives;
+            } elseif (!$title->isEmpty()) {
+                $ret = $title;
+            } else {
+                $ret = collect(); // Create an empty collection if both are empty
+            }
 
-                    $ret = $archives;
-                } elseif (!$title->isEmpty()) {
 
-                    $ret = $title;
-                } else {
-                    $ret = collect();
-                }
 
 
             $auth = STUDENT::where('ARCH_ID', 'N/A')->get();

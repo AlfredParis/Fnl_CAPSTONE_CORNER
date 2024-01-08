@@ -28,25 +28,39 @@ class facultyController extends Controller
 
         return view('facultyDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty)->with( 'auths',$auth);
      }
+
+
+
     public function myArchive(Request $request)
     {
 
 
 
-        $yearToSearch=$request->input("search");
-        if(isset($yearToSearch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
+        $srch=$request->input("search");
+
+        if(isset($srch)){
+            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
+            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
+
+
+
+                if (!$archives->isEmpty()) {
+                    $ret = $archives;
+                } elseif (!$title->isEmpty()) {
+                    $ret = $title;
+                } else {
+                    $ret = collect(); // Create an empty collection if both are empty
+                }
+
+
             $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-            return view('facultyArchive')->with('arch', $archives) ->with( 'auths',$auth);
+
+            return view('facultyArchive')->with('arch', $ret) ->with( 'auths',$auth);
         }
 
-
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-
-
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-
-        return view('facultyArchive')->with('arch', $archives) ->with( 'auths',$auth);;
+         return view('facultyArchive')->with('arch', $archives) ->with( 'auths',$auth);;
     }
 
 

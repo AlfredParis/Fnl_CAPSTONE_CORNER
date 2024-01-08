@@ -65,14 +65,6 @@ class superAdmin extends Controller
             $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
             $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
 
-                // if(isset($archives)){
-                //     $ret=$archives;
-                // }elseif(isset($title)){
-                //     $ret=$title;
-                // }
-                // else{
-
-                // }
 
 
                 if (!$archives->isEmpty()) {
@@ -249,7 +241,7 @@ class superAdmin extends Controller
                     $pdfFile = $request->file('pdf_file');
                     $fileName = time() . '_' . $pdfFile->getClientOriginalName();
                     $pdfFile->storeAs('pdfs', $fileName, 'public');
-                    
+
                     $selectedCountries  = $request->input("countries");
 
 

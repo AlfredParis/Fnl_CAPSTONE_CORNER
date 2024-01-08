@@ -33,14 +33,13 @@ class studentController extends Controller
             $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
             $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
 
-                if(isset($archives)){
-                    $ret=$archives;
-                }elseif(isset($title)){
-                    $ret=$title;
-                }
-                else{
-
-                }
+            if (!$archives->isEmpty()) {
+                $ret = $archives;
+            } elseif (!$title->isEmpty()) {
+                $ret = $title;
+            } else {
+                $ret = collect();
+            }
             $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
             return view('studArchiveTB')->with('arch', $ret) ->with( 'auths',$auth);

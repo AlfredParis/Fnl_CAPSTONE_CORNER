@@ -41,8 +41,8 @@
                 <form action="{{ route('faculty.myArchive') }}" method="get">
                     <div class="input-group">
 
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" name="search" />
+                        <input type="search" class="form-control rounded" placeholder="Search arvhive name or publish date"
+                            aria-label="Search" aria-describedby="search-addon" name="search" />
                         <button type="submit" class="btn btn-outline-primary">Search</button>
 
                     </div>

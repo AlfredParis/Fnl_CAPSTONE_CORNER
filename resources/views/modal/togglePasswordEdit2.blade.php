@@ -16,7 +16,7 @@
 
     <div class="form-group">
         <label for="PASSWORD">Passwordss</label>
-        <input id="passwordB{{ $i }}" class="form-control" type="text" name="PASSWORD"
+        <input id="passwordB{{ $i }}" class="form-control" type="password" name="PASSWORD"
             value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}" required>
 
     </div>

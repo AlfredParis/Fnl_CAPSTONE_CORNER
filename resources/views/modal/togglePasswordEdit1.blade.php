@@ -1,4 +1,3 @@
-
 <form action="{{ route('admin.update', ['S_ID' => $profile->S_ID]) }}" method="POST">
     @csrf
     @method('PUT')
@@ -8,8 +7,8 @@
     @enderror
     <div class="form-group">
         <label for="fullname">Full name</label>
-        <input class="form-control" type="text" name="NAME"
-            value="{{ old('NAME', $profile->NAME) }}" id="fullname" required>
+        <input class="form-control" type="text" name="NAME" value="{{ old('NAME', $profile->NAME) }}" id="fullname"
+            required>
     </div>
 
     @error('')
@@ -18,8 +17,7 @@
 
     <div class="form-group">
         <label for="PASSWORD">Password</label>
-        <input class="form-control" type="text" name="PASSWORD"
-            id="passwordA{{$i}}" required>
+        <input class="form-control" type="password" name="PASSWORD" id="passwordA{{ $i }}" required>
 
 
 
@@ -38,4 +36,3 @@
         <input class="form-control" type="text" id="courseId" name="C_ID"
             value="{{ old('C_ID', $profile->C_ID) }} " required>
     </div>
-
