@@ -49,7 +49,7 @@
                 <br>
             </div>
             {{-- <div class="form-group" style="background-color:#f1f1f1"> --}}
-            <div class="line">____________________________________________________</div>
+            <div class="line">or</div>
             <br>
             {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
             {{-- </div> --}}

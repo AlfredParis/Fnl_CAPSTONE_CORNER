@@ -13,8 +13,6 @@
 
             margin: 0%;
             max-height: 100vh;
-
-
         }
 
         .back {
@@ -58,6 +56,89 @@
             /* background-image: url('https://main.psu.edu.ph/wp-content/uploads/2022/07/itgo.png'); */
         }
 
+
+
+
+
+        @media (max-width: 500px) {
+            .back {
+                height: 100vh;
+                display: grid;
+                grid-template-columns: 100%;
+                grid-template-rows: 15% 85%;
+                grid-template-areas:
+                    "left"
+                    "right"
+
+                ;
+            }
+
+            .grid_child {
+                display: grid;
+            }
+
+            .grid_child.left {
+                grid-area: left;
+                grid-template-columns: 50% 50%;
+                grid-template-rows: 100%;
+                grid-template-areas:
+
+
+                    "logoB  div2"
+
+                ;
+                background-color: rgba(255, 255, 255, 0);
+
+            }
+
+            .grid_child.right {
+                grid-area: right;
+
+                grid-template-columns: ;
+                grid-template-rows: 100%;
+                grid-template-areas:
+
+                    "div3"
+                ;
+                /* background-image: url('https://main.psu.edu.ph/wp-content/uploads/2022/07/itgo.png'); */
+            }
+
+            .logoB {
+
+                grid-area: logoB;
+
+                padding-left: 0%;
+                text-align: center;
+
+            }
+
+
+            .div2 {
+                grid-area: div2;
+                display: flex;
+                justify-content: left;
+                align-items: left;
+                height: 8rem;
+                width: auto;
+
+            }
+
+            .greet {
+                display: none;
+            }
+
+            .div5 {
+                display: none;
+
+
+            }
+
+            .div5 a {
+                display: none;
+            }
+
+        }
+
         .imgikot {
             max-width: 100%;
             max-height: 100%;
@@ -79,7 +160,7 @@
             grid-area: nav;
             background: linear-gradient(to bottom, #041AA0, #030351);
             height: auto;
-            padding: 10px;
+            padding: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -124,7 +205,7 @@
             justify-content: center;
             padding-left: 20%;
 
-            margin: 10px;
+            margin: 1rem;
             background-color: #95959500;
             border-radius: 10px;
 
@@ -163,29 +244,6 @@
         }
 
 
-        @media (max-width: 500px) {
-            /* .back {
-
-
-
-                grid-auto-columns: 50% 50%;
-                grid-auto-rows: 50% 50%;
-                grid-template-areas:
-                    "left right"
-                    "left right"
-                ;
-            } */
-
-            /* .grid_child.left {
-                height: auto;
-            }
-
-            .div4 {
-                display: none;
-            }
-
-            .grid_child.right {} */
-        }
 
         .msgAlert {
             font-family: "Helvetica Neue", Arial, sans-serif;
@@ -215,6 +273,19 @@
                 align-items: center;
             }
 
+            .logo {
+
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .logo img {
+                max-width: auto;
+                height: 8rem;
+                /* height: 100px; */
+            }
 
 
         }
@@ -264,8 +335,14 @@
 
         /* Custom styles for the login form */
         .line {
-            color: #DADDE1;
+            color: #0b1522;
+            font-size: 1rem;
+            padding-top: 1rem;
+            text-align: center;
         }
+
+
+
 
         .container {
 
@@ -274,11 +351,34 @@
             align-items: center;
 
             flex-direction: column;
-            width: 375px;
+            /* width: 25rem; */
 
+            width: 25rem;
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 500px) {
+            .line {
+                color: #0b1522;
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .container {
+
+                margin: 0 auto;
+                padding: 15px;
+                align-items: center;
+
+                flex-direction: column;
+                width: 20rem;
+
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            }
         }
 
         .form-group {
@@ -330,7 +430,7 @@
             border-radius: 10px;
             border: none;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 0rem;
             background-color: #ffdf46;
             color: #444444;
             transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3 ease;
