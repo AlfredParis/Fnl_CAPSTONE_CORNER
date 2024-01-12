@@ -292,7 +292,7 @@
                                         <li class="nav-item dropdown">
                                             <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
-                                                Dropdown
+                                                Others
                                             </button>
                                             @php
                                                 $id = Session::get('userID');
