@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\student_acc;
+use App\Models\program;
 
-class studAcc extends Seeder
+class programSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,23 +14,26 @@ class studAcc extends Seeder
     public function run(): void
     {
 
+
+
+
+
         $data = [
             [
-                'S_ID' => '20-sc-0147',
-                'PASSWORD' =>encrypt( 'student'),
-                'ACCTYPE' => 'student',
+                'PROG_NAME' => 'College of Teacher Education'
             ],
             [
-                'S_ID' => '20-sc-0148',
-                'PASSWORD' =>encrypt( 'student'),
-                'ACCTYPE' => 'student',
+                'PROG_NAME' => 'College of Hospitality Management, Business Administration and Computing'
             ],
+            [
+                'PROG_NAME' => 'College of Agriculture'
+            ],
+
         ];
 
 
               foreach ($data as $record) {
-            student_acc::create($record);
+                program::create($record);
         }
-
     }
 }

@@ -15,9 +15,15 @@ class studDet extends Seeder
         $data = [
             [
                 'S_ID' => '20-sc-0147',
-                'NAME' => 'student',
+                'NAME' => 'Alfred Paris',
                 'C_ID' => '1',
                 'ARCH_ID' => 'IT-1',
+            ],
+            [
+                'S_ID' => '20-sc-0148',
+                'NAME' => 'Jayson Sanchez',
+                'C_ID' => '1',
+                'ARCH_ID' => 'N/A',
             ],];
 
 

@@ -15,7 +15,7 @@
     @enderror
 
     <div class="form-group">
-        <label for="PASSWORD">Passwordss</label>
+        <label for="PASSWORD">Password</label>
         <input id="passwordB{{ $i }}" class="form-control" type="password" name="PASSWORD"
             value="{{ decrypt(old('PASSWORD', $Users->PASSWORD)) }}" required>
 

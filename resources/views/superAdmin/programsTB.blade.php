@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white active" aria-current="true" href="{{ route('superAdmin.archives') }}">
+            <a class="nav-link text-white " aria-current="true" href="{{ route('superAdmin.archives') }}">
                 <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline ">Archives</span>
             </a>
         </li>
@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('superAdmin.index') }}">
+            <a class="nav-link text-white active" href="{{ route('superAdmin.index') }}">
                 <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Department</span>
             </a>
         </li>
