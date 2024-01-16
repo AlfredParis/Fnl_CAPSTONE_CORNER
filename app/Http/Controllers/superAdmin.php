@@ -24,6 +24,9 @@ use App\Models\USER_ACC_EMP;
 use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\notif;
+use App\Models\program;
+use App\Models\department;
+
 
 class superAdmin extends Controller
 {
@@ -219,6 +222,7 @@ class superAdmin extends Controller
         $notif->save();
         return redirect()->route('superAdmin.archives')->with('alert', 'Archive updated Successfully!');
     }
+
     public function storeArch(Request $request){
 
         $name = Session::get('fullNs');
@@ -399,5 +403,56 @@ class superAdmin extends Controller
         } else {
             return back()->with('alert', 'Id already exist!')->withInput();
         }
+
+
     }
+
+
+
+
+    public function department(Request $request){
+
+        $program = program::all();
+        $programCount = program::count();
+        $department=department::all();
+
+        for ($i=0; $i < $programCount; $i++) {
+
+            $department=department::where('PROG_ID', $i);
+
+            for ($i=0; $i <  $programCount; $i++) {
+
+            }
+        }
+
+
+
+        $srch=$request->input("search");
+
+        if(isset($srch)){
+            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
+            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
+
+
+
+                if (!$archives->isEmpty()) {
+                    $ret = $archives;
+                } elseif (!$title->isEmpty()) {
+                    $ret = $title;
+                } else {
+                    $ret = collect(); // Create an empty collection if both are empty
+                }
+
+
+            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+
+            return view('superAdmin.ArchiveTB')->with('arch', $ret)->with( 'auths',$auth)->with( 'progCnt',$programCount);
+
+        }
+
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+        return view('superAdmin.programsTB')->with('arch', $archives) ->with( 'auths',$auth);
+    }
+
 }

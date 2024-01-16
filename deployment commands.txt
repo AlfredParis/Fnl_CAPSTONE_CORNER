@@ -18,7 +18,8 @@ php artisan db:seed --class=adminDet
 php artisan db:seed --class=archiveSeed
 php artisan db:seed --class=studAcc
 php artisan db:seed --class=studDet
-
+php artisan db:seed --class=departmentSeed
+php artisan db:seed --class=programSeed
 
 additional=
 composer require barryvdh/laravel-dompdf

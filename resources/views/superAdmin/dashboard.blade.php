@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="#">
+            <a class="nav-link text-white" href="{{ route('superAdmin.department') }}">
                 <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Department</span>
             </a>
         </li>
@@ -111,7 +111,8 @@
                                 @endphp
                                 <td scope="row">
                                     <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
-                                        onclick="incrementViewCount('{{ $archive->ARCH_ID }}')"> {{ $archive->ARCH_ID }}</a>
+                                        onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
+                                        {{ $archive->ARCH_ID }}</a>
 
                                 </td>
                                 <td scope="row">
