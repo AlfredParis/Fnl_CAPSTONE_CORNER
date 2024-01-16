@@ -44,6 +44,8 @@
     @endsection
 
     @section('main')
+        <h1>ADMIN</h1>
+
         @php
             $userAdd = 'superAdmin';
         @endphp

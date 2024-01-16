@@ -115,6 +115,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::get('/student', [superAdmin::class, 'student'])->name('student');
 
         Route::get('/department', [superAdmin::class, 'department'])->name('department');
+        Route::put('/updateProg', [superAdmin::class, 'updateProg'])->name('updateProg');
 
         Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
         Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');

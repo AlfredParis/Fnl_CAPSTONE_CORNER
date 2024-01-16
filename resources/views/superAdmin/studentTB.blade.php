@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
-            <a class="nav-link text-white" href="{{ route('superAdmin.index') }}">
+            <a class="nav-link text-white" href="{{ route('superAdmin.department') }}">
                 <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Department</span>
             </a>
         </li>
@@ -44,6 +44,8 @@
     @endsection
 
     @section('main')
+        <h1> <U>STUDENTS</U></h1>
+
         @php
             $userAdd = 'student';
         @endphp

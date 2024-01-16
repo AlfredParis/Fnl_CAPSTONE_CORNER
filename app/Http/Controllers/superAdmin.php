@@ -416,43 +416,9 @@ class superAdmin extends Controller
         $programCount = program::count();
         $department=department::all();
 
-        for ($i=0; $i < $programCount; $i++) {
-
-            $department=department::where('PROG_ID', $i);
-
-            for ($i=0; $i <  $programCount; $i++) {
-
-            }
-        }
 
 
-
-        $srch=$request->input("search");
-
-        if(isset($srch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
-            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
-
-
-
-                if (!$archives->isEmpty()) {
-                    $ret = $archives;
-                } elseif (!$title->isEmpty()) {
-                    $ret = $title;
-                } else {
-                    $ret = collect(); // Create an empty collection if both are empty
-                }
-
-
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-
-            return view('superAdmin.ArchiveTB')->with('arch', $ret)->with( 'auths',$auth)->with( 'progCnt',$programCount);
-
-        }
-
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('superAdmin.programsTB')->with('arch', $archives) ->with( 'auths',$auth);
+        return view('superAdmin.programsTB')->with( 'progCnt',$programCount)->with( 'prog',$program);
     }
 
 }

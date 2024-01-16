@@ -45,6 +45,7 @@
     {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add archives --}}
     @section('main')
         {{-- <a href="{{ route('superAdmin.addArch') }}" class="btn btn-primary">Add Archive</a> --}}
+        <h1>ARCHIVES</h1>
 
 
         <div class="container" style="margin-left: 0;">

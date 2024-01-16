@@ -44,6 +44,8 @@
     @endsection
 
     @section('main')
+        <h1>AUDIT</h1>
+
         <table class=" table table-primary"><br>
 
 
