@@ -20,13 +20,17 @@ class programSeed extends Seeder
 
         $data = [
             [
-                'PROG_NAME' => 'College of Teacher Education'
+                'PROG_NAME' => 'College of Teacher Education',
+                'PROG_ABBR' => 'CTE'
+
             ],
             [
-                'PROG_NAME' => 'College of Hospitality Management, Business Administration and Computing'
+                'PROG_NAME' => 'College of Hospitality Management, Business Administration and Computing',
+                'PROG_ABBR' => 'CHMBAC'
             ],
             [
-                'PROG_NAME' => 'College of Agriculture'
+                'PROG_NAME' => 'College of Agriculture',
+                'PROG_ABBR' => 'College of Agri'
             ],
 
         ];

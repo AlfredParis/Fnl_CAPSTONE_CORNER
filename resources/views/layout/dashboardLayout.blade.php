@@ -230,41 +230,33 @@
                                             </button>
 
                                             <ul class="dropdown-menu dropdown-menu-dark hihi">
-                                                <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
-                                                        data-bs-toggle="dropdown" href="#">CHMBAC</a>
-                                                    <ul class="dropdown-menu dropdown-menu-dark DDhover">
-                                                        <li>
-                                                            <a href="" class="dropdown-item">BS in Bussiness
-                                                                Administration</a>
-                                                            <a href="" class="dropdown-item">BS in Information
-                                                                Technology</a>
-                                                            <a href="" class="dropdown-item">BS in Hospitality
-                                                                Management</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
 
-                                                <li class="dropend DD"><a class="dropdown-item dropdown-toggle"
-                                                        href="" data-bs-toggle="dropdown"></i>CED
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-menu-dark DDhover">
-                                                        <li>
-                                                            <a href="" class="dropdown-item">Bachelor in
-                                                                Elementary Education</a>
-                                                            <a href="" class="dropdown-item">BSE major in
-                                                                Filipino</a>
-                                                            <a href="" class="dropdown-item">BSE major in Social
-                                                                Studies</a>
-                                                            <a href="" class="dropdown-item">Bachelor of
-                                                                Technology and Livelihood Education</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="dropend "><a class="dropdown-item " href=""
-                                                        data-bs-toggle="modal"></i>College of Agri
-                                                    </a>
+                                                @php
+                                                // $depts = \App\Models\department::all();
+                                                $progs = \App\Models\program::all();
 
-                                                </li>
+                                                @endphp
+                                        @foreach ($progs as $prog)
+                                        <li class="dropend DD">
+                                            <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">{{$prog->PROG_ABBR}}</a>
+                                                <ul class="dropdown-menu dropdown-menu-dark DDhover">
+                                                    @php
+                                                       $depts = \App\Models\department::where('PROG_ID', $prog->id)->get();
+                                                    @endphp
+
+                                                    <li>
+
+                                                            @foreach ($depts as $dept)
+                                                            <a href="" class="dropdown-item">{{$dept->DEPT_NAME}}</a>
+
+                                                            @endforeach
+
+                                                    </li>
+                                                </ul>
+                                        </li>
+
+                                        @endforeach
+
 
 
                                             </ul>

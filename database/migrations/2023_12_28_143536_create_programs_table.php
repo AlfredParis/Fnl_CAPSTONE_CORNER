@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('PROG_NAME');
+            $table->string('PROG_ABBR');
             $table->timestamps();
         });
     }
