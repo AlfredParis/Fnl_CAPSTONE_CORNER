@@ -24,6 +24,7 @@ class departmentSeed extends Seeder
             // cet start
             [
                'DEPT_NAME' => 'Bachelor of Elemtary',
+
                 'PROG_ID' =>1,
 
             ],
@@ -72,6 +73,12 @@ class departmentSeed extends Seeder
                  'PROG_ID' =>3,
 
              ],
+             [
+                'DEPT_NAME' => 'Library',
+                 'PROG_ID' =>4,
+
+             ],
+
 
         ];
 

@@ -16,28 +16,52 @@ class adminDet extends Seeder
           $data = [
             [
                 'EMP_ID' => 'admin1',
-                'NAME' => 'admin1 name',
+                'NAME' => 'librarian',
+                'EMP_DEPT' => '10',
 
             ],
           [
                 'EMP_ID' => 'admin2',
-                'NAME' => 'admin2 name',
+                'NAME' => 'librarian assistant',
+                'EMP_DEPT' => '4',
 
-            ],  [
-                'EMP_ID' => 'faculty1',
-                'NAME' => 'faculty1 name',
+            ],
+           [
+                'EMP_ID' => 'facultyIT',
+                'NAME' => 'faculty IT',
+                'EMP_DEPT' => '6',
+
+            ],
+            [
+                'EMP_ID' => 'facultyBSBA',
+                'NAME' => 'faculty BSBA',
+                'EMP_DEPT' => '5',
+
+            ],
+            [
+                'EMP_ID' => 'facultyBSHM',
+                'NAME' => 'faculty BSHM',
+                'EMP_DEPT' => '7',
+
+            ],
+            [
+                'EMP_ID' => 'facultyBSOA',
+                'NAME' => 'faculty BSOA',
+                'EMP_DEPT' => '8',
 
             ],
             [
 
                 'EMP_ID' => 'subAdmin',
                 'NAME' => 'subAdmin',
+                'EMP_DEPT' => '',
 
             ],
             [
 
-                'EMP_ID' => 'superAdmin',
-                'NAME' => 'superAdmin',
+                'EMP_ID' => 'MIS',
+                'NAME' => 'MIS',
+                'EMP_DEPT' => '0',
 
             ],
         ];

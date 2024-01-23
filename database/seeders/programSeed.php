@@ -32,6 +32,10 @@ class programSeed extends Seeder
                 'PROG_NAME' => 'College of Agriculture',
                 'PROG_ABBR' => 'College of Agri'
             ],
+            [
+                'PROG_NAME' => 'Others',
+                'PROG_ABBR' => 'Others'
+            ],
 
         ];
 

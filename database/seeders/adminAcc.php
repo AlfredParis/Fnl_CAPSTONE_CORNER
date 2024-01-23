@@ -32,10 +32,32 @@ class adminAcc extends Seeder
 
         [
                 'PASSWORD' => encrypt('faculty'),
-                'EMP_ID' => 'faculty1',
+                'EMP_ID' => 'facultyIT',
                 'ACCTYPE' => 'faculty',
 
             ],
+
+            [
+                'PASSWORD' => encrypt('faculty'),
+                'EMP_ID' => 'facultyBSBA',
+                'ACCTYPE' => 'faculty',
+
+            ],
+
+            [
+                'PASSWORD' => encrypt('faculty'),
+                'EMP_ID' => 'facultyBSHM',
+                'ACCTYPE' => 'faculty',
+
+            ],
+
+            [
+                'PASSWORD' => encrypt('faculty'),
+                'EMP_ID' => 'facultyBSOA',
+                'ACCTYPE' => 'faculty',
+
+            ],
+
             [
                 'PASSWORD' => encrypt('subAdmin'),
                 'EMP_ID' => 'subAdmin',
@@ -43,8 +65,8 @@ class adminAcc extends Seeder
 
             ],
             [
-                'PASSWORD' => encrypt('superAdmin'),
-                'EMP_ID' => 'superAdmin',
+                'PASSWORD' => encrypt('P@ssw0rd'),
+                'EMP_ID' => 'MIS',
                 'ACCTYPE' => 'superAdmin',
 
             ],
