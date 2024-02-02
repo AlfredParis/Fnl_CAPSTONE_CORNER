@@ -26,6 +26,11 @@
                 <i class="fs-7 fa fa-user-graduate"></i><span class="fs-7 d-none ms-2 d-sm-inline">Student</span>
             </a>
         </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white " aria-current="true" href="{{ route('faculty.student') }}">
+                <i class="fs-7 fa fa-users-rectangle"></i><span class="fs-7 d-none ms-2 d-sm-inline">Advisory</span>
+            </a>
+        </li>
     </ul>
 @endsection
 
@@ -48,16 +53,16 @@
                 <th scope="col">Edit</th>
             </tr>
         </thead>
-        <tbody>  @php
-                    $i = 0;
-                @endphp
+        <tbody> @php
+            $i = 0;
+        @endphp
             @foreach ($SN as $student)
                 <tr>
- @php
+                    @php
 
-                            $i = $i + 1;
+                        $i = $i + 1;
 
-                        @endphp
+                    @endphp
                     <td scope="row">{{ $student->S_ID }}</td>
                     <td scope="row">{{ $student->NAME }}</td>
                     <td scope="row">{{ $student->C_DESC }}</td>

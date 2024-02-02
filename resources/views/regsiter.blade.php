@@ -10,8 +10,11 @@
 @endsection
 
 @section('main')
-    <br>
+    <i class="fa-brands fa-creative-commons-by"></i>
     <div class="container">
+
+
+
         <form action="{{ route('userCC.store') }}" method="POST">
             @csrf
 
@@ -56,7 +59,7 @@
 
             {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
 
-            <div class="line">____________________________________________________</div>
+            <div class="line">or</div>
             <br>
             {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
             {{-- </div> --}}

@@ -26,53 +26,150 @@
                 <i class="fs-7 fa fa-user-graduate"></i><span class="fs-7 d-none ms-2 d-sm-inline">Student</span>
             </a>
         </li>
+        <li class="nav-item py-2 py-sm-0">
+            <a class="nav-link text-white " aria-current="true" href="{{ route('faculty.student') }}">
+                <i class="fs-7 fa fa-users-rectangle"></i><span class="fs-7 d-none ms-2 d-sm-inline">Advisory</span>
+            </a>
+        </li>
     </ul>
 @endsection
 
 @section('main')
-    <div class="container text-center">
-        <div class="row row-cols-2">
-            <div class="col p-2">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ asset('images/18771.jpg') }}" class="card-img-top" alt="...">
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-md-4">
+                <div class="card" style="width: 20rem;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $tl_admin }}</h5>
-                        <p class="card-text">ADMIN</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-2">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ asset('images/students_09.jpg') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $tl_stud }}</h5>
-                        <p class="card-text">STUDENT</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-2">
+                        <h5 class="card-title">Archives</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Archives Present in the system</h6>
+                        <h1 class="card-text">{{ $ttlArch }}</h1>
 
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ asset('images/fac.jpg') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $tl_fac }}</h5>
-                        <p class="card-text">FACULTY</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
-            <div class="col p-2">
-
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ asset('images/829.jpg') }}" class="card-img-top" alt="...">
+            <div class="col-md-4">
+                <div class="card" style="width: 20rem;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $tl_arch }}</h5>
-                        <p class="card-text">ARCHIVES</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Students</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <h1 class="card-text">{{ $ttlStud }}</h1>
+
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <h1 class="card-text">3</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row " style="margin-top: 1rem;">
+            <div class="col-md-12">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Archive ID</th>
+                            <th scope="col">Archive Title</th>
+                            <th scope="col"> Documentation</th>
+                            <th scope="col"> GitHub Repository</th>
+
+                            <th scope="col"> Views </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $i = 0;
+
+                        @endphp
+                        @foreach ($arch as $archive)
+                            @include('modal.ViewArch')
+
+
+
+                            <tr>
+                                @php
+
+                                    $i = $i + 1;
+
+                                @endphp
+                                <td scope="row">
+                                    <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                        onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
+                                        {{ $archive->ARCH_ID }}</a>
+
+                                </td>
+                                <td scope="row">
+                                    <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                        onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
+                                        {{ $archive->ARCH_NAME }}</a>
+                                </td>
+                                <td scope="row"><a href="#"
+                                        onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILE }}</a>
+                                </td>
+                                <td scope="row">{{ $archive->GITHUB_LINK }}</td>
+                                <td scope="row">
+                                    {{-- <a href="{{ route('superAdmin.viewCnt', ['ARCH_ID' => $archive->ARCH_ID]) }}"
+                                        class="open-modal">
+                                    --}}
+                                    {{ $archive->viewCount }}
+                                </td>
+
+                                <script>
+                                    function incrementViewCount(archiveId) {
+                                        // Make an AJAX request to increment the view count
+                                        $.ajax({
+                                            url: `/superAdmin/viewCnt/${archiveId}`,
+                                            type: 'GET',
+                                            success: function(response) {
+                                                console.log(response);
+                                            },
+                                            error: function(error) {
+                                                console.error(error);
+                                            }
+                                        });
+                                    }
+                                </script>
+
+
+
+                                <td scope="row">
+                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_{{ $archive->id }}">
+                                        EDIT Archive
+                                    </button> --}}
+
+
+
+
+
+
+
+                                    {{-- modal for edit archive --}}
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            new MultiSelectTag("countries{{ $i }}");
+                                        });
+                                    </script>
+
+
+
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+
+
+
 
 
             </div>

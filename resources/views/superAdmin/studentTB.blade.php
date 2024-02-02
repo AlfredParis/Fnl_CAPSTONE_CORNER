@@ -44,7 +44,7 @@
     @endsection
 
     @section('main')
-        <h1> <U>STUDENTS</U></h1>
+        <h1>STUDENTS</h1>
 
         @php
             $userAdd = 'student';
