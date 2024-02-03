@@ -16,14 +16,16 @@ class studDet extends Seeder
             [
                 'S_ID' => '20-sc-0147',
                 'NAME' => 'Alfred Paris',
-                'C_ID' => '1',
-                'ARCH_ID' => 'IT-1',
+                'DEPT_ID'=>'6',
+                'GROUP_ID' => 'N/A',
+
             ],
             [
                 'S_ID' => '20-sc-0148',
                 'NAME' => 'Jayson Sanchez',
-                'C_ID' => '1',
-                'ARCH_ID' => 'N/A',
+                'DEPT_ID'=>'6',
+                'GROUP_ID' => 'N/A',
+
             ],];
 
 

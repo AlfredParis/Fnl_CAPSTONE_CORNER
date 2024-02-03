@@ -18,17 +18,42 @@
         <form action="{{ route('userCC.store') }}" method="POST">
             @csrf
 
-            {{-- <div class="form-group">
-                <label for="userID">User ID</label>
-                <input type="text" class="form-control" placeholder="Enter ID" name="userID" value="{{ old('userID') }}"
-                    required>
-            </div> --}}
 
             <div class="form-group">
                 <label for="S_ID">Student ID</label>
                 <input type="text" class="form-control" placeholder="Student ID" name="S_ID"
                     value="{{ old('S_ID') }}" required>
             </div>
+            <div class="form-group">
+                <label for="NAME">Student Name</label>
+                <input type="text" class="form-control" placeholder="Name" name="NAME"
+                    value="{{ old('NAME') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="DEPT_ID">Course</label>
+
+                @php
+                    $CHMBAC=App\Models\department::where('PROG_ID', 2)->get();
+                    $CTE=App\Models\department::where('PROG_ID', 1)->get();
+                    $AGRI=App\Models\department::where('PROG_ID', 3)->get();
+                @endphp
+
+                <select name="DEPT_ID" id="DEPT_ID" style="max-width: 23rem">
+                    <option value="">select your course</option>
+                @foreach ($CHMBAC as $item)
+                <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                @endforeach
+                @foreach ($CTE as $item)
+                <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                @endforeach
+                @foreach ($AGRI as $item)
+                <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                @endforeach
+                </select>
+
+
+            </div>
+
 
             <div class="form-group">
                 <label for="password">Password</label>
@@ -48,21 +73,14 @@
                 </div>
             </div>
 
-            {{-- <label class="form-check-label" for="remember">Remember me</label>  <input type="checkbox" class="form-check-input" checked="checked" name="remember"> --}}
-
             <div style="text-align: center">
                 <button type="submit" class="btn btn-primary">Register</button>
                 <br>
             </div>
-            {{-- <div class="form-group" style="background-color:#f1f1f1"> --}}
-
-
-            {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
 
             <div class="line">or</div>
             <br>
-            {{-- <span class="psw">Forgot <a href="#">password?</a></span> --}}
-            {{-- </div> --}}
+
             <DIV class="sec-btn"><a href="{{ route('root') }}" class="btn btn-secondary">Already have an
                     account</a>
             </DIV>

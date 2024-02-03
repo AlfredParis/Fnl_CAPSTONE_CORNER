@@ -109,9 +109,6 @@
                         </td>
                         <td scope="row">{{ $archive->GITHUB_LINK }}</td>
                         <td scope="row">
-                            {{-- <a href="{{ route('superAdmin.viewCnt', ['ARCH_ID' => $archive->ARCH_ID]) }}"
-                                class="open-modal">
-                            --}}
 
 
                             <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
@@ -137,9 +134,7 @@
                         </td>
 
                         <td scope="row">
-                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_{{ $archive->id }}">
-                                EDIT Archive
-                            </button> --}}
+
 
                             <a href="#edit_{{ $archive->ARCH_ID }}" data-bs-toggle="modal">
                                 <i class="fs-5 fa fa-pen-to-square"></i></a>
@@ -155,6 +150,7 @@
                                     new MultiSelectTag("countries{{ $i }}");
                                 });
                             </script>
+
                             <div class="modal fade" id="edit_{{ $archive->ARCH_ID }}" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -164,7 +160,8 @@
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Archive update</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
-                                        </div> @php
+                                        </div>
+                                        @php
                                             $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
                                         @endphp
 

@@ -51,7 +51,7 @@
                 <div class="card" style="width: 20rem;">
                     <div class="card-body">
                         <h5 class="card-title">Archives</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Archives Present in the system</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Archives Present in the system.</h6>
                         <h1 class="card-text">{{ $ttlArch }}</h1>
 
                     </div>
@@ -61,7 +61,7 @@
                 <div class="card" style="width: 20rem;">
                     <div class="card-body">
                         <h5 class="card-title">Students</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Number of students registered.</h6>
                         <h1 class="card-text">{{ $ttlStud }}</h1>
 
                     </div>
@@ -78,6 +78,7 @@
                 </div>
             </div>
         </div>
+        <h1>Most viewed archives</h1>
         <div class="row " style="margin-top: 1rem;">
             <div class="col-md-12">
 

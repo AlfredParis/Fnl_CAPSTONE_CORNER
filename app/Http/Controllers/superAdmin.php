@@ -37,7 +37,7 @@ class superAdmin extends Controller
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->get();
+        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
         return view('superAdmin.dashboard')->with('arch', $archDesc)->with('auths', $auth)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);

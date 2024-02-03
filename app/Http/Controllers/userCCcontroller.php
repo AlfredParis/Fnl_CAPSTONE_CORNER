@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\userCC;
 use App\Models\student_acc;
 use App\Models\STUDENT;
+use App\Models\department;
 use App\Models\USER_ACC_EMP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -148,20 +149,12 @@ class userCCcontroller extends Controller
      */
     public function store(Request $request)
     {
-//       $validator = Validator::make($request->all(), [
 
-//     "fullname" => "required|min:4|max:50",
-//     "password" => "required|min:4|max:100",
-// ]);
-
-// if ($validator->fails()) {
-//     return back()->withErrors($validator)->withInput();
-// }
-
-// Log::alert("User has been added!");
 
     $user = new student_acc;
+    $student_det = new STUDENT;
 
+    $name= $request->input("NAME");
     $S_ID = $request->input("S_ID");
     $exists = STUDENT::where('S_ID', $S_ID)->exists();
     $conPass = $request->input("conpassword");
@@ -169,35 +162,42 @@ class userCCcontroller extends Controller
 
 
 
-if ($exists) {
 
 $accExist = student_acc::where('S_ID', $S_ID)->exists();
 if ($accExist) {
     return back()->with('alert', 'This student id already has a account.')->withInput();
-}else{if ($conPass == $pass) {
+}else{
+
+    if ($conPass == $pass) {
     $user->S_ID = $request->input("S_ID");
+
     $user->PASSWORD = encrypt($request->input("password"));
     $user->ACCTYPE = 'student';
     $user->save();
 
+    $student_det->S_ID = $request->input("S_ID");
+    $student_det->NAME = $name;
+    $student_det->DEPT_ID = $request->input("DEPT_ID");
+    $student_det->GROUP_ID = "N/A";
+    $student_det->save();
 
     $user = DB::table('student_accs')
     ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
-    ->select('s_t_u_d_e_n_t_s.C_ID','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME', 'student_accs.PASSWORD')
+    ->select('s_t_u_d_e_n_t_s.DEPT_ID','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME', 'student_accs.PASSWORD')
     ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
     ->first();
 
     $studentCId = DB::table('student_accs')
     ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
     ->where('s_t_u_d_e_n_t_s.S_ID', $S_ID)
-    ->value('s_t_u_d_e_n_t_s.C_ID');
+    ->value('s_t_u_d_e_n_t_s.DEPT_ID');
 
     if ($studentCId) {
-
-            $result = DB::table('c_o_u_r_s_e_s')
-            ->join('s_t_u_d_e_n_t_s', 'c_o_u_r_s_e_s.C_ID', '=',  DB::raw($studentCId))
-            ->where('s_t_u_d_e_n_t_s.C_ID', $studentCId)
-            ->select('c_o_u_r_s_e_s.C_DESC')
+//
+            $result = DB::table('departments')
+            ->join('s_t_u_d_e_n_t_s', 'departments.id', '=', DB::raw($studentCId) )
+            ->where('s_t_u_d_e_n_t_s.DEPT_ID', $studentCId)
+            ->select('departments.DEPT_NAME')
             ->first();
 
     } else {
@@ -221,11 +221,7 @@ return redirect()->route('userCC.index')->with('alert', 'Account Successfully Cr
 }
 
 
-} else {
 
-
-    return back()->with('alert', 'This User ID is not ready yet!')->withInput();
-}
 
     }
 

@@ -74,6 +74,7 @@
                         @php
                             $i = $i + 1;
                         @endphp
+
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $progs->id }}</h5>

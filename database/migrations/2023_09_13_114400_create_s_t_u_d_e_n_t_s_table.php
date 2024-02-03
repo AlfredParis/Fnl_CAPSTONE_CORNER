@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('s_t_u_d_e_n_t_s', function (Blueprint $table) {
             $table->string('S_ID')->primary();
             $table->string('NAME');
-            $table->string('C_ID');
-            $table->string('ARCH_ID');
+
+            $table->string('DEPT_ID');
+            $table->string('GROUP_ID');
             $table->timestamps();
         });
     }
