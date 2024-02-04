@@ -36,11 +36,11 @@ class superAdmin extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        // $auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with('auths', $auth)
         $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
-        return view('superAdmin.dashboard')->with('arch', $archDesc)->with('auths', $auth)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
+
+        return view('superAdmin.dashboard')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
     }
 
     public function adminTB()
@@ -83,12 +83,12 @@ class superAdmin extends Controller
             }
 
 
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+            $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
 
             return view('superAdmin.ArchiveTB')->with('arch', $ret)->with('auths', $auth);
         }
 
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('superAdmin.ArchiveTB')->with('arch', $archives)->with('auths', $auth);
     }
@@ -136,8 +136,8 @@ class superAdmin extends Controller
 
 
         $users = DB::table('s_t_u_d_e_n_t_s')
-            ->join('c_o_u_r_s_e_s', 's_t_u_d_e_n_t_s.C_ID', '=', 'c_o_u_r_s_e_s.C_ID')
-            ->select('c_o_u_r_s_e_s.C_DESC', 's_t_u_d_e_n_t_s.S_ID', 's_t_u_d_e_n_t_s.NAME')->paginate(10);
+            ->join('departments', 's_t_u_d_e_n_t_s.DEPT_ID', '=', 'departments.id')
+            ->select('departments.DEPT_NAME', 's_t_u_d_e_n_t_s.S_ID', 's_t_u_d_e_n_t_s.NAME')->paginate(10);
 
         return view('superAdmin.studentTB')->with('students', $studentPage)->with('SN', $users);
     }
@@ -295,7 +295,8 @@ class superAdmin extends Controller
         }
 
 
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
+
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('superAdmin.ArchiveTB')->with('arch', $archives)->with('auths', $auth);
 

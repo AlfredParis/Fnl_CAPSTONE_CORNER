@@ -162,7 +162,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         @php
-                                            $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
+                                            $auth = App\Models\STUDENT::where('GROUP_ID', $archive->ARCH_ID)->get();
                                         @endphp
 
                                         <div class="modal-body">

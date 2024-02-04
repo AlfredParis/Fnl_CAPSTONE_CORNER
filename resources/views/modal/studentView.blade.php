@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label for="courseId">Course</label>
 
-                        <p class="form-control">{{ $student->C_DESC }}</p>
+                        <p class="form-control">{{ $student->DEPT_NAME }}</p>
                     </div>
                 @else
                     @if ($Users->ACCTYPE == 'student')
@@ -79,7 +79,7 @@
                         <div class="form-group">
                             <label for="courseId">Course</label>
 
-                            <p class="form-control">{{ $student->C_DESC }}</p>
+                            <p class="form-control">{{ $student->DEPT_NAME }}</p>
                         </div>
                     @else
                     <div class="form-group">

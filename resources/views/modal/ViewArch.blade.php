@@ -9,7 +9,7 @@
             <div class="modal-body">
                 @php
 
-                    $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
+                    // $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
 
                 @endphp
 
@@ -55,7 +55,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="Status" class="form-label">Status:</label>
-                   NON FUNCTION PA PO 
+                   NON FUNCTION PA PO
 
                 </div>
                 <div class="mb-3">
@@ -65,9 +65,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="form-label">Authors</label>
-                    @foreach ($auth as $item)
+                    {{-- @foreach ($auth as $item)
                         <p class="form-control">{{ $item->S_ID }} || {{ $item->NAME }}</p>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
             <div class="modal-footer">
