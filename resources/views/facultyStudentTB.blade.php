@@ -65,7 +65,7 @@
                     @endphp
                     <td scope="row">{{ $student->S_ID }}</td>
                     <td scope="row">{{ $student->NAME }}</td>
-                    <td scope="row">{{ $student->C_DESC }}</td>
+                    <td scope="row">{{ $student->DEPT_NAME }}</td>
                     <td scope="row">
                         @php
                             $id = $student->S_ID;

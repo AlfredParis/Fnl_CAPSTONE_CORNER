@@ -25,12 +25,12 @@ class facultyController extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        //$auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with('auths', $auth)
         $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
 
-        return view('facultyDashB')->with('tl_admin', $total_admin)->with('ttlArch', $total_arch)->with('ttlStud', $total_student)->with('tl_fac', $total_faculty)->with('auths', $auth)->with('arch', $archDesc);
+
+        return view('facultyDashB')->with('tl_admin', $total_admin)->with('ttlArch', $total_arch)->with('ttlStud', $total_student)->with('tl_fac', $total_faculty)->with('arch', $archDesc);
     }
 
 
@@ -81,8 +81,8 @@ class facultyController extends Controller
 
 
         $users = DB::table('s_t_u_d_e_n_t_s')
-            ->join('c_o_u_r_s_e_s', 's_t_u_d_e_n_t_s.C_ID', '=', 'c_o_u_r_s_e_s.C_ID')
-            ->select('c_o_u_r_s_e_s.C_DESC', 's_t_u_d_e_n_t_s.S_ID', 's_t_u_d_e_n_t_s.NAME')->paginate(10)
+            ->join('departments', 's_t_u_d_e_n_t_s.DEPT_ID', '=', 'departments.id')
+            ->select('departments.DEPT_NAME', 's_t_u_d_e_n_t_s.S_ID', 's_t_u_d_e_n_t_s.NAME')->paginate(10)
         ;
 
         return view('facultyStudentTB')->with('students', $studentPage)->with('SN', $users);

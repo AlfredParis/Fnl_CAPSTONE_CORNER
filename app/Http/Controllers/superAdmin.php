@@ -48,7 +48,7 @@ class superAdmin extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        // $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
         $adminPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
             ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
             ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
