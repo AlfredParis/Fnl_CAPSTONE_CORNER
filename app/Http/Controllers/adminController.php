@@ -32,9 +32,9 @@ class adminController extends Controller
             $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
             $total_student=student_acc::where('ACCTYPE', 'student')->count();
             $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+           // $auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with( 'auths',$auth)
 
-            return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty)->with( 'auths',$auth);
+            return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
 
 
     }
@@ -64,16 +64,16 @@ class adminController extends Controller
 
 
 
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+            //$auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with( 'auths',$auth)
 
-            return view('adminArchive')->with('arch', $ret) ->with( 'auths',$auth);
+            return view('adminArchive')->with('arch', $ret) ;
         }
 
 
 
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        //$auth = STUDENT::where('ARCH_ID', 'N/A')->get(); ->with( 'auths',$auth)
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('adminArchive')->with('arch', $archives) ->with( 'auths',$auth);
+        return view('adminArchive')->with('arch', $archives);
     }
     public function audit()
     {
@@ -541,15 +541,15 @@ $name = Session::get('fullNs');
         return redirect()->route('admin.archives')->with('alert', 'Archive updated Successfully!');
     }
 
-    public function delArch($id){
+    // public function delArch($id){
 
-        $name = Session::get('fullNs');
-        Log::alert("$name has been Deleted!");
+    //     $name = Session::get('fullNs');
+    //     Log::alert("$name has been Deleted!");
 
-        $delete = archive::find($id);
-        $delete->delete();
-        return redirect()->route('admin.archives')->with('alert', 'The Archive has been Deleted Successfully!');
-    }
+    //     $delete = archive::find($id);
+    //     $delete->delete();
+    //     return redirect()->route('admin.archives')->with('alert', 'The Archive has been Deleted Successfully!');
+    // }
 
    public function findSimilarWords(Request $request)
 {

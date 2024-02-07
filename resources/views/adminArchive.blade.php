@@ -134,45 +134,35 @@
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Archive update</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
-                                        </div> @php
+                                        </div>
+
+                                        {{-- @php
                                             $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
-                                        @endphp
+                                        @endphp --}}
 
                                         <div class="modal-body">
 
                                             <form class=""
                                                 action="{{ route('admin.updateArch', ['ARCH_ID' => $archive->ARCH_ID]) }}"
                                                 method="POST" enctype="multipart/form-data">
-
                                                 @csrf
                                                 @method('PUT')
-
                                                 <div class="mb-3">
                                                     <label for="archID" class="form-label">Archive ID</label>
                                                     <p type="text" class="form-control">{{ $archive->ARCH_ID }} </p>
-
                                                 </div>
-
                                                 <div class="mb-3">
-
                                                     <label for="name" class="form-label">Archive name</label>
                                                     <input class="form-control" type="text" name="ARCH_NAME"
                                                         value="{{ old('ARCH_NAME', $archive->ARCH_NAME) }}"
                                                         id="name" required>
-
-
                                                 </div>
-
-
                                                 <div class="mb-3">
-
-
                                                     <div class="mb-3">
                                                         <label for="gh" class="form-label">GitHub Repository</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter Link" name="GITHUB_LINK" id="gh"
                                                             value="{{ old('GITHUB_LINK', $archive->GITHUB_LINK) }}">
-
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="pdf_file" class="form-label">Current
@@ -207,31 +197,24 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="form-label">Authors</label>
-                                                        @foreach ($auth as $item)
+
+                                                        {{-- @foreach ($auth as $item)
                                                             <p class="form-control">{{ $item->S_ID }} ||
                                                                 {{ $item->NAME }}</p>
-                                                        @endforeach
+                                                        @endforeach --}}
+
                                                     </div>
                                                     <label for="Author" class="form-label">Author</label>
 
                                                     <select name="countries[]" id="countries{{ $i }}"
                                                         multiple>
-                                                        @foreach ($auths as $archive)
+                                                        {{-- @foreach ($auths as $archive)
                                                             <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }} ||
                                                                 {{ $archive->NAME }}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
-
-
-
-
                                                 </div>
-
-
-
-
-
-                                        </div>
+                                         </div>
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -286,9 +269,9 @@
                                 <label for="Author" class="form-label">Authors</label>
 
                                 <select name="countries[]" id="countries" multiple>
-                                    @foreach ($auths as $archive)
+                                    {{-- @foreach ($auths as $archive)
                                         <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
 
                             </div>

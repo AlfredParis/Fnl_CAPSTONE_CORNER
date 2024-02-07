@@ -23,7 +23,7 @@ class adminDet extends Seeder
           [
                 'EMP_ID' => 'admin2',
                 'NAME' => 'librarian assistant',
-                'EMP_DEPT' => '4',
+                'EMP_DEPT' => '10',
 
             ],
            [
