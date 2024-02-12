@@ -12,6 +12,8 @@ use App\Mail\WelcomeEmail;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\userCCcontroller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 
 
 
@@ -116,6 +118,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
 
         Route::get('/department', [superAdmin::class, 'department'])->name('department');
         Route::put('/updateProg', [superAdmin::class, 'updateProg'])->name('updateProg');
+        Route::put('/updatePosition', [superAdmin::class, 'updatePosition'])->name('updatePosition');
+
 
         Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
         Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');

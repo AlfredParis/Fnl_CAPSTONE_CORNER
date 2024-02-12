@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item py-2 py-sm-0">
             <a class="nav-link text-white" href="{{ route('superAdmin.group') }}">
-                <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">group</span>
+                <i class="fs-7 fa fa-people-group"></i><span class="fs-6 d-none ms-2 d-sm-inline">group</span>
             </a>
         </li>
         <li class="nav-item py-2 py-sm-0">
@@ -94,7 +94,6 @@
                                 <i class="fs-5 fa fa-eye"></i></a>
 
                             @include('modal.studentView')
-
                         </td>
                         <td scope="row">
                             @php

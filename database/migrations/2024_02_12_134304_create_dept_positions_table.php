@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('s_t_u_d_e_n_t_s', function (Blueprint $table) {
-            $table->string('S_ID')->primary();
-            $table->string('NAME');
-            $table->string('DEPT_ID');
-            $table->string('GROUP_ID');
+        Schema::create('dept_positions', function (Blueprint $table) {
+            $table->id();
+            $table->string('POS_NAME');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('s_t_u_d_e_n_t_s');
+        Schema::dropIfExists('dept_positions');
     }
 };

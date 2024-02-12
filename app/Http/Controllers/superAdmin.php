@@ -98,7 +98,7 @@ class superAdmin extends Controller
 
     public function viewCnt(string $ARCH_ID)
     {
-        \Log::info("Received ARCH_ID: $ARCH_ID");
+        Log::info("Received ARCH_ID: $ARCH_ID");
 
         $archNW = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
         $id = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('ARCH_ID');
@@ -420,7 +420,7 @@ class superAdmin extends Controller
     public function department(Request $request)
     {
 
-        $program = program::all();
+        $program = program::paginate(10);
         $programCount = program::count();
         $department = department::all();
 
