@@ -429,4 +429,10 @@ class superAdmin extends Controller
         return view('superAdmin.programsTB')->with('progCnt', $programCount)->with('prog', $program);
     }
 
+
+
+
+    public function group(){
+        return view('superAdmin.groupsTB');
+    }
 }

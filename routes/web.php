@@ -131,6 +131,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::get('/viewCnt/{ARCH_ID}', [superAdmin::class, 'viewCnt'])->name('viewCnt');
         Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
         Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
+        //for Groups
+        Route::get('/group', [superAdmin::class, 'group'])->name('group');
     });
 
 
