@@ -51,15 +51,19 @@ progs Table
     @section('main')
     <h1>PROGRAMS</h1>
     <table class="table table-striped">
+
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#progAdd">
             Add Program
         </button>
+        @include('superAdmin.SAmodal.programAdd')
+
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Program Name</th>
                 <th scope="col">Program abbreviation</th>
-                <th scope="col"> View Departments </th>
+                <th scope="col"> Courses </th>
+                <th scope="col"> Add Courses </th>
                 <th scope="col"> Edit </th>
             </tr>
         </thead>
@@ -82,6 +86,10 @@ progs Table
                 <td scope="row">
                     <a href="#progView{{ $pro->id }}" data-bs-toggle="modal">
                         <i class="fs-5 fa fa-eye"></i></a>
+                </td>
+                <td scope="row">
+                    <a href="#addCourse{{ $pro->id }}" data-bs-toggle="modal">
+                        <i class="fs-5 fa fa-plus"></i></a>
                 </td>
                 <td scope="row">
                     <a href="#progEdit{{ $pro->id }}" data-bs-toggle="modal">

@@ -137,6 +137,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
         //for Groups
         Route::get('/group', [superAdmin::class, 'group'])->name('group');
+
+        Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
+
     });
 
 

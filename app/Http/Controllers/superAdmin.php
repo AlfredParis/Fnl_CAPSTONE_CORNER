@@ -435,4 +435,17 @@ class superAdmin extends Controller
     public function group(){
         return view('superAdmin.groupsTB');
     }
+
+
+
+    public function addCourse(Request $request,$id){
+        $user = new department;
+
+        $user->DEPT_NAME = $request->input("DEPT_NAME");
+        $user->PROG_ID = $id;
+        $user->save();
+
+
+        return redirect()->route('superAdmin.department');
+    }
 }
