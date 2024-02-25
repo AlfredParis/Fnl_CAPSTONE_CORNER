@@ -22,7 +22,7 @@ Student Table
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white active" aria-current="true" href="{{ route('superAdmin.student') }}">
+        <a class="nav-link text-white" aria-current="true" href="{{ route('superAdmin.student') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
         </a>
     </li>
@@ -47,7 +47,7 @@ Student Table
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('superAdmin.faculty') }}">
+        <a class="nav-link text-white active" href="{{ route('superAdmin.faculty') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Faculties and
                 emplopyies</span>
         </a>
@@ -79,35 +79,35 @@ Student Table
             @php
             $i = 0;
             @endphp
-            @foreach ($SN as $student)
+            @foreach ($SN as $emp)
             <tr>
                 @php
 
                 $i = $i + 1;
 
                 @endphp
-                <td scope="row">{{ $student->S_ID }}</td>
-                <td scope="row">{{ $student->NAME }}</td>
-                <td scope="row">{{ $student->DEPT_NAME }}</td>
+                <td scope="row">{{ $emp->NAME }}</td>
+                <td scope="row">{{ $emp->EMP_ID }}</td>
+                <td scope="row">{{ $emp->EMP_DEPT }}</td>
                 <td scope="row">
                     @php
-                    $id = $student->S_ID;
+                    $id = $emp->S_ID;
                     @endphp
                     <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
                         <i class="fs-5 fa fa-eye"></i></a>
 
-                    @include('modal.studentView')
+                    {{-- @include('modal.studentView') --}}
 
                 </td>
 
                 <td scope="row">
                     @php
-                    $id = $student->S_ID;
+                    $id = $emp->S_ID;
                     @endphp
                     <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
                         <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                    @include('modal.editUser')
+                    {{-- @include('modal.editUser') --}}
 
                 </td>
 
@@ -122,4 +122,4 @@ Student Table
     {{ $SN->links() }}
     @endsection
 
-    @include('modal.supAdminAdduser')
+    {{-- @include('modal.supAdminAdduser') --}}

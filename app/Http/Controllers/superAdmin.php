@@ -448,4 +448,16 @@ class superAdmin extends Controller
 
         return redirect()->route('superAdmin.department');
     }
+
+    public function faculty(){
+        $employee=EMPLOYEE::paginate(10);
+
+        return view("superAdmin.Fac&Emplo")->with('SN',$employee);
+    }
+
+    public function facultySort(Request $request){
+
+
+
+    }
 }

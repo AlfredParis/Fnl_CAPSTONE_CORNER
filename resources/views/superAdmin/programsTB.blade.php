@@ -46,6 +46,12 @@ progs Table
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Audit</span>
         </a>
     </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('superAdmin.faculty') }}">
+            <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Faculties and
+                emplopyies</span>
+        </a>
+    </li>
     @endsection
 
     @section('main')
