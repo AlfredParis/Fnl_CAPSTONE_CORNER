@@ -460,4 +460,12 @@ class superAdmin extends Controller
 
 
     }
+
+    public function specAdminTB($id){
+        $identifyProg=program::where('id', $id)->first();
+
+        $employee=EMPLOYEE::paginate(10);
+
+        return view("superAdmin.specAdminTB")->with('SN',$employee);
+    }
 }

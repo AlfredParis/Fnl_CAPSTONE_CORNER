@@ -66,6 +66,11 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '0',
                 'ADVICER_STATUS'=>'INACTIVE'
             ],
+
+
+
+
+
         ];
 
 

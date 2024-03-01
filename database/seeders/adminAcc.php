@@ -58,6 +58,13 @@ class adminAcc extends Seeder
 
             ],
 
+
+            [
+                'PASSWORD' => encrypt('P@ssw0rd'),
+                'EMP_ID' => 'MIS',
+                'ACCTYPE' => 'superAdmin',
+
+            ],
             [
                 'PASSWORD' => encrypt('subAdmin'),
                 'EMP_ID' => 'subAdmin',
@@ -65,9 +72,31 @@ class adminAcc extends Seeder
 
             ],
             [
-                'PASSWORD' => encrypt('P@ssw0rd'),
-                'EMP_ID' => 'MIS',
-                'ACCTYPE' => 'superAdmin',
+                'PASSWORD' => encrypt('subAdmin'),
+                'EMP_ID' => 'deanAgri',
+                'ACCTYPE' => 'subAdmin',
+
+            ],
+            [
+                'PASSWORD' => encrypt('subAdmin'),
+                'EMP_ID' => 'deanChmbac',
+                'ACCTYPE' => 'subAdmin',
+
+            ],
+            [
+                'PASSWORD' => encrypt('subAdmin'),
+                'EMP_ID' => 'subAdmin',
+                'ACCTYPE' => 'subAdmin',
+
+            ], [
+                'PASSWORD' => encrypt('subAdmin'),
+                'EMP_ID' => 'subAdmin',
+                'ACCTYPE' => 'subAdmin',
+
+            ], [
+                'PASSWORD' => encrypt('subAdmin'),
+                'EMP_ID' => 'subAdmin',
+                'ACCTYPE' => 'subAdmin',
 
             ],
         ];

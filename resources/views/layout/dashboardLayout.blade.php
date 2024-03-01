@@ -238,7 +238,7 @@
                                                 @endphp
                                         @foreach ($progs as $prog)
                                         <li class="dropend DD">
-                                            <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">{{$prog->PROG_ABBR}}</a>
+                                            <a class="dropdown-item dropdown-toggle" href="{{ route('superAdmin.specAdminTB', ['id' =>  $prog->id]) }}">{{$prog->PROG_ABBR}}</a>
                                                 <ul class="dropdown-menu dropdown-menu-dark DDhover">
                                                     @php
                                                        $depts = \App\Models\department::where('PROG_ID', $prog->id)->get();
