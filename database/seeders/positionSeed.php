@@ -32,9 +32,7 @@ class positionSeed extends Seeder
             [
                 'POSITION_NAME' => 'faculty',
             ],
-            [
-                'POSITION_NAME' => 'non-teaching',
-            ],
+
         ];
         foreach ($data as $record) {
             position::create($record);

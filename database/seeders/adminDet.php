@@ -18,53 +18,85 @@ class adminDet extends Seeder
                 'EMP_ID' => 'admin1',
                 'NAME' => 'librarian',
                 'EMP_DEPT' => '10',
-                'ADVICER_STATUS'=>'ACTIVE'
+                'ADVICER_STATUS'=>'INACTIVE',
+                'POSITION_ID' => '2',
 
             ],
           [
                 'EMP_ID' => 'admin2',
                 'NAME' => 'librarian assistant',
                 'EMP_DEPT' => '10',
-                'ADVICER_STATUS'=>'ACTIVE'
-
+                'ADVICER_STATUS'=>'INACTIVE',
+                'POSITION_ID' => '2',
             ],
            [
                 'EMP_ID' => 'facultyIT',
                 'NAME' => 'faculty IT',
                 'EMP_DEPT' => '6',
-                'ADVICER_STATUS'=>'ACTIVE'
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '5',
             ],
             [
                 'EMP_ID' => 'facultyBSBA',
                 'NAME' => 'faculty BSBA',
                 'EMP_DEPT' => '5',
-                'ADVICER_STATUS'=>'ACTIVE'
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '5',
             ],
             [
                 'EMP_ID' => 'facultyBSHM',
                 'NAME' => 'faculty BSHM',
                 'EMP_DEPT' => '7',
-                'ADVICER_STATUS'=>'ACTIVE'
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '5',
             ],
             [
                 'EMP_ID' => 'facultyBSOA',
                 'NAME' => 'faculty BSOA',
                 'EMP_DEPT' => '8',
-                'ADVICER_STATUS'=>'ACTIVE'
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '5',
             ],
             [
 
-                'EMP_ID' => 'subAdmin',
-                'NAME' => 'subAdmin',
-                'EMP_DEPT' => '',
-                'ADVICER_STATUS'=>'INACTIVE'
+                'EMP_ID' => 'subAdmin4',
+                'NAME' => 'Dean nang agri',
+                'EMP_DEPT' => '10',
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '3',
+
+            ],
+            [
+
+                'EMP_ID' => 'subAdmin3',
+                'NAME' => 'Dean nang cet',
+                'EMP_DEPT' => '10',
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '3',
+            ],
+            [
+
+                'EMP_ID' => 'subAdmin2',
+                'NAME' => 'Juliet',
+                'EMP_DEPT' => '6',
+                'ADVICER_STATUS'=>'INACTIVE',
+                'POSITION_ID' => '3',
+            ],
+            [
+
+                'EMP_ID' => 'subAdmin1',
+                'NAME' => 'Cristy',
+                'EMP_DEPT' => '6',
+                'ADVICER_STATUS'=>'ACTIVE',
+                'POSITION_ID' => '4',
             ],
             [
 
                 'EMP_ID' => 'MIS',
-                'NAME' => 'MIS',
-                'EMP_DEPT' => '0',
-                'ADVICER_STATUS'=>'INACTIVE'
+                'NAME' => 'Gamboa',
+                'EMP_DEPT' => '6',
+                'ADVICER_STATUS'=>'INACTIVE',
+                'POSITION_ID' => '1',
             ],
 
 

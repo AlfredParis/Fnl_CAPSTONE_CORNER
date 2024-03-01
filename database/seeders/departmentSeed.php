@@ -73,13 +73,9 @@ class departmentSeed extends Seeder
                  'PROG_ID' =>3,
 
              ],
-             [
-                'DEPT_NAME' => 'Library',
-                 'PROG_ID' =>4,
-
-             ],
-
-
+             [ 'DEPT_NAME' => 'non-teaching',
+             'PROG_ID' =>4,
+            ]
         ];
 
 

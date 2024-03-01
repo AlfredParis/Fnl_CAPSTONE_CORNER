@@ -32,13 +32,10 @@ class programSeed extends Seeder
                 'PROG_NAME' => 'College of Agriculture',
                 'PROG_ABBR' => 'College of Agri'
             ],
+
             [
-                'PROG_NAME' => 'Library',
-                'PROG_ABBR' => 'library'
-            ],
-            [
-                'PROG_NAME' => 'superadmin',
-                'PROG_ABBR' => 'superadmin'
+                'PROG_NAME' => 'non-teaching',
+                'PROG_ABBR' => 'non-teaching'
             ],
         ];
 
