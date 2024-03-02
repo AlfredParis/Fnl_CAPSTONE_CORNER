@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('NAME');
             $table->string('EMP_DEPT');
             $table->string('ADVICER_STATUS');
+            $table->string('POSITION_ID');
             $table->timestamps();
         });
     }

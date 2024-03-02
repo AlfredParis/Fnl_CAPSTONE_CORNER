@@ -12,7 +12,7 @@ Archive Table
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white active" aria-current="true" href="{{ route('superAdmin.archives') }}">
+        <a class="nav-link text-white" aria-current="true" href="{{ route('superAdmin.archives') }}">
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline ">Archives</span>
         </a>
     </li>
@@ -47,352 +47,72 @@ Archive Table
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('superAdmin.faculty') }}">
+        <a class="nav-link text-white active" href="{{ route('superAdmin.faculty') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Faculties and
                 emplopyies</span>
         </a>
     </li>
     @endsection
-    {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add
-    archives --}}
+
     @section('main')
-    {{-- <a href="{{ route('superAdmin.addArch') }}" class="btn btn-primary">Add Archive</a> --}}
-    <h1>sub admin</h1>
+  <h1>{{$if}} Department</h1>
 
 
-    {{-- <div class="container" style="margin-left: 0;">
-        <div class="row">
-            <div class="col auto">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    Add Archive
-                </button>
-            </div>
-            <div class="col">
-                <form action="{{ route('superAdmin.archives') }}" method="get">
-                    <div class="input-group">
+  <table class="table table-striped">
 
-                        <input type="search" class="form-control rounded"
-                            placeholder="Search arvhive name or publish date" aria-label="Search"
-                            aria-describedby="search-addon" name="search" />
-                        <button type="submit" class="btn btn-outline-primary">Search</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
+        Add admin
+    </button>
 
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Password</th>
+            <th scope="col"> Views </th>
+            <th scope="col"> Edit </th>
 
-
-
-
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Archive ID</th>
-                <th scope="col">Archive Title</th>
-                <th scope="col"> Documentation</th>
-                <th scope="col"> GitHub Repository</th>
-                <th scope="col"> View </th>
-                <th scope="col"> Edit </th>
-
-            </tr>
-        </thead>
-        <tbody>
+        </tr>
+    </thead>
+    <tbody> @php
+        $i = 0;
+        @endphp
+        @foreach ($admin as $adm)
+        <tr>
             @php
-            $i = 0;
+
+            $i = $i + 1;
 
             @endphp
-            @foreach ($arch as $archive)
-            @include('modal.ViewArch')
+            <td scope="row">{{ $adm->EMP_ID }}</td>
+            <td scope="row">{{ $adm->NAME }}</td>
+            <td scope="row">{{ decrypt($adm->PASSWORD) }}</td>
 
-
-
-            <tr>
+            <td scope="row">
                 @php
-
-                $i = $i + 1;
-
+                $id = $adm->EMP_ID;
                 @endphp
-                <td scope="row">{{ $archive->ARCH_ID }}</td>
-                <td scope="row">{{ $archive->ARCH_NAME }}</td>
-                <td scope="row"><a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{
-                        $archive->PDF_FILE }}</a>
-                </td>
-                <td scope="row">{{ $archive->GITHUB_LINK }}</td>
-                <td scope="row">
+                <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
+                    <i class="fs-5 fa fa-eye"></i></a>
 
+                @include('modal.studentView')
+            </td>
+            <td scope="row">
+                @php
+                $id = $adm->EMP_ID;
+                @endphp
+                <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
+                    <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                    <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
-                        onclick="incrementViewCount('{{ $archive->ARCH_ID }}')"><i class="fs-5 fa fa-eye">
-                        </i> </a>
+                @include('modal.editUser')
+            </td>
 
-                    <script>
-                        function incrementViewCount(archiveId) {
-                                    // Make an AJAX request to increment the view count
-                                    $.ajax({
-                                        url: `/superAdmin/viewCnt/${archiveId}`,
-                                        type: 'GET',
-                                        success: function(response) {
-                                            console.log(response);
-                                        },
-                                        error: function(error) {
-                                            console.error(error);
-                                        }
-                                    });
-                                }
-                    </script>
 
-                </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
-                <td scope="row">
 
 
-                    <a href="#edit_{{ $archive->ARCH_ID }}" data-bs-toggle="modal">
-                        <i class="fs-5 fa fa-pen-to-square"></i></a>
-
-
-
-
-
-
-
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                                    new MultiSelectTag("countries{{ $i }}");
-                                });
-                    </script>
-
-                    <div class="modal fade" id="edit_{{ $archive->ARCH_ID }}" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Archive update</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                @php
-                                $auth = App\Models\STUDENT::where('GROUP_ID', $archive->ARCH_ID)->get();
-                                @endphp
-
-                                <div class="modal-body">
-
-                                    <form class=""
-                                        action="{{ route('superAdmin.updateArch', ['ARCH_ID' => $archive->ARCH_ID]) }}"
-                                        method="POST" enctype="multipart/form-data">
-
-                                        @csrf
-                                        @method('PUT')
-
-                                        <div class="mb-3">
-                                            <label for="archID" class="form-label">Archive ID</label>
-                                            <p type="text" class="form-control">{{ $archive->ARCH_ID }} </p>
-
-                                        </div>
-
-                                        <div class="mb-3">
-
-                                            <label for="name" class="form-label">Archive name</label>
-                                            <input class="form-control" type="text" name="ARCH_NAME"
-                                                value="{{ old('ARCH_NAME', $archive->ARCH_NAME) }}" id="name" required>
-
-
-                                        </div>
-
-
-                                        <div class="mb-3">
-
-
-                                            <div class="mb-3">
-                                                <label for="gh" class="form-label">GitHub Repository</label>
-                                                <input type="text" class="form-control" placeholder="Enter Link"
-                                                    name="GITHUB_LINK" id="gh"
-                                                    value="{{ old('GITHUB_LINK', $archive->GITHUB_LINK) }}">
-
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="pdf_file" class="form-label">Current
-                                                    Documentation</label>
-                                                <a class="form-control" href="#"
-                                                    onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{
-                                                    $archive->PDF_FILE }}</a>
-
-                                                <label for="pdf_file" class="form-label">Documentation</label>
-                                                <input type="file" id="pdf_file" name="pdf_file"
-                                                    accept="application/pdf" value="{{ old('PDF_FILE') }}" id="pdf"
-                                                    class="form-control">
-
-                                            </div>
-
-                                            <div class="dropdown">
-                                                <label for="Status" class="form-label">Status:</label>
-                                                <select id="stat" name="IS_APPROVED" class="form-select"
-                                                    aria-label="Default select example">
-                                                    <option value="approved">approved</option>
-                                                    <option value="not approved">not approved</option>
-
-                                                </select>
-
-
-                                                <br>
-                                            </div>
-
-                                            <div class="form-floating">
-
-                                                <textarea class="form-control" placeholder="Leave a abstract here"
-                                                    name="ABSTRACT"
-                                                    rows="3">{{ old('ABSTRACT', $archive->ABSTRACT) }}</textarea>
-                                                <label for="floatingTextarea2">Abstract</label>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="form-label">Authors</label>
-                                                @foreach ($auth as $item)
-                                                <p class="form-control">{{ $item->S_ID }} ||
-                                                    {{ $item->NAME }}</p>
-                                                @endforeach
-                                            </div>
-                                            <label for="Author" class="form-label">Author</label>
-
-                                            <select name="countries[]" id="countries{{ $i }}" multiple>
-                                                @foreach ($auths as $archive)
-                                                <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }} ||
-                                                    {{ $archive->NAME }}</option>
-                                                @endforeach
-                                            </select>
-
-
-
-
-                                        </div>
-
-
-
-
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Update Archive</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-
-
-                    </div> {{-- end modal for edit archive --}}
-
-
-
-
-                </td>
-
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {{ $arch->links() }}
-
-
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Archive add</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <form class="" action="{{ route('superAdmin.storeArch') }}" method="POST"
-                        enctype="multipart/form-data">
-
-                        @csrf
-
-
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Archive Title</label>
-                            <input type="text" class="form-control" placeholder="Enter Title" name="name"
-                                value="{{ old('name') }}" required>
-
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="Author" class="form-label">Authors</label>
-
-                            <select name="countries[]" id="countries" multiple>
-                                @foreach ($auths as $archive)
-                                <option value="{{ $archive->S_ID }}">{{ $archive->S_ID }}</option>
-                                @endforeach
-                            </select>
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-
-                            <label for="pdf_file" class="form-label">Documentation</label>
-                            <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf"
-                                value="{{ old('pdf_file') }}" id="pdf" class="form-control">
-
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="pubYear" class="form-label">Approved Year</label>
-                            <input type="text" class="form-control" placeholder="Ex: JUNE 2023" name="pubYear"
-                                value="{{ old('pubYear') }}" required>
-
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="gh" class="form-label">GitHub Repository</label>
-                            <input type="text" class="form-control" placeholder="Enter Link" name="gh" id="gh"
-                                value="{{ old('gh') }}">
-
-                        </div>
-
-                        <div class="dropdown">
-                            <label for="Status" class="form-label">Status:</label>
-                            <select id="stat" name="stat" class="form-select" aria-label="Default select example">
-                                <option value="approved">approved</option>
-                                <option value="not approved">not approved</option>
-
-                            </select>
-
-
-                            <br>
-                        </div>
-                        <div class="form-floating">
-
-                            <textarea class="form-control" placeholder="Leave a abstract here" name="abs"
-                                id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Abstract</label>
-                        </div>
-
-
-
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Archive</button>
-                </div>
-                </form>
-            </div>
-        </div>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                    new MultiSelectTag("countries");
-                });
-        </script>
-
-
-
-
-    </div>  --}}
     @endsection
