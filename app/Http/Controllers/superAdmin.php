@@ -465,14 +465,12 @@ class superAdmin extends Controller
 
         $identifyProg=program::where('id', $id)->value('PROG_NAME');
 
-        $depts=department::where('PROG_ID',$id)->all();
-
-            foreach ($depts as $dept) {
-
-            }
-        $employee=EMPLOYEE::where('EMP_DEPT',$dept)->all();
+        $depts=department::where('PROG_ID',$id)->get();
 
 
-        return view("superAdmin.specAdminTB")->with('emp',$employee)->with('if',$identifyProg);
+        //  $emp=EMPLOYEE::where('EMP_DEPT',$depts)->get();
+
+
+        return view("superAdmin.specAdminTB")->with('dept',$depts)->with('if',$identifyProg);
     }
 }

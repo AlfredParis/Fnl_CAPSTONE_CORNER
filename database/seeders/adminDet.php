@@ -20,6 +20,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '10',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '2',
+                'PROG_ID'=>'4'
 
             ],
           [
@@ -28,6 +29,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '10',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '2',
+                'PROG_ID'=>'4'
             ],
            [
                 'EMP_ID' => 'facultyIT',
@@ -35,6 +37,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
+                'PROG_ID'=>'2'
             ],
             [
                 'EMP_ID' => 'facultyBSBA',
@@ -42,6 +45,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '5',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
+                'PROG_ID'=>'2'
             ],
             [
                 'EMP_ID' => 'facultyBSHM',
@@ -49,6 +53,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '7',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
+                'PROG_ID'=>'2'
             ],
             [
                 'EMP_ID' => 'facultyBSOA',
@@ -56,6 +61,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '8',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
+                'PROG_ID'=>'2'
             ],
             [
 
@@ -64,6 +70,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '10',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '3',
+                'PROG_ID'=>'3'
 
             ],
             [
@@ -73,6 +80,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '10',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '3',
+                'PROG_ID'=>'1'
             ],
             [
 
@@ -81,6 +89,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '3',
+                'PROG_ID'=>'2'
             ],
             [
 
@@ -89,6 +98,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '4',
+                'PROG_ID'=>'2'
             ],
             [
 
@@ -97,6 +107,7 @@ class adminDet extends Seeder
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '1',
+                'PROG_ID'=>'2'
             ],
 
 

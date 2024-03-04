@@ -36,7 +36,7 @@ class programSeed extends Seeder
             [
                 'PROG_NAME' => 'non-teaching',
                 'PROG_ABBR' => 'non-teaching'
-            ],
+            ]
         ];
 
 

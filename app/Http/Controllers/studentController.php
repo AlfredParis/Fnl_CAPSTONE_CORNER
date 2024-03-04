@@ -15,16 +15,16 @@ class studentController extends Controller
 
     public function index()
     {
-        $ID = Session::get('userID') ;
-        $total_arch=ARCHIVES::count() ;
-        $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
-        $total_student=student_acc::where('ACCTYPE', 'student')->count();
-        $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+        $total_arch = ARCHIVES::count();
+        $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student = student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+       $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
 
 
-        return view('studentDB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
+
+        return view('studentDB')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
     }
-
     public function archives(Request $request)
     {
         $yearToSearch=$request->input("search");
@@ -40,11 +40,11 @@ class studentController extends Controller
             } else {
                 $ret = collect();
             }
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+            $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
 
             return view('studArchiveTB')->with('arch', $ret) ->with( 'auths',$auth);
         }
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
 
         return view('studArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
@@ -53,7 +53,7 @@ class studentController extends Controller
 
     public function viewCnt(string $ARCH_ID)
     {
-        \Log::info("Received ARCH_ID: $ARCH_ID");
+        Log::info("Received ARCH_ID: $ARCH_ID");
 
         $archNW = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
         $id=ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('ARCH_ID');
@@ -93,7 +93,11 @@ class studentController extends Controller
         return view('studMyArchive')->with('arch', $archives);
     }
 
+    public function group()
+    {
 
+        return view('studGroup');
+    }
 
 
 
@@ -108,7 +112,7 @@ class studentController extends Controller
     $inputWords = explode(' ', $userInput);
 
     // Retrieve all titles from the database
-    $titles = DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
+    $titles=DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
 
      $similarTitles = [];
 
