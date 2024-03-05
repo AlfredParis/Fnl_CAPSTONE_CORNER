@@ -6,6 +6,7 @@ use App\Models\USER_ACC_EMP;
 use App\Models\student_acc;
 use Illuminate\Http\Request;
 use App\Models\STUDENT;
+use App\Models\group;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Illuminate\Support\Facades\Log;
@@ -95,8 +96,10 @@ class studentController extends Controller
 
     public function group()
     {
+        $id = Session::get('userID');
+        $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
 
-        return view('studGroup');
+        return view('studGroup')->with('isGrouped',$isGroup);
     }
 
 
