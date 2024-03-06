@@ -84,11 +84,6 @@ class studentController extends Controller
     {
         $ID = Session::get('userID');
 
-
-    //      $archives = DB::table('a_r_c_h_i_v_e_s')
-    //  ->where('a_r_c_h_i_v_e_s.ARCH_ID', '=', $ID)
-    // ->select('a_r_c_h_i_v_e_s.ARCH_ID', 'a_r_c_h_i_v_e_s.ARCH_NAME', )
-    // ->paginate(2);
     $archId = STUDENT::where("S_ID", $ID)->value("ARCH_ID");
      $archives= ARCHIVES::where('ARCH_ID',$archId )->paginate(2);
         return view('studMyArchive')->with('arch', $archives);
@@ -103,7 +98,7 @@ class studentController extends Controller
             return view('studGroup')->with('isGrouped',$isGroup);
         }else {
 
-            return view('studGroup')->with('isGrouped',$isGroup)->with();
+            return view('studGroup')->with('isGrouped',$isGroup);
         }
 
 
@@ -112,7 +107,6 @@ class studentController extends Controller
     {
 
         $id = Session::get('userID');
-        $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
 
         $grp = new group;
 
@@ -121,7 +115,15 @@ class studentController extends Controller
         $grp->ARCH_ID = $request->input("ARCH_ID");
         $grp->save();
 
-        return view('studGroup')->with('isGrouped',$isGroup);
+        $arch = STUDENT::where('S_ID', $id)->first();
+
+            // $findGRP=
+        $arch->where('S_ID', $id)->update([
+            'GROUP_ID' => $grp->id
+        ]);
+
+        return redirect()->route('studentt.group')->with('alert', 'Group created');
+
     }
 
    public function findSimilarWords(Request $request)

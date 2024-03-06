@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="" action="{{ route('superAdmin.addGroup') }}" method="POST" enctype="multipart/form-data">
+                <form class="" action="{{ route('studentt.addGroup') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 

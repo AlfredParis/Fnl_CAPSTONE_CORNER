@@ -33,6 +33,7 @@ Archive Table
         Make a group
     </button>
 </div>
+
 @include("studentModal.makeGroup")
 @endif
 

@@ -72,11 +72,11 @@
 </head>
 
 <body>
-    {{--
+
     <div id="alertBox" class="alert">
         <span id="alertMessage" class="alert-message">{{ Session::get('alert') }}</span>
         <span id="alertClose" class="alert-close">&times;</span>
-    </div> --}}
+    </div>
 
 
     <script>
@@ -88,7 +88,7 @@
     </script>
 
     @php
-        $i = 0;
+    $i = 0;
     @endphp
 
     <script>
@@ -181,12 +181,12 @@
             toggleMenu.classList.toggle('actives');
         }
     </script>
-    {{-- Log out Animation  END --}}
+    {{-- Log out Animation END --}}
     {{-- Alert message end --}}
 
 
     @php
-        $name = Session::get('fullNs');
+    $name = Session::get('fullNs');
     @endphp
 
     <div class="container-fluid">
@@ -205,7 +205,7 @@
 
                     @section('topnav')
 
-                        @parent
+                    @parent
 
 
                     @show
@@ -213,103 +213,104 @@
                     </ul>
 
                     @if ($accT = Session::get('accT') == 'superAdmin')
-                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                            <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <div class="container-fluid">
 
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item dropdown">
-                                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false">
-                                                Programs
-                                            </button>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                            data-bs-auto-close="outside" aria-expanded="false">
+                                            Programs
+                                        </button>
 
-                                            <ul class="dropdown-menu dropdown-menu-dark hihi">
+                                        <ul class="dropdown-menu dropdown-menu-dark hihi">
 
-                                                @php
-                                                // $depts = \App\Models\department::all();
-                                                $progs = \App\Models\program::all();
+                                            @php
+                                            // $depts = \App\Models\department::all();
+                                            $progs = \App\Models\program::all();
 
-                                                @endphp
-                                        @foreach ($progs as $prog)
-                                        <li class="dropend DD">
-                                            <a class="dropdown-item dropdown-toggle" href="{{ route('superAdmin.specAdminTB', ['id' =>  $prog->id]) }}">{{$prog->PROG_ABBR}}</a>
+                                            @endphp
+                                            @foreach ($progs as $prog)
+                                            <li class="dropend DD">
+                                                <a class="dropdown-item dropdown-toggle"
+                                                    href="{{ route('superAdmin.specAdminTB', ['id' =>  $prog->id]) }}">{{$prog->PROG_ABBR}}</a>
                                                 <ul class="dropdown-menu dropdown-menu-dark DDhover">
                                                     @php
-                                                       $depts = \App\Models\department::where('PROG_ID', $prog->id)->get();
+                                                    $depts = \App\Models\department::where('PROG_ID', $prog->id)->get();
                                                     @endphp
 
                                                     <li>
 
-                                                            @foreach ($depts as $dept)
-                                                            <a href="" class="dropdown-item">{{$dept->DEPT_NAME}}</a>
+                                                        @foreach ($depts as $dept)
+                                                        <a href="" class="dropdown-item">{{$dept->DEPT_NAME}}</a>
 
-                                                            @endforeach
+                                                        @endforeach
 
                                                     </li>
                                                 </ul>
-                                        </li>
+                                            </li>
 
-                                        @endforeach
+                                            @endforeach
 
 
 
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                        </nav>
+                        </div>
+                    </nav>
                     @endif
 
                     @section('logout')
 
-                        <br>
+                    <br>
 
-                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                            <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <div class="container-fluid">
 
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item dropdown">
-                                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                Others
-                                            </button>
-                                            @php
-                                                $id = Session::get('userID');
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            Others
+                                        </button>
+                                        @php
+                                        $id = Session::get('userID');
 
-                                            @endphp
-                                            <ul class="dropdown-menu dropdown-menu-dark">
-                                                <li><a class="dropdown-item" href="#">Account:
-                                                        {{ $accT = Session::get('accT') }}</a></li>
-                                                <li><a class="dropdown-item" href="#editUser_{{ $id }}"
-                                                        data-bs-toggle="modal"> <i class="fs-5 fa fa-pen-to-square"></i>Edit
-                                                        Account</a></li>
+                                        @endphp
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a class="dropdown-item" href="#">Account:
+                                                    {{ $accT = Session::get('accT') }}</a></li>
+                                            <li><a class="dropdown-item" href="#editUser_{{ $id }}"
+                                                    data-bs-toggle="modal"> <i class="fs-5 fa fa-pen-to-square"></i>Edit
+                                                    Account</a></li>
 
 
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="{{ route('logout') }}"> <i
-                                                            class="fs-5 fa fa-right-from-bracket" alt="sadf"> </i>
-                                                        Logout </a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="{{ route('logout') }}"> <i
+                                                        class="fs-5 fa fa-right-from-bracket" alt="sadf"> </i>
+                                                    Logout </a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                        </nav>
+                        </div>
+                    </nav>
                     @show
                 </div>
 
@@ -318,7 +319,7 @@
 
             <div class="p-3 " style="width: 80vw;">
                 @section('main')
-                    @parent
+                @parent
                 @show
             </div>
         </div>
