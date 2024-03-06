@@ -7,25 +7,29 @@
             </div>
             <div class="modal-body">
 
-                <form class="" action="{{ route('superAdmin.storeArch') }}" method="POST" enctype="multipart/form-data">
+                <form class="" action="{{ route('superAdmin.addGroup') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
 
                     <div class="mb-3">
-                        <label for="name" class="form-label">Program name</label>
-                        <input type="text" class="form-control" placeholder="Name" name="PROG_NAME"
+                        <label for="name" class="form-label">Group name</label>
+                        <input type="text" class="form-control" placeholder="Name" name="GRP_NAME"
                             value="{{ old('PROG_NAME') }}" required>
 
                     </div>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Program abbreviation</label>
-                        <input type="text" class="form-control" placeholder="Ex. BSIT" name="PROG_ABBR"
+                        <input type="text" class="form-control" placeholder="Ex. BSIT" name="ADVSR_ID"
+                            value="{{ old('PROG_ABBR') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Program abbreviation</label>
+                        <input type="text" class="form-control" placeholder="Ex. BSIT" name="ARCH_ID"
                             value="{{ old('PROG_ABBR') }}" required>
 
                     </div>
-
 
             </div>
 

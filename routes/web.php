@@ -43,6 +43,8 @@ Route::resource('/usercc', userCCcontroller::class)->names([
 Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF');
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
+
+    Route::get('/addGroup', [studentController::class, 'addGroup'])->name('addGroup');
     Route::get('/group', [studentController::class, 'group'])->name('group');
     Route::get('/', [studentController::class, 'index'])->name('index');
     Route::get('/my-archive', [studentController::class, 'myArchive'])->name('myArchive');

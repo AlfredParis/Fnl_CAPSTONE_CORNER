@@ -99,10 +99,30 @@ class studentController extends Controller
         $id = Session::get('userID');
         $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
 
+        if($isGroup =='N/A'){
+            return view('studGroup')->with('isGrouped',$isGroup);
+        }else {
+
+            return view('studGroup')->with('isGrouped',$isGroup)->with();
+        }
+
+
+    }
+    public function addGroup(Request $request)
+    {
+
+        $id = Session::get('userID');
+        $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
+
+        $grp = new group;
+
+        $grp->GRP_NAME = $request->input("GRP_NAME");
+        $grp->ADVSR_ID = $request->input("ADVSR_ID");
+        $grp->ARCH_ID = $request->input("ARCH_ID");
+        $grp->save();
+
         return view('studGroup')->with('isGrouped',$isGroup);
     }
-
-
 
    public function findSimilarWords(Request $request)
 {
