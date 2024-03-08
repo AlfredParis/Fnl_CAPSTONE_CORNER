@@ -24,6 +24,7 @@ Archive Table
                 class="fs-6 d-none ms-2 d-sm-inline">archives</span></a>
     </li>
 </ul>
+
 @endsection
 
 @section('main')
@@ -40,6 +41,13 @@ Archive Table
 @else
 
 {{ $GRP_det->id }}
+
+@php
+       $advicername= \App\Models\EMPLOYEE::where('EMP_ID ',  $GRP_det->id)->first();
+@endphp
+{{ $advicername->NAME }}
+{{ $GRP_det->id }}
+
 @endif
 
 

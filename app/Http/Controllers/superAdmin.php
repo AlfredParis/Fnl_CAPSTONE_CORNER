@@ -103,13 +103,7 @@ class superAdmin extends Controller
         $archNW = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
         $id = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('ARCH_ID');
         $total = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('viewCount');
-
-        // return dd($ARCH_ID);
-        if ($archNW) {
-            //  return dd($archNW);
-            // Check if $arch is not null before proceeding
-
-            // Increment the viewCount directly in the update statement
+ if ($archNW) {
             $archNW->where('ARCH_ID', $ARCH_ID)->update([
                 'viewCount' => $total + 1,
                 'updated_at' => now(), // or use a specific timestamp if needed
@@ -119,11 +113,8 @@ class superAdmin extends Controller
             $auths = STUDENT::where('ARCH_ID', 'N/A')->get();
             $arch = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
 
-            // return response()->json(['success' => true]);
-            // return view('superAdmin.ArchiveTB', compact('success', 'arch', 'auths'));
-        } else {
-            // Handle the case where the archive is not found
-            abort(404);
+         } else {
+        abort(404);
         }
     }
 

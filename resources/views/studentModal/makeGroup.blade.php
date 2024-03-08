@@ -19,13 +19,24 @@
 
                     </div>
 
+
+                    <label for="Author" class="form-label">Available advisers</label>
+
+                    <select name="countries[]" id="countries" multiple>
+                        @foreach ($adviser as $advc)
+                        <option value="{{ $advc->EMP_ID }}">{{ $advc->NAME }} ||
+                            {{ $advc->EMP_ID }}</option>
+                        @endforeach
+                    </select>
+
+
+
+
+
+
+
                     <div class="mb-3">
-                        <label for="name" class="form-label">Program abbreviation</label>
-                        <input type="text" class="form-control" placeholder="Ex. BSIT" name="ADVSR_ID"
-                            value="{{ old('PROG_ABBR') }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Program abbreviation</label>
+                        <label for="name" class="form-label">Arch id</label>
                         <input type="text" class="form-control" placeholder="Ex. BSIT" name="ARCH_ID"
                             value="{{ old('PROG_ABBR') }}" required>
 

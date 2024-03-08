@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\ARCHIVES;
 use App\Models\USER_ACC_EMP;
+use App\Models\EMPLOYEE;
 use App\Models\student_acc;
 use Illuminate\Http\Request;
 use App\Models\STUDENT;
@@ -94,7 +95,11 @@ class studentController extends Controller
         $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
 
         if($isGroup =='N/A'){
-            return view('studGroup')->with('isGrouped',$isGroup);
+            // $auth=EMPLOYEE::where('GROUP_ID', 'N/A')->get();
+            $auth=EMPLOYEE::get();
+
+
+            return view('studGroup')->with('isGrouped',$isGroup) ->with('adviser', $auth);
         }else {
 
             $myGRP=group::where('id',$isGroup)->first();
