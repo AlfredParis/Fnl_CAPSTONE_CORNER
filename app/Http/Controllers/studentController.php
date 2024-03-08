@@ -72,10 +72,9 @@ class studentController extends Controller
             $auths = STUDENT::where('ARCH_ID', 'N/A')->get();
             $arch = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
 
-            // return response()->json(['success' => true]);
-            // return view('superAdmin.ArchiveTB', compact('success', 'arch', 'auths'));
+
         } else {
-            // Handle the case where the archive is not found
+
             abort(404);
         }
     }
@@ -98,7 +97,9 @@ class studentController extends Controller
             return view('studGroup')->with('isGrouped',$isGroup);
         }else {
 
-            return view('studGroup')->with('isGrouped',$isGroup);
+            $myGRP=group::where('id',$isGroup)->first();
+
+            return view('studGroup')->with('isGrouped',$isGroup)->with('GRP_det',$myGRP);
         }
 
 

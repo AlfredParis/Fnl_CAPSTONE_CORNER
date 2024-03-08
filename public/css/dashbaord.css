@@ -1,21 +1,22 @@
-.nav-pills li a:hover{
-background-color: blue;
+.nav-pills li a:hover {
+    background-color: blue;
 }
+
 .alert {
     position: fixed;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #394ed6;
-    border: 2px solid #decb1e;
+    background: #0d6efd;
+    border: 2px solid #decb1e00;
     padding: 15px 20px;
-    border-radius: 6px;
+    border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #ffffff;
+    font-size: 25px;
+    color: #fefefe;
     max-width: 350px;
     text-align: center;
 }
