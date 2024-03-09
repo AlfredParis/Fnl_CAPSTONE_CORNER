@@ -14,25 +14,11 @@
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Group name</label>
-                        <input type="text" class="form-control" placeholder="Name" name="GRP_NAME"
-                            value="{{ old('PROG_NAME') }}" required>
 
                     </div>
 
 
-                    <label for="Author" class="form-label">Available advisers (Select Only one)</label>
 
-                    <select name="ADVSR_ID" id="countries" multiple>
-                        @foreach ($adviser as $advc)
-                        <option value="{{ $advc->EMP_ID }}">Adviser: <u>{{ $advc->NAME}}</u> </option>
-                        @endforeach
-                    </select>
-                    {{--
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Arch id</label>
-                        <input type="text" class="form-control" placeholder="Ex. BSIT" name="ARCH_ID"
-                            value="{{ old('PROG_ABBR') }}" required>
-                    </div> --}}
 
             </div>
 
@@ -43,12 +29,6 @@
             </form>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            new MultiSelectTag("countries");
-        });
-    </script>
 
 
 

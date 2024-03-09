@@ -30,7 +30,6 @@ class subAdmin extends Controller
         $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student=student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
             return view('subAdmin.dashboard');
 

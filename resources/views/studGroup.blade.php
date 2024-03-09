@@ -48,9 +48,22 @@ Archive Table
 
 @php
 $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
+$mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 @endphp
-{{ $advicername->NAME }} <br>
-{{ $GRP_det->id }}
+
+<div> <h1> {{ $GRP_det->GRP_NAME }}</h1> <br>
+  Adviser:  {{ $advicername->NAME }} <br>
+
+</div>
+Members:
+<br>
+@foreach ( $mmbrs as $mmbr)
+    {{$mmbr->NAME}}
+@endforeach
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupAdd">
+    Add Archive
+</button>
 
 @endif
 
