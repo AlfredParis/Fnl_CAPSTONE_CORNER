@@ -118,7 +118,7 @@ class studentController extends Controller
 
         $grp->GRP_NAME = $request->input("GRP_NAME");
         $grp->ADVSR_ID = $request->input("ADVSR_ID");
-        $grp->ARCH_ID = $request->input("ARCH_ID");
+        $grp->ARCH_ID = "N/A";
         $grp->save();
 
         $arch = STUDENT::where('S_ID', $id)->first();

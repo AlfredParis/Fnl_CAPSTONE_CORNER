@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('advicers', function (Blueprint $table) {
             $table->id();
+            $table->string('EMP_ID');
+            $table->string('STAT');
+            $table->string('MAX_ADV');
             $table->timestamps();
         });
     }

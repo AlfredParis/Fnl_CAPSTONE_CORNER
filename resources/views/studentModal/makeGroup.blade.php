@@ -20,27 +20,20 @@
                     </div>
 
 
-                    <label for="Author" class="form-label">Available advisers</label>
+                    <label for="Author" class="form-label">Available advisers (Select Only one)</label>
 
-                    <select name="countries[]" id="countries" multiple>
+                    <select name="ADVSR_ID" id="countries" multiple>
                         @foreach ($adviser as $advc)
-                        <option value="{{ $advc->EMP_ID }}">{{ $advc->NAME }} ||
-                            {{ $advc->EMP_ID }}</option>
+                        <option value="{{ $advc->EMP_ID }}">Adviser: <u>{{ $advc->NAME}}</u> </option>
                         @endforeach
                     </select>
-
-
-
-
-
-
-
+                    {{--
                     <div class="mb-3">
                         <label for="name" class="form-label">Arch id</label>
                         <input type="text" class="form-control" placeholder="Ex. BSIT" name="ARCH_ID"
                             value="{{ old('PROG_ABBR') }}" required>
 
-                    </div>
+                    </div> --}}
 
             </div>
 

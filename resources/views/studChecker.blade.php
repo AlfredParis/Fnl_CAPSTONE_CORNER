@@ -5,13 +5,13 @@ Student Dashboard
 @endsection
 
 @section('topnav')
-<ul class="nav nav-pills flex-column mt-4">
+<ul class="nav nav-pills flex-column mt-4 gap-1">
     <li class="nav-item py-2 py-sm-0">
         <a href="{{ route('studentt.index') }}" class="nav-link text-white "><i class="fs-7 fa fa-house"></i><span
                 class="fs-6 d-none ms-2 d-sm-inline">Dashboard</span></a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a href="{{ route('studentt.group') }}" class="nav-link text-white"><i class="fs-7 fa fa-box-archive"></i><span
+        <a href="{{ route('studentt.group') }}" class="nav-link text-white"><i class="fs-7 fa fa-user-group"></i><span
                 class="fs-6 d-none ms-2 d-sm-inline">Group</span></a>
     </li>
     <li class="nav-item py-2 py-sm-0">
