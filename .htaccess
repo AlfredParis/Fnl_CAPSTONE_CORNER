@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+RewriteRule ^(.*)$ /Fnl_CAPSTONE_CORNER/public/$1 [L]
+</IfModule>

@@ -26,12 +26,11 @@ Archive Table
 @endsection
 
 @section('main')
+<div class="pddingForBody">
 <div class="container" style="margin-left: 0;">
     <div class="row">
         <div class="col auto">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                Add Archive
-            </button>
+
         </div>
         <div class="col">
             <form action="{{ route('studentt.archives') }}" method="get">
@@ -86,8 +85,6 @@ Archive Table
             </td>
             <td scope="row">{{ $archive->GITHUB_LINK }}</td>
             <td scope="row">
-                {{-- <a href="{{ route('superAdmin.viewCnt', ['ARCH_ID' => $archive->ARCH_ID]) }}" class="open-modal">
-                    --}}
 
 
                     <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
@@ -117,7 +114,7 @@ Archive Table
     </tbody>
 </table>
 {{ $arch->links() }}
-
+</div>
 {{-- modal for add archive --}}
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

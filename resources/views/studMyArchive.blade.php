@@ -26,10 +26,8 @@
 @endsection
 
 @section('main')
-    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArch">
-            Add Archive
-        </button> --}}
 
+<div class="pddingForBody">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -66,6 +64,6 @@
         </tbody>
     </table>
     {{ $arch->links() }}
-
+</div>
     @include('modal.studaddArch')
 @endsection

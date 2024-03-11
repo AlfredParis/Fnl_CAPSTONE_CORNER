@@ -34,11 +34,13 @@ class userCCcontroller extends Controller
                 $decrypt = decrypt($password);
                     if ( $passwordinput == $decrypt) {
                         $accT = student_acc::where("S_ID", $userID)->value("ACCTYPE");
+                        $dept = STUDENT::where("S_ID", $userID)->value("DEPT_ID");
                             $fullN = DB::table('student_accs')
                             ->join('s_t_u_d_e_n_t_s', 'student_accs.S_ID', '=', 's_t_u_d_e_n_t_s.S_ID')
                             ->where('s_t_u_d_e_n_t_s.S_ID', $userID)
                             ->value('s_t_u_d_e_n_t_s.NAME');
                             Session::put('userID', $userID);
+                            Session::put('course', $dept);
                             Session::put('fullNs', $fullN);
                             Session::put('accT', $accT);
                             return redirect('/student')->with('lrt', 1)->with('alert', "Welcome  $fullN!");

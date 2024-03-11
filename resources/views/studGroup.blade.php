@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-Archive Table
+My Group
 @endsection
 
 @section('topnav')
@@ -30,6 +30,7 @@ Archive Table
 @section('main')
 
 @if ($isGrouped == 'N/A')
+<div class="pddingForBody">
 <div class="col auto">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupAdd">
         Make a group
@@ -39,7 +40,7 @@ Archive Table
 <div style="text-align: center; Margin-top:40vh;">
     <h1>You don't have a group yet. Make yours or wait for your leader to add you.</h1>
 </div>
-
+</div>
 @include("studentModal.makeGroup")
 
 @else
@@ -50,22 +51,58 @@ Archive Table
 $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
 $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 @endphp
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container-fluid">
+        <h1 style="padding-right: 15px; color:aliceblue;"> {{ $GRP_det->GRP_NAME }} |</h1> <h2 style="padding-right: 15px;  color:aliceblue;"> Adviser:  {{ $advicername->NAME }}</h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Group Members
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" >
+                        @foreach ( $mmbrs as $mmbr)
+                        <li style="padding-left:10px;">
+                         <form class=""
+                            action="{{route('studentt.removeMem', ['S_ID' => $mmbr->S_ID])}}"
+                            method="POST" enctype="multipart/form-data">
+                            {{$mmbr->NAME}} |
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;"> <i class="fs-7 fa fa-trash"></i></button>
 
-<div> <h1> {{ $GRP_det->GRP_NAME }}</h1> <br>
-  Adviser:  {{ $advicername->NAME }} <br>
+                            </form>
+                         </li>
+                         @endforeach
+                         <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                         <li > <button type="button" data-bs-toggle="modal" data-bs-target="#memAdd" style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;"> Add member</button></li>
 
-</div>
-Members:
-<br>
-@foreach ( $mmbrs as $mmbr)
-    {{$mmbr->NAME}}
-@endforeach
+                        </ul>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupAdd">
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="pddingForBody">
+@include('studentModal.addMember')
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArchive">
     Add Archive
 </button>
+@include("studentModal.addArchive")
 
 @endif
-
+</div>
 
 @endsection

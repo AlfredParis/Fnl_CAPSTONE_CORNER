@@ -191,7 +191,7 @@
 
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div
+            <div style="position: fixed"
                 class="bg-dark col-auto col-sm-6 col-md-2 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
                 <div class="bg-dark p-2">
                     <a href="" class="d-flex text-decoration-none align-items-center text-white">
@@ -272,7 +272,7 @@
 
                     <br>
 
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
                         <div class="container-fluid">
 
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -317,7 +317,7 @@
 
             </div>
 
-            <div class="p-3 " style="width: 80vw;">
+            <div class="" style="padding-left:16.7vw;padding-right:0px;">
                 @section('main')
                 @parent
                 @show

@@ -26,7 +26,7 @@ Student Dashboard
 @endsection
 
 @section('main')
-
+<div class="pddingForBody">
 <form action="{{ route('studentt.words') }}" method="POST">
     @csrf
     <div class="form-group">
@@ -99,6 +99,6 @@ Student Dashboard
 <strong>No similar titles found!</strong>
 @endif
 </div>
-</div>
-</div>
+
+
 @endsection

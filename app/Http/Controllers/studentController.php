@@ -8,6 +8,7 @@ use App\Models\student_acc;
 use Illuminate\Http\Request;
 use App\Models\STUDENT;
 use App\Models\group;
+use App\Models\OP_Archive;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Illuminate\Support\Facades\Log;
@@ -27,6 +28,7 @@ class studentController extends Controller
 
         return view('studentDB')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
     }
+
     public function archives(Request $request)
     {
         $yearToSearch=$request->input("search");
@@ -109,6 +111,7 @@ class studentController extends Controller
 
 
     }
+
     public function addGroup(Request $request)
     {
 
@@ -216,6 +219,102 @@ public function addArch()
         return view('studaddArch');
     }
 
+    public function updateMember(Request $request)
+    {
+        $id = Session::get('userID');
+        $logGroup = STUDENT::where('S_ID', $id)->value('GROUP_ID');
+
+        $members = $request->input("S_ID");
+
+        if (is_array($members )) {
+            foreach ($members  as $member) {
+
+                $stud = STUDENT::where('S_ID', $member)->first();
+                $stud->where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
+
+
+            }
+        }
+        return redirect()->route('studentt.group')->with('alert', 'Member Successfully added.');
+
+    }
+    public function removeMem($S_ID)
+    {
+                $stud = STUDENT::where('S_ID', $S_ID)->first();
+
+                $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+
+        return redirect()->route('studentt.group')->with('alert', 'Member Successfully added.');
+
+    }
+
+    public function opArch(Request $request)
+    {
+
+        $name = Session::get('fullNs');
+        $arch = new OP_Archive;
+        $arch->ARCH_NAME = $request->input("name");
+        $arch->ABSTRACT = $request->input("abs");
+        $arch->UPLOADER = $name ;
+        $arch->YEAR_PUB = $request->input("pubYear");
+
+        if ($request->hasFile('pdf_file')) {
+
+            $pdfFile = $request->file('pdf_file');
+            $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfFile->storeAs('pdfs', $fileName, 'public');
+
+            $selectedCountries = $request->input("countries");
+
+
+            if (isset($gh)) {
+                $arch->PDF_FILE = $fileName;
+                $arch->viewCount = 0;
+                $arch->GITHUB_LINK = $request->input("gh");
+                $arch->IS_APPROVED = $request->input("stat");
+                if (is_array($selectedCountries)) {
+                    foreach ($selectedCountries as $ID) {
+
+                        $country = STUDENT::where('S_ID', $ID)->first();
+                        $country->where('S_ID', $ID)->update(['ARCH_ID' => $archID,]);
+
+
+                    }
+                }
+                $arch->save();
+
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this archive: $archID ";
+                $notif->suspect = $name;
+            } else {
+                $arch->PDF_FILE = $fileName;
+                $arch->viewCount = 0;
+                $arch->GITHUB_LINK = 'There is no GitHub repository For this archive!';
+                $arch->save();
+
+                Log::alert("Archive has been added $name !");
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this archive: $archID  ";
+                $notif->suspect = $name;
+            }
+
+        } else {
+
+            return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+        }
+
+
+        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
+
+        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+        return view('superAdmin.ArchiveTB')->with('arch', $archives)->with('auths', $auth);
+
+
+
+    }
+
 public function storeArch(Request $request)
     {
         $name = Session::get('fullNs');
@@ -225,9 +324,14 @@ public function storeArch(Request $request)
         $total_arch=ARCHIVES::count();
         $arch->ARCH_ID = "IT-".$total_arch+1;
 
-         $arch->ARCH_NAME = $request->input("name");
-         $arch->ABSTRACT = $request->input("abs");
-        $arch->AUTHOR_ID = $id;
+        $selectedCountries = $request->input("countries");
+        $gh = $request->input("gh");
+
+
+        $arch->ARCH_NAME = $request->input("name");
+        $arch->ABSTRACT = $request->input("abs");
+        $arch->IS_APPROVED = $request->input("stat");
+        $arch->YEAR_PUB = $request->input("pubYear");
 
   if ($request->hasFile('pdf_file')) {
         $pdfFile = $request->file('pdf_file');

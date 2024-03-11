@@ -45,6 +45,8 @@ Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
 
     Route::post('/addGroup', [studentController::class, 'addGroup'])->name('addGroup');
+    Route::put('/{S_ID}/removeMem', [studentController::class, 'removeMem'])->name('removeMem'); //user edit store
+
     Route::get('/group', [studentController::class, 'group'])->name('group');
     Route::get('/', [studentController::class, 'index'])->name('index');
     Route::get('/my-archive', [studentController::class, 'myArchive'])->name('myArchive');
@@ -57,6 +59,8 @@ Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forSt
     Route::delete('/{id}', [studentController::class, 'delArch'])->name('delArch');
     Route::get('/checker', [studentController::class, 'Checker'])->name('Checker');
     Route::post('/find-similar-words', [studentController::class, 'findSimilarWords'])->name('words');
+    Route::post('/updateMember', [studentController::class, 'updateMember'])->name('updateMember'); //user edit store
+
 });
 
 Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFaculty'], function () {

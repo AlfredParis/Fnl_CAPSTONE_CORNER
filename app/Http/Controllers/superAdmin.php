@@ -103,20 +103,20 @@ class superAdmin extends Controller
         $archNW = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
         $id = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('ARCH_ID');
         $total = ARCHIVES::where('ARCH_ID', $ARCH_ID)->value('viewCount');
- if ($archNW) {
-            $archNW->where('ARCH_ID', $ARCH_ID)->update([
-                'viewCount' => $total + 1,
-                'updated_at' => now(), // or use a specific timestamp if needed
-            ]);
+            if ($archNW) {
+                        $archNW->where('ARCH_ID', $ARCH_ID)->update([
+                            'viewCount' => $total + 1,
+                            'updated_at' => now(), // or use a specific timestamp if needed
+                        ]);
 
-            $success = true;
-            $auths = STUDENT::where('ARCH_ID', 'N/A')->get();
-            $arch = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
+                        $success = true;
+                        $auths = STUDENT::where('ARCH_ID', 'N/A')->get();
+                        $arch = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
 
-         } else {
-        abort(404);
-        }
-    }
+                    } else {
+                    abort(404);
+                    }
+                }
 
 
 

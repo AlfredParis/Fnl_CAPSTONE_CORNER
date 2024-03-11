@@ -10,17 +10,19 @@
     background: #0d6efd;
     border: 2px solid #decb1e00;
     padding: 15px 20px;
-    border-radius: 2px;
+    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     font-family: Arial, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     color: #fefefe;
     max-width: 350px;
     text-align: center;
 }
-
+.pddingForBody{
+    padding: 10px;
+}
 .alert-message {
     margin-bottom: 10px;
 }

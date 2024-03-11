@@ -26,6 +26,7 @@ Student Dashboard
 @endsection
 
 @section('main')
+<div class="pddingForBody">
 <div class="container-fluid ">
     <div class="row ">
         <div class="col-md-4">
@@ -65,7 +66,7 @@ Student Dashboard
 
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr> <th scope="col">Ranking</th>
                         <th scope="col">Archive ID</th>
                         <th scope="col">Archive Title</th>
                         <th scope="col"> Documentation</th>
@@ -91,6 +92,15 @@ Student Dashboard
                         $i = $i + 1;
 
                         @endphp
+                         <td scope="row">
+                            @if ($i==1)
+                                 <h2 style="text-align: center; color:gold;">{{$i}} <i class="fa-solid fa-crown" style="text-align: center; color:gold;"></i> </h2>
+                            @elseif ($i==2)
+                            <h2 style="text-align: center;color:silver;">{{$i}} <i class="fa-solid fa-crown"></i> </h2>
+                            @elseif ($i==3)
+                            <h2 style="text-align: center;color:rgb(129, 83, 22);">{{$i}} <i class="fa-solid fa-crown"></i> </h2>
+                            @endif
+                        </td>
                         <td scope="row">
                             <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
                                 onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
@@ -144,5 +154,6 @@ Student Dashboard
 
         </div>
     </div>
+</div>
 </div>
 @endsection
