@@ -61,6 +61,7 @@ Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forSt
     Route::get('/checker', [studentController::class, 'Checker'])->name('Checker');
     Route::post('/find-similar-words', [studentController::class, 'findSimilarWords'])->name('words');
     Route::post('/updateMember', [studentController::class, 'updateMember'])->name('updateMember'); //user edit store
+    Route::post('{oparchID}/addComment', [studentController::class, 'addComment'])->name('addComment');
 
 });
 

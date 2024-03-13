@@ -124,6 +124,9 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
                         <a href="#"
                             onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');">{{$oparch->PDF_FILE}}</a>
                     </td>
+                    <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
+                    </td>
+                    @include('studentModal.addComment')
                 </tr>
                 @endforeach
 

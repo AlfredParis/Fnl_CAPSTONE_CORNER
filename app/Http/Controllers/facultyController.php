@@ -567,6 +567,7 @@ class facultyController extends Controller
             $addComment->COMMENTOR = Session::get('userID');
             $addComment->MESSAGE = $request->input('MESSAGE');
             $addComment->save();
+            return redirect()->back()->with('alert', 'sent');
 
     }
     public function updateMember(Request $request,string $advisory)

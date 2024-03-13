@@ -8,11 +8,10 @@
             </div>
             <div class="modal-body">
 
-                <form class="" action="{{ route('faculty.addComment',['oparchID' => $oparch->id])}}" method="POST"
+                <form class="" action="{{ route('studentt.addComment',['oparchID' => $oparch->id])}}" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf
-
                     <div class="messages">
                         @php
                         $com= Session::get('userID');
@@ -37,16 +36,16 @@
                             @if ($mess->COMMENTOR==$com)
 
 
-                            <div class="textR"> {{$mess->MESSAGE}} <p class="sender">from: {{$mess->COMMENTOR}}</p>
+                            <div class="textR"> {{$mess->MESSAGE}}
+                                <p class="sender">from: {{$mess->COMMENTOR}}</p>
                             </div>
-
                             @else
 
 
-                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$mess->COMMENTOR}}</p>
+                            <div class="textL"> {{$mess->MESSAGE}}
+
+                                <p class="sender">from: {{$mess->COMMENTOR}}</p>
                             </div>
-
-
                             @endif
 
 

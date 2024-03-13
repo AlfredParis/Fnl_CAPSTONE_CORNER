@@ -13,7 +13,7 @@ use App\Models\notif;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Illuminate\Support\Facades\Log;
-
+use App\Models\messages;
 class studentController extends Controller
 {
 
@@ -336,4 +336,17 @@ else{
 
 
     }
+
+
+    public function addComment(Request $request ,string $oparchID)
+    {
+            $addComment=new messages;
+            $addComment->OP_ID =$oparchID;
+            $addComment->COMMENTOR = Session::get('userID');
+            $addComment->MESSAGE = $request->input('MESSAGE');
+            $addComment->save();
+            return redirect()->back()->with('alert', 'sent');
+
+    }
+
 }

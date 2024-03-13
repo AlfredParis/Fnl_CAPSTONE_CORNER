@@ -29,21 +29,27 @@
     margin-bottom: 10px;
 }
 
+.sender {
+    font-size: 10px;
+}
+
 .messages {
 
 
 
     gap: 5px;
     display: grid;
-    grid-template-columns: 20vw 10vw;
-    grid-template-rows: 20vh 10vh;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: auto;
     grid-template-areas:
-        " textL textR"
+        " missage missage"
         "mess send"
     ;
+    margin-bottom: 50px;
 }
 
 .mess {
+
     position: absolute;
     bottom: 5px;
     left: 5px;
@@ -58,13 +64,32 @@
     grid-area: send;
 }
 
+
+
+.missage {
+
+    width: 100%;
+
+
+}
+
 .textL {
-    grid-area: textL;
+
+    width: 45%;
 }
 
 .textR {
-    grid-area: textR;
+
+    text-align: right;
+    margin-left: 70%;
+    background-color: #0d6efd;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 45%;
 }
+
+
 
 .bottom {
 
