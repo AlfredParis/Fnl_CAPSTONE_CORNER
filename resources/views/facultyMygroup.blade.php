@@ -55,8 +55,8 @@ My Group
 
 
 @php
-$advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
-$mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+    $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
+    $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 @endphp
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
@@ -142,25 +142,24 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 
     @csrf
 
-<div class="bottom">
+        <div class="bottom">
 
 
-    <div class=" mesDes">
-        <input type="text" class="form-control" placeholder="Description Here" name="DESCRIPTION"
-            value="{{ old('DESCRIPTION') }}" required>
-    </div>
-    <div class="mesFile">
+            <div class=" mesDes">
+                <input type="text" class="form-control" placeholder="Description Here" name="DESCRIPTION"
+                    value="{{ old('DESCRIPTION') }}" required>
+            </div>
+            <div class="mesFile">
+                <input type="file" id="pdf_file" name="pdf_file"
+                    accept="application/pdf" value="{{ old('PDF_FILE') }}" id="pdf"
+                    class="form-control" >
+            </div>
+            <div class="mesSave">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
 
-        <input type="file" id="pdf_file" name="pdf_file"
-            accept="application/pdf" value="{{ old('PDF_FILE') }}" id="pdf"
-            class="form-control" >
-    </div>
-    <div class="mesSave">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
 
-
-</div>
+        </div>
 </form>
 
 
