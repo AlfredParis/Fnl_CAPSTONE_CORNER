@@ -586,6 +586,15 @@ class facultyController extends Controller
 
 
     }
+    public function removeMem($S_ID)
+    {
+                $stud = STUDENT::where('S_ID', $S_ID)->first();
+
+                $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+
+                return redirect()->back()->with('alert', 'student removed.');
+
+    }
 
 
 

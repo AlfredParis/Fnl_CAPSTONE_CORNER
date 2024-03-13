@@ -79,6 +79,7 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::get('{advisory}myGroup', [facultyController::class, 'myGroup'])->name('myGroup');
     Route::post('{oparchID}/addComment', [facultyController::class, 'addComment'])->name('addComment');
     Route::post('{advisory}/updateMember', [facultyController::class, 'updateMember'])->name('updateMember'); //user edit store
+    Route::put('/{S_ID}/removeMem', [facultyController::class, 'removeMem'])->name('removeMem'); //user edit store
 
 
 });

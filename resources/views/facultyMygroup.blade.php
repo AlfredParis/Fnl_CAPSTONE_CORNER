@@ -64,27 +64,25 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
     <div class="container-fluid">
         <h1 style="padding-right: 15px; color:aliceblue;"> {{ $GRP_det->GRP_NAME }} |</h1>
         <h2 style="padding-right: 15px;  color:aliceblue;"> Adviser: {{ $advicername->NAME }}</h2>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
-            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown" style="width:50vw;">
+                    <button style="width:10vw;" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Group Members
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         @foreach ( $mmbrs as $mmbr)
-                        <li style="padding-left:10px;">
-                            <form class="" action="{{route('studentt.removeMem', ['S_ID' => $mmbr->S_ID])}}"
+                        <li style="padding-left:10px; padding-right:10px; width:auto; ">
+                            <form class="" action="{{route('faculty.removeMem', ['S_ID' => $mmbr->S_ID])}}"
                                 method="POST" enctype="multipart/form-data">
-                                {{$mmbr->NAME}} |
+                                {{$mmbr->NAME}}
                                 @csrf
                                 @method('PUT')
                                 <button type="submit"
-                                    style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;">
-                                    <i class="fs-7 fa fa-trash"></i></button>
+                                    style="position:absolute; border:none; background-color:rgba(0, 0, 255, 0); color:aliceblue;  right:1px;">
+                                    | <i class="fs-7 fa fa-trash"></i></button>
 
                             </form>
                         </li>
