@@ -23,7 +23,7 @@
                         @foreach ($messages as $mess)
                         <div class="missage">
                             @php
-
+                            $comName="";
                             $comNameEMP=App\Models\EMPLOYEE::where('EMP_ID',$mess->COMMENTOR)->value('NAME');
 
                             $comNameStud=App\Models\STUDENT::where('S_ID',$mess->COMMENTOR)->value('NAME');
@@ -37,13 +37,13 @@
                             @if ($mess->COMMENTOR==$com)
 
 
-                            <div class="textR"> {{$mess->MESSAGE}} <p class="sender">from: {{$mess->COMMENTOR}}</p>
+                            <div class="textR"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
                             </div>
 
                             @else
 
 
-                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$mess->COMMENTOR}}</p>
+                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
                             </div>
 
 

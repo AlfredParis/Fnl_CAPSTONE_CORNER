@@ -232,7 +232,13 @@ public function addArch()
 
         if (is_array($members )) {
             foreach ($members  as $member) {
-
+                $oparchID=STUDENT::where('S_ID',$member)->value('GROUP_ID');
+                $remover=Session::get('userID');
+             $addComment=new messages;
+                $addComment->OP_ID =$logGroup;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $member." has been added by ".$remover;
+                $addComment->save();
                 $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
 
 
@@ -242,10 +248,21 @@ public function addArch()
 
     }
     public function removeMem($S_ID)
-    {
+    {  $remover=Session::get('userID');
                 $stud = STUDENT::where('S_ID', $S_ID)->first();
-
+                $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
                 $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+                $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+                $addComment=new messages;
+                $addComment->OP_ID =$oparchID;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $S_ID." has been removed by ".$remover;
+                $addComment->save();
+
+
+
+
+
 
         return redirect()->route('studentt.group')->with('alert', 'Member Successfully added.');
 

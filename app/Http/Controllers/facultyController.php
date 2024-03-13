@@ -578,9 +578,16 @@ class facultyController extends Controller
         if (is_array($members )) {
             foreach ($members  as $member) {
 
+                $oparchID=STUDENT::where('S_ID',$member)->value('GROUP_ID');
+
+                $remover=Session::get('userID');
+
+                $addComment=new messages;
+                $addComment->OP_ID =$advisory;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $member." has been added by ".$remover;
+                $addComment->save();
                 $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $advisory]);
-
-
             }
         }
         return redirect()->back()->with('alert', 'student added.');
@@ -589,9 +596,17 @@ class facultyController extends Controller
     }
     public function removeMem($S_ID)
     {
+                $remover=Session::get('userID');
+                $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
                 $stud = STUDENT::where('S_ID', $S_ID)->first();
 
                 $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+                $addComment=new messages;
+                $addComment->OP_ID =$oparchID;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $S_ID." has been removed by ".$remover;
+                $addComment->save();
+
 
                 return redirect()->back()->with('alert', 'student removed.');
 

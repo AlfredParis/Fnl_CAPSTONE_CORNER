@@ -8,10 +8,11 @@
             </div>
             <div class="modal-body">
 
-                <form class="" action="{{ route('studentt.addComment',['oparchID' => $oparch->id])}}" method="POST"
+                <form class="" action="{{ route('subAdmin.addComment',['oparchID' => $oparch->id])}}" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf
+
                     <div class="messages">
                         @php
                         $com= Session::get('userID');
@@ -22,11 +23,10 @@
                         @foreach ($messages as $mess)
                         <div class="missage">
                             @php
-
+                            $comName="";
                             $comNameEMP=App\Models\EMPLOYEE::where('EMP_ID',$mess->COMMENTOR)->value('NAME');
 
                             $comNameStud=App\Models\STUDENT::where('S_ID',$mess->COMMENTOR)->value('NAME');
-                            $comName="";
                             if (isset($comNameEMP)) {
                             $comName=$comNameEMP;
                             }elseif (isset( $comNameStud)) {
@@ -37,16 +37,16 @@
                             @if ($mess->COMMENTOR==$com)
 
 
-                            <div class="textR"> {{$mess->MESSAGE}}
-                                <p class="sender">from: {{ $comName}}</p>
+                            <div class="textR"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
                             </div>
+
                             @else
 
 
-                            <div class="textL"> {{$mess->MESSAGE}}
-
-                                <p class="sender">from: {{ $comName}}</p>
+                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
                             </div>
+
+
                             @endif
 
 
