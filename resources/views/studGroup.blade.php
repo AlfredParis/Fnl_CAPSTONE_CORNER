@@ -51,7 +51,8 @@ My Group
 $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
 $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 @endphp
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
         <h1 style="padding-right: 15px; color:aliceblue;"> {{ $GRP_det->GRP_NAME }} |</h1> <h2 style="padding-right: 15px;  color:aliceblue;"> Adviser:  {{ $advicername->NAME }}</h2>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -95,9 +96,11 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 
 <div class="pddingForBody">
 @include('studentModal.addMember')
+<div style="margin-top: 60px ">
 
 <table class="table table-striped">
-    <thead>
+     <div>
+         <thead>
         <tr>
             <th scope="col">Version</th>
             <th scope="col">Uploader</th>
@@ -108,13 +111,15 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 
         </tr>
     </thead>
+</div>
     <tbody>
 @foreach ( $arch as $oparch)
 <tr>
 <td scope="row">{{$oparch->ARCH_NAME}} </td>
 <td scope="row">{{$oparch->UPLOADER}}</td>
 <td scope="row">{{$oparch->DESCRIPTION}}</td>
-<td scope="row">{{$oparch->PDF_FILE}}</td>
+<td scope="row">
+    <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');">{{$oparch->PDF_FILE}}</a></td>
 </tr>
 @endforeach
 
@@ -123,6 +128,7 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
  </tbody>
 </table>
 @include("studentModal.addArchive")
+</div>
 </div>
 
 <form class="" action="{{ route('studentt.opArch') }}" method="POST" enctype="multipart/form-data">
@@ -152,6 +158,5 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 
 
 @endif
-</div>
 
 @endsection

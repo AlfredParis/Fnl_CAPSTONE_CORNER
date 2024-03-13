@@ -158,17 +158,13 @@ class userCCcontroller extends Controller
 
     $name= $request->input("NAME");
     $S_ID = $request->input("S_ID");
-    $exists = STUDENT::where('S_ID', $S_ID)->exists();
+
     $conPass = $request->input("conpassword");
     $pass = $request->input("password");
 
 
 
 
-$accExist = student_acc::where('S_ID', $S_ID)->exists();
-if ($accExist) {
-    return back()->with('alert', 'This student id already has a account.')->withInput();
-}else{
 
     if ($conPass == $pass) {
     $user->S_ID = $request->input("S_ID");
@@ -220,7 +216,7 @@ return redirect()->route('userCC.index')->with('alert', 'Account Successfully Cr
     return back()->with('alert', 'Password does not match')->withInput();
 }
 
-}
+
 
 
 

@@ -234,8 +234,7 @@ public function addArch()
         if (is_array($members )) {
             foreach ($members  as $member) {
 
-                $stud = STUDENT::where('S_ID', $member)->first();
-                $stud->where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
+                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
 
 
             }
@@ -259,8 +258,8 @@ public function addArch()
         $name = Session::get('fullNs');
         $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
         $arch = new OP_Archive;
-          $total_arch=OP_Archive::count();
-          $num=$total_arch+1;
+        $total_arch=OP_Archive::where('GRP_ID',$groupID)->count();
+        $num=$total_arch+1;
 
         $arch->ARCH_NAME = "Archive Update #".$num;
         $arch->DESCRIPTION = $request->input("DESCRIPTION");

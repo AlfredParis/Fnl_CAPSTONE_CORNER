@@ -10,7 +10,7 @@
 @endsection
 
 @section('main')
-    <i class="fa-brands fa-creative-commons-by"></i>
+
     <div class="container">
 
 

@@ -57,12 +57,12 @@ class facultyController extends Controller
             }
 
 
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+            $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
 
             return view('facultyArchive')->with('arch', $ret)->with('auths', $auth);
         }
 
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('facultyArchive')->with('arch', $archives)->with('auths', $auth);
         ;

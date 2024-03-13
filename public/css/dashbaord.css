@@ -38,7 +38,9 @@ grid-template-columns:  20vw 55vw 10vw;
 grid-template-rows:10vh ;
 grid-template-areas:
   "mesFile mesDes mesSave"
-
+;
+background-color: #E6E4E4;
+padding: 10px;
 }
 .mesFile{
 

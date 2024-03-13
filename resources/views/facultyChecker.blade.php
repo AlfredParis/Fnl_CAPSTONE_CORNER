@@ -35,7 +35,7 @@
 @endsection
 
 @section('main')
-
+<div class="pddingForBody">
     <form action="{{ route('faculty.words') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -107,5 +107,5 @@
     @else
         <strong>No similar titles found!</strong>
     @endif
-
+</div>
 @endsection

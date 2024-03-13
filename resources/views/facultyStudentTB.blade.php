@@ -35,6 +35,7 @@
 @endsection
 
 @section('main')
+<div class="pddingForBody">
     @php
         $userAdd = 'student';
     @endphp
@@ -96,6 +97,7 @@
     </table>
 
     {{ $SN->links() }}
+</div>
 @endsection
 
 @include('modal.facultyAdduser')
