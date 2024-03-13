@@ -27,7 +27,7 @@ class facultyController extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-        //$auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with('auths', $auth)
+
         $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
 
 
@@ -537,13 +537,33 @@ class facultyController extends Controller
     public function advisory()
     {
         $userID=Session::get('userID');
-        $grp=group::where('ADVSR_ID',$userID);
+        $grp=group::where('ADVSR_ID',$userID)->get();
+
         return view('facultyAdvisory')->with('groups',$grp);
     }
 
     public function myGroup()
     {
-        return view('facultyMygroup');
+        $id = Session::get('userID');
+        $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
+
+        if($isGroup =='N/A'){
+
+            $auth=EMPLOYEE::get();
+            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
+            $archives=OP_Archive::where('GRP_ID', $groupID)->get();
+
+            return view('facultyMygroup')->with('isGrouped',$isGroup) ->with('adviser', $auth)->with('arch', $archives);
+        }else {
+
+            $myGRP=group::where('id',$isGroup)->first();
+            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
+            $archives=OP_Archive::where('GRP_ID', $groupID)->get();
+
+            return view('facultyMygroup')->with('isGrouped',$isGroup)->with('GRP_det',$myGRP)->with('arch', $archives);
+        }
+
+
     }
 
 }

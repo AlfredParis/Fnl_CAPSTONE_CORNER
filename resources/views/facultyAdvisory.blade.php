@@ -62,8 +62,8 @@ My Advisory
 
                                 @endphp
 
-                                <td>{{ GPR_NAME}}</td>
-
+                                <td> {{ $archive->GRP_NAME}}</td>
+                                <td> <a href="{{ route('faculty.advisory') }}">open</a></td>
                             </tr>
                         @endforeach
                     </tbody>

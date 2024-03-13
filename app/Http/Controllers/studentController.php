@@ -98,7 +98,7 @@ class studentController extends Controller
         $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
 
         if($isGroup =='N/A'){
-            // $auth=EMPLOYEE::where('GROUP_ID', 'N/A')->get();
+
             $auth=EMPLOYEE::get();
             $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
             $archives=OP_Archive::where('GRP_ID', $groupID)->get();
@@ -131,7 +131,6 @@ $archives=OP_Archive::where('GRP_ID', $groupID)->get();
 
         $arch = STUDENT::where('S_ID', $id)->first();
 
-            // $findGRP=
         $arch->where('S_ID', $id)->update([
             'GROUP_ID' => $grp->id
         ]);
@@ -290,7 +289,7 @@ public function addArch()
 
         $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
         $archives=OP_Archive::where('GRP_ID', $groupID)->get();
-        // $archives = OP_Archive::orderByRaw("CAST(SUBSTRING(OP_Archive, 4) AS UNSIGNED)")->orderBy('OP_Archive')->get();
+
          return redirect()->route('studentt.group')->with('arch', $archives)->with('auths', $auth);
 
 
