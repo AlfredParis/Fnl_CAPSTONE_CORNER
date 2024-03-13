@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\STUDENT;
 use App\Models\group;
 use App\Models\OP_Archive;
+use App\Models\notif;
 use Illuminate\Support\Facades\Session;
 use DB;
 use Illuminate\Support\Facades\Log;
@@ -99,14 +100,18 @@ class studentController extends Controller
         if($isGroup =='N/A'){
             // $auth=EMPLOYEE::where('GROUP_ID', 'N/A')->get();
             $auth=EMPLOYEE::get();
+            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
+            $archives=OP_Archive::where('GRP_ID', $groupID)->get();
 
-
-            return view('studGroup')->with('isGrouped',$isGroup) ->with('adviser', $auth);
+            return view('studGroup')->with('isGrouped',$isGroup) ->with('adviser', $auth)->with('arch', $archives);
         }else {
 
             $myGRP=group::where('id',$isGroup)->first();
 
-            return view('studGroup')->with('isGrouped',$isGroup)->with('GRP_det',$myGRP);
+            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
+$archives=OP_Archive::where('GRP_ID', $groupID)->get();
+
+            return view('studGroup')->with('isGrouped',$isGroup)->with('GRP_det',$myGRP)->with('arch', $archives);
         }
 
 
@@ -250,55 +255,33 @@ public function addArch()
 
     public function opArch(Request $request)
     {
-
+        $id = Session::get('userID');
         $name = Session::get('fullNs');
+        $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
         $arch = new OP_Archive;
-        $arch->ARCH_NAME = $request->input("name");
-        $arch->ABSTRACT = $request->input("abs");
+          $total_arch=OP_Archive::count();
+          $num=$total_arch+1;
+
+        $arch->ARCH_NAME = "Archive Update #".$num;
+        $arch->DESCRIPTION = $request->input("DESCRIPTION");
         $arch->UPLOADER = $name ;
-        $arch->YEAR_PUB = $request->input("pubYear");
+        $arch->GRP_ID = $groupID ;
+
 
         if ($request->hasFile('pdf_file')) {
 
             $pdfFile = $request->file('pdf_file');
             $fileName = time() . '_' . $pdfFile->getClientOriginalName();
             $pdfFile->storeAs('pdfs', $fileName, 'public');
-
-            $selectedCountries = $request->input("countries");
-
-
-            if (isset($gh)) {
                 $arch->PDF_FILE = $fileName;
-                $arch->viewCount = 0;
-                $arch->GITHUB_LINK = $request->input("gh");
-                $arch->IS_APPROVED = $request->input("stat");
-                if (is_array($selectedCountries)) {
-                    foreach ($selectedCountries as $ID) {
 
-                        $country = STUDENT::where('S_ID', $ID)->first();
-                        $country->where('S_ID', $ID)->update(['ARCH_ID' => $archID,]);
-
-
-                    }
-                }
                 $arch->save();
 
                 $notif = new notif;
                 $notif->category = "Add";
-                $notif->content = "$name has been added this archive: $archID ";
+                $notif->content = "$name has been updated on Progress Archive: $total_arch ";
                 $notif->suspect = $name;
-            } else {
-                $arch->PDF_FILE = $fileName;
-                $arch->viewCount = 0;
-                $arch->GITHUB_LINK = 'There is no GitHub repository For this archive!';
-                $arch->save();
-
-                Log::alert("Archive has been added $name !");
-                $notif = new notif;
-                $notif->category = "Add";
-                $notif->content = "$name has been added this archive: $archID  ";
-                $notif->suspect = $name;
-            }
+                $notif->save();
 
         } else {
 
@@ -307,13 +290,14 @@ public function addArch()
 
 
         $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
-
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('superAdmin.ArchiveTB')->with('arch', $archives)->with('auths', $auth);
+        $archives=OP_Archive::where('GRP_ID', $groupID)->get();
+        // $archives = OP_Archive::orderByRaw("CAST(SUBSTRING(OP_Archive, 4) AS UNSIGNED)")->orderBy('OP_Archive')->get();
+         return redirect()->route('studentt.group')->with('arch', $archives)->with('auths', $auth);
 
 
 
     }
+
 
 public function storeArch(Request $request)
     {
@@ -337,26 +321,16 @@ public function storeArch(Request $request)
         $pdfFile = $request->file('pdf_file');
         $fileName = time() . '_' . $pdfFile->getClientOriginalName();
         $pdfFile->storeAs('pdfs', $fileName, 'public');
-$gh = $request->input("gh");
-        if (isset($gh)) {
-            $arch->PDF_FILE =  $fileName;
-            $arch->GITHUB_LINK = $request->input("gh");
-            $arch->IS_APPROVED = "not approved";
+        $arch->PDF_FILE =  $fileName;
 
             $arch->save();
             Log::alert("Archive has been added by $name !");
-            return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
-        } else {
-            $arch->gh = 'There is no GitHub repository For this archive!';
-            $arch->save();
-            Log::alert("Archive has been added $name !");
-            return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
-        }
+            return redirect()->route('studentt.group')->with('alert', 'An archive succesfully added !');
 
     }
 else{
    // If they forgot the paper, tell them to bring one
-    return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+    return redirect()->route('studentt.group')->with('alert', 'No PDF file selected.')->withInput();
 }
 
 

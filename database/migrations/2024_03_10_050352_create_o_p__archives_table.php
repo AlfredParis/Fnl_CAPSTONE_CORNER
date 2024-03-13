@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('o_p__archives', function (Blueprint $table) {
-
+            $table->id();
             $table->string('ARCH_NAME');
             $table->string('UPLOADER');
             $table->string('DESCRIPTION');

@@ -61,7 +61,7 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown"  >
                     <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Group Members
@@ -96,11 +96,60 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 <div class="pddingForBody">
 @include('studentModal.addMember')
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Version</th>
+            <th scope="col">Uploader</th>
+            <th scope="col">Description</th>
+            <th scope="col"> Pdf</th>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addArchive">
-    Add Archive
-</button>
+
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach ( $arch as $oparch)
+<tr>
+<td scope="row">{{$oparch->ARCH_NAME}} </td>
+<td scope="row">{{$oparch->UPLOADER}}</td>
+<td scope="row">{{$oparch->DESCRIPTION}}</td>
+<td scope="row">{{$oparch->PDF_FILE}}</td>
+</tr>
+@endforeach
+
+
+
+ </tbody>
+</table>
 @include("studentModal.addArchive")
+</div>
+
+<form class="" action="{{ route('studentt.opArch') }}" method="POST" enctype="multipart/form-data">
+
+    @csrf
+
+<div class="bottom">
+
+
+    <div class=" mesDes">
+        <input type="text" class="form-control" placeholder="Description Here" name="DESCRIPTION"
+            value="{{ old('DESCRIPTION') }}" required>
+    </div>
+    <div class="mesFile">
+
+        <input type="file" id="pdf_file" name="pdf_file"
+            accept="application/pdf" value="{{ old('PDF_FILE') }}" id="pdf"
+            class="form-control" >
+    </div>
+    <div class="mesSave">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
+
+</div>
+</form>
+
 
 @endif
 </div>

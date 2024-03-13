@@ -43,6 +43,7 @@ Route::resource('/usercc', userCCcontroller::class)->names([
 Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF');
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
+    Route::post('/opArch', [studentController::class, 'opArch'])->name('opArch');
 
     Route::post('/addGroup', [studentController::class, 'addGroup'])->name('addGroup');
     Route::put('/{S_ID}/removeMem', [studentController::class, 'removeMem'])->name('removeMem'); //user edit store

@@ -26,6 +26,30 @@
 .alert-message {
     margin-bottom: 10px;
 }
+.bottom{
+
+position: fixed;
+bottom:0;
+width: 100vw;
+margin-left: 10px;
+gap: 5px;
+display: grid;
+grid-template-columns:  20vw 55vw 10vw;
+grid-template-rows:10vh ;
+grid-template-areas:
+  "mesFile mesDes mesSave"
+
+}
+.mesFile{
+
+    grid-area: mesFile;
+}
+.mesDes{
+    grid-area: mesDes;
+}
+.mesSave{
+    grid-area: mesSave;}
+
 
 .alert-close {
     position: absolute;

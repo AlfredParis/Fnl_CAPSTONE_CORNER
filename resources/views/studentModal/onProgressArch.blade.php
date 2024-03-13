@@ -27,12 +27,6 @@
                         <option value="{{ $advc->EMP_ID }}">Adviser: <u>{{ $advc->NAME}}</u> </option>
                         @endforeach
                     </select>
-                    {{--
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Arch id</label>
-                        <input type="text" class="form-control" placeholder="Ex. BSIT" name="ARCH_ID"
-                            value="{{ old('PROG_ABBR') }}" required>
-                    </div> --}}
 
             </div>
 
