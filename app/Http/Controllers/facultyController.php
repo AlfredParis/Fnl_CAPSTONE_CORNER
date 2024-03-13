@@ -16,6 +16,8 @@ use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\notif;
 use App\Models\group;
+use App\Models\OP_Archive;
+use App\Models\messages;
 
 
 class facultyController extends Controller
@@ -542,28 +544,49 @@ class facultyController extends Controller
         return view('facultyAdvisory')->with('groups',$grp);
     }
 
-    public function myGroup()
+    public function myGroup( string $advisory)
     {
         $id = Session::get('userID');
-        $isGroup=STUDENT::where('S_ID',$id)->value('GROUP_ID');
 
-        if($isGroup =='N/A'){
-
-            $auth=EMPLOYEE::get();
+            $myGRP=group::where('id',$advisory)->first();
             $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
-            $archives=OP_Archive::where('GRP_ID', $groupID)->get();
+            $archives=OP_Archive::where('GRP_ID', $advisory)->get();
 
-            return view('facultyMygroup')->with('isGrouped',$isGroup) ->with('adviser', $auth)->with('arch', $archives);
-        }else {
+            return view('facultyMygroup')->with('isGrouped',$advisory)->with('GRP_det',$myGRP)->with('arch', $archives);
 
-            $myGRP=group::where('id',$isGroup)->first();
-            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
-            $archives=OP_Archive::where('GRP_ID', $groupID)->get();
 
-            return view('facultyMygroup')->with('isGrouped',$isGroup)->with('GRP_det',$myGRP)->with('arch', $archives);
+
+
+
+}
+
+ public function addComment(Request $request ,string $oparchID)
+    {
+            $addComment=new messages;
+            $addComment->OP_ID =$oparchID;
+            $addComment->COMMENTOR = Session::get('userID');
+            $addComment->MESSAGE = $request->input('MESSAGE');
+            $addComment->save();
+
+    }
+    public function updateMember(Request $request,string $advisory)
+    {
+
+        $members = $request->input("S_ID");
+
+        if (is_array($members )) {
+            foreach ($members  as $member) {
+
+                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $advisory]);
+
+
+            }
         }
+        return redirect()->back()->with('alert', 'student added.');
 
 
     }
+
+
 
 }

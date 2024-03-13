@@ -24,7 +24,7 @@
 
                     <select name="ADVSR_ID" id="countries" multiple>
                         @foreach ($adviser as $advc)
-                        <option value="{{ $advc->EMP_ID }}">Adviser: <u>{{ $advc->NAME}}</u> </option>
+                        <option value="{{ $advc->EMP_ID }}"> <u>{{ $advc->NAME}}</u> </option>
                         @endforeach
                     </select>
                     {{--

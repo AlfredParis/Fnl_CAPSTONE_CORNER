@@ -1,4 +1,5 @@
-<div class="modal fade" id="memAdd" tabindex="-1" aria-labelledby="memAdd" aria-hidden="true">
+<div class="modal fade" id="memAdd{{$GRP_det->id}}" tabindex="-1" aria-labelledby="memAdd{{$GRP_det->id}}"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,10 +10,12 @@
                 @php
                 $id = Session::get('course');
 
-                $mmdrCourse= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+                // $grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+                //$grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->value('GRP_ID');
+
                 $addmmbr= \App\Models\STUDENT::where('GROUP_ID','N/A')->Get();
                 @endphp
-                <form class="" action="{{ route('studentt.updateMember') }}" method="POST"
+                <form class="" action="{{ route('faculty.updateMember',['advisory' => $GRP_det->id]) }}" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf

@@ -20,37 +20,81 @@
     max-width: 350px;
     text-align: center;
 }
-.pddingForBody{
+
+.pddingForBody {
     padding: 10px;
 }
+
 .alert-message {
     margin-bottom: 10px;
 }
-.bottom{
 
-position: fixed;
-bottom:0;
-width: 100vw;
-margin-left: 10px;
-gap: 5px;
-display: grid;
-grid-template-columns:  20vw 55vw 10vw;
-grid-template-rows:10vh ;
-grid-template-areas:
-  "mesFile mesDes mesSave"
-;
-background-color: #E6E4E4;
-padding: 10px;
+.messages {
+
+
+
+    gap: 5px;
+    display: grid;
+    grid-template-columns: 20vw 10vw;
+    grid-template-rows: 20vh 10vh;
+    grid-template-areas:
+        " textL textR"
+        "mess send"
+    ;
 }
-.mesFile{
+
+.mess {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    grid-area: mess;
+    width: 85%;
+}
+
+.send {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    grid-area: send;
+}
+
+.textL {
+    grid-area: textL;
+}
+
+.textR {
+    grid-area: textR;
+}
+
+.bottom {
+
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    margin-left: 10px;
+    gap: 5px;
+    display: grid;
+    grid-template-columns: 20vw 55vw 10vw;
+    grid-template-rows: 10vh;
+    grid-template-areas:
+        "mesFile mesDes mesSave"
+    ;
+    background-color: #E6E4E4;
+    padding: 10px;
+}
+
+.mesFile {
 
     grid-area: mesFile;
 }
-.mesDes{
+
+.mesDes {
     grid-area: mesDes;
 }
-.mesSave{
-    grid-area: mesSave;}
+
+.mesSave {
+    grid-area: mesSave;
+}
 
 
 .alert-close {
