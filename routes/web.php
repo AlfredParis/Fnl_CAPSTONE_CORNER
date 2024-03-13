@@ -75,6 +75,10 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::post('/find-similar', [facultyController::class, 'findSimilarWords'])->name('words');
     Route::post('/{user}/storeEmps', [facultyController::class, 'storeEmp'])->name('storeEmp'); //user add function
     Route::put('/{S_ID}/updateUser', [facultyController::class, 'userUpdate'])->name('update');
+    Route::get('advisory', [facultyController::class, 'advisory'])->name('advisory');
+    Route::get('myGroup', [facultyController::class, 'myGroup'])->name('myGroup');
+
+
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin'], function () {

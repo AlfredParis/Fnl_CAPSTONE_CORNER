@@ -15,10 +15,12 @@ use App\Models\USER_ACC_EMP;
 use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\notif;
+use App\Models\group;
+
 
 class facultyController extends Controller
 {
-    // TODO:finish faculty intrface
+
     public function index(Request $request)
     {
         $total_arch = ARCHIVES::count();
@@ -532,8 +534,16 @@ class facultyController extends Controller
 
     }
 
+    public function advisory()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('ADVSR_ID',$userID);
+        return view('facultyAdvisory')->with('groups',$grp);
+    }
 
-
-
+    public function myGroup()
+    {
+        return view('facultyMygroup');
+    }
 
 }
