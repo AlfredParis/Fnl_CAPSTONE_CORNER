@@ -107,9 +107,8 @@ class studentController extends Controller
         }else {
 
             $myGRP=group::where('id',$isGroup)->first();
-
             $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
-$archives=OP_Archive::where('GRP_ID', $groupID)->get();
+            $archives=OP_Archive::where('GRP_ID', $groupID)->get();
 
             return view('studGroup')->with('isGrouped',$isGroup)->with('GRP_det',$myGRP)->with('arch', $archives);
         }
@@ -127,10 +126,10 @@ $archives=OP_Archive::where('GRP_ID', $groupID)->get();
         $grp->GRP_NAME = $request->input("GRP_NAME");
         $grp->ADVSR_ID = $request->input("ADVSR_ID");
         $grp->ARCH_ID = "N/A";
+        $grp->STATUS_ID = 1;
         $grp->save();
 
         $arch = STUDENT::where('S_ID', $id)->first();
-
         $arch->where('S_ID', $id)->update([
             'GROUP_ID' => $grp->id
         ]);
@@ -232,9 +231,9 @@ public function addArch()
 
         if (is_array($members )) {
             foreach ($members  as $member) {
-                $oparchID=STUDENT::where('S_ID',$member)->value('GROUP_ID');
-                $remover=Session::get('userID');
-             $addComment=new messages;
+                $rem=Session::get('userID');
+                $remover=STUDENT::where('S_ID',$rem)->value('NAME');
+                $addComment=new messages;
                 $addComment->OP_ID =$logGroup;
                 $addComment->COMMENTOR =  $remover;
                 $addComment->MESSAGE = $member." has been added by ".$remover;
@@ -248,7 +247,8 @@ public function addArch()
 
     }
     public function removeMem($S_ID)
-    {  $remover=Session::get('userID');
+    {           $rem=Session::get('userID');
+                $remover=STUDENT::where('S_ID',$rem)->value('NAME');
                 $stud = STUDENT::where('S_ID', $S_ID)->first();
                 $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
                 $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);

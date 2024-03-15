@@ -44,10 +44,8 @@ Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
     Route::post('/opArch', [studentController::class, 'opArch'])->name('opArch');
-
     Route::post('/addGroup', [studentController::class, 'addGroup'])->name('addGroup');
     Route::put('/{S_ID}/removeMem', [studentController::class, 'removeMem'])->name('removeMem'); //user edit store
-
     Route::get('/group', [studentController::class, 'group'])->name('group');
     Route::get('/', [studentController::class, 'index'])->name('index');
     Route::get('/my-archive', [studentController::class, 'myArchive'])->name('myArchive');
@@ -131,30 +129,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::get('/audit', [superAdmin::class, 'audit'])->name('audit');
         Route::get('/archives', [superAdmin::class, 'archives'])->name('archives');
         Route::get('/student', [superAdmin::class, 'student'])->name('student');
-
         Route::get('/department', [superAdmin::class, 'department'])->name('department');
         Route::put('/updateProg', [superAdmin::class, 'updateProg'])->name('updateProg');
         Route::put('/updatePosition', [superAdmin::class, 'updatePosition'])->name('updatePosition');
-
-
         Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
         Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
         Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
         Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch');
         Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
         Route::post('/{user}/storeEmp', [superAdmin::class, 'storeEmp'])->name('storeEmp'); //user add function
-
         Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
         Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
         Route::get('/faculty', [superAdmin::class, 'faculty'])->name('faculty');
-
         Route::get('/viewCnt/{ARCH_ID}', [superAdmin::class, 'viewCnt'])->name('viewCnt');
         Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
         Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
-        //for Groups
         Route::get('/group', [superAdmin::class, 'group'])->name('group');
         Route::get('{id}/specAdminTB', [superAdmin::class, 'specAdminTB'])->name('specAdminTB');
-
         Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
 
     });
@@ -164,9 +155,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
 
 Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' => 'forSubAdmin'], function () {
     Route::get('/dashSubAdmin', [subAdmin::class, 'index'])->name('index');
-
+    Route::get('{advisory}myGroup', [subAdmin::class, 'myGroup'])->name('myGroup');
+    Route::post('{oparchID}/addComment', [subAdmin::class, 'addComment'])->name('addComment');
+    Route::post('{advisory}/updateMember', [subAdmin::class, 'updateMember'])->name('updateMember');
+    Route::put('/{S_ID}/removeMem', [subAdmin::class, 'removeMem'])->name('removeMem');
+    Route::get('/advisory', [subAdmin::class, 'advisory'])->name('advisory');
 });
-
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Carbon\Carbon;
 
 use App\Models\userCC;
@@ -15,8 +16,9 @@ use App\Models\STUDENT;
 use App\Models\USER_ACC_EMP;
 use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
+use App\Models\group;
 use App\Models\notif;
-
+use App\Models\OP_Archive;
 
 use App\Http\Controllers\userCCcontroller;
 
@@ -26,12 +28,15 @@ class subAdmin extends Controller
  public function index(Request $request)
     {
 
-        $total_arch=ARCHIVES::count() ;
-        $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
-        $total_student=student_acc::where('ACCTYPE', 'student')->count();
-        $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
 
-            return view('subAdmin.dashboard');
+        $total_arch = ARCHIVES::count();
+        $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student = student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+       $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+
+
+            return view('subAdmin.dashboard')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
 
 
     }
@@ -60,6 +65,24 @@ class subAdmin extends Controller
         $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
         $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
         return view('subAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
+    }
+    public function advisory()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('ADVSR_ID',$userID)->get();
+
+        return view('subAdmin.Advisory')->with('groups',$grp);
+    }
+    public function myGroup( string $advisory)
+    {
+        $id = Session::get('userID');
+
+            $myGRP=group::where('id',$advisory)->first();
+            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
+            $archives=OP_Archive::where('GRP_ID', $advisory)->get();
+
+            return view('subAdmin.Mygroup')->with('isGrouped',$advisory)->with('GRP_det',$myGRP)->with('arch', $archives);
+
     }
 
 

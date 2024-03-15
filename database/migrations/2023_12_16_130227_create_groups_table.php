@@ -16,6 +16,7 @@ return new class extends Migration
              $table->string('GRP_NAME');
              $table->string('ADVSR_ID');
              $table->string('ARCH_ID');
+             $table->string('STATUS_ID');
             $table->timestamps();
         });
     }

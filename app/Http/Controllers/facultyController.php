@@ -554,10 +554,6 @@ class facultyController extends Controller
 
             return view('facultyMygroup')->with('isGrouped',$advisory)->with('GRP_det',$myGRP)->with('arch', $archives);
 
-
-
-
-
 }
 
  public function addComment(Request $request ,string $oparchID)

@@ -85,7 +85,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'subAdmin2',
-                'NAME' => 'Juliet',
+                'NAME' => 'Juliet Menor',
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '3',
@@ -94,7 +94,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'subAdmin1',
-                'NAME' => 'Cristy',
+                'NAME' => 'Christian Dela Cruz',
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '4',
@@ -103,7 +103,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'MIS',
-                'NAME' => 'Gamboa',
+                'NAME' => 'jose carlo gamboa',
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '1',

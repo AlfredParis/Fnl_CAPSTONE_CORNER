@@ -21,6 +21,7 @@ php artisan db:seed --class=studDet
 php artisan db:seed --class=departmentSeed
 php artisan db:seed --class=programSeed
 php artisan db:seed --class=positionSeed
+php artisan db:seed --class=arch_stat
 
 additional=
 composer require barryvdh/laravel-dompdf

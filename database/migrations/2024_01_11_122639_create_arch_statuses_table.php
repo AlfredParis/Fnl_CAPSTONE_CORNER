@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('arch_statuses', function (Blueprint $table) {
             $table->id();
             $table->string("arch_stat");
-           
             $table->timestamps();
         });
     }

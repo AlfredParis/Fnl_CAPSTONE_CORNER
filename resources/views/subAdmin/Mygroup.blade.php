@@ -5,26 +5,33 @@ My Group
 @endsection
 
 @section('topnav')
-<ul class="nav nav-pills flex-column mt-4 gap-1">
+<ul class="nav nav-pills flex-column mt-4" style="gap: 1vh;">
     <li class="nav-item py-2 py-sm-0">
-        <a href="{{ route('studentt.index') }}" class="nav-link text-white " aria-current="true"><i
-                class="fs-7 fa fa-house"></i><span class="fs-6 d-none ms-2 d-sm-inline">Dashboard</span></a>
+        <a class="nav-link text-white " aria-current="true" href="{{ route('faculty.index') }}">
+            <i class="fs-7 fa fa-house"></i><span class="fs-7 d-none ms-2 d-sm-inline">Dashboard</span>
+        </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a href="{{ route('studentt.group') }}" class="nav-link text-white active"><i
-                class="fs-7 fa fa-user-group"></i><span class="fs-6 d-none ms-2 d-sm-inline">Group</span></a>
-    </li>
-
-    <li class="nav-item py-2 py-sm-0">
-        <a href="{{ route('studentt.Checker') }}" class="nav-link text-white"><i class="fs-7 fa fa-check"></i><span
-                class="fs-6 d-none ms-2 d-sm-inline">Checker</span></a>
+        <a class="nav-link text-white " href="{{ route('faculty.myArchive') }}">
+            <i class="fs-7 fa fa-box-archive"></i><span class="fs-7 d-none ms-2 d-sm-inline">Archives</span>
+        </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a href="{{ route('studentt.archives') }}" class="nav-link text-white"><i class="fs-7 fa fa-book"></i><span
-                class="fs-6 d-none ms-2 d-sm-inline">archives</span></a>
+        <a class="nav-link text-white " href="{{ route('faculty.Checker') }}">
+            <i class="fs-7 fa fa-check"></i><span class="fs-7 d-none ms-2 d-sm-inline">Checker</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white " href="{{ route('faculty.student') }}">
+            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-7 d-none ms-2 d-sm-inline">Student</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white active" aria-current="true" href="{{ route('faculty.advisory') }}">
+            <i class="fs-7 fa fa-users-rectangle"></i><span class="fs-7 d-none ms-2 d-sm-inline">Advisory</span>
+        </a>
     </li>
 </ul>
-
 @endsection
 
 @section('main')
@@ -48,29 +55,37 @@ My Group
 
 
 @php
+
 $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
 $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+$stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
 @endphp
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
-        <h3 class="group-nav-content"> {{ $GRP_det->GRP_NAME }} </h3>
-        <h3 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h3>
-        <h3 class="group-nav-content"> Status: {{ $GRP_det->STATUS_ID }}</h3>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
-            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+        <h3 class="group-nav-content">
+            {{
+            $GRP_det->GRP_NAME }}
+        </h3>
+        <h3 class="group-nav-content"> Adviser:
+            {{
+            $advicername->NAME }} </h3>
+        <h3 class="group-nav-content"> Status: {{
+            $stat }}
+        </h3>
+
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown" style="width:50vw;">
-                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown" style="width:30vw;">
+                    <button style="width:10vw;" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Group Members
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         @foreach ( $mmbrs as $mmbr)
                         <li style="padding-left:10px; padding-right:10px; width:auto; ">
-                            <form class="" action="{{route('studentt.removeMem', ['S_ID' => $mmbr->S_ID])}}"
+                            <form class="" action="{{route('faculty.removeMem', ['S_ID' => $mmbr->S_ID])}}"
                                 method="POST" enctype="multipart/form-data">
                                 {{$mmbr->NAME}}
                                 @csrf
@@ -85,7 +100,7 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li> <button type="button" data-bs-toggle="modal" data-bs-target="#memAdd"
+                        <li> <button type="button" data-bs-toggle="modal" data-bs-target="#memAdd{{$GRP_det->id}}"
                                 style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;">
                                 Add member</button></li>
 
@@ -98,7 +113,7 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 </nav>
 
 <div class="pddingForBody">
-    @include('studentModal.addMember')
+    @include('facultyModal.addMember')
     <div style="margin-top: 60px ">
 
         <table class="table table-striped">
@@ -127,7 +142,7 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
                     </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
-                    @include('studentModal.addComment')
+                    @include('facultyModal.addComment')
                 </tr>
                 @endforeach
 
@@ -151,7 +166,6 @@ $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
                 value="{{ old('DESCRIPTION') }}" required>
         </div>
         <div class="mesFile">
-
             <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" value="{{ old('PDF_FILE') }}"
                 id="pdf" class="form-control">
         </div>
