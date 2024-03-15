@@ -24,9 +24,10 @@
                         <div class="missage">
                             @php
                             $comName="";
-                            $comNameEMP=App\Models\EMPLOYEE::where('EMP_ID',$mess->COMMENTOR)->value('NAME');
 
+                            $comNameEMP=App\Models\EMPLOYEE::where('EMP_ID',$mess->COMMENTOR)->value('NAME');
                             $comNameStud=App\Models\STUDENT::where('S_ID',$mess->COMMENTOR)->value('NAME');
+
                             if (isset($comNameEMP)) {
                             $comName=$comNameEMP;
                             }elseif (isset( $comNameStud)) {

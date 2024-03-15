@@ -50,21 +50,22 @@ My Group
 @php
 $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
 $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+$stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
 @endphp
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
         <h3 class="group-nav-content"> {{ $GRP_det->GRP_NAME }} </h3>
         <h3 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h3>
-        <h3 class="group-nav-content"> Status: {{ $GRP_det->STATUS_ID }}</h3>
+        <h3 class="group-nav-content"> Status: {{ $stat }}</h3>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
             aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown" style="width:50vw;">
-                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown" style="width:30vw;">
+                    <button s class=" btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Group Members
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">

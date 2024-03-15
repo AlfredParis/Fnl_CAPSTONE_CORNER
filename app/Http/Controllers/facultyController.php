@@ -556,56 +556,62 @@ class facultyController extends Controller
 
 }
 
- public function addComment(Request $request ,string $oparchID)
-    {
-            $addComment=new messages;
-            $addComment->OP_ID =$oparchID;
-            $addComment->COMMENTOR = Session::get('userID');
-            $addComment->MESSAGE = $request->input('MESSAGE');
-            $addComment->save();
-            return redirect()->back()->with('alert', 'sent');
+    public function addComment(Request $request ,string $oparchID)
+        {
+                $addComment=new messages;
+                $addComment->OP_ID =$oparchID;
+                $addComment->COMMENTOR = Session::get('userID');
+                $addComment->MESSAGE = $request->input('MESSAGE');
+                $addComment->save();
+                return redirect()->back()->with('alert', 'sent');
 
-    }
+        }
     public function updateMember(Request $request,string $advisory)
     {
 
+        $id = Session::get('userID');
+        $logGroup = group::where('ADVSR_ID', $id)->value('id');
         $members = $request->input("S_ID");
+        $remName=STUDENT::where('S_ID',$request->input("S_ID"))->value('NAME');
+        $remover=EMPLOYEE::where('EMP_ID',$id)->value('NAME');
+
+
 
         if (is_array($members )) {
             foreach ($members  as $member) {
 
-                $oparchID=STUDENT::where('S_ID',$member)->value('GROUP_ID');
-
-                $remover=Session::get('userID');
-
                 $addComment=new messages;
-                $addComment->OP_ID =$advisory;
+                $addComment->OP_ID =$logGroup;
                 $addComment->COMMENTOR =  $remover;
-                $addComment->MESSAGE = $member." has been added by ".$remover;
+                $addComment->MESSAGE = $remName." has been added by ".$remover;
                 $addComment->save();
-                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $advisory]);
+                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
+
+
             }
         }
-        return redirect()->back()->with('alert', 'student added.');
+        return redirect()->back()->with('alert', 'Member Successfully added.');
 
 
     }
     public function removeMem($S_ID)
     {
-                $remover=Session::get('userID');
-                $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
-                $stud = STUDENT::where('S_ID', $S_ID)->first();
+        $rem=Session::get('userID');
 
-                $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
-                $addComment=new messages;
-                $addComment->OP_ID =$oparchID;
-                $addComment->COMMENTOR =  $remover;
-                $addComment->MESSAGE = $S_ID." has been removed by ".$remover;
-                $addComment->save();
+        $remName=STUDENT::where('S_ID',$S_ID)->value('NAME');
+        $remover=EMPLOYEE::where('EMP_ID',$rem)->value('NAME');
+        $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
+        $stud = STUDENT::where('S_ID', $S_ID)->first();
+
+        $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+        $addComment=new messages;
+        $addComment->OP_ID =$oparchID;
+        $addComment->COMMENTOR =  $remover;
+        $addComment->MESSAGE = $remName." has been removed by ".$remover;
+        $addComment->save();
 
 
-                return redirect()->back()->with('alert', 'student removed.');
-
+        return redirect()->back()->with('alert', 'student removed.');
     }
 
 

@@ -9,13 +9,9 @@
             <div class="modal-body">
                 @php
                 $id = Session::get('course');
-
-                // $grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
-                //$grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->value('GRP_ID');
-
                 $addmmbr= \App\Models\STUDENT::where('GROUP_ID','N/A')->Get();
                 @endphp
-                <form class="" action="{{ route('faculty.updateMember',['advisory' => $GRP_det->id]) }}" method="POST"
+                <form class="" action="{{ route('subAdmin.updateMember',['advisory' => $GRP_det->id]) }}" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf
@@ -44,3 +40,9 @@
 
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        new MultiSelectTag("countries");
+    });
+</script>

@@ -233,10 +233,11 @@ public function addArch()
             foreach ($members  as $member) {
                 $rem=Session::get('userID');
                 $remover=STUDENT::where('S_ID',$rem)->value('NAME');
+                $mmbr=STUDENT::where('S_ID',$member)->value('NAME');;
                 $addComment=new messages;
                 $addComment->OP_ID =$logGroup;
                 $addComment->COMMENTOR =  $remover;
-                $addComment->MESSAGE = $member." has been added by ".$remover;
+                $addComment->MESSAGE = $mmbr." has been added by ".$remover;
                 $addComment->save();
                 $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
 
@@ -252,17 +253,12 @@ public function addArch()
                 $stud = STUDENT::where('S_ID', $S_ID)->first();
                 $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
                 $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
-                $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+                $studName=STUDENT::where('S_ID',$S_ID)->value('NAME');
                 $addComment=new messages;
                 $addComment->OP_ID =$oparchID;
                 $addComment->COMMENTOR =  $remover;
-                $addComment->MESSAGE = $S_ID." has been removed by ".$remover;
+                $addComment->MESSAGE = $studName." has been removed by ".$remover;
                 $addComment->save();
-
-
-
-
-
 
         return redirect()->route('studentt.group')->with('alert', 'Member Successfully added.');
 

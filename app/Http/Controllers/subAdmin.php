@@ -17,6 +17,7 @@ use App\Models\USER_ACC_EMP;
 use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\group;
+use App\Models\messages;
 use App\Models\notif;
 use App\Models\OP_Archive;
 
@@ -84,6 +85,65 @@ class subAdmin extends Controller
             return view('subAdmin.Mygroup')->with('isGrouped',$advisory)->with('GRP_det',$myGRP)->with('arch', $archives);
 
     }
+    public function addComment(Request $request ,string $oparchID)
+    {
+            $addComment=new messages;
+            $addComment->OP_ID =$oparchID;
+            $addComment->COMMENTOR = Session::get('userID');
+            $addComment->MESSAGE = $request->input('MESSAGE');
+            $addComment->save();
+            return redirect()->back()->with('alert', 'sent');
+
+    }
+    public function removeMem($S_ID)
+    {
+                $rem=Session::get('userID');
+
+                $remName=STUDENT::where('S_ID',$S_ID)->value('NAME');
+                $remover=EMPLOYEE::where('EMP_ID',$rem)->value('NAME');
+                $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
+                $stud = STUDENT::where('S_ID', $S_ID)->first();
+
+                $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
+                $addComment=new messages;
+                $addComment->OP_ID =$oparchID;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $remName." has been removed by ".$remover;
+                $addComment->save();
 
 
+                return redirect()->back()->with('alert', 'student removed.');
+
+    }
+    public function updateMember(Request $request)
+    {
+        $id = Session::get('userID');
+
+        $logGroup = group::where('ADVSR_ID', $id)->value('id');
+        $members = $request->input("S_ID");
+
+        $rem=Session::get('userID');
+
+        $remName=STUDENT::where('S_ID',$request->input("S_ID"))->value('NAME');
+        $remover=EMPLOYEE::where('EMP_ID',$rem)->value('NAME');
+
+
+
+        if (is_array($members )) {
+            foreach ($members  as $member) {
+                $rem=Session::get('userID');
+
+                $addComment=new messages;
+                $addComment->OP_ID =$logGroup;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $remName." has been added by ".$remover;
+                $addComment->save();
+                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
+
+
+            }
+        }
+        return redirect()->back()->with('alert', 'Member Successfully added.');
+
+    }
 }

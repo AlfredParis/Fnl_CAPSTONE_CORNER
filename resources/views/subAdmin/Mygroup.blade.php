@@ -48,7 +48,7 @@ My Group
         <h1>You don't have a group yet. Make yours or wait for your leader to add you.</h1>
     </div>
 </div>
-@include("studentModal.makeGroup")
+
 
 @else
 
@@ -85,7 +85,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                     <ul class="dropdown-menu dropdown-menu-dark">
                         @foreach ( $mmbrs as $mmbr)
                         <li style="padding-left:10px; padding-right:10px; width:auto; ">
-                            <form class="" action="{{route('faculty.removeMem', ['S_ID' => $mmbr->S_ID])}}"
+                            <form class="" action="{{route('subAdmin.removeMem', ['S_ID' => $mmbr->S_ID])}}"
                                 method="POST" enctype="multipart/form-data">
                                 {{$mmbr->NAME}}
                                 @csrf
@@ -113,7 +113,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
 </nav>
 
 <div class="pddingForBody">
-    @include('facultyModal.addMember')
+    @include('subAdmin.modal.addMember')
     <div style="margin-top: 60px ">
 
         <table class="table table-striped">
@@ -142,7 +142,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                     </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
-                    @include('facultyModal.addComment')
+                    @include("subAdmin.modal.addComment")
                 </tr>
                 @endforeach
 
@@ -150,11 +150,11 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
 
             </tbody>
         </table>
-        @include("studentModal.addArchive")
+
     </div>
 </div>
 
-<form class="" action="{{ route('studentt.opArch') }}" method="POST" enctype="multipart/form-data">
+<form class="" action="{{ route('subAdmin.opArch') }}" method="POST" enctype="multipart/form-data">
 
     @csrf
 

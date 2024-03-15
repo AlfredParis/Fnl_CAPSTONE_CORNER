@@ -160,6 +160,8 @@ Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' =
     Route::post('{advisory}/updateMember', [subAdmin::class, 'updateMember'])->name('updateMember');
     Route::put('/{S_ID}/removeMem', [subAdmin::class, 'removeMem'])->name('removeMem');
     Route::get('/advisory', [subAdmin::class, 'advisory'])->name('advisory');
+    Route::post('/opArch', [subAdmin::class, 'opArch'])->name('opArch');
+
 });
 
 
