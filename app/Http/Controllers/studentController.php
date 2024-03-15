@@ -11,7 +11,7 @@ use App\Models\group;
 use App\Models\OP_Archive;
 use App\Models\notif;
 use Illuminate\Support\Facades\Session;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\messages;
 class studentController extends Controller
