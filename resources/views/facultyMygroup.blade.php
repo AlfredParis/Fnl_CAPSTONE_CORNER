@@ -51,32 +51,29 @@ My Group
 @include("studentModal.makeGroup")
 
 @else
-
-
-
 @php
 
-$advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
-$mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
-$stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
+    $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
+    $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+    $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
+    $allStat=\App\Models\archStatus::get() ;
 @endphp
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
         <h3 class="group-nav-content"> {{ $GRP_det->GRP_NAME }}</h3>
         <h3 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h3>
         <h3 class="group-nav-content"> Status: {{$stat }} </h3>
 
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown" style="width:30vw;">
-                    <button style="width:10vw;" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="">
+            <ul class="navbar-nav" >
+                <li class="nav-item dropdown"  >
+                    <button style="" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Group Members
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-dark" >
                         @foreach ( $mmbrs as $mmbr)
-                        <li style="padding-left:10px; padding-right:10px; width:auto; ">
+                        <li style="padding-left:10px; padding-right:10px;">
                             <form class="" action="{{route('faculty.removeMem', ['S_ID' => $mmbr->S_ID])}}"
                                 method="POST" enctype="multipart/form-data">
                                 {{$mmbr->NAME}}
@@ -93,8 +90,35 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                             <hr class="dropdown-divider">
                         </li>
                         <li> <button type="button" data-bs-toggle="modal" data-bs-target="#memAdd{{$GRP_det->id}}"
-                                style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;">
+                               class="btn-noDesign">
                                 Add member</button></li>
+
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown" style="width:15vw;">
+                    <button style="width:10vw;" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Change Status
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        @foreach ( $allStat as $mmbr)
+                        <li class="btn-noDesign">
+
+                            <form class="" action="{{route('updateProg', ['S_ID' => $mmbr->id],['G_ID',$GRP_det->id])}}"
+                                method="POST" enctype="multipart/form-data">
+
+                                <button type="submit"
+                                class="btn-noDesign">
+                                {{$mmbr->arch_stat}}</button>
+
+                            </form>
+                        </li>
+                        @endforeach
 
                     </ul>
 
@@ -106,7 +130,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
 
 <div class="pddingForBody">
     @include('facultyModal.addMember')
-    <div style="margin-top: 60px ">
+    <div style="margin-top: 60px; margin-bottom: 10vh; ">
 
         <table class="table table-striped">
             <div>
@@ -130,8 +154,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                     <td scope="row">{{$oparch->DESCRIPTION}}</td>
                     <td scope="row">
                         <a href="#"
-                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');">{{$oparch->PDF_FILE}}</a>
-                    </td>
+                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');" class="btn btn-primary">Open Document
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
                     @include('facultyModal.addComment')

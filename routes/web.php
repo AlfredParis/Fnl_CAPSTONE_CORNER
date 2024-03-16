@@ -33,6 +33,10 @@ Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
 Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
+Route::put('/{S_ID}/{G_ID}/updateProg', [extraCtrl::class, 'updateProg'])->name('updateProg');
+
+
+Route::put('{S_ID}/updateUser', [extraCtrl::class, 'userUpdate'])->name('userUpdate');
 
 Route::resource('/usercc', userCCcontroller::class)->names([
     'index' => 'userCC.index',
@@ -78,7 +82,7 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::get('{advisory}myGroup', [facultyController::class, 'myGroup'])->name('myGroup');
     Route::post('{oparchID}/addComment', [facultyController::class, 'addComment'])->name('addComment');
     Route::post('{advisory}/updateMember', [facultyController::class, 'updateMember'])->name('updateMember'); //user edit store
-    Route::put('/{S_ID}/removeMem', [facultyController::class, 'removeMem'])->name('removeMem'); //user edit store
+    Route::put('/removeMem/{S_ID}', [facultyController::class, 'removeMem'])->name('removeMem'); //user edit store
 
 
 });

@@ -200,14 +200,8 @@
                         <p class="ms-2 fs-5"> {{ $name }}</p>
                     </a>
 
-
-
-
                     @section('topnav')
-
-                    @parent
-
-
+                        @parent
                     @show
 
                     </ul>
@@ -319,7 +313,7 @@
 
             <div class="" style="padding-left:16.7vw;padding-right:0px;">
                 @section('main')
-                @parent
+                 @parent
                 @show
             </div>
         </div>

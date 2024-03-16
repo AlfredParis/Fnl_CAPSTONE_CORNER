@@ -10,7 +10,7 @@
                 $id = Session::get('course');
 
                 $mmdrCourse= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
-                $addmmbr= \App\Models\STUDENT::where('GROUP_ID','N/A')->Get();
+                $addmmbr= \App\Models\STUDENT::where('GROUP_ID','N/A')->where('DEPT_ID', $id)->Get();
                 @endphp
                 <form class="" action="{{ route('studentt.updateMember') }}" method="POST"
                     enctype="multipart/form-data">

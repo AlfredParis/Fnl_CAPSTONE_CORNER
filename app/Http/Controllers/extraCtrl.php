@@ -1,15 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\userCC;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use App\Models\student_acc;
 use App\Models\STUDENT;
+use App\Models\USER_ACC_EMP;
+use App\Models\EMPLOYEE;
+use App\Models\ARCHIVES;
+use App\Models\notif;
+use App\Models\group;
+use App\Models\OP_Archive;
+use App\Models\messages;
+
+
+
 use Mail;
 use App\Mail\addStud;
 
 
-
-use Illuminate\Support\Facades\DB;
 
 class extraCtrl extends Controller
 {
@@ -141,4 +155,120 @@ public function mail()
     return "Test email sent successfully!";
 
 }
+
+
+public function userEdit($id)
+{
+
+    $isAdmin = USER_ACC_EMP::where('EMP_ID', $id)->first();
+    $isStudent = student_acc::where('S_ID', $id)->first();
+    $isDontAcc = STUDENT::where('S_ID', $id)->first();
+
+  if (!isset($isStudent)&&isset($isDontAcc)) {
+
+
+      $profile = STUDENT::where('S_ID', $id)->first();
+
+      return view('adminEditUser', compact('profile'));
+    }
+
+    else if(isset($isStudent)){
+
+        $Users=$isStudent;
+        $profile = STUDENT::where('S_ID', $id)->first();
+
+        return view('adminEditUser', compact('Users', 'profile'));
+
+     }
+    else if(isset($isAdmin)){
+
+        $Users=$isAdmin;
+        $profile = EMPLOYEE::where('EMP_ID', $id)->first();
+        return view('adminEditUser', compact('Users', 'profile'));
+
+    }
+
+}
+        public function userUpdate(Request $request, string $id)
+        {
+
+            $name = Session::get('fullNs');
+            $userID=Session::get('userID');
+            $isEMP=USER_ACC_EMP::where('EMP_ID',$userID)->value('ACCTYPE');
+            $isSTUD=student_acc::where('S_ID',$userID)->value('ACCTYPE');
+
+            if ($isSTUD == 'student') {
+                $studAcc = student_acc::where('S_ID', $id)->first();
+                $currentPass= student_acc::where('S_ID', $id)->value('PASSWORD');
+                $currentCourse=STUDENT::where('S_ID', $id)->value('DEPT_ID');
+                $NewPASSWORD=$request->NewPASSWORD;
+
+                if(decrypt($currentPass)==$request->PASSWORD){
+                        if(!empty($NewPASSWORD)){
+                            $studAcc->PASSWORD = encrypt($NewPASSWORD);
+                        }
+                        $studAcc->save();
+
+                        $studProf = STUDENT::where('S_ID', $id)->first();
+                        if (!empty($request->C_ID)) {
+                            $studProf->where('S_ID', $id)->update([
+                                'NAME' => $request->NAME,
+                                'DEPT_ID' => $request->DEPT_ID,
+                            ]);
+                        }
+                        $studProf->where('S_ID', $id)->update([
+                            'NAME' => $request->NAME,
+
+                        ]);
+
+                        $notif = new notif;
+                        $notif->category = "Update";
+                        $notif->content="$name has been updated this account: $id a student ";
+                        $notif->suspect=$name ;
+                        $notif->save();
+                        Log::alert("Student account is updated Successfully by: $name!");
+                    return redirect()->back()->with('alert', 'Account Successfully updated.');
+                    }else{
+                        return redirect()->back()->with('alert', 'Wrong old password.');
+                    }
+
+            } else {
+                $emp = USER_ACC_EMP::where('EMP_ID', $id)->first();
+                $currentPass=USER_ACC_EMP::where('EMP_ID', $id)->value('PASSWORD');
+                $PASSWORD=$request->PASSWORD;
+                $NewPASSWORD=encrypt($request->NewPASSWORD);
+
+                if($PASSWORD==decrypt($currentPass)){
+
+                    if(!empty($NewPASSWORD)){
+                        $emp->where('EMP_ID', $id)->update([
+                            'PASSWORD' => $NewPASSWORD,
+                        ]);
+
+                    }
+
+
+                $studProf = EMPLOYEE::where('EMP_ID', $id)->first();
+                $studProf->where('EMP_ID', $id)->update([
+                    'NAME' => $request->NAME,
+                ]);
+
+                $notif = new notif;
+                $notif->category = "Update";
+                $notif->content="$name has been updated this account: $id a faculty ";
+                $notif->suspect=$name ;
+                $notif->save();
+
+                Log::alert("Faculty account is updated Successfully by: $name!");
+                         return redirect()->back()->with('alert', 'Account Successfully updated.');
+                    }else{
+                        return redirect()->back()->with('alert', 'Wrong old password.');
+                    }
+            }
+
+        }
+
+        public function updateProg(Request $request,$S_ID ,$G_ID){
+            return dd($G_ID);
+        }
 }

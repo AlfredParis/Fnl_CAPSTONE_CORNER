@@ -38,11 +38,6 @@
 <div class="pddingForBody">
     <div class="container" style="margin-left: 0;">
         <div class="row">
-            <div class="col auto">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    Add Archive
-                </button>
-            </div>
             <div class="col">
                 <form action="{{ route('faculty.myArchive') }}" method="get">
                     <div class="input-group">

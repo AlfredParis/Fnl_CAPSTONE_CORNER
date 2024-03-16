@@ -100,7 +100,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
 
 <div class="pddingForBody">
     @include('studentModal.addMember')
-    <div style="margin-top: 60px ">
+    <div style="margin-top: 60px; margin-bottom: 10vh;">
 
         <table class="table table-striped">
             <div>
@@ -124,7 +124,7 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                     <td scope="row">{{$oparch->DESCRIPTION}}</td>
                     <td scope="row">
                         <a href="#"
-                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');">{{$oparch->PDF_FILE}}</a>
+                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');" class="btn btn-primary">Open Document</a>
                     </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>

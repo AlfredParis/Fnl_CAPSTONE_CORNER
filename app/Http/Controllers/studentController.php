@@ -233,10 +233,11 @@ public function addArch()
             foreach ($members  as $member) {
                 $rem=Session::get('userID');
                 $remover=STUDENT::where('S_ID',$rem)->value('NAME');
-                $mmbr=STUDENT::where('S_ID',$member)->value('NAME');;
+                $mmbr=STUDENT::where('S_ID',$member)->value('NAME');
+                $total_arch=OP_Archive::where('GRP_ID',$logGroup)->count();
                 $addComment=new messages;
-                $addComment->OP_ID =$logGroup;
-                $addComment->COMMENTOR =  $remover;
+                $addComment->OP_ID =$total_arch;
+                $addComment->COMMENTOR =  $rem;
                 $addComment->MESSAGE = $mmbr." has been added by ".$remover;
                 $addComment->save();
                 $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
@@ -250,17 +251,20 @@ public function addArch()
     public function removeMem($S_ID)
     {           $rem=Session::get('userID');
                 $remover=STUDENT::where('S_ID',$rem)->value('NAME');
+
                 $stud = STUDENT::where('S_ID', $S_ID)->first();
                 $oparchID=STUDENT::where('S_ID', $S_ID)->value('GROUP_ID');
                 $stud->where('S_ID', $S_ID)->update(['GROUP_ID' => "N/A"]);
                 $studName=STUDENT::where('S_ID',$S_ID)->value('NAME');
+
+                $total_arch=OP_Archive::where('GRP_ID',$oparchID)->count();
                 $addComment=new messages;
-                $addComment->OP_ID =$oparchID;
-                $addComment->COMMENTOR =  $remover;
+                $addComment->OP_ID =$total_arch;
+                $addComment->COMMENTOR =  $rem;
                 $addComment->MESSAGE = $studName." has been removed by ".$remover;
                 $addComment->save();
 
-        return redirect()->route('studentt.group')->with('alert', 'Member Successfully added.');
+        return redirect()->route('studentt.group')->with('alert', 'Member Successfully removed.');
 
     }
 

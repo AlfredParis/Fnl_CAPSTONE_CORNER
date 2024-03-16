@@ -13,12 +13,12 @@ Substitute Admin Dashboard
     </li>
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="#">
-            <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">On Progress</span>
+            <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Proposal</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="#">
-            <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">Proposal</span>
+            <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Final Defense</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
@@ -38,12 +38,7 @@ Substitute Admin Dashboard
         </a>
     </li>
 
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="#">
-            <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Audit</span>
-        </a>
-    </li>
-</ul>
+    </ul>
 @endsection
 
 @section('main')

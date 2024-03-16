@@ -35,17 +35,16 @@
                             @endphp
 
                             @if ($mess->COMMENTOR==$com)
-
-
-                            <div class="textR"> {{$mess->MESSAGE}}
-                                <p class="sender">from: {{ $comName}}</p>
-                            </div>
+                                <div class="textR"> {{$mess->MESSAGE}}
+                                    <p class="sender">
+                                        from: {{ $comName}} <br>
+                                        Date: {{$mess->created_at}}</p>
+                                </div>
                             @else
-
-
                             <div class="textL"> {{$mess->MESSAGE}}
-
-                                <p class="sender">from: {{ $comName}}</p>
+                                <p class="sender">
+                                    from: {{ $comName}}<br>
+                                    Date: {{$mess->created_at}}</p>
                             </div>
                             @endif
 
