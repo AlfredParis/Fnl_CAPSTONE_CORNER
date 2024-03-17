@@ -43,5 +43,48 @@
 @endsection
 
 @section('main')
-    sub admin
+
+<div class="container-fluid ">
+
+    <div class="row " style="margin-top: 1rem;">
+        <div class="col-md-12">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Group Name</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $i = 0;
+
+                    @endphp
+                    @foreach ($groups as $archive)
+
+                    <tr>
+                        @php
+
+                        $i = $i + 1;
+
+                        @endphp
+
+                        <td> {{ $archive->GRP_NAME}}</td>
+                        <td> <a class="btn btn-primary"
+                                href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}">open</a> </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
 @endsection

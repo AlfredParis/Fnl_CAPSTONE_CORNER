@@ -268,49 +268,35 @@ public function addArch()
 
     }
 
-    public function opArch(Request $request)
-    {
+    public function opArch(Request $request){
         $id = Session::get('userID');
         $name = Session::get('fullNs');
         $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
         $arch = new OP_Archive;
         $total_arch=OP_Archive::where('GRP_ID',$groupID)->count();
         $num=$total_arch+1;
-
         $arch->ARCH_NAME = "Archive Update #".$num;
         $arch->DESCRIPTION = $request->input("DESCRIPTION");
         $arch->UPLOADER = $name ;
         $arch->GRP_ID = $groupID ;
-
-
         if ($request->hasFile('pdf_file')) {
-
             $pdfFile = $request->file('pdf_file');
             $fileName = time() . '_' . $pdfFile->getClientOriginalName();
             $pdfFile->storeAs('pdfs', $fileName, 'public');
                 $arch->PDF_FILE = $fileName;
-
                 $arch->save();
-
                 $notif = new notif;
                 $notif->category = "Add";
                 $notif->content = "$name has been updated on Progress Archive: $total_arch ";
                 $notif->suspect = $name;
                 $notif->save();
-
         } else {
-
             return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
         }
-
-
         $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
         $archives=OP_Archive::where('GRP_ID', $groupID)->get();
 
          return redirect()->route('studentt.group')->with('arch', $archives)->with('auths', $auth);
-
-
-
     }
 
 

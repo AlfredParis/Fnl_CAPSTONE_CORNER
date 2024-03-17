@@ -38,7 +38,7 @@
 
     <style>
         body {}
-
+        a{ text-decoration: none;}
         .loading {
             position: fixed;
             top: 0;

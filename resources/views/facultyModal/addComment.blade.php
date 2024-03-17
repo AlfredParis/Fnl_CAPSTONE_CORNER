@@ -44,7 +44,9 @@
                             @else
 
 
-                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
+                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}
+                            <br>Date:{{$mess->created_at}}
+                            </p>
                             </div>
 
 

@@ -76,10 +76,9 @@ class subAdmin extends Controller
     }
     public function myGroup( string $advisory)
     {
-        $id = Session::get('userID');
+
 
             $myGRP=group::where('id',$advisory)->first();
-            $groupID= STUDENT::where('S_ID',$id)->value('GROUP_ID');
             $archives=OP_Archive::where('GRP_ID', $advisory)->get();
 
             return view('subAdmin.Mygroup')->with('isGrouped',$advisory)->with('GRP_det',$myGRP)->with('arch', $archives);
@@ -146,4 +145,48 @@ class subAdmin extends Controller
         return redirect()->back()->with('alert', 'Member Successfully added.');
 
     }
+
+
+    public function onProgress()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('ADVSR_ID',$userID)->get();
+
+        return view('subAdmin.onProgress')->with('groups',$grp);
+    }
+
+    public function opArch(Request $request){
+        $id = Session::get('userID');
+        $name = Session::get('fullNs');
+        $groupID= group::where('ADVSR_ID',$id)->value('id');
+
+        $arch = new OP_Archive;
+        $total_arch=OP_Archive::where('GRP_ID',$groupID)->count();
+        $num=$total_arch+1;
+        $arch->ARCH_NAME = "Archive Update #".$num;
+        $arch->DESCRIPTION = $request->input("DESCRIPTION");
+        $arch->UPLOADER = $name ;
+        $arch->GRP_ID = $groupID ;
+        if ($request->hasFile('pdf_file')) {
+            $pdfFile = $request->file('pdf_file');
+            $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfFile->storeAs('pdfs', $fileName, 'public');
+                $arch->PDF_FILE = $fileName;
+                $arch->save();
+
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been updated on Progress Archive: $total_arch ";
+                $notif->suspect = $name;
+                $notif->save();
+        } else {
+            return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+        }
+        $sameDept= EMPLOYEE::where('EMP_ID', $id)->value('EMP_DEPT');
+        $auth = STUDENT::where('GROUP_ID', 'N/A')->where('DEPT_ID', $sameDept)->get();
+        $archives=OP_Archive::where('GRP_ID', $groupID)->get();
+
+         return redirect()->back()->with('arch', $archives)->with('auths', $auth);
+    }
+
 }

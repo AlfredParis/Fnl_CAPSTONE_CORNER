@@ -17,6 +17,7 @@ use App\Models\notif;
 use App\Models\group;
 use App\Models\OP_Archive;
 use App\Models\messages;
+use App\Models\TURNED_OVER_ARCHIVES;
 
 
 
@@ -268,7 +269,29 @@ public function userEdit($id)
 
         }
 
-        public function updateProg(Request $request,$S_ID ,$G_ID){
-            return dd($G_ID);
+        public function updateProg( string $S_ID ,$G_ID){
+
+            $studProf = group::where('id', $G_ID)->first();
+
+            $studProf->where('id', $G_ID)->update([
+                'STATUS_ID' =>$S_ID,
+            ]);
+
+            return redirect()->back()->with('alert', 'Status updated');
         }
+
+        public function turnOver($grp_id){
+
+
+
+            $trnd=new TURNED_OVER_ARCHIVES;
+            $trnd->ARCH_ID =;
+            $trnd->GROUP_ID=;
+            $trnd->ADVISER_ID= ;
+            $trnd->save();
+            return redirect()->back()->with('alert', 'Group archive has been turned over');
+
+        }
+
+
 }

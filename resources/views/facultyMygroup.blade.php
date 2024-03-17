@@ -109,14 +109,8 @@ My Group
                         @foreach ( $allStat as $mmbr)
                         <li class="btn-noDesign">
 
-                            <form class="" action="{{route('updateProg', ['S_ID' => $mmbr->id],['G_ID',$GRP_det->id])}}"
-                                method="POST" enctype="multipart/form-data">
+                            <a class="btn-noDesign" href="{{ route('updateProg', ['S_ID' => $mmbr->id, 'G_ID' => $GRP_det->id]) }}"> {{$mmbr->arch_stat}}</a>
 
-                                <button type="submit"
-                                class="btn-noDesign">
-                                {{$mmbr->arch_stat}}</button>
-
-                            </form>
                         </li>
                         @endforeach
 
@@ -165,11 +159,11 @@ My Group
 
             </tbody>
         </table>
-        @include("studentModal.addArchive")
+
     </div>
 </div>
 
-<form class="" action="{{ route('studentt.opArch') }}" method="POST" enctype="multipart/form-data">
+<form class="" action="{{ route('faculty.opArch') }}" method="POST" enctype="multipart/form-data">
 
     @csrf
 

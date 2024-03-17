@@ -33,7 +33,8 @@ Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
 Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
-Route::put('/{S_ID}/{G_ID}/updateProg', [extraCtrl::class, 'updateProg'])->name('updateProg');
+Route::get('updateProg/{S_ID}/{G_ID}/', [extraCtrl::class, 'updateProg'])->name('updateProg');
+Route::get('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
 
 
 Route::put('{S_ID}/updateUser', [extraCtrl::class, 'userUpdate'])->name('userUpdate');
@@ -83,6 +84,7 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::post('{oparchID}/addComment', [facultyController::class, 'addComment'])->name('addComment');
     Route::post('{advisory}/updateMember', [facultyController::class, 'updateMember'])->name('updateMember'); //user edit store
     Route::put('/removeMem/{S_ID}', [facultyController::class, 'removeMem'])->name('removeMem'); //user edit store
+    Route::post('/opArch', [facultyController::class, 'opArch'])->name('opArch');
 
 
 });
@@ -165,6 +167,9 @@ Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' =
     Route::put('/{S_ID}/removeMem', [subAdmin::class, 'removeMem'])->name('removeMem');
     Route::get('/advisory', [subAdmin::class, 'advisory'])->name('advisory');
     Route::post('/opArch', [subAdmin::class, 'opArch'])->name('opArch');
+
+    Route::get('/onProgress', [subAdmin::class, 'onProgress'])->name('onProgress');
+
 
 });
 
