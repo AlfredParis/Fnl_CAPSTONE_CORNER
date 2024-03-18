@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('TRND_OVER_ARCH', function (Blueprint $table) {
+        Schema::create('t_u_r_n_e_d__o_v_e_r__a_r_c_h_i_v_e_s', function (Blueprint $table) {
             $table->id();
             $table->string('ARCH_ID');
             $table->string('GROUP_ID');
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('ABS');
             $table->string('DEPT_ID');
             $table->string('DOCU');
+            $table->string('PUB');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('TRND_OVER_ARCH');
+        Schema::dropIfExists('t_u_r_n_e_d__o_v_e_r__a_r_c_h_i_v_e_s');
     }
 };

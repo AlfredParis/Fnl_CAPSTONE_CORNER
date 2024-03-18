@@ -34,7 +34,9 @@ Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
 Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
 Route::get('updateProg/{S_ID}/{G_ID}/', [extraCtrl::class, 'updateProg'])->name('updateProg');
-Route::get('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
+Route::post('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
+
+Route::post('{grp_id}/opArchGL', [extraCtrl::class, 'opArch'])->name('opArchGL');
 
 
 Route::put('{S_ID}/updateUser', [extraCtrl::class, 'userUpdate'])->name('userUpdate');

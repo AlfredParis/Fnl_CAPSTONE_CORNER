@@ -39,7 +39,7 @@ My Group
         </a>
     </li>
 
-    </ul>
+</ul>
 @endsection
 
 @section('main')
@@ -64,10 +64,10 @@ My Group
 
 @php
 
-    $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
-    $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
-    $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
-    $allStat=\App\Models\archStatus::get() ;
+$advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
+$mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+$stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
+$allStat=\App\Models\archStatus::get() ;
 @endphp
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
@@ -129,7 +129,9 @@ My Group
                         @foreach ( $allStat as $mmbr)
                         <li class="btn-noDesign">
 
-                            <a class="btn-noDesign" href="{{ route('updateProg', ['S_ID' => $mmbr->id, 'G_ID' => $GRP_det->id]) }}"> {{$mmbr->arch_stat}}</a>
+                            <a class="btn-noDesign"
+                                href="{{ route('updateProg', ['S_ID' => $mmbr->id, 'G_ID' => $GRP_det->id]) }}">
+                                {{$mmbr->arch_stat}}</a>
 
                         </li>
                         @endforeach
@@ -167,8 +169,8 @@ My Group
                     <td scope="row">{{$oparch->UPLOADER}}</td>
                     <td scope="row">{{$oparch->DESCRIPTION}}</td>
                     <td scope="row">
-                        <a href="#"
-                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');" class="btn btn-primary">Open Document</a>
+                        <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');"
+                            class="btn btn-primary">Open Document</a>
                     </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
@@ -184,7 +186,7 @@ My Group
     </div>
 </div>
 
-<form class="" action="{{ route('subAdmin.opArch') }}" method="POST" enctype="multipart/form-data">
+<form class="" action="{{  route('opArchGL',['grp_id'=>$GRP_det->id])}}" method="POST" enctype="multipart/form-data">
 
     @csrf
 

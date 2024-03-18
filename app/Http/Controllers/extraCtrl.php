@@ -280,17 +280,95 @@ public function userEdit($id)
             return redirect()->back()->with('alert', 'Status updated');
         }
 
-        public function turnOver($grp_id){
+        public function turnOver(Request $request, $grp_id){
+            $userid=Session::get('userID');
+             $latestArch=group::where('id', $grp_id)->first();
+
+            $crs="";
+            $course=EMPLOYEE::where('EMP_ID', $userid)->value('EMP_DEPT');
 
 
+            $total_arch=OP_Archive::where('GRP_ID',$grp_id)->count();
+            $yawa = "Archive Update #".$total_arch;
 
+            $file=OP_Archive::where('ARCH_NAME',$yawa)->value('PDF_FILE');
+            if ($course== 1) {
+                $crs="BEED";
+            }
+
+            elseif ($course== 2) {
+                $crs="BTLED";
+            }
+            elseif ($course== 3) {
+                $crs="BSEF";
+            }
+            elseif ($course== 4) {
+                $crs="BSESS";
+            }
+            elseif ($course== 5) {
+                $crs="BSBA";
+            }
+            elseif ($course== 6) {
+                $crs="BSIT";
+            }
+            elseif ($course== 7) {
+                $crs="BSHM";
+            }
+            elseif ($course== 8) {
+                $crs="BSOA";
+            }
+            elseif ($course== 9) {
+                $crs="BSA";
+            }
+            else {
+                $crs="BEED";
+            }
+
+            $naa=$latestArch['ADVSR_ID'];
+            $total=TURNED_OVER_ARCHIVES::count();
+            $totalTRND=$total+1;
             $trnd=new TURNED_OVER_ARCHIVES;
-            $trnd->ARCH_ID =;
-            $trnd->GROUP_ID=;
-            $trnd->ADVISER_ID= ;
+            $trnd->ARCH_ID =$crs.$totalTRND;
+            $trnd->GROUP_ID=$latestArch['GRP_NAME'];
+            $trnd->ADVISER_ID= $userid;
+            $trnd->TITLE= $request->input('TITLE') ;
+            $trnd->ABS= $request->input('ABS') ;
+            $trnd->DEPT_ID= $course;
+            $trnd->DOCU= $file;
+            $trnd->PUB=0;
             $trnd->save();
             return redirect()->back()->with('alert', 'Group archive has been turned over');
 
+        }
+        public function opArch(Request $request,$grp_id){
+            $id = Session::get('userID');
+            $name = Session::get('fullNs');
+
+            $arch = new OP_Archive;
+            $total_arch=OP_Archive::where('GRP_ID',$grp_id)->count();
+            $num=$total_arch+1;
+            $arch->ARCH_NAME = "Archive Update #".$num;
+            $arch->DESCRIPTION = $request->input("DESCRIPTION");
+            $arch->UPLOADER = $name ;
+            $arch->GRP_ID = $grp_id ;
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+                $pdfFile->storeAs('pdfs', $fileName, 'public');
+                    $arch->PDF_FILE = $fileName;
+                    $arch->save();
+                    $notif = new notif;
+                    $notif->category = "Add";
+                    $notif->content = "$name has been updated on Progress Archive: $total_arch ";
+                    $notif->suspect = $name;
+                    $notif->save();
+            } else {
+                return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+            }
+            $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
+            $archives=OP_Archive::where('GRP_ID', $grp_id)->get();
+
+            return redirect()->back()->with('alert', 'PDF uploaded.');
         }
 
 

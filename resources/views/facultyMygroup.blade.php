@@ -53,10 +53,10 @@ My Group
 @else
 @php
 
-    $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
-    $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
-    $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
-    $allStat=\App\Models\archStatus::get() ;
+$advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
+$mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+$stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
+$allStat=\App\Models\archStatus::get() ;
 @endphp
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
@@ -65,13 +65,13 @@ My Group
         <h3 class="group-nav-content"> Status: {{$stat }} </h3>
 
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="">
-            <ul class="navbar-nav" >
-                <li class="nav-item dropdown"  >
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
                     <button style="" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Group Members
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark" >
+                    <ul class="dropdown-menu dropdown-menu-dark">
                         @foreach ( $mmbrs as $mmbr)
                         <li style="padding-left:10px; padding-right:10px;">
                             <form class="" action="{{route('faculty.removeMem', ['S_ID' => $mmbr->S_ID])}}"
@@ -90,7 +90,7 @@ My Group
                             <hr class="dropdown-divider">
                         </li>
                         <li> <button type="button" data-bs-toggle="modal" data-bs-target="#memAdd{{$GRP_det->id}}"
-                               class="btn-noDesign">
+                                class="btn-noDesign">
                                 Add member</button></li>
 
                     </ul>
@@ -109,7 +109,9 @@ My Group
                         @foreach ( $allStat as $mmbr)
                         <li class="btn-noDesign">
 
-                            <a class="btn-noDesign" href="{{ route('updateProg', ['S_ID' => $mmbr->id, 'G_ID' => $GRP_det->id]) }}"> {{$mmbr->arch_stat}}</a>
+                            <a class="btn-noDesign"
+                                href="{{ route('updateProg', ['S_ID' => $mmbr->id, 'G_ID' => $GRP_det->id]) }}">
+                                {{$mmbr->arch_stat}}</a>
 
                         </li>
                         @endforeach
@@ -147,8 +149,8 @@ My Group
                     <td scope="row">{{$oparch->UPLOADER}}</td>
                     <td scope="row">{{$oparch->DESCRIPTION}}</td>
                     <td scope="row">
-                        <a href="#"
-                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');" class="btn btn-primary">Open Document
+                        <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');"
+                            class="btn btn-primary">Open Document
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
                     @include('facultyModal.addComment')
@@ -163,7 +165,7 @@ My Group
     </div>
 </div>
 
-<form class="" action="{{ route('faculty.opArch') }}" method="POST" enctype="multipart/form-data">
+<form class="" action="{{ route('opArchGL',['grp_id'=>$GRP_det->id]) }}" method="POST" enctype="multipart/form-data">
 
     @csrf
 

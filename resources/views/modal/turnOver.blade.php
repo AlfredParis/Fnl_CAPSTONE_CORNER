@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-               Turn Over Form
+                    Turn Over Form
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -14,20 +14,19 @@
                     @csrf
                     <div class="form-group">
                         <label for="archId">Title</label>
-                        <input class="form-control" type="text" id="archId" name="ARCH_ID"
-                            value="" required>
+                        <input class="form-control" type="text" id="archId" name="TITLE" value="" required>
                     </div>
                     <div class="form-group">
                         <label for="ABS">Abstract</label>
-                            <textarea name="ABS" id="" cols="60" rows="5"></textarea>
+                        <textarea name="ABS" id="" cols="60" rows="5"></textarea>
                     </div>
-             </div>
+            </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">SAVE</button>
             </div>
-        </form>
+            </form>
 
         </div>
     </div>

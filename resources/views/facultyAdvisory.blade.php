@@ -58,8 +58,9 @@ My Advisory
 
                     <tr>
                         @php
-                            $isTurned=\App\Models\group::where('id', $archive->id)->value('STATUS_ID');
-                            $stat=\App\Models\archStatus::where('id', $isTurned)->value('arch_stat');
+                        $isTurned=\App\Models\group::where('id', $archive->id)->value('STATUS_ID');
+                        $stat=\App\Models\archStatus::where('id', $isTurned)->value('arch_stat');
+                        $trnd=\App\Models\TURNED_OVER_ARCHIVES::where('GROUP_ID',$archive->GRP_NAME)->value('id');
 
                         @endphp
 
@@ -69,11 +70,19 @@ My Advisory
                         </td>
                         <td>
                             @if ($isTurned==4)
-                            <a class="btn btn-success" href="#turnOver_{{  $archive->id }}"
-                            data-bs-toggle="modal">
-                            Turn Over</a>
 
-                                @include('modal.turnOver')
+                            @if (isset($trnd))
+
+                            <p class="btn btn-outline-success">
+                                Waiting For Response</p>
+
+                            @else
+                            <a class="btn btn-success" href="#turnOver_{{  $archive->id }}" data-bs-toggle="modal">
+                                Turn Over</a>
+
+                            @endif
+
+                            @include('modal.turnOver')
                             @elseif ($isTurned==3)
                             <p class="btn btn-warning">{{ $stat }}</p>
                             @elseif ($isTurned==2)
@@ -84,7 +93,7 @@ My Advisory
 
                         </td>
 
-                            </tr>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
