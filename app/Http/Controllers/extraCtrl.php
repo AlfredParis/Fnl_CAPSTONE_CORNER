@@ -281,6 +281,7 @@ public function userEdit($id)
         }
 
         public function turnOver(Request $request, $grp_id){
+          
             $userid=Session::get('userID');
              $latestArch=group::where('id', $grp_id)->first();
 
@@ -291,7 +292,7 @@ public function userEdit($id)
             $total_arch=OP_Archive::where('GRP_ID',$grp_id)->count();
             $yawa = "Archive Update #".$total_arch;
 
-            $file=OP_Archive::where('ARCH_NAME',$yawa)->value('PDF_FILE');
+            $file=OP_Archive::where('ARCH_NAME',$yawa)->where('GRP_ID',$grp_id)->value('PDF_FILE');
             if ($course== 1) {
                 $crs="BEED";
             }
@@ -329,7 +330,7 @@ public function userEdit($id)
             $totalTRND=$total+1;
             $trnd=new TURNED_OVER_ARCHIVES;
             $trnd->ARCH_ID =$crs.$totalTRND;
-            $trnd->GROUP_ID=$latestArch['GRP_NAME'];
+            $trnd->GROUP_ID=$grp_id;
             $trnd->ADVISER_ID= $userid;
             $trnd->TITLE= $request->input('TITLE') ;
             $trnd->ABS= $request->input('ABS') ;

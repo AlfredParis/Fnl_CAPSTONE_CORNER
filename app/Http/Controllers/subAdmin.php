@@ -20,6 +20,8 @@ use App\Models\group;
 use App\Models\messages;
 use App\Models\notif;
 use App\Models\OP_Archive;
+use App\Models\TURNED_OVER_ARCHIVES;
+
 
 use App\Http\Controllers\userCCcontroller;
 
@@ -188,5 +190,30 @@ class subAdmin extends Controller
 
          return redirect()->back()->with('arch', $archives)->with('auths', $auth);
     }
+    public function finalDefended()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('STATUS_ID',4)->get();
+
+        return view('subAdmin.finalDefended')->with('groups',$grp);
+    }
+    public function forProposal()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('STATUS_ID',2)->get();
+
+        return view('subAdmin.forProposal')->with('groups',$grp);
+    }
+    public function forFinalDefense()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('STATUS_ID',3)->get();
+
+        return view('subAdmin.forFinalDefense')->with('groups',$grp);
+    }
+
+
+    
+
 
 }

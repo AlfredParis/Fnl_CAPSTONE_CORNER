@@ -60,7 +60,7 @@ My Advisory
                         @php
                         $isTurned=\App\Models\group::where('id', $archive->id)->value('STATUS_ID');
                         $stat=\App\Models\archStatus::where('id', $isTurned)->value('arch_stat');
-                        $trnd=\App\Models\TURNED_OVER_ARCHIVES::where('GROUP_ID',$archive->GRP_NAME)->value('id');
+                        $trnd=\App\Models\TURNED_OVER_ARCHIVES::where('GROUP_ID',$archive->id)->value('id');
 
                         @endphp
 

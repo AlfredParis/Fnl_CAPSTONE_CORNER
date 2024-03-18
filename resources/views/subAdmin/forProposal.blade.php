@@ -6,7 +6,6 @@
 
 @section('topnav')
 
-
 <ul class="nav nav-pills flex-column mt-4" style="gap: 1vh;">
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white active" aria-current="true" href="{{ route('subAdmin.index') }}">
@@ -14,13 +13,12 @@
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('subAdmin.forProposal') }}
-">
+        <a class="nav-link text-white" href="{{ route('subAdmin.forProposal') }}">
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Proposal</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{route('subAdmin.forFinalDefense')}}">
+        <a class="nav-link text-white" href="{{ route('subAdmin.forFinalDefense') }}">
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Final Defense</span>
         </a>
     </li>
@@ -50,10 +48,13 @@
 
     <div class="row " style="margin-top: 1rem;">
         <div class="col-md-12">
+
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Group Name</th>
+
+
                     </tr>
                 </thead>
                 <tbody>
@@ -77,6 +78,12 @@
                     @endforeach
                 </tbody>
             </table>
+
+
+
+
+
+
         </div>
     </div>
 </div>

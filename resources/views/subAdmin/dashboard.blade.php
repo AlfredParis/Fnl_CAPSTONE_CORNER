@@ -12,17 +12,17 @@ Substitute Admin Dashboard
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="#">
+        <a class="nav-link text-white" href="{{ route('subAdmin.forProposal') }}">
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Proposal</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="#">
+        <a class="nav-link text-white" href="{{ route('subAdmin.forFinalDefense') }}">
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Final Defense</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="#">
+        <a class="nav-link text-white" href="{{ route('subAdmin.finalDefended') }}">
             <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Final Defended</span>
         </a>
     </li>

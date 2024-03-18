@@ -136,6 +136,8 @@ $allStat=\App\Models\archStatus::get() ;
                         <th scope="col">Uploader</th>
                         <th scope="col">Description</th>
                         <th scope="col"> Pdf</th>
+                        <th scope="col"> Comment</th>
+                        <th scope="col"> Date</th>
 
 
 
@@ -153,6 +155,8 @@ $allStat=\App\Models\archStatus::get() ;
                             class="btn btn-primary">Open Document
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
+                    <td scope="row">{{$oparch->created_at}}</td>
+                   
                     @include('facultyModal.addComment')
                 </tr>
                 @endforeach
