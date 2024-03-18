@@ -371,5 +371,12 @@ public function userEdit($id)
             return redirect()->back()->with('alert', 'PDF uploaded.');
         }
 
+        public function turnedOverArch()
+        {
+            $userID=Session::get('userID');
+            
+        $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
+        return view('turnedOverArch')->with('trnd',$trndOver);
+        }
 
 }

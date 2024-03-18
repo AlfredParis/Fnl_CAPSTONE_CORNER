@@ -18,6 +18,8 @@ use App\Models\notif;
 use App\Models\group;
 use App\Models\OP_Archive;
 use App\Models\messages;
+use App\Models\TURNED_OVER_ARCHIVES;
+
 
 
 class facultyController extends Controller
@@ -42,34 +44,11 @@ class facultyController extends Controller
     public function myArchive(Request $request)
     {
 
+      
+        $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
+       
+        return view('turnedOverArchFaculty')->with('trnd',$trndOver);
 
-
-        $srch = $request->input("search");
-
-        if (isset($srch)) {
-            $archives = ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
-            $title = ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
-
-
-
-            if (!$archives->isEmpty()) {
-                $ret = $archives;
-            } elseif (!$title->isEmpty()) {
-                $ret = $title;
-            } else {
-                $ret = collect(); // Create an empty collection if both are empty
-            }
-
-
-            $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
-
-            return view('facultyArchive')->with('arch', $ret)->with('auths', $auth);
-        }
-
-        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('facultyArchive')->with('arch', $archives)->with('auths', $auth);
-        ;
     }
 
 

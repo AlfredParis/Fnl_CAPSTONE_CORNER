@@ -16,6 +16,7 @@ use App\Models\USER_ACC_EMP;
 use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\notif;
+use App\Models\TURNED_OVER_ARCHIVES;
 
 use App\Http\Controllers\userCCcontroller;
 
@@ -632,17 +633,14 @@ public function view($id)
 
 public function srch(Request $request)
     {
-
+        
       }
 
       
-public function turnedOverArch()
-{
-$trndOver=TURNED_OVER_ARCHIVES::paginate(10);
-return view('turnedOverArch')->with('trnd',$trndOver);
-  }
-
-
-
+      public function turnedOverArch()
+    {
+            $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
+            return view('turnedOverArch')->with('trnd',$trndOver);
+    }
 
 }

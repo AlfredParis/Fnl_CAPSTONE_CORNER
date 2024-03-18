@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\messages;
+use App\Models\TURNED_OVER_ARCHIVES;
+
 class studentController extends Controller
 {
 
@@ -32,27 +34,10 @@ class studentController extends Controller
 
     public function archives(Request $request)
     {
-        $yearToSearch=$request->input("search");
-
-        if(isset($yearToSearch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
-            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $yearToSearch . '%')->paginate(10);
-
-            if (!$archives->isEmpty()) {
-                $ret = $archives;
-            } elseif (!$title->isEmpty()) {
-                $ret = $title;
-            } else {
-                $ret = collect();
-            }
-            $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
-
-            return view('studArchiveTB')->with('arch', $ret) ->with( 'auths',$auth);
-        }
-        $auth = STUDENT::where('GROUP_ID', 'N/A')->get();
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-
-        return view('studArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
+      
+        $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
+       
+        return view('turnedOverArchStudent')->with('trnd',$trndOver);
     }
 
 

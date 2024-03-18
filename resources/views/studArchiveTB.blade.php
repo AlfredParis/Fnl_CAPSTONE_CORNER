@@ -26,30 +26,6 @@ Archive Table
 @endsection
 
 @section('main')
-<div class="pddingForBody">
-<div class="container" style="margin-left: 0;">
-    <div class="row">
-        <div class="col auto">
-
-        </div>
-        <div class="col">
-            <form action="{{ route('studentt.archives') }}" method="get">
-                <div class="input-group">
-
-                    <input type="search" class="form-control rounded" placeholder="Search arvhive name or publish date"
-                        aria-label="Search" aria-describedby="search-addon" name="search" />
-                    <button type="submit" class="btn btn-outline-primary">Search</button>
-
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
-
-
 <table class="table table-striped">
     <thead>
         <tr>

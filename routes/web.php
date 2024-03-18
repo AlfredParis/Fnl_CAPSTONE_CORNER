@@ -93,6 +93,8 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin'], function () {
     //Excel imports
+    
+    Route::get('/turnedOverArch', [adminController::class, 'turnedOverArch'])->name('turnedOverArch');
     Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
     //excel import end
 
