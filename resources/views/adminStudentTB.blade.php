@@ -59,7 +59,6 @@
                     <th scope="col">Full Name</th>
                     <th scope="col">Course</th>
                     <th scope="col">View</th>
-                    <th scope="col">Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,7 +74,7 @@
                         @endphp
                         <td scope="row">{{ $student->S_ID }}</td>
                         <td scope="row">{{ $student->NAME }}</td>
-                        <td scope="row">{{ $student->C_DESC }}</td>
+                        <td scope="row">{{ $student->DEPT_NAME }}</td>
                         <td scope="row">
                             @php
                                 $id = $student->S_ID;
@@ -87,17 +86,7 @@
 
                         </td>
 
-                        <td scope="row">
-                            @php
-                                $id = $student->S_ID;
-                            @endphp
-                            <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
-                                <i class="fs-5 fa fa-pen-to-square"></i></a>
-
-                            @include('modal.editUser')
-
-                        </td>
-
+                        
 
 
 

@@ -29,7 +29,7 @@ composer require barryvdh/laravel-dompdf
 
 
 additional steps:
-Remove this is the php.ini of the xampp : ;extension=gd
+Remove this is the php.ini of the xampp : ;extension=gd & ;extension=zip 
 This is for the excel import
 and then run this command in the project
 composer require phpoffice/phpspreadsheet

@@ -27,16 +27,13 @@ class adminController extends Controller
 
     public function index(Request $request)
     {
+        $total_arch = ARCHIVES::count();
+        $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student = student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
 
-            $total_arch=ARCHIVES::count() ;
-            $total_admin= USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
-            $total_student=student_acc::where('ACCTYPE', 'student')->count();
-            $total_faculty=USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-           // $auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with( 'auths',$auth)
-
-            return view('adminDashB')->with('tl_admin', $total_admin)->with('tl_arch', $total_arch)->with('tl_stud', $total_student)->with('tl_fac', $total_faculty);
-
-
+        return view('adminDashB')->with('tl_admin', $total_admin)->with('ttlArch', $total_arch)->with('ttlStud', $total_student)->with('tl_fac', $total_faculty)->with('arch', $archDesc);
     }
 
     public function checker()
@@ -89,10 +86,9 @@ class adminController extends Controller
 
 
         $users = DB::table('s_t_u_d_e_n_t_s')
-        ->join('c_o_u_r_s_e_s', 's_t_u_d_e_n_t_s.C_ID', '=', 'c_o_u_r_s_e_s.C_ID')
-        ->select('c_o_u_r_s_e_s.C_DESC','s_t_u_d_e_n_t_s.S_ID','s_t_u_d_e_n_t_s.NAME')->paginate(10)
+            ->join('departments', 's_t_u_d_e_n_t_s.DEPT_ID', '=', 'departments.id')
+            ->select('departments.DEPT_NAME', 's_t_u_d_e_n_t_s.S_ID', 's_t_u_d_e_n_t_s.NAME')->paginate(10)
         ;
-
         return view('adminStudentTB')->with('students', $studentPage)->with('SN', $users);
 
 
@@ -633,11 +629,18 @@ public function view($id)
 
   return view('adminAccView')->with($show);
     }
+
 public function srch(Request $request)
     {
 
       }
 
+      
+public function turnedOverArch()
+{
+$trndOver=TURNED_OVER_ARCHIVES::paginate(10);
+return view('turnedOverArch')->with('trnd',$trndOver);
+  }
 
 
 
