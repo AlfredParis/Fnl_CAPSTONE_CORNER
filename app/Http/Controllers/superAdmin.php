@@ -436,9 +436,32 @@ class superAdmin extends Controller
         $depts=department::where('PROG_ID',$id)->get();
 
 
-        //  $emp=EMPLOYEE::where('EMP_DEPT',$depts)->get();
-
 
         return view("superAdmin.specAdminTB")->with('dept',$depts)->with('if',$identifyProg);
     }
+
+    public function storeProg(Request $request){
+        $prog=new program;
+        $prog->PROG_NAME =$request->input('PROG_NAME');
+        $prog->PROG_ABBR =$request->input('PROG_ABBR');
+        $prog->save();
+
+
+        return redirect()->back()->with('alert', 'Created a program.')->withInput();
+    }
+    public function updateProg(Request $request,$id){
+
+
+        $country = program::where('id', $id)->first();
+        $country->where('id', $id)->update([
+            'PROG_ABBR' => $request->input('PROG_ABBR'),
+            'PROG_NAME' => $request->input('PROG_NAME'),
+    ]);
+
+
+        return redirect()->back()->with('alert', 'Created a program.')->withInput();
+    }
+
+
+
 }

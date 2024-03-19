@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="" action="{{ route('superAdmin.storeArch') }}" method="POST" enctype="multipart/form-data">
+                <form class="" action="{{ route('superAdmin.storeProg') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -37,11 +37,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            new MultiSelectTag("countries");
-        });
-    </script>
 
 
 

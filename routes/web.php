@@ -149,7 +149,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::get('/archives', [superAdmin::class, 'archives'])->name('archives');
         Route::get('/student', [superAdmin::class, 'student'])->name('student');
         Route::get('/department', [superAdmin::class, 'department'])->name('department');
-        Route::put('/updateProg', [superAdmin::class, 'updateProg'])->name('updateProg');
+        Route::put('/updProg/{id}', [superAdmin::class, 'updateProg'])->name('updateProg');
         Route::put('/updatePosition', [superAdmin::class, 'updatePosition'])->name('updatePosition');
         Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
         Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
@@ -166,6 +166,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::get('/group', [superAdmin::class, 'group'])->name('group');
         Route::get('{id}/specAdminTB', [superAdmin::class, 'specAdminTB'])->name('specAdminTB');
         Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
+        Route::post('/storeProg', [superAdmin::class, 'storeProg'])->name('storeProg');
 
     });
 
