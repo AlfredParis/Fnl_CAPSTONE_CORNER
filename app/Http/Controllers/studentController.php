@@ -35,8 +35,8 @@ class studentController extends Controller
     public function archives(Request $request)
     {
       
-        $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
-       
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
+
         return view('turnedOverArchStudent')->with('trnd',$trndOver);
     }
 

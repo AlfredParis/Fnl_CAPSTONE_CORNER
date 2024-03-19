@@ -49,7 +49,7 @@
     @endsection
     {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add archives --}}
     @section('main')
-    <h1>Recieved</h1>
+    <h1>Finalized</h1>
     <div class="container-fluid ">
     
         <div class="row " style="margin-top: 1rem;">

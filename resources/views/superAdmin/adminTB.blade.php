@@ -52,6 +52,7 @@ Admin Table
                 emplopyies</span>
         </a>
     </li>
+</ul>
     @endsection
 
     @section('main')

@@ -21,11 +21,11 @@ My Group
             <i class="fs-7 fa fa-check"></i><span class="fs-7 d-none ms-2 d-sm-inline">Checker</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
+    {{-- <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white " href="{{ route('faculty.student') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-7 d-none ms-2 d-sm-inline">Student</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white active" aria-current="true" href="{{ route('faculty.advisory') }}">
             <i class="fs-7 fa fa-users-rectangle"></i><span class="fs-7 d-none ms-2 d-sm-inline">Advisory</span>
@@ -60,9 +60,9 @@ $allStat=\App\Models\archStatus::get() ;
 @endphp
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
-        <h3 class="group-nav-content"> {{ $GRP_det->GRP_NAME }}</h3>
-        <h3 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h3>
-        <h3 class="group-nav-content"> Status: {{$stat }} </h3>
+        <h6 class="group-nav-content"> {{ $GRP_det->GRP_NAME }}</h6>
+        <h6 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h6>
+        <h6 class="group-nav-content"> Status: {{$stat }} </h6>
 
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="">
             <ul class="navbar-nav">

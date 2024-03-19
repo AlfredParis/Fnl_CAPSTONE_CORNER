@@ -33,7 +33,7 @@ class adminDet extends Seeder
             ],
            [
                 'EMP_ID' => 'facultyIT',
-                'NAME' => 'faculty IT',
+                'NAME' => 'BENSON LESTER A. FLORES',
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
@@ -41,7 +41,7 @@ class adminDet extends Seeder
             ],
             [
                 'EMP_ID' => 'facultyBSBA',
-                'NAME' => 'faculty BSBA',
+                'NAME' => 'KIM ANGELA L. CRUZ',
                 'EMP_DEPT' => '5',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
@@ -49,7 +49,7 @@ class adminDet extends Seeder
             ],
             [
                 'EMP_ID' => 'facultyBSHM',
-                'NAME' => 'faculty BSHM',
+                'NAME' => 'MILAGROSA M. MALICDEM',
                 'EMP_DEPT' => '7',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
@@ -57,7 +57,7 @@ class adminDet extends Seeder
             ],
             [
                 'EMP_ID' => 'facultyBSOA',
-                'NAME' => 'faculty BSOA',
+                'NAME' => 'JOBELLE S. QUINTO',
                 'EMP_DEPT' => '8',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
@@ -85,7 +85,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'subAdmin2',
-                'NAME' => 'Juliet Menor',
+                'NAME' => 'JULIET V. MENOR ',
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '3',
@@ -103,7 +103,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'MIS',
-                'NAME' => 'jose carlo gamboa',
+                'NAME' => 'JOSE CARLOS C. GAMBOA',
                 'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'INACTIVE',
                 'POSITION_ID' => '1',

@@ -336,7 +336,10 @@ public function userEdit($id)
             $trnd->ABS= $request->input('ABS') ;
             $trnd->DEPT_ID= $course;
             $trnd->DOCU= $file;
-            $trnd->PUB=0;
+            
+            
+            $trnd->ADVS_STAT=0;
+            $trnd->PUB_STAT=0;
             $trnd->save();
             return redirect()->back()->with('alert', 'Group archive has been turned over');
 
@@ -378,6 +381,15 @@ public function userEdit($id)
             
         $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
         return view('turnedOverArch')->with('trnd',$trndOver);
+        }
+
+   
+        public function archivesFinal()
+        {
+            $userID=Session::get('userID');
+        $grp=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
+
+        return view('archiveFinal')->with('groups',$grp);
         }
 
 }

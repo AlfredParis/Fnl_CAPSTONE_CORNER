@@ -94,6 +94,12 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin'], function () {
     //Excel imports
     
+
+
+
+    Route::put('/toPublish/{trndID}', [adminController::class, 'toPublish'])->name('toPublish');
+
+
     Route::get('/turnedOverArch', [adminController::class, 'turnedOverArch'])->name('turnedOverArch');
     Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
     //excel import end
@@ -127,6 +133,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
     //views
     Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
     Route::post('/srch', [adminController::class, 'srch'])->name('srch');
+   
     //views end
     Route::post('/test', [adminController::class, 'test'])->name('test');
 });
@@ -174,7 +181,8 @@ Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' =
 
     Route::get('/finalized', [subAdmin::class, 'finalized'])->name('finalized');
 
-    
+    Route::put('/toAdmin/{trndID}', [subAdmin::class, 'toAdmin'])->name('toAdmin');
+
     Route::get('/finalDefended', [subAdmin::class, 'finalDefended'])->name('finalDefended');
 
     Route::get('/forProposal', [subAdmin::class, 'forProposal'])->name('forProposal');
@@ -182,6 +190,8 @@ Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' =
     Route::get('/forFinalDefense', [subAdmin::class, 'forFinalDefense'])->name('forFinalDefense');
 
 
+
+    Route::get('/archives', [subAdmin::class, 'archives'])->name('archives');
 
 
 });

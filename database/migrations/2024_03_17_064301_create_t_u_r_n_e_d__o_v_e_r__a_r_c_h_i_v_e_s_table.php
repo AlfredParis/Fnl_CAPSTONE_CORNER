@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('ABS');
             $table->string('DEPT_ID');
             $table->string('DOCU');
-            $table->string('PUB');
+            $table->string('ADVS_STAT');
+            $table->string('PUB_STAT');
             $table->timestamps();
         });
     }

@@ -28,12 +28,12 @@
             <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Final Defended</span>
         </a>
     </li>
-
+{{-- 
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="#">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('subAdmin.advisory') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">My Advisory</span>
@@ -42,6 +42,11 @@
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('subAdmin.finalized') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Finalized</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('subAdmin.archives') }}">
+            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
     </ul>

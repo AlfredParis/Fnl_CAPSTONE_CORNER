@@ -14,7 +14,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="archId">Title</label>
-                        <input class="form-control" type="text" id="archId" name="TITLE" value="" required>
+                        <input class="form-control" type="text" id="archId" name="TITLE" value="{{ old('TITLE', $archive->GRP_NAME) }}" required>
                     </div>
                     <div class="form-group">
                         <label for="ABS">Abstract</label>

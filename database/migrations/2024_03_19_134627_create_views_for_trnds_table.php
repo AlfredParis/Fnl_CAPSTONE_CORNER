@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('for_publishes', function (Blueprint $table) {
+        Schema::create('views_for_trnds', function (Blueprint $table) {
             $table->id();
+            $table->string('TRND_ID');
+            $table->string('VIEWS');
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('for_publishes');
+        Schema::dropIfExists('views_for_trnds');
     }
 };

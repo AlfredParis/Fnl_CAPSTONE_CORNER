@@ -45,29 +45,10 @@ class subAdmin extends Controller
     }
 
     public function archives(Request $request){
-        $srch=$request->input("search");
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
 
-        if(isset($srch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
-            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
+        return view('turnedOverArchSubAdmin')->with('trnd',$trndOver);
 
-                if (!$archives->isEmpty()) {
-                    $ret = $archives;
-                } elseif (!$title->isEmpty()) {
-                    $ret = $title;
-                } else {
-                    $ret = collect(); // Create an empty collection if both are empty
-                }
-
-
-            $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-
-            return view('subAdmin.ArchiveTB')->with('arch', $ret) ->with( 'auths',$auth);
-        }
-
-        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('subAdmin.ArchiveTB')->with('arch', $archives) ->with( 'auths',$auth);
     }
     public function advisory()
     {
@@ -214,14 +195,24 @@ class subAdmin extends Controller
         return view('subAdmin.forFinalDefense')->with('groups',$grp);
     }
     
+
     public function finalized()
     {
         $userID=Session::get('userID');
-        $grp=group::where('STATUS_ID',3)->get();
+        $grp=TURNED_OVER_ARCHIVES::where('PUB_STAT',0)->paginate(10);
 
         return view('subAdmin.turnedOver')->with('groups',$grp);
     }
     
+    public function toAdmin($trndID)
+    {
+        $userID=Session::get('userID');
+        $stud = TURNED_OVER_ARCHIVES::where('id', $trndID)->first();
+        $stud->where('id', $trndID)->update(['PUB_STAT' => 1]);
+
+        return redirect()->back()->with('alert', "Succesfully sent to library");
+    }
+
 
 
 }

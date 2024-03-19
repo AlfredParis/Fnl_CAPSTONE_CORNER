@@ -68,9 +68,11 @@ class superAdmin extends Controller
     public function archives(Request $request)
     {
        
-            $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
+            
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
+
            
-            return view('turnedOverSuperAdmin')->with('trnd',$trndOver);
+            return view('turnedOverArchSuperAdmin')->with('trnd',$trndOver);
        
     }
 

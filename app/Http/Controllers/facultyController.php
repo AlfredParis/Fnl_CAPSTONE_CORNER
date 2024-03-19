@@ -44,9 +44,8 @@ class facultyController extends Controller
     public function myArchive(Request $request)
     {
 
-      
-        $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
-       
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
+
         return view('turnedOverArchFaculty')->with('trnd',$trndOver);
 
     }

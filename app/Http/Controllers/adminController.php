@@ -17,6 +17,8 @@ use App\Models\EMPLOYEE;
 use App\Models\ARCHIVES;
 use App\Models\notif;
 use App\Models\TURNED_OVER_ARCHIVES;
+use App\Models\viewsForTrnd;
+
 
 use App\Http\Controllers\userCCcontroller;
 
@@ -45,33 +47,10 @@ class adminController extends Controller
 
     public function archives(Request $request)
     {
-        $srch=$request->input("search");
+        
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
+        return view('turnedOverArchAdmin')->with('trnd',$trndOver);
 
-        if(isset($srch)){
-            $archives=ARCHIVES::where('YEAR_PUB', 'LIKE', '%' . $srch . '%')->paginate(10);
-            $title=ARCHIVES::where('ARCH_NAME', 'LIKE', '%' . $srch . '%')->paginate(10);
-
-            if (!$archives->isEmpty()) {
-                $ret = $archives;
-            } elseif (!$title->isEmpty()) {
-                $ret = $title;
-            } else {
-                $ret = collect(); // Create an empty collection if both are empty
-            }
-
-
-
-
-            //$auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with( 'auths',$auth)
-
-            return view('adminArchive')->with('arch', $ret) ;
-        }
-
-
-
-        //$auth = STUDENT::where('ARCH_ID', 'N/A')->get(); ->with( 'auths',$auth)
-        $archives = ARCHIVES::orderByRaw("CAST(SUBSTRING(ARCH_ID, 4) AS UNSIGNED)")->orderBy('ARCH_ID')->paginate(10);
-        return view('adminArchive')->with('arch', $archives);
     }
     public function audit()
     {
@@ -639,8 +618,30 @@ public function srch(Request $request)
       
       public function turnedOverArch()
     {
-            $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
-            return view('turnedOverArch')->with('trnd',$trndOver);
+
+        $userID=Session::get('userID');
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',1)->paginate(10);
+
+            return view('turnedOverArch')->with('groups',$trndOver);
+    }
+
+    public function toPublish($trndID)
+    {
+        $userID=Session::get('userID');
+        $idTRND=TURNED_OVER_ARCHIVES::where('id',$trndID)->value('id');
+        $stud = TURNED_OVER_ARCHIVES::find($trndID);
+        if ($stud) {
+            $stud->update(['PUB_STAT' => 2]);
+        } else {
+           
+        }
+
+        viewsForTrnd::create([
+            'TRND_ID' => $idTRND,
+            'VIEWS' => 0
+        ]);
+        
+        return redirect()->back()->with('alert', "Succesfully published an archive.");
     }
 
 }

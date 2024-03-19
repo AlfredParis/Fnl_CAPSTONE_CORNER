@@ -26,46 +26,21 @@
     @endsection
     {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add archives --}}
     @section('main')
-        {{-- <a href="{{ route('admin.addArch') }}" class="btn btn-primary">Add Archive</a> --}}
-
-
-        <div class="container" style="margin-left: 0;">
-            <div class="row">
-                <div class="col auto">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        Add Archive
-                    </button>
-                </div>
-                <div class="col">
-                    <form action="{{ route('admin.archives') }}" method="get">
-                        <div class="input-group">
-
-                            <input type="search" class="form-control rounded"
-                                placeholder="Search arvhive name or publish date" aria-label="Search"
-                                aria-describedby="search-addon" name="search" />
-                            <button type="submit" class="btn btn-outline-primary">Search</button>
-
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-
+        <h1>Archives</h1>
 
 
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Archive ID</th>
-                    <th scope="col">Archive Title</th>
-
-                    <th scope="col"> Documentation</th>
-                    <th scope="col"> GitHub Repository</th>
-                    <th scope="col"> View </th>
-                    <th scope="col"> Edit </th>
-
+                    <th scope="col">Title</th>
+                    <th scope="col">Group Name</th>
+                    <th scope="col">Abstract</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Adviser</th>
+                    <th scope="col">Date</th>
+                    {{-- <th scope="col">Send</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -77,15 +52,27 @@
                         @php
 
                             $i = $i + 1;
-
+                            $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
+                            $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
+                            $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
+                       
                         @endphp
-                        <td scope="row">{{ $archive->ARCH_ID }}</td>
-                        <td scope="row">{{ $archive->TITLE }}</td>
-                        <td scope="row">{{ $archive->GROUP_ID }}</td>
-                        <td scope="row">{{ $archive->ADVISER_ID }}</td>
-                        <td scope="row">{{ $archive->ABS }}</td>
-                        <td scope="row">{{ $archive->DOCU }}</td>
-                        <td scope="row">{{ $archive->PUB }}</td> 
+                       <td> {{ $archive->ARCH_ID}}</td>
+                       <td> {{ $archive->TITLE}}</td>
+                       <td> {{ $grp_name}}</td>
+                       <td> {{ $archive->ABS}}</td>
+                       <td> {{ $dept}}</td> 
+                       <td> {{ $archive->DOCU}}</td>
+                       <td> {{ $adviserName}}</td> 
+                       <td> {{ $archive->updated_at}}</td>   
+                       {{-- <td>
+                        <form action="{{route('admin.toPublish',['trndID' => $archive->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                            <input type="submit" value="Publish"  class="btn btn-success">
+                        </form>
+
+                    </td> --}}
                 @endforeach
             </tbody>
         </table>

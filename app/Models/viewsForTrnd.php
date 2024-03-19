@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TURNED_OVER_ARCHIVES extends Model
+class viewsForTrnd extends Model
 {
     use HasFactory;
-    protected $fillable = ['PUB_STAT'];
+    protected $table = 'views_for_trnds'; 
+    protected $fillable = ['TRND_ID', 'VIEWS'];
 }

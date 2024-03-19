@@ -22,9 +22,7 @@
 
 
     </div>
-    {{-- <div class="showpass">
-        <input type="checkbox" onclick="togglePasswordEdit1()"> Show Password
-    </div> --}}
+   
 
     <div class="form-group">
         <label for="archId">Archive ID</label>
@@ -36,3 +34,4 @@
         <input class="form-control" type="text" id="courseId" name="C_ID"
             value="{{ old('C_ID', $profile->C_ID) }} " required>
     </div>
+</form>

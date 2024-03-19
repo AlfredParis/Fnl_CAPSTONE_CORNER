@@ -55,14 +55,14 @@ Student Table
     @endsection
 
     @section('main')
-    <h1>STUDENTS</h1>
+    <h1>Employies</h1>
 
     @php
     $userAdd = 'student';
     @endphp
     <table class="table table-striped">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
-            Add student
+            Add Faculty
         </button>
 
 
