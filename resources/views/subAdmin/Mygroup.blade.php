@@ -38,7 +38,11 @@ My Group
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">My Advisory</span>
         </a>
     </li>
-
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('subAdmin.finalized') }}">
+            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Finalized</span>
+        </a>
+    </li>
 </ul>
 @endsection
 
@@ -73,16 +77,16 @@ $allStat=\App\Models\archStatus::get() ;
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
 
-        <h4 class="group-nav-content">
+        <h6 class="group-nav-content">
             {{
             $GRP_det->GRP_NAME }}
-        </h4>
-        <h4 class="group-nav-content"> Adviser:
+        </h6>
+        <h6 class="group-nav-content"> Adviser:
             {{
-            $advicername->NAME }} </h4>
-        <h4 class="group-nav-content"> Status: {{
+            $advicername->NAME }} </h6>
+        <h6 class="group-nav-content"> Status: {{
             $stat }}
-        </h4>
+        </h6>
 
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
@@ -156,7 +160,8 @@ $allStat=\App\Models\archStatus::get() ;
                         <th scope="col">Uploader</th>
                         <th scope="col">Description</th>
                         <th scope="col"> Pdf</th>
-
+                        <th scope="col"> Comments</th>
+                        <th scope="col"> Date</th>
 
 
                     </tr>
@@ -174,6 +179,7 @@ $allStat=\App\Models\archStatus::get() ;
                     </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
+                    <td scope="row">{{$oparch->created_at}}</td>
                     @include("subAdmin.modal.addComment")
                 </tr>
                 @endforeach

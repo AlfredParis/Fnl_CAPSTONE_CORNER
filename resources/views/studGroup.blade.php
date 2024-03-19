@@ -55,9 +55,9 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
-        <h3 class="group-nav-content"> {{ $GRP_det->GRP_NAME }} </h3>
-        <h3 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h3>
-        <h3 class="group-nav-content"> Status: {{ $stat }}</h3>
+        <h6 class="group-nav-content"> {{ $GRP_det->GRP_NAME }} </h6>
+        <h6 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h6>
+        <h6 class="group-nav-content"> Status: {{ $stat }}</h6>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
             aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

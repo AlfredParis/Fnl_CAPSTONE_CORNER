@@ -172,6 +172,9 @@ Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' =
     Route::get('/advisory', [subAdmin::class, 'advisory'])->name('advisory');
     Route::post('/opArch', [subAdmin::class, 'opArch'])->name('opArch');
 
+    Route::get('/finalized', [subAdmin::class, 'finalized'])->name('finalized');
+
+    
     Route::get('/finalDefended', [subAdmin::class, 'finalDefended'])->name('finalDefended');
 
     Route::get('/forProposal', [subAdmin::class, 'forProposal'])->name('forProposal');

@@ -33,38 +33,28 @@
                             $comName=$comNameStud;
                             }
                             @endphp
-
                             @if ($mess->COMMENTOR==$com)
-
-
-                            <div class="textR"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
+                            <div class="textR"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}} <br> Date: {{ $mess->created_at }}</p>
                             </div>
-
                             @else
-
-
-                            <div class="textL"> {{$mess->MESSAGE}} <p class="sender">from: {{$comName}}</p>
+                            <div class="textL"> 
+                                {{$mess->MESSAGE}} 
+                                <p class="sender">
+                                    from: {{$comName}} 
+                                    <br> 
+                                    Date: {{ $mess->created_at }}
+                                </p>
                             </div>
-
-
                             @endif
-
-
                         </div><br>
                         @endforeach
-
-
-
                         <div class="mess">
-
                             <input type="text" class="form-control" placeholder="Your Comment Here" name="MESSAGE"
                                 value="{{ old('MESSAGE') }}" required>
-
                         </div>
                         <div class="send">
                             <button type="submit" class="btn btn-primary ">Send</button>
                         </div>
-
                     </div>
                 </form>
             </div>

@@ -197,6 +197,7 @@ class subAdmin extends Controller
 
         return view('subAdmin.finalDefended')->with('groups',$grp);
     }
+
     public function forProposal()
     {
         $userID=Session::get('userID');
@@ -204,6 +205,7 @@ class subAdmin extends Controller
 
         return view('subAdmin.forProposal')->with('groups',$grp);
     }
+    
     public function forFinalDefense()
     {
         $userID=Session::get('userID');
@@ -211,8 +213,14 @@ class subAdmin extends Controller
 
         return view('subAdmin.forFinalDefense')->with('groups',$grp);
     }
+    
+    public function finalized()
+    {
+        $userID=Session::get('userID');
+        $grp=group::where('STATUS_ID',3)->get();
 
-
+        return view('subAdmin.turnedOver')->with('groups',$grp);
+    }
     
 
 
