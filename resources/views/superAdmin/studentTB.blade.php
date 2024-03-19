@@ -121,5 +121,4 @@ Student Table
 
     {{ $SN->links() }}
     @endsection
-
     @include('modal.supAdminAdduser')

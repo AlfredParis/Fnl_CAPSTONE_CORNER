@@ -7,6 +7,8 @@
             </div>
             <div class="modal-body">
 
+
+
                 @if ($userAdd == 'student')
                 <form action="{{ route('superAdmin.import.excel') }}" method="POST" enctype="multipart/form-data">
                     @csrf <div class="mb-3">
@@ -18,6 +20,7 @@
                     <button type="submit" class="btn btn-primary">Import Excel</button>
 
                 </form>
+                @else
                 @endif
 
 
@@ -38,18 +41,34 @@
                     </div>
 
 
-                    @if ($userAdd == 'student')
+
+                    @if ($userAdd == 'faculty')
+                    <label for="DEPT_ID">Position</label>
+
+                    @php
+                    $TEACH=App\Models\position::where('id', '!=', 2)->where('id', '!=', 1)->get();
+                    @endphp
+                    <select class="custom-select" name="POSITION_ID" id="POSITION_ID" style="max-width: 23rem">
+                        <option value="">select Position</option>
+                        @foreach ($TEACH as $item)
+                        <option value="{{$item->id}}">{{ucfirst($item->POSITION_NAME)}}</option>
+                        @endforeach
+                    </select>
+                    @else
+                    @endif
+
+
                     <div class="mb-3">
-                        <label for="DEPT_ID">Course</label>
 
                         @php
                         $CHMBAC=App\Models\department::where('PROG_ID', 2)->get();
                         $CTE=App\Models\department::where('PROG_ID', 1)->get();
                         $AGRI=App\Models\department::where('PROG_ID', 3)->get();
-                        @endphp
 
+                        @endphp
+                        <label for="DEPT_ID">Course</label>
                         <select class="custom-select" name="DEPT_ID" id="DEPT_ID" style="max-width: 23rem">
-                            <option value="">select your course</option>
+                            <option value="">select course</option>
                             @foreach ($CHMBAC as $item)
                             <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
                             @endforeach
@@ -60,20 +79,7 @@
                             <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
                             @endforeach
                         </select>
-
-
                     </div>
-                    @else
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" placeholder="Password" name="PASSWORD" id="myInput"
-                            value="{{ old('PASSWORD') }}">
-                    </div>
-                    <div class="showpass">
-                        <input type="checkbox" onclick="myFunction()"> Show Password
-                    </div>
-                    @endif
-
 
 
                     @if ($userAdd == 'student')
@@ -87,6 +93,16 @@
                     </div>
 
                     @else
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Password" name="PASSWORD" id="myInput"
+                            value="{{ old('PASSWORD') }}">
+                    </div>
+                    <div class="showpass">
+                        <input type="checkbox" onclick="myFunction()"> Show Password
+                    </div>
+
                     @endif
 
 

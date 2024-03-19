@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 07:45 PM
+-- Generation Time: Mar 20, 2024 at 12:49 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -183,7 +183,8 @@ INSERT INTO `departments` (`id`, `DEPT_NAME`, `PROG_ID`, `created_at`, `updated_
 (7, 'BS in Hospitality Management', '2', '2024-03-19 10:38:56', '2024-03-19 10:38:56'),
 (8, 'BS in Office Administration', '2', '2024-03-19 10:38:56', '2024-03-19 10:38:56'),
 (9, 'BS in Agriculture', '3', '2024-03-19 10:38:56', '2024-03-19 10:38:56'),
-(10, 'non-teaching', '4', '2024-03-19 10:38:56', '2024-03-19 10:38:56');
+(10, 'non-teaching', '4', '2024-03-19 10:38:56', '2024-03-19 10:38:56'),
+(11, 'BS burat', '3', '2024-03-19 19:23:10', '2024-03-19 19:23:10');
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,8 @@ INSERT INTO `e_m_p_l_o_y_e_e_s` (`id`, `EMP_ID`, `NAME`, `EMP_DEPT`, `ADVICER_ST
 (9, 'subAdmin2', 'JULIET V. MENOR ', '6', 'INACTIVE', '3', '2', '2024-03-19 10:38:54', '2024-03-19 10:38:54'),
 (10, 'subAdmin1', 'Christian Dela Cruz', '6', 'ACTIVE', '4', '2', '2024-03-19 10:38:54', '2024-03-19 10:38:54'),
 (11, 'MIS', 'JOSE CARLOS C. GAMBOA', '6', 'INACTIVE', '1', '2', '2024-03-19 10:38:54', '2024-03-19 10:38:54'),
-(12, 'librarian', 'Mary Ann M. Pacio', '10', 'INACTIVE', '2', '4', '2024-03-19 17:25:44', '2024-03-19 17:25:44');
+(12, 'librarian', 'Mary Ann M. Pacio', '10', 'INACTIVE', '2', '4', '2024-03-19 17:25:44', '2024-03-19 17:25:44'),
+(13, '20-sc-9999', 'GELIL DAVID S. GALANG', '6', 'ACTIVE', '5', '2', '2024-03-19 23:31:57', '2024-03-19 23:31:57');
 
 -- --------------------------------------------------------
 
@@ -399,7 +401,9 @@ INSERT INTO `notifs` (`id`, `category`, `content`, `suspect`, `created_at`, `upd
 (9, 'Add', 'JOSE CARLOS C. GAMBOA has been added this account: librarian a admin', 'JOSE CARLOS C. GAMBOA', '2024-03-19 17:25:44', '2024-03-19 17:25:44'),
 (10, 'Update', 'JOSE CARLOS C. GAMBOA has been updated this account: 20-SC-0042 a student ', 'JOSE CARLOS C. GAMBOA', '2024-03-19 18:22:07', '2024-03-19 18:22:07'),
 (11, 'Update', 'JOSE CARLOS C. GAMBOA has been updated this account: 20-SC-0042 a student ', 'JOSE CARLOS C. GAMBOA', '2024-03-19 18:23:14', '2024-03-19 18:23:14'),
-(12, 'Update', 'JOSE CARLOS C. GAMBOA has been updated this account: 20-SC-0042 a student ', 'JOSE CARLOS C. GAMBOA', '2024-03-19 18:23:26', '2024-03-19 18:23:26');
+(12, 'Update', 'JOSE CARLOS C. GAMBOA has been updated this account: 20-SC-0042 a student ', 'JOSE CARLOS C. GAMBOA', '2024-03-19 18:23:26', '2024-03-19 18:23:26'),
+(13, 'Add', 'JOSE CARLOS C. GAMBOA has been added this account: 20-sc-9999 a faculty ', 'JOSE CARLOS C. GAMBOA', '2024-03-19 23:31:57', '2024-03-19 23:31:57'),
+(14, 'Add', 'JOSE CARLOS C. GAMBOA has been added this account: 20-sc-0048 a student ', 'JOSE CARLOS C. GAMBOA', '2024-03-19 23:48:44', '2024-03-19 23:48:44');
 
 -- --------------------------------------------------------
 
@@ -508,7 +512,7 @@ CREATE TABLE `programs` (
 INSERT INTO `programs` (`id`, `PROG_NAME`, `PROG_ABBR`, `created_at`, `updated_at`) VALUES
 (1, 'College of Teacher Education', 'CTE', '2024-03-19 10:38:57', '2024-03-19 10:38:57'),
 (2, 'College of Hospitality Management, Business Administration and Computing', 'CHMBAC', '2024-03-19 10:38:57', '2024-03-19 10:38:57'),
-(3, 'College of Agriculture', 'College of Agri', '2024-03-19 10:38:57', '2024-03-19 10:38:57'),
+(3, 'College of Agriculture', 'COA', '2024-03-19 10:38:57', '2024-03-19 19:31:58'),
 (4, 'non-teaching', 'non-teaching', '2024-03-19 10:38:57', '2024-03-19 10:38:57');
 
 -- --------------------------------------------------------
@@ -568,7 +572,9 @@ INSERT INTO `student_accs` (`id`, `S_ID`, `PASSWORD`, `ACCTYPE`, `created_at`, `
 (10, '20-SC-1475', 'eyJpdiI6IjdjaFhtcTAvQ2xKaTNteklScUx5SkE9PSIsInZhbHVlIjoiOWRkbXV2Y3ZDMm5iZVlVK3Z2TFNzdz09IiwibWFjIjoiMzhiMDU0MzAxZTMyNmQ4NGIxNTBiNTYyMWFiMjYwZjNhMTE1NWM1MjEzYTNjNTg1NzcwYmQxMDhhOTgyMGUzYSIsInRhZyI6IiJ9', 'student', '2024-03-19 11:07:43', '2024-03-19 11:07:43'),
 (11, '20-SC-1467', 'eyJpdiI6Im5TRUVUOTBzWEZ3cTA3SFVuZ3BvaVE9PSIsInZhbHVlIjoiRXdXRXZsMG1YM1BPQmlsQnhDWE9CQT09IiwibWFjIjoiZTczMDZjMTJhMmZlM2RiNWVlNjMzYjAwMmMwZjIwZWI3ZjA4N2FlOWM2N2YxZWVlMzVhZTM3MTUxZTJiMjkyYiIsInRhZyI6IiJ9', 'student', '2024-03-19 11:08:16', '2024-03-19 11:08:16'),
 (12, '20-SC-0306', 'eyJpdiI6IkZHWTcyS3BFazJVdnQvbUFMWWs4WHc9PSIsInZhbHVlIjoiWlNjMXlYVUtuY2FGZ1hnbzlCeTlKUT09IiwibWFjIjoiY2U3MDg4YWU4ZTQzNWVmYTA5MjFjODBlYTIwZDgwYzI1NjZiNzhiOWYyZDQ1OTU5YjQzZjIxNGY3ZmUxNWUwYSIsInRhZyI6IiJ9', 'student', '2024-03-19 11:08:53', '2024-03-19 11:08:53'),
-(13, '20-SC-0402', 'eyJpdiI6InZwdTVxcUZ2aTczeUYydWZnSWQwNGc9PSIsInZhbHVlIjoia2Z5QnQ5UW1kdjNxNExldk5jQ2t6Zz09IiwibWFjIjoiMmNjMGI5MzQ1Yjc4NGZkYWQ3Yjc2OTAyNzQ2NjkxNDQ5YmZkMWNkOTE0NTJiZTcyZmZkYjFlOGI2YzExZTllOCIsInRhZyI6IiJ9', 'student', '2024-03-19 14:42:21', '2024-03-19 14:42:21');
+(13, '20-SC-0402', 'eyJpdiI6InZwdTVxcUZ2aTczeUYydWZnSWQwNGc9PSIsInZhbHVlIjoia2Z5QnQ5UW1kdjNxNExldk5jQ2t6Zz09IiwibWFjIjoiMmNjMGI5MzQ1Yjc4NGZkYWQ3Yjc2OTAyNzQ2NjkxNDQ5YmZkMWNkOTE0NTJiZTcyZmZkYjFlOGI2YzExZTllOCIsInRhZyI6IiJ9', 'student', '2024-03-19 14:42:21', '2024-03-19 14:42:21'),
+(14, '20-sc-0149', 'eyJpdiI6Ikh2ekcrV0RGN2xzaGdNb2RxNEJOSXc9PSIsInZhbHVlIjoiVVpib1Y1MkVMSWZPS2JzNXF0RVRtUT09IiwibWFjIjoiYTYzZDc0ZTU1NzUxMzAwMTNhMDkzZGRjYmUwMmFkNDZhNDIxNTU3MWIxN2MxZjA4YzlmNTI3MDVmODNmMjY3ZCIsInRhZyI6IiJ9', 'student', '2024-03-19 23:33:23', '2024-03-19 23:33:23'),
+(15, '20-sc-0048', 'eyJpdiI6InVjenpLdHFuZHpmd29uMDZIU2ZmS0E9PSIsInZhbHVlIjoiUlBaeUNWMVBlcmJtbHNTcXFiWGhSZz09IiwibWFjIjoiZTIzMjc3NDNlNzBmN2I5NWFhYTZjNmUwYTVmZmMyYjA4NjlmM2VmMTM3NjJjZjVlYTg3MmM3NWZhMDJmZDc2MCIsInRhZyI6IiJ9', 'student', '2024-03-19 23:48:44', '2024-03-19 23:48:44');
 
 -- --------------------------------------------------------
 
@@ -591,6 +597,7 @@ CREATE TABLE `s_t_u_d_e_n_t_s` (
 
 INSERT INTO `s_t_u_d_e_n_t_s` (`S_ID`, `NAME`, `DEPT_ID`, `GROUP_ID`, `created_at`, `updated_at`) VALUES
 ('20-SC-0042', 'Loise Ann, ilaguison Torio', '6', 'N/A', '2024-03-19 11:00:48', '2024-03-19 18:23:26'),
+('20-sc-0048', 'Alexander Paris', '8', 'N/A', '2024-03-19 23:48:44', '2024-03-19 23:48:44'),
 ('20-sc-0147', 'Alfred Paris', '6', '1', '2024-03-19 10:38:56', '2024-03-19 10:40:51'),
 ('20-sc-0148', 'Jayson Sanchez', '6', 'N/A', '2024-03-19 10:38:56', '2024-03-19 12:22:01'),
 ('20-SC-0239', 'Mark Angel Molina Garcia', '6', 'N/A', '2024-03-19 11:06:27', '2024-03-19 11:06:27'),
@@ -697,7 +704,8 @@ INSERT INTO `u_s_e_r__a_c_c__e_m_p_s` (`USER_ID_EMP`, `PASSWORD`, `EMP_ID`, `ACC
 (9, 'eyJpdiI6IlN6ZzN5T1prUWtPL05FUmdkeXZJK2c9PSIsInZhbHVlIjoic1B5b1N6MmxUa3J4Uk5kdVRJeXQwZz09IiwibWFjIjoiNjQ1N2M2OTFmNzM0MDVlOGIwNzlhYmZiM2NkNGUxNmU1NmZjMjVjZDEzODNlZDg4MDgzZGVjYTFiMTFkYWQ0NSIsInRhZyI6IiJ9', 'subAdmin2', 'subAdmin', '2024-03-19 10:38:53', '2024-03-19 10:38:53'),
 (10, 'eyJpdiI6InFvMVk4WExiSERTTm1ITkpvZGtjUnc9PSIsInZhbHVlIjoiZWZmb0swTmFxcVNMK2d5aFRUSnppdz09IiwibWFjIjoiZmFmYTE3MTlmZjBhYWIzMjY2MDlkZGYwMzcwMjYzM2Y0NjA0Zjc2Zjg4NTY1NTk0OWQ3NDNmYzNhZWRiMGVmZCIsInRhZyI6IiJ9', 'subAdmin1', 'subAdmin', '2024-03-19 10:38:53', '2024-03-19 10:38:53'),
 (11, 'eyJpdiI6IkFBODkxNWt1REdEeHpSU1dTaFl3eEE9PSIsInZhbHVlIjoiZFdlRFQ2NVVvZ2Z4ajh1aVhrUGphQT09IiwibWFjIjoiZDM0OTc1MThiODEwYmZmZDRlMTk5YzM0NjBkYTM3NGVkMGRhNTMzMTIwN2RhODE5NzA4YWViNGQ5ZDM3MTJjOCIsInRhZyI6IiJ9', 'MIS', 'superAdmin', '2024-03-19 10:38:53', '2024-03-19 10:38:53'),
-(13, 'eyJpdiI6IlBqajJXYnhhQlVZMG52bGhPZ1U1emc9PSIsInZhbHVlIjoidlVRZ0JWNlBmME44a2lVOHZwU3NxT3dqRS9RRnFZZUVUQi83bDc4WnMrOD0iLCJtYWMiOiI0YzNkODY2ZDUyM2RhZTJlN2QwMGQ5MWRmNzAxYzMxZTBiNzM3MGMwZTE4MzZhNTMwMTZlY2I3OWU3M2M3ODI4IiwidGFnIjoiIn0=', 'librarian', 'admin', '2024-03-19 17:25:44', '2024-03-19 17:25:44');
+(13, 'eyJpdiI6IlBqajJXYnhhQlVZMG52bGhPZ1U1emc9PSIsInZhbHVlIjoidlVRZ0JWNlBmME44a2lVOHZwU3NxT3dqRS9RRnFZZUVUQi83bDc4WnMrOD0iLCJtYWMiOiI0YzNkODY2ZDUyM2RhZTJlN2QwMGQ5MWRmNzAxYzMxZTBiNzM3MGMwZTE4MzZhNTMwMTZlY2I3OWU3M2M3ODI4IiwidGFnIjoiIn0=', 'librarian', 'admin', '2024-03-19 17:25:44', '2024-03-19 17:25:44'),
+(14, 'eyJpdiI6IndZdGJ2SFpYQWFRNy8rU25TZFh5bWc9PSIsInZhbHVlIjoiVlJlWFhiMDdVMkg0Nll5WU96cy9uQT09IiwibWFjIjoiNmY2NzQ5MmYwYmRjMzJjZjBhNzg3YTM2NDM3ZDJiMmYxZjBkZWYyMmMyY2MyNzNiNDRjMjM4MWVkZDBmMWRjNyIsInRhZyI6IiJ9', '20-sc-9999', 'faculty', '2024-03-19 23:31:57', '2024-03-19 23:31:57');
 
 -- --------------------------------------------------------
 
@@ -952,7 +960,7 @@ ALTER TABLE `c_o_u_r_s_e_s`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `dept_positions`
@@ -964,7 +972,7 @@ ALTER TABLE `dept_positions`
 -- AUTO_INCREMENT for table `e_m_p_l_o_y_e_e_s`
 --
 ALTER TABLE `e_m_p_l_o_y_e_e_s`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1000,7 +1008,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifs`
 --
 ALTER TABLE `notifs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `o_p__archives`
@@ -1024,7 +1032,7 @@ ALTER TABLE `positions`
 -- AUTO_INCREMENT for table `programs`
 --
 ALTER TABLE `programs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `proposals`
@@ -1042,7 +1050,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `student_accs`
 --
 ALTER TABLE `student_accs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `t_u_r_n_e_d__o_v_e_r__a_r_c_h_i_v_e_s`
@@ -1066,7 +1074,7 @@ ALTER TABLE `user_c_c_s`
 -- AUTO_INCREMENT for table `u_s_e_r__a_c_c__e_m_p_s`
 --
 ALTER TABLE `u_s_e_r__a_c_c__e_m_p_s`
-  MODIFY `USER_ID_EMP` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `USER_ID_EMP` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `views_for_trnds`

@@ -36,12 +36,12 @@ class superAdmin extends Controller
 {
     public function index(Request $request)
     {
-        $total_arch = ARCHIVES::count();
+
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
         // $auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with('auths', $auth)
-        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+        $total_arch = TURNED_OVER_ARCHIVES::where('PUB_STAT', 2)->count();
 
         $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
@@ -318,7 +318,36 @@ class superAdmin extends Controller
                 Log::alert("$name has been added this account: $userID a admin");
                 return redirect()->back()->with('alert', 'An Administrator has been added.');
 
-            } elseif ($userac == 'faculty') {
+            } elseif ($userac == 'student') {
+
+                $user = new student_acc;
+                $user->S_ID = $request->input("userID");
+                $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                $user->ACCTYPE = $userac;
+                $user->save();
+
+                $EMP = new STUDENT;
+                $EMP->NAME = $request->input("fullname");
+                $EMP->S_ID = $request->input("userID");
+                $EMP->DEPT_ID =  $request->input("DEPT_ID");
+                $EMP->GROUP_ID = "N/A";
+                $EMP->save();
+
+
+
+            $name = Session::get('fullNs');
+            $added = $request->input("userID");
+            $notif = new notif;
+            $notif->category = "Add";
+            $notif->content = "$name has been added this account: $added a student ";
+            $notif->suspect = $name;
+
+            $notif->save();
+
+            Log::alert("$name has been added this account: $userID a student");
+            return redirect()->back()->with('alert', 'An student has been added.');
+
+            } else {
                 $name = Session::get('fullNs');
                 $user = new USER_ACC_EMP;
                 $user->EMP_ID = $request->input("userID");
@@ -329,6 +358,12 @@ class superAdmin extends Controller
                 $EMP = new EMPLOYEE;
                 $EMP->NAME = $request->input("fullname");
                 $EMP->EMP_ID = $request->input("userID");
+                $EMP->EMP_DEPT = $request->input("DEPT_ID");
+                $progID=department::where('id',$request->input("DEPT_ID"))->value('PROG_ID');
+                $EMP->ADVICER_STATUS ='ACTIVE';
+                $EMP->POSITION_ID = $request->input("POSITION_ID");
+                $EMP->PROG_ID =$progID;
+
                 $EMP->save();
 
                 $added = $request->input("userID");
@@ -339,38 +374,9 @@ class superAdmin extends Controller
 
                 $notif->save();
 
-                Log::alert("$name has been added this account: $userID a faculty");
-                return redirect()->route('superAdmin.faculty')->with('alert', 'Faculty account succesfully added!');
+                Log::alert("$name has been added this account: $userID ");
+                return redirect()->back()->with('alert', 'An account has been added.');
 
-            } else {
-
-
-                    $user = new student_acc;
-                    $user->S_ID = $request->input("userID");
-                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
-                    $user->ACCTYPE = $userac;
-                    $user->save();
-
-                    $EMP = new STUDENT;
-                    $EMP->NAME = $request->input("fullname");
-                    $EMP->S_ID = $request->input("userID");
-                    $EMP->DEPT_ID =  $request->input("DEPT_ID");
-                    $EMP->GROUP_ID = "N/A";
-                    $EMP->save();
-
-
-
-                $name = Session::get('fullNs');
-                $added = $request->input("userID");
-                $notif = new notif;
-                $notif->category = "Add";
-                $notif->content = "$name has been added this account: $added a student ";
-                $notif->suspect = $name;
-
-                $notif->save();
-
-                Log::alert("$name has been added this account: $userID a student");
-                return redirect()->back()->with('alert', 'An student has been added.');
             }
 
         } else {
@@ -454,7 +460,7 @@ class superAdmin extends Controller
 
         $country = program::where('id', $id)->first();
         $country->where('id', $id)->update([
-            'PROG_ABBR' => $request->input('PROG_ABBR'),
+            'PROG_ABBR' => $request->input('PROG_ABBR   '),
             'PROG_NAME' => $request->input('PROG_NAME'),
     ]);
 
