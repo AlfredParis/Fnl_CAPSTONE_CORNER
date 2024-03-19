@@ -21,6 +21,8 @@ use App\Models\messages;
 use App\Models\notif;
 use App\Models\OP_Archive;
 use App\Models\TURNED_OVER_ARCHIVES;
+use App\Models\viewsForTrnd;
+
 
 
 use App\Http\Controllers\userCCcontroller;
@@ -37,9 +39,10 @@ class subAdmin extends Controller
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+       $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
 
-            return view('subAdmin.dashboard')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
+            return view('subAdmin.dashboard')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
 
 
     }
@@ -186,7 +189,7 @@ class subAdmin extends Controller
 
         return view('subAdmin.forProposal')->with('groups',$grp);
     }
-    
+
     public function forFinalDefense()
     {
         $userID=Session::get('userID');
@@ -194,7 +197,7 @@ class subAdmin extends Controller
 
         return view('subAdmin.forFinalDefense')->with('groups',$grp);
     }
-    
+
 
     public function finalized()
     {
@@ -203,7 +206,7 @@ class subAdmin extends Controller
 
         return view('subAdmin.turnedOver')->with('groups',$grp);
     }
-    
+
     public function toAdmin($trndID)
     {
         $userID=Session::get('userID');

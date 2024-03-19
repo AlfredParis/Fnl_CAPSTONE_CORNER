@@ -63,12 +63,12 @@ Archive Table
             <td scope="row">
 
 
-                    <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
-                        onclick="incrementViewCount('{{ $archive->ARCH_ID }}')"><i class="fs-5 fa fa-eye">
-                        </i> </a>
+                <a href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                    onclick="incrementViewCount('{{ $archive->ARCH_ID }}')"><i class="fs-5 fa fa-eye">
+                    </i> </a>
 
-                    <script>
-                        function incrementViewCount(archiveId) {
+                <script>
+                    function incrementViewCount(archiveId) {
                                 // Make an AJAX request to increment the view count
                                 $.ajax({
                                     url: `/student/viewCnt/${archiveId}`,
@@ -81,7 +81,7 @@ Archive Table
                                     }
                                 });
                             }
-                    </script>
+                </script>
 
             </td>
 

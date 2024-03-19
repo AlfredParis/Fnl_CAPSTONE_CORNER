@@ -34,75 +34,78 @@ My Advisory
 </ul>
 @endsection
 
+
 @section('main')
+<div class="pddingForBody">
+    <h1>My Advisories</h1>
+    <div class="container-fluid ">
 
-<div class="container-fluid ">
+        <div class="row " style="margin-top: 1rem;">
+            <div class="col-md-12">
 
-    <div class="row " style="margin-top: 1rem;">
-        <div class="col-md-12">
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Group Name</th>
-                        <th scope="col">Open Group</th>
-                        <th scope="col">Ready for turn over</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                    $i = 0;
-
-                    @endphp
-                    @foreach ($groups as $archive)
-
-                    <tr>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Group Name</th>
+                            <th scope="col">Open Group</th>
+                            <th scope="col">Ready for turn over</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         @php
-                        $isTurned=\App\Models\group::where('id', $archive->id)->value('STATUS_ID');
-                        $stat=\App\Models\archStatus::where('id', $isTurned)->value('arch_stat');
-                        $trnd=\App\Models\TURNED_OVER_ARCHIVES::where('GROUP_ID',$archive->id)->value('id');
+                        $i = 0;
 
                         @endphp
+                        @foreach ($groups as $archive)
 
-                        <td> {{ $archive->GRP_NAME}}</td>
-                        <td> <a class="btn btn-primary"
-                                href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}">open</a>
-                        </td>
-                        <td>
-                            @if ($isTurned==4)
+                        <tr>
+                            @php
+                            $isTurned=\App\Models\group::where('id', $archive->id)->value('STATUS_ID');
+                            $stat=\App\Models\archStatus::where('id', $isTurned)->value('arch_stat');
+                            $trnd=\App\Models\TURNED_OVER_ARCHIVES::where('GROUP_ID',$archive->id)->value('id');
 
-                            @if (isset($trnd))
+                            @endphp
 
-                            <p class="btn btn-outline-success">
-                                Waiting For Response</p>
+                            <td> {{ $archive->GRP_NAME}}</td>
+                            <td> <a class="btn btn-primary"
+                                    href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}">open</a>
+                            </td>
+                            <td>
+                                @if ($isTurned==4)
 
-                            @else
-                            <a class="btn btn-success" href="#turnOver_{{  $archive->id }}" data-bs-toggle="modal">
-                                Turn Over</a>
+                                @if (isset($trnd))
 
-                            @endif
+                                <p class="btn btn-outline-success">
+                                    Waiting For Response</p>
 
-                            @include('modal.turnOver')
-                            @elseif ($isTurned==3)
-                            <p class="btn btn-warning">{{ $stat }}</p>
-                            @elseif ($isTurned==2)
-                            <p class="btn btn-info">{{ $stat }}</p>
-                            @else
-                            <p class="btn btn-danger">{{ $stat }}</p>
-                            @endif
+                                @else
+                                <a class="btn btn-success" href="#turnOver_{{  $archive->id }}" data-bs-toggle="modal">
+                                    Turn Over</a>
 
-                        </td>
+                                @endif
 
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                @include('modal.turnOver')
+                                @elseif ($isTurned==3)
+                                <p class="btn btn-warning">{{ $stat }}</p>
+                                @elseif ($isTurned==2)
+                                <p class="btn btn-info">{{ $stat }}</p>
+                                @else
+                                <p class="btn btn-danger">{{ $stat }}</p>
+                                @endif
+
+                            </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
 
 
 
 
 
+            </div>
         </div>
     </div>
 </div>

@@ -182,8 +182,9 @@
             display: flex;
             justify-content: left;
             align-items: left;
-            /* height: 30vw; */
+
             object-fit: fill;
+
 
         }
 
@@ -541,14 +542,14 @@
         });
     </script>
     @if (session('alert'))
-        <div class="alert alert-success">
-            {{ session('alert') }}
-            @if (session('pdf_url'))
-                <script>
-                    window.open("{{ session('pdf_url') }}", "_blank");
-                </script>
-            @endif
-        </div>
+    <div class="alert alert-success">
+        {{ session('alert') }}
+        @if (session('pdf_url'))
+        <script>
+            window.open("{{ session('pdf_url') }}", "_blank");
+        </script>
+        @endif
+    </div>
     @endif
 
 
@@ -605,13 +606,7 @@
             <DIV class="blank"></DIV>
             <div class="div4">
                 <div class="greet">
-                    CAPSTONE CORNER: A SECURE AND USER-FRIENDLY ARCHIVING SYSTEM
-                    {{-- This is a website is created by Pangasinan State University,San Carlos City students
-                    that provides a
-                    efficient archiving system and a system proposal checker for the students. This website is still
-                    underdevelopment and this is not officially used by the said campus. This is website is for capstone
-                    project. --}}
-
+                    THESIS CORNER: A SECURE AND USER-FRIENDLY ARCHIVING SYSTEM
 
                 </div>
             </div>
@@ -622,7 +617,7 @@
 
 
                 @section('topnav')
-                    @parent
+                @parent
                 @show
 
 
@@ -631,14 +626,14 @@
                 <div class="form">
                     @section('main')
 
-                        @parent
+                    @parent
 
                     @show </div>
             </div>
         </div>
 
-        {{-- <div class="div1"><img class="imgikot" src="https://main.psu.edu.ph/wp-content/uploads/2022/06/psu-loader.gif"
-                alt="Psu logo loader">
+        {{-- <div class="div1"><img class="imgikot"
+                src="https://main.psu.edu.ph/wp-content/uploads/2022/06/psu-loader.gif" alt="Psu logo loader">
         </div> --}}
 
 

@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-    Substitute Admin Dashboard
+Substitute Admin Dashboard
 @endsection
 
 @section('topnav')
@@ -27,7 +27,7 @@
             <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Final Defended</span>
         </a>
     </li>
-{{-- 
+    {{--
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="#">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
@@ -48,11 +48,11 @@
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    </ul>
+</ul>
 @endsection
 
 @section('main')
-
+<h1>For Proposal</h1>
 <div class="container-fluid ">
 
     <div class="row " style="margin-top: 1rem;">
@@ -72,7 +72,7 @@
                     @endphp
                     @foreach ($groups as $archive)
                     @php
-                        $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVSR_ID)->value("NAME");
+                    $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVSR_ID)->value("NAME");
                     @endphp
                     <tr>
                         @php

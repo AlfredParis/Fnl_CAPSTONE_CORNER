@@ -47,7 +47,7 @@ Substitute Admin Dashboard
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    </ul>
+</ul>
 @endsection
 
 @section('main')
@@ -95,10 +95,14 @@ Substitute Admin Dashboard
                         <tr>
                             <th scope="col">Ranking</th>
                             <th scope="col">Archive ID</th>
-                            <th scope="col">Archive Title</th>
-                            <th scope="col"> Documentation</th>
-                            <th scope="col"> GitHub Repository</th>
-                            <th scope="col"> Views </th>
+                            <th scope="col">Group Name</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Department</th>
+
+                            <th scope="col">Adviser</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">View</th>
+                            <th scope="col">Number of Views</th>
 
                         </tr>
                     </thead>
@@ -107,17 +111,21 @@ Substitute Admin Dashboard
                         $i = 0;
 
                         @endphp
-                        @foreach ($arch as $archive)
-                        @include('modal.ViewArch')
-
-
+                        @foreach ($viewss as $view)
 
                         <tr>
                             @php
 
+
                             $i = $i + 1;
+                            $archive=\App\Models\TURNED_OVER_ARCHIVES::where('id', $view->TRND_ID)->first();
+                            $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
+                            $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
+                            $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
 
                             @endphp
+                            @include('modal.ViewArch')
+
                             <td scope="row">
                                 @if ($i==1)
                                 <h2 style="text-align: center; color:gold;">{{$i}} <i class="fa-solid fa-crown"
@@ -133,37 +141,53 @@ Substitute Admin Dashboard
                             <td scope="row">
                                 <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
                                     onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
-                                    {{ $archive->ARCH_ID }}</a>
+                                    {{ $archive->ARCH_ID }}
+                                </a>
 
+                            </td>
+                            <td scope="row">
+                                {{ $grp_name}}
                             </td>
                             <td scope="row">
                                 <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
                                     onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
-                                    {{ $archive->ARCH_NAME }}</a>
+                                    {{ $archive->TITLE }}
+                                </a>
                             </td>
-                            <td scope="row"><a href="#"
-                                    onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{
-                                    $archive->PDF_FILE }}</a>
-                            </td>
-                            <td scope="row">{{ $archive->GITHUB_LINK }}</td>
                             <td scope="row">
-                                {{ $archive->viewCount }}
+                                {{$dept}}
                             </td>
+
+
+                            <td> {{ $adviserName}}</td>
+                            <td> {{ $archive->updated_at}}</td>
+
+                            <td scope="row">
+                                <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                    onclick="incrementViewCount('{{ $archive->id }}')">
+                                    <i class="fa-solid fa-eye"></i></a>
+                            </td>
+                            <td>
+                                <h4>{{ $view->VIEWS}}</h4>
+                            </td>
+
                             <script>
                                 function incrementViewCount(archiveId) {
-                                            // Make an AJAX request to increment the view count
-                                            $.ajax({
-                                                url: `/superAdmin/viewCnt/${archiveId}`,
-                                                type: 'GET',
-                                                success: function(response) {
-                                                    console.log(response);
-                                                },
-                                                error: function(error) {
-                                                    console.error(error);
-                                                }
-                                            });
-                                        }
+                                         $.ajax({
+                                            url: `/viewCnt/${archiveId}`,
+                                            type: 'GET',
+                                            success: function(response) {
+                                                console.log(response);
+                                            },
+                                            error: function(error) {
+                                                console.error(error);
+                                            }
+                                        });
+                                    }
                             </script>
+
+
+
                             <td scope="row">
                                 <script>
                                     document.addEventListener("DOMContentLoaded", function() {

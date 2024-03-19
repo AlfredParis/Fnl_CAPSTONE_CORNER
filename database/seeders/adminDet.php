@@ -40,9 +40,9 @@ class adminDet extends Seeder
                 'PROG_ID'=>'2'
             ],
             [
-                'EMP_ID' => 'facultyBSBA',
-                'NAME' => 'KIM ANGELA L. CRUZ',
-                'EMP_DEPT' => '5',
+                'EMP_ID' => 'facultyIT3',
+                'NAME' => 'NAPOLEON HERMOSO',
+                'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
                 'PROG_ID'=>'2'
@@ -56,9 +56,9 @@ class adminDet extends Seeder
                 'PROG_ID'=>'2'
             ],
             [
-                'EMP_ID' => 'facultyBSOA',
+                'EMP_ID' => 'facultyIT2',
                 'NAME' => 'JOBELLE S. QUINTO',
-                'EMP_DEPT' => '8',
+                'EMP_DEPT' => '6',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '5',
                 'PROG_ID'=>'2'
@@ -66,7 +66,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'subAdmin4',
-                'NAME' => 'Dean nang agri',
+                'NAME' => 'Dean of Agri',
                 'EMP_DEPT' => '10',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '3',
@@ -76,7 +76,7 @@ class adminDet extends Seeder
             [
 
                 'EMP_ID' => 'subAdmin3',
-                'NAME' => 'Dean nang cet',
+                'NAME' => 'Dean of cet',
                 'EMP_DEPT' => '10',
                 'ADVICER_STATUS'=>'ACTIVE',
                 'POSITION_ID' => '3',

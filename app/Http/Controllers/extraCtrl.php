@@ -18,13 +18,14 @@ use App\Models\group;
 use App\Models\OP_Archive;
 use App\Models\messages;
 use App\Models\TURNED_OVER_ARCHIVES;
+use App\Models\User;
 
+use Illuminate\Support\Facades\Mail as FacadesMail;
 
 
 use Mail;
 use App\Mail\addStud;
-
-
+use App\Models\viewsForTrnd;
 
 class extraCtrl extends Controller
 {
@@ -194,9 +195,10 @@ public function userEdit($id)
         {
 
             $name = Session::get('fullNs');
+
             $userID=Session::get('userID');
-            $isEMP=USER_ACC_EMP::where('EMP_ID',$userID)->value('ACCTYPE');
-            $isSTUD=student_acc::where('S_ID',$userID)->value('ACCTYPE');
+            $isEMP=USER_ACC_EMP::where('EMP_ID',$id)->value('ACCTYPE');
+            $isSTUD=student_acc::where('S_ID',$id)->value('ACCTYPE');
 
             if ($isSTUD == 'student') {
                 $studAcc = student_acc::where('S_ID', $id)->first();
@@ -204,14 +206,14 @@ public function userEdit($id)
                 $currentCourse=STUDENT::where('S_ID', $id)->value('DEPT_ID');
                 $NewPASSWORD=$request->NewPASSWORD;
 
-                if(decrypt($currentPass)==$request->PASSWORD){
+                if(decrypt($currentPass) == $request->PASSWORD){
                         if(!empty($NewPASSWORD)){
                             $studAcc->PASSWORD = encrypt($NewPASSWORD);
                         }
                         $studAcc->save();
 
                         $studProf = STUDENT::where('S_ID', $id)->first();
-                        if (!empty($request->C_ID)) {
+                        if (!empty($request->DEPT_ID)) {
                             $studProf->where('S_ID', $id)->update([
                                 'NAME' => $request->NAME,
                                 'DEPT_ID' => $request->DEPT_ID,
@@ -239,7 +241,7 @@ public function userEdit($id)
                 $PASSWORD=$request->PASSWORD;
                 $NewPASSWORD=encrypt($request->NewPASSWORD);
 
-                if($PASSWORD==decrypt($currentPass)){
+                if($PASSWORD == decrypt($currentPass)){
 
                     if(!empty($NewPASSWORD)){
                         $emp->where('EMP_ID', $id)->update([
@@ -281,7 +283,7 @@ public function userEdit($id)
         }
 
         public function turnOver(Request $request, $grp_id){
-          
+
             $userid=Session::get('userID');
              $latestArch=group::where('id', $grp_id)->first();
 
@@ -336,8 +338,8 @@ public function userEdit($id)
             $trnd->ABS= $request->input('ABS') ;
             $trnd->DEPT_ID= $course;
             $trnd->DOCU= $file;
-            
-            
+
+
             $trnd->ADVS_STAT=0;
             $trnd->PUB_STAT=0;
             $trnd->save();
@@ -378,12 +380,12 @@ public function userEdit($id)
         public function turnedOverArch()
         {
             $userID=Session::get('userID');
-            
+
         $trndOver=TURNED_OVER_ARCHIVES::paginate(10);
         return view('turnedOverArch')->with('trnd',$trndOver);
         }
 
-   
+
         public function archivesFinal()
         {
             $userID=Session::get('userID');
@@ -391,5 +393,29 @@ public function userEdit($id)
 
         return view('archiveFinal')->with('groups',$grp);
         }
+
+        public function viewCnt(string $ARCH_ID)
+    {
+        Log::info("Received ARCH_ID: $ARCH_ID");
+
+        $archNW = viewsForTrnd::where('TRND_ID', $ARCH_ID)->first();
+
+        $total=viewsForTrnd::where('TRND_ID', $ARCH_ID)->value('VIEWS');
+
+
+        if ($archNW) {
+
+            $archNW->where('TRND_ID', $ARCH_ID)->update([
+                'VIEWS' => $total + 1,
+                'updated_at' => now(),
+                 ]);
+
+            $success = true;
+
+        } else {
+
+            abort(404);
+        }
+    }
 
 }

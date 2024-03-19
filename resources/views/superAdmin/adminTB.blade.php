@@ -16,11 +16,11 @@ Admin Table
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
+    {{-- <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('superAdmin.index') }}">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('superAdmin.student') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
@@ -53,73 +53,73 @@ Admin Table
         </a>
     </li>
 </ul>
-    @endsection
+@endsection
 
-    @section('main')
-    <h1>ADMIN</h1>
+@section('main')
+<h1>ADMIN</h1>
 
-    @php
-    $userAdd = 'superAdmin';
-    @endphp
+@php
+$userAdd = 'admin';
+@endphp
 
 
-    <table class="table table-striped">
+<table class="table table-striped">
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
-            Add admin
-        </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
+        Add admin
+    </button>
 
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Password</th>
-                <th scope="col"> Views </th>
-                <th scope="col"> Edit </th>
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Password</th>
+            <th scope="col"> Views </th>
+            <th scope="col"> Edit </th>
 
-            </tr>
-        </thead>
-        <tbody> @php
-            $i = 0;
+        </tr>
+    </thead>
+    <tbody> @php
+        $i = 0;
+        @endphp
+        @foreach ($admin as $adm)
+        <tr>
+            @php
+
+            $i = $i + 1;
+
             @endphp
-            @foreach ($admin as $adm)
-            <tr>
+            <td scope="row">{{ $adm->EMP_ID }}</td>
+            <td scope="row">{{ $adm->NAME }}</td>
+            <td scope="row">{{ decrypt($adm->PASSWORD) }}</td>
+
+            <td scope="row">
                 @php
-
-                $i = $i + 1;
-
+                $id = $adm->EMP_ID;
                 @endphp
-                <td scope="row">{{ $adm->EMP_ID }}</td>
-                <td scope="row">{{ $adm->NAME }}</td>
-                <td scope="row">{{ decrypt($adm->PASSWORD) }}</td>
+                <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
+                    <i class="fs-5 fa fa-eye"></i></a>
 
-                <td scope="row">
-                    @php
-                    $id = $adm->EMP_ID;
-                    @endphp
-                    <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
-                        <i class="fs-5 fa fa-eye"></i></a>
+                @include('modal.studentView')
+            </td>
+            <td scope="row">
+                @php
+                $id = $adm->EMP_ID;
+                @endphp
+                <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
+                    <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                    @include('modal.studentView')
-                </td>
-                <td scope="row">
-                    @php
-                    $id = $adm->EMP_ID;
-                    @endphp
-                    <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
-                        <i class="fs-5 fa fa-pen-to-square"></i></a>
-
-                    @include('modal.editUser')
-                </td>
+                @include('modal.editUser')
+            </td>
 
 
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 
-    <div class="pagination">{{ $admin->links() }}</div>
-    @endsection
+<div class="pagination">{{ $admin->links() }}</div>
+@endsection
 
-    @include('modal.adminAdduser')
+@include('modal.adminAdduser')

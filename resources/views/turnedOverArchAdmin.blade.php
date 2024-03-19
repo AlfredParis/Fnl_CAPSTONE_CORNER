@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-    Archive Table
+Archive Table
 @endsection
 
 @section('topnav')
@@ -16,7 +16,7 @@
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline ">Archives</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
+    {{-- <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('admin.checker') }}">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
         </a>
@@ -35,7 +35,7 @@
         <a class="nav-link text-white" href="{{ route('admin.admin') }}">
             <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Admin</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('admin.audit') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Audit</span>
@@ -47,8 +47,10 @@
         </a>
     </li>
     @endsection
-     @section('main')
-    <h1>Archives</h1>
+    @section('main')
+    <div class="pddingForBody">
+        <h1>Archives</h1>
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -65,33 +67,37 @@
             </thead>
             <tbody>
                 @php
-                    $i = 0;
+                $i = 0;
                 @endphp
                 @foreach ($trnd as $archive)
-                    <tr>
-                        @php
+                <tr>
+                    @php
 
-                            $i = $i + 1;
+                    $i = $i + 1;
 
-                        @endphp
-                         @php
-                         $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
-                         $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
-                         $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
-                     @endphp
+                    @endphp
+                    @php
+                    $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
+                    $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
+                    $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
+                    @endphp
                     <td> {{ $archive->ARCH_ID}}</td>
                     <td> {{ $archive->TITLE}}</td>
                     <td> {{ $grp_name}}</td>
                     <td> {{ $archive->ABS}}</td>
-                    <td> {{ $dept}}</td> 
-                    <td> {{ $archive->DOCU}}</td>
-                    <td> {{ $adviserName}}</td> 
-                    <td> {{ $archive->updated_at}}</td> 
-                @endforeach
+                    <td> {{ $dept}}</td>
+                    <td scope="row">
+                        <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $archive->DOCU) }}');"
+                            class="btn btn-primary">Open Document </a>
+                    </td>
+                    {{-- <td> {{ $archive->DOCU}}</td> --}}
+                    <td> {{ $adviserName}}</td>
+                    <td> {{ $archive->updated_at}}</td>
+                    @endforeach
             </tbody>
         </table>
         {{ $trnd->links() }}
 
 
-
+    </div>
     @endsection

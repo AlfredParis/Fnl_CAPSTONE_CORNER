@@ -39,7 +39,7 @@ class adminAcc extends Seeder
 
             [
                 'PASSWORD' => encrypt('faculty'),
-                'EMP_ID' => 'facultyBSBA',
+                'EMP_ID' => 'facultyIT3',
                 'ACCTYPE' => 'faculty',
 
             ],
@@ -53,7 +53,7 @@ class adminAcc extends Seeder
 
             [
                 'PASSWORD' => encrypt('faculty'),
-                'EMP_ID' => 'facultyBSOA',
+                'EMP_ID' => 'facultyIT2',
                 'ACCTYPE' => 'faculty',
 
             ],

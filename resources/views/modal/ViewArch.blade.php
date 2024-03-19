@@ -3,13 +3,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Archive update</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Archive view</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 @php
-
-                    // $auth = App\Models\STUDENT::where('ARCH_ID', $archive->ARCH_ID)->get();
+                $auth=\App\Models\STUDENT::where('GROUP_ID', $archive->GROUP_ID)->get();
 
                 @endphp
 
@@ -19,55 +18,41 @@
                         {{ $archive->ARCH_ID }} </p>
 
                 </div>
-
                 <div class="mb-3">
-
-                    <label for="name" class="form-label">Archive name</label>
-                    <p class="form-control" type="text" name="ARCH_NAME"> {{ $archive->ARCH_NAME }}</p>
-
-
-                </div>
-
-
-
-                <div class="mb-3">
-
-
-
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="gh" class="form-label">GitHub Repository</label>
-                    <p class="form-control">{{ $archive->GITHUB_LINK }}</p>
+                    <label for="archID" class="form-label">Archive Title</label>
+                    <p type="text" class="form-control" placeholder="Enter Archive ID" id="archID" name="ARCH_ID">
+                        {{ $archive->TITLE}} </p>
 
                 </div>
                 <div class="mb-3">
 
-                    <p>{{ old('PDF_FILE') }}</p>
-                    <label for="pdf_file" class="form-label">Documentation</label>
-
-
-                    <a class="form-control" href="#"
-                        onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{ $archive->PDF_FILE }}</a>
-
-
+                    <label for="name" class="form-label">Group Name</label>
+                    <p class="form-control" type="text" name="ARCH_NAME">{{ $grp_name}}
+                    </p>
                 </div>
                 <div class="mb-3">
-                    <label for="Status" class="form-label">Status:</label>
-                   NON FUNCTION PA PO
 
+                    <label for="name" class="form-label">Group Adviser</label>
+                    <p class="form-control" type="text" name="ARCH_NAME">{{ $adviserName}}
+                    </p>
                 </div>
+                <div class="mb-3">
+                    <label for="gh" class="form-label">Documentation</label><br>
+                    <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $archive->DOCU) }}');"
+                        class="btn btn-primary">Open Document </a>
+                </div>
+
+
                 <div class="mb-3">
                     <label for="form-label">Abstract</label>
-                    <p class="form-control" read-only=true>{{ $archive->ABSTRACT }}</p>
+                    <p class="form-control" read-only=true>{{ $archive->ABS}}</p>
 
                 </div>
                 <div class="mb-3">
                     <label for="form-label">Authors</label>
-                    {{-- @foreach ($auth as $item)
-                        <p class="form-control">{{ $item->S_ID }} || {{ $item->NAME }}</p>
-                    @endforeach --}}
+                    @foreach ($auth as $item)
+                    <p class="form-control">{{ $item->NAME }}</p>
+                    @endforeach
                 </div>
             </div>
             <div class="modal-footer">

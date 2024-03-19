@@ -36,6 +36,8 @@ Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-s
 Route::get('updateProg/{S_ID}/{G_ID}/', [extraCtrl::class, 'updateProg'])->name('updateProg');
 Route::post('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
 
+Route::get('/viewCnt/{ARCH_ID}', [extraCtrl::class, 'viewCnt'])->name('viewCnt');
+
 Route::post('{grp_id}/opArchGL', [extraCtrl::class, 'opArch'])->name('opArchGL');
 
 
@@ -93,7 +95,7 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin'], function () {
     //Excel imports
-    
+
 
 
 
@@ -133,7 +135,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
     //views
     Route::get('/show/{id}', [adminController::class, 'view'])->name('view');
     Route::post('/srch', [adminController::class, 'srch'])->name('srch');
-   
+
     //views end
     Route::post('/test', [adminController::class, 'test'])->name('test');
 });

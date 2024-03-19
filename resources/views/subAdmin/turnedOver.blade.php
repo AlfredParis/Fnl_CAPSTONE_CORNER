@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-    Substitute Admin Dashboard
+Substitute Finalized Dashboard
 @endsection
 
 @section('topnav')
@@ -28,7 +28,7 @@
             <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Final Defended</span>
         </a>
     </li>
-{{-- 
+    {{--
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="#">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
@@ -49,7 +49,7 @@
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    </ul>
+</ul>
 @endsection
 
 @section('main')
@@ -79,9 +79,9 @@
                     @endphp
                     @foreach ($groups as $archive)
                     @php
-                        $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
-                        $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
-                        $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
+                    $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
+                    $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
+                    $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
                     @endphp
                     <tr>
                         @php
@@ -91,21 +91,26 @@
                         <td> {{ $archive->TITLE}}</td>
                         <td> {{ $grp_name}}</td>
                         <td> {{ $archive->ABS}}</td>
-                        <td> {{ $dept}}</td> 
-                        <td> {{ $archive->DOCU}}</td>
-                        <td> {{ $adviserName}}</td> 
-                        <td> {{ $archive->created_at}}</td>     
+                        <td> {{ $dept}}</td>
+                        {{-- <td> {{ $archive->DOCU}}</td> --}}
+                        <td scope="row">
+                            <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $archive->DOCU) }}');"
+                                class="btn btn-primary">Open Document </a>
+                        </td>
+                        <td> {{ $adviserName}}</td>
+                        <td> {{ $archive->created_at}}</td>
 
                         <td>
                             <form action="{{route('subAdmin.toAdmin',['trndID' => $archive->id]) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                                <input type="submit" value="Send"  class="btn btn-success">
+                                @csrf
+                                @method('PUT')
+                                <input type="submit" value="Send" class="btn btn-success">
                             </form>
 
                         </td>
-                         {{-- <td> <a class="btn btn-primary" href="{{ route('subAdmin.toAdmin',['trndID' => $archive->id]) }}">Send</a> </td>
-                    --}}
+                        {{-- <td> <a class="btn btn-primary"
+                                href="{{ route('subAdmin.toAdmin',['trndID' => $archive->id]) }}">Send</a> </td>
+                        --}}
                     </tr>
                     @endforeach
                 </tbody>

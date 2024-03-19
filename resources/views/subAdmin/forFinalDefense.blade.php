@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-    Substitute Admin Dashboard
+Substitute Admin Dashboard
 @endsection
 
 @section('topnav')
@@ -18,7 +18,7 @@
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Proposal</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0" >
+    <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white active" href="{{route('subAdmin.forFinalDefense')}}">
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">For Final Defense</span>
         </a>
@@ -28,7 +28,7 @@
             <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Final Defended</span>
         </a>
     </li>
-{{-- 
+    {{--
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="#">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
@@ -49,11 +49,11 @@
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    </ul>
+</ul>
 @endsection
 
 @section('main')
-
+<h1>For Final Defense</h1>
 <div class="container-fluid ">
 
     <div class="row " style="margin-top: 1rem;">
@@ -85,7 +85,7 @@
                                 href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}">open</a> </td> --}}
                         <td> {{ $adviserName}}</td>
                         <td> {{ $archive->updated_at}}</td>
-                            </tr>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

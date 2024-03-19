@@ -152,11 +152,12 @@ $allStat=\App\Models\archStatus::get() ;
                     <td scope="row">{{$oparch->DESCRIPTION}}</td>
                     <td scope="row">
                         <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');"
-                            class="btn btn-primary">Open Document
+                            class="btn btn-primary">Open Document </a>
+                    </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>
                     <td scope="row">{{$oparch->created_at}}</td>
-                   
+
                     @include('facultyModal.addComment')
                 </tr>
                 @endforeach

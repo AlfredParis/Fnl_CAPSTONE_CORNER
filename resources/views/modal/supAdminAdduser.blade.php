@@ -8,16 +8,16 @@
             <div class="modal-body">
 
                 @if ($userAdd == 'student')
-                    <form action="{{ route('superAdmin.import.excel') }}" method="POST" enctype="multipart/form-data">
-                        @csrf <div class="mb-3">
+                <form action="{{ route('superAdmin.import.excel') }}" method="POST" enctype="multipart/form-data">
+                    @csrf <div class="mb-3">
 
-                            <label for="excel_file" class="form-label">Import Student</label>
-                            <input type="file" name="excel_file" id="excel_file" accept=".xlsx, .xls"
-                                class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Import Excel</button>
+                        <label for="excel_file" class="form-label">Import Student</label>
+                        <input type="file" name="excel_file" id="excel_file" accept=".xlsx, .xls" class="form-control"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Import Excel</button>
 
-                    </form>
+                </form>
                 @endif
 
 
@@ -39,33 +39,52 @@
 
 
                     @if ($userAdd == 'student')
-                        <div class="mb-3">
-                            <label for="ARCH_ID" class="form-label"> Archive ID</label>
-                            <input type="text" class="form-control" placeholder="archive id" name="ARCH_ID"
-                                value="{{ old('ARCH_ID') }}">
-                        </div>
+                    <div class="mb-3">
+                        <label for="DEPT_ID">Course</label>
+
+                        @php
+                        $CHMBAC=App\Models\department::where('PROG_ID', 2)->get();
+                        $CTE=App\Models\department::where('PROG_ID', 1)->get();
+                        $AGRI=App\Models\department::where('PROG_ID', 3)->get();
+                        @endphp
+
+                        <select class="custom-select" name="DEPT_ID" id="DEPT_ID" style="max-width: 23rem">
+                            <option value="">select your course</option>
+                            @foreach ($CHMBAC as $item)
+                            <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                            @endforeach
+                            @foreach ($CTE as $item)
+                            <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                            @endforeach
+                            @foreach ($AGRI as $item)
+                            <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                            @endforeach
+                        </select>
+
+
+                    </div>
                     @else
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Password" name="PASSWORD"
-                                id="myInput" value="{{ old('PASSWORD') }}" >
-                        </div>
-                        <div class="showpass">
-                            <input type="checkbox" onclick="myFunction()"> Show Password
-                        </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Password" name="PASSWORD" id="myInput"
+                            value="{{ old('PASSWORD') }}">
+                    </div>
+                    <div class="showpass">
+                        <input type="checkbox" onclick="myFunction()"> Show Password
+                    </div>
                     @endif
 
 
 
                     @if ($userAdd == 'student')
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Student Password</label>
-                            <input type="password" class="form-control" placeholder="Enter student password"
-                                name="PASSWORD" id="myInput"  >
-                        </div>
-                        <div class="showpass">
-                            <input type="checkbox" onclick="myFunction()"> Show Password
-                        </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Student Password</label>
+                        <input type="password" class="form-control" placeholder="Enter student password" name="PASSWORD"
+                            id="myInput">
+                    </div>
+                    <div class="showpass">
+                        <input type="checkbox" onclick="myFunction()"> Show Password
+                    </div>
 
                     @else
                     @endif

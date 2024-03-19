@@ -48,11 +48,11 @@ My Advisory
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    </ul>
+</ul>
 @endsection
 
 @section('main')
-
+<h1>My Advisories</h1>
 <div class="container-fluid ">
 
     <div class="row " style="margin-top: 1rem;">
@@ -109,7 +109,7 @@ My Advisory
 
                     </td>
 
-                </tr>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

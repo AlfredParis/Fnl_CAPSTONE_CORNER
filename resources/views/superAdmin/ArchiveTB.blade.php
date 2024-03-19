@@ -16,11 +16,11 @@ Archive Table
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline ">Archives</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
+    {{-- <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('superAdmin.index') }}">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('superAdmin.student') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>

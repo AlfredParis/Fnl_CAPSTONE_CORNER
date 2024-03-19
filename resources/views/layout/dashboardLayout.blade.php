@@ -38,7 +38,11 @@
 
     <style>
         body {}
-        a{ text-decoration: none;}
+
+        a {
+            text-decoration: none;
+        }
+
         .loading {
             position: fixed;
             top: 0;
@@ -201,7 +205,7 @@
                     </a>
 
                     @section('topnav')
-                        @parent
+                    @parent
                     @show
 
                     </ul>
@@ -266,7 +270,7 @@
 
                     <br>
 
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                         <div class="container-fluid">
 
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -312,9 +316,11 @@
             </div>
 
             <div class="" style="padding-left:16.7vw;padding-right:0px;">
-                @section('main')
-                 @parent
-                @show
+                <div class="pddingForBody">
+                    @section('main')
+                    @parent
+                    @show
+                </div>
             </div>
         </div>
     </div>

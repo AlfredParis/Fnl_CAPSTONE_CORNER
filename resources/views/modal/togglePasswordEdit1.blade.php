@@ -1,9 +1,9 @@
-<form action="{{ route('admin.update', ['S_ID' => $profile->S_ID]) }}" method="POST">
+<form action="{{ route('admin.update', ['S_ID' => $profile->EMP_ID]) }}" method="POST">
     @csrf
     @method('PUT')
 
     @error('')
-        <span> {{ $message }}</span>
+    <span> {{ $message }}</span>
     @enderror
     <div class="form-group">
         <label for="fullname">Full name</label>
@@ -12,7 +12,7 @@
     </div>
 
     @error('')
-        <span> {{ $message }}</span>
+    <span> {{ $message }}</span>
     @enderror
 
     <div class="form-group">
@@ -22,7 +22,7 @@
 
 
     </div>
-   
+
 
     <div class="form-group">
         <label for="archId">Archive ID</label>
@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <label for="courseId">Course ID</label>
-        <input class="form-control" type="text" id="courseId" name="C_ID"
-            value="{{ old('C_ID', $profile->C_ID) }} " required>
+        <input class="form-control" type="text" id="courseId" name="C_ID" value="{{ old('C_ID', $profile->C_ID) }} "
+            required>
     </div>
 </form>

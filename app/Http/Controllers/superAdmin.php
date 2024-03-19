@@ -26,7 +26,10 @@ use App\Models\ARCHIVES;
 use App\Models\notif;
 use App\Models\program;
 use App\Models\department;
+use App\Models\group;
 use App\Models\TURNED_OVER_ARCHIVES;
+use App\Models\viewsForTrnd;
+
 
 
 class superAdmin extends Controller
@@ -40,8 +43,9 @@ class superAdmin extends Controller
         // $auth = STUDENT::where('ARCH_ID', 'N/A')->get();->with('auths', $auth)
         $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
 
+        $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
-        return view('superAdmin.dashboard')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
+        return view('superAdmin.dashboard')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
     }
 
     public function adminTB()
@@ -67,13 +71,13 @@ class superAdmin extends Controller
 
     public function archives(Request $request)
     {
-       
-            
+
+
         $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
 
-           
+
             return view('turnedOverArchSuperAdmin')->with('trnd',$trndOver);
-       
+
     }
 
 
@@ -298,6 +302,10 @@ class superAdmin extends Controller
                 $EMP = new EMPLOYEE;
                 $EMP->NAME = $request->input("fullname");
                 $EMP->EMP_ID = $request->input("userID");
+                $EMP->EMP_DEPT = 10;
+                $EMP->ADVICER_STATUS = "INACTIVE";
+                $EMP->POSITION_ID = 2;
+                $EMP->PROG_ID = 4;
                 $EMP->save();
                 $added = $request->input("userID");
                 $notif = new notif;
@@ -308,7 +316,7 @@ class superAdmin extends Controller
                 $notif->save();
 
                 Log::alert("$name has been added this account: $userID a admin");
-                return redirect()->route('superAdmin.admin')->with('alert', 'Admin account succesfully added!');
+                return redirect()->back()->with('alert', 'An Administrator has been added.');
 
             } elseif ($userac == 'faculty') {
                 $name = Session::get('fullNs');
@@ -335,23 +343,7 @@ class superAdmin extends Controller
                 return redirect()->route('superAdmin.faculty')->with('alert', 'Faculty account succesfully added!');
 
             } else {
-                if ($request->input("ARCH_ID") == null) {
-                    $user = new student_acc;
-                    $user->S_ID = $request->input("userID");
-                    $user->ACCTYPE = $userac;
-                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
 
-                    $user->save();
-
-                    $EMP = new STUDENT;
-                    $EMP->NAME = $request->input("fullname");
-                    $EMP->S_ID = $request->input("userID");
-                    $EMP->C_ID = '1';
-                    $EMP->ARCH_ID = 'N/A';
-                    $EMP->save();
-
-
-                } else {
 
                     $user = new student_acc;
                     $user->S_ID = $request->input("userID");
@@ -362,10 +354,10 @@ class superAdmin extends Controller
                     $EMP = new STUDENT;
                     $EMP->NAME = $request->input("fullname");
                     $EMP->S_ID = $request->input("userID");
-                    $EMP->C_ID = '1';
-                    $EMP->ARCH_ID = $request->input("ARCH_ID");
+                    $EMP->DEPT_ID =  $request->input("DEPT_ID");
+                    $EMP->GROUP_ID = "N/A";
                     $EMP->save();
-                }
+
 
 
                 $name = Session::get('fullNs');
@@ -378,7 +370,7 @@ class superAdmin extends Controller
                 $notif->save();
 
                 Log::alert("$name has been added this account: $userID a student");
-                return redirect()->route('superAdmin.student')->with('alert', 'Student Account added!');
+                return redirect()->back()->with('alert', 'An student has been added.');
             }
 
         } else {
@@ -407,7 +399,9 @@ class superAdmin extends Controller
 
 
     public function group(){
-        return view('superAdmin.groupsTB');
+
+        $studProf = group::paginate(10);
+        return view('superAdmin.groupsTB')->with('groups',$studProf);
     }
 
 

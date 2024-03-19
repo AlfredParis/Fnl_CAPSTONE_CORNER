@@ -19,6 +19,7 @@ use App\Models\group;
 use App\Models\OP_Archive;
 use App\Models\messages;
 use App\Models\TURNED_OVER_ARCHIVES;
+use App\Models\viewsForTrnd;
 
 
 
@@ -33,10 +34,11 @@ class facultyController extends Controller
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
 
         $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+        $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
+        // $trndOver=TURNED_OVER_ARCHIVES::orderBy('PUB_STAT',2)->paginate(10);
 
 
-
-        return view('facultyDashB')->with('tl_admin', $total_admin)->with('ttlArch', $total_arch)->with('ttlStud', $total_student)->with('tl_fac', $total_faculty)->with('arch', $archDesc);
+        return view('facultyDashB')->with('tl_admin', $total_admin)->with('ttlArch', $total_arch)->with('ttlStud', $total_student)->with('tl_fac', $total_faculty)->with('viewss', $views);
     }
 
 

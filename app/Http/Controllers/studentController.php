@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\messages;
 use App\Models\TURNED_OVER_ARCHIVES;
+use App\Models\viewsForTrnd;
 
 class studentController extends Controller
 {
@@ -26,15 +27,16 @@ class studentController extends Controller
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+       $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
 
 
-        return view('studentDB')->with('arch', $archDesc)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
+        return view('studentDB')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
     }
 
     public function archives(Request $request)
     {
-      
+
         $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
 
         return view('turnedOverArchStudent')->with('trnd',$trndOver);

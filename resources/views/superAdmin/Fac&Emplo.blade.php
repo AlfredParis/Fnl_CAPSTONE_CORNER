@@ -16,11 +16,11 @@ Student Table
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
+    {{-- <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('superAdmin.index') }}">
             <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" aria-current="true" href="{{ route('superAdmin.student') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
@@ -49,7 +49,7 @@ Student Table
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white active" href="{{ route('superAdmin.faculty') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Faculties and
-                emplopyies</span>
+                profilelopyies</span>
         </a>
     </li>
     @endsection
@@ -58,7 +58,7 @@ Student Table
     <h1>Employies</h1>
 
     @php
-    $userAdd = 'student';
+    $userAdd = 'faculty';
     @endphp
     <table class="table table-striped">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
@@ -79,19 +79,19 @@ Student Table
             @php
             $i = 0;
             @endphp
-            @foreach ($SN as $emp)
+            @foreach ($SN as $profile)
             <tr>
                 @php
 
                 $i = $i + 1;
 
                 @endphp
-                <td scope="row">{{ $emp->NAME }}</td>
-                <td scope="row">{{ $emp->EMP_ID }}</td>
-                <td scope="row">{{ $emp->EMP_DEPT }}</td>
+                <td scope="row">{{ $profile->NAME }}</td>
+                <td scope="row">{{ $profile->profile_ID }}</td>
+                <td scope="row">{{ $profile->profile_DEPT }}</td>
                 <td scope="row">
                     @php
-                    $id = $emp->S_ID;
+                    $id = $profile->S_ID;
                     @endphp
                     <a href="#viewUser_{{ $id }}" data-bs-toggle="modal">
                         <i class="fs-5 fa fa-eye"></i></a>
@@ -102,12 +102,12 @@ Student Table
 
                 <td scope="row">
                     @php
-                    $id = $emp->S_ID;
+                    $id = $profile->S_ID;
                     @endphp
                     <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
                         <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                    {{-- @include('modal.editUser') --}}
+                    @include('modal.editUser')
 
                 </td>
 
@@ -122,4 +122,4 @@ Student Table
     {{ $SN->links() }}
     @endsection
 
-    {{-- @include('modal.supAdminAdduser') --}}
+    @include('modal.supAdminAdduser')
