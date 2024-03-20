@@ -125,68 +125,54 @@ class studentController extends Controller
 
     }
 
-   public function findSimilarWords(Request $request)
+public function findSimilarWords(Request $request)
 {
     $userInput = $request->input('user_input');
-    $abs = $request->input('abs');
-  if (empty($userInput) || is_null($userInput)) {
+    $userInputAbs = $request->input('abs');
+
+    if (empty($userInput) || is_null($userInput)) {
         return view('studChecker')->with('similarTitles', []);
     }
+
     // Split the user input into individual words
     $inputWords = explode(' ', $userInput);
 
-    // Retrieve all titles from the database
-    $titles=DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
+    // Split the user input abstract into individual words
+    $inputAbsWords = explode(' ', $userInputAbs);
 
-     $similarTitles = [];
+    // Retrieve all titles and abstracts from the database
+    $titlesAndAbstracts = DB::table('t_u_r_n_e_d__o_v_e_r__a_r_c_h_i_v_e_s')
+        ->where('PUB_STAT', 2)
+        ->select('TITLE', 'ABS','id', 'GROUP_ID', 'DOCU', 'DEPT_ID', 'ADVISER_ID','ARCH_ID' )
+        ->get();
 
+    $similarTitles = [];
 
-    foreach ($titles as $title) {
-        $titleWords = explode(' ', $title);
+    foreach ($titlesAndAbstracts as $item) {
+        $titleWords = explode(' ', $item->TITLE);
+        $absWords = explode(' ', $item->ABS);
 
-        $totalSimilarityPercentage = 0;
-        $wordCount = count($inputWords);
-        $similarWords = [];
+        // Compare user input with title
+        $titleSimilarity = $this->calculateSimilarity($inputWords, $titleWords);
 
-        foreach ($inputWords as $inputWord) {
-            $maxSimilarityPercentage = 0;
-            $inputWordFound = false; // Flag to track if input word is found in the title
+        // Compare user input abstract with database abstract
+        $abstractSimilarity = $this->calculateSimilarity($inputAbsWords, $absWords);
 
-            foreach ($titleWords as $titleWord) {
+        // If the average similarity percentage is at least 10% for title or abstract, add the title to the result
+        if ($titleSimilarity >= 10 || $abstractSimilarity >= 10) {
 
-                $distance = levenshtein($inputWord, $titleWord);
-
-                $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($titleWord))) * 100;
-                if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
-                    $maxSimilarityPercentage = $wordSimilarityPercentage;
-                      if (stripos($titleWord, $inputWord) !== false) {
-                        $inputWordFound = true;
-
-                         }
-                }
-            }
-            if ($inputWordFound) {
-                $similarWords[] = $inputWord;
-            }
-
-            $totalSimilarityPercentage += $maxSimilarityPercentage;
-        }
-
-        // Calculate the average similarity percentage for the title
-        if ($wordCount > 0) {
-            $averageSimilarityPercentage = $totalSimilarityPercentage / count($inputWords);
-
-        } else {
-            $averageSimilarityPercentage = 0;
-        }
-
-        // If the average similarity percentage is at least 50%, and there are similar words, add the title to the result
-        if ($averageSimilarityPercentage >= 10 && !empty($similarWords)) {
+            $averageSimilarityPercentage = ($titleSimilarity + $abstractSimilarity) / 2;
+            $formattedSimilarityPercentage = number_format($averageSimilarityPercentage, 0); // Format to nearest integer
             $similarTitles[] = [
-                'title' => $title,
-                'average_similarity_percentage' => round($averageSimilarityPercentage, 2),
-                'similar_words' => array_unique($similarWords) // Remove duplicates from the list
-            ];
+                'id' => $item->id,
+                'title' => $item->TITLE,
+                'abstract' => $item->ABS,
+                'ARCH_ID'=> $item->ARCH_ID,
+                'GROUP_ID' => $item->GROUP_ID,
+                'DOCU'=> $item->DOCU,
+               'DEPT_ID'=> $item->DEPT_ID,
+               'ADVISER_ID'=> $item->ADVISER_ID,
+                'average_similarity_percentage' => $formattedSimilarityPercentage, ];
         }
     }
 
@@ -195,9 +181,45 @@ class studentController extends Controller
         return $b['average_similarity_percentage'] - $a['average_similarity_percentage'];
     });
 
-// return dd( $wordSimilarityPercentage);
- return view('studChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput)->with('absract',$abs);
+    return view('studChecker')->with('similarTitles', $similarTitles)->with('titel', $userInput)->with('absract', $userInputAbs);
 }
+
+private function calculateSimilarity($inputWords, $compareWords)
+{
+    $totalSimilarityPercentage = 0;
+
+    foreach ($inputWords as $inputWord) {
+        $maxSimilarityPercentage = 0;
+
+        foreach ($compareWords as $compareWord) {
+            $distance = levenshtein($inputWord, $compareWord);
+            $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($compareWord))) * 100;
+
+            // Cap the similarity percentage at 100%
+            $wordSimilarityPercentage = min($wordSimilarityPercentage, 100);
+
+            if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
+                $maxSimilarityPercentage = $wordSimilarityPercentage;
+            }
+        }
+
+        $totalSimilarityPercentage += $maxSimilarityPercentage;
+    }
+
+    // Calculate the average similarity percentage
+    $wordCount = count($inputWords);
+    $averageSimilarityPercentage = $wordCount > 0 ? $totalSimilarityPercentage / $wordCount : 0;
+
+    // Cap the average similarity percentage at 100%
+    $averageSimilarityPercentage = min($averageSimilarityPercentage, 100);
+
+    return $averageSimilarityPercentage;
+}
+
+
+
+
+
 
 public function Checker()
     {

@@ -1,7 +1,7 @@
 @extends('layout.homeLayout')
 
 @section('title')
-    Capstone Corner
+    Thesis Corner
 @endsection
 
 @section('topnav')

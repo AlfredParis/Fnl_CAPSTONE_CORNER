@@ -19,6 +19,8 @@ use App\Models\OP_Archive;
 use App\Models\messages;
 use App\Models\TURNED_OVER_ARCHIVES;
 use App\Models\User;
+use Illuminate\Support\Str;
+use SimilarText\Finder;
 
 use Illuminate\Support\Facades\Mail as FacadesMail;
 
@@ -86,6 +88,145 @@ class extraCtrl extends Controller
     STUDENT::insert($userData);
 
     return redirect()->route('admin.student')->with('alert', 'Data imported successfully');
+}
+
+
+public function findSimilarWords(Request $request)
+{
+    $userInput = $request->input('user_input');
+    $userInputAbs = $request->input('abs');
+
+    if (empty($userInput) || is_null($userInput)) {
+        return redirect()->back()->with('similarTitles', []);
+    }
+
+    // Split the user input into individual words
+    $inputWords = explode(' ', $userInput);
+
+    // Split the user input abstract into individual words
+    $inputAbsWords = explode(' ', $userInputAbs);
+
+    // Retrieve all titles and abstracts from the database
+    $titlesAndAbstracts = DB::table('t_u_r_n_e_d__o_v_e_r__a_r_c_h_i_v_e_s')
+        ->where('PUB_STAT', 2)
+        ->select('TITLE', 'ABS')
+        ->get();
+
+    $similarTitles = [];
+
+    foreach ($titlesAndAbstracts as $item) {
+        $titleWords = explode(' ', $item->TITLE);
+        $absWords = explode(' ', $item->ABS);
+
+        // Compare user input with title
+        $titleSimilarity = $this->calculateSimilarity($inputWords, $titleWords);
+
+        // Compare user input abstract with database abstract
+        $abstractSimilarity = $this->calculateSimilarity($inputAbsWords, $absWords);
+
+        // If the average similarity percentage is at least 10% for title or abstract, add the title to the result
+        if ($titleSimilarity >= 10 || $abstractSimilarity >= 10) {
+            $similarTitles[] = [
+                'title' => $item->TITLE,
+                'abstract' => $item->ABS,
+                'average_similarity_percentage' => max($titleSimilarity, $abstractSimilarity),
+            ];
+        }
+    }
+
+    // Sort the results by average similarity percentage in descending order
+    usort($similarTitles, function ($a, $b) {
+        return $b['average_similarity_percentage'] - $a['average_similarity_percentage'];
+    });
+
+    return redirect()->back()->with('similarTitles', $similarTitles)->with('titel', $userInput)->with('abstract', $userInputAbs);
+}
+
+private function calculateSimilarity($inputWords, $compareWords)
+{
+    $totalSimilarityPercentage = 0;
+
+    foreach ($inputWords as $inputWord) {
+        $maxSimilarityPercentage = 0;
+
+        foreach ($compareWords as $compareWord) {
+            $distance = levenshtein($inputWord, $compareWord);
+            $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($compareWord))) * 100;
+
+            // Cap the similarity percentage at 100%
+            $wordSimilarityPercentage = min($wordSimilarityPercentage, 100);
+
+            if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
+                $maxSimilarityPercentage = $wordSimilarityPercentage;
+            }
+        }
+
+        $totalSimilarityPercentage += $maxSimilarityPercentage;
+    }
+
+    // Calculate the average similarity percentage
+    $wordCount = count($inputWords);
+    $averageSimilarityPercentage = $wordCount > 0 ? $totalSimilarityPercentage / $wordCount : 0;
+
+    // Cap the average similarity percentage at 100%
+    $averageSimilarityPercentage = min($averageSimilarityPercentage, 100);
+
+    return $averageSimilarityPercentage;
+}
+
+
+
+
+
+
+public function checkSimilarity(Request $request)
+{
+    // Validate incoming request data
+    $request->validate([
+        'title' => 'required|string',
+        'abstract' => 'required|string',
+    ]);
+
+    // Retrieve input data
+    $inputTitle = $request->input('title');
+    $inputAbstract = $request->input('abstract');
+
+    // Fetch all articles from the database
+    $articles = TURNED_OVER_ARCHIVES::all();
+
+    // Initialize variables for storing most similar article and similarity percentage
+    $mostSimilarArticle = null;
+    $maxSimilarityPercentage = 0;
+
+    // Loop through each article to find the most similar one
+    foreach ($articles as $article) {
+        // Calculate similarity percentage for title and abstract
+        $titleSimilarityPercentage = $this->SimilarityPercentage($inputTitle, $article->TITLE);
+        $abstractSimilarityPercentage = $this->SimilarityPercentage($inputAbstract, $article->ABS);
+
+        // Average similarity percentage for title and abstract
+        $averageSimilarityPercentage = ($titleSimilarityPercentage + $abstractSimilarityPercentage) / 2;
+
+        // Check if the current article has a higher similarity percentage
+        // than the previously found most similar article
+        if ($averageSimilarityPercentage > $maxSimilarityPercentage) {
+            $maxSimilarityPercentage = $averageSimilarityPercentage;
+            $mostSimilarArticle = $article;
+        }
+    }
+
+    // Return the most similar article and its similarity percentage
+    return response()->json([
+        'most_similar_article' => $mostSimilarArticle,
+        'similarity_percentage' => $maxSimilarityPercentage,
+    ]);
+}
+
+// Function to calculate similarity percentage using PHP's similar_text function
+private function SimilarityPercentage($string1, $string2)
+{
+    similar_text($string1, $string2, $percentage);
+    return $percentage;
 }
 
 public function importExcelSTUDENTFac(Request $request)

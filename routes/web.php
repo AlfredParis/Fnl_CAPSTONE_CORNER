@@ -35,6 +35,10 @@ Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
 Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
 Route::get('updateProg/{S_ID}/{G_ID}/', [extraCtrl::class, 'updateProg'])->name('updateProg');
 Route::post('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
+Route::post('/check-similarity', [extraCtrl::class, 'checkSimilarity'])->name('check_similarity');
+Route::post('/words', [extraCtrl::class, 'findSimilarWords'])->name('words');
+
+
 
 Route::get('/viewCnt/{ARCH_ID}', [extraCtrl::class, 'viewCnt'])->name('viewCnt');
 
