@@ -34,10 +34,11 @@ class adminController extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+       $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+       $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
-        return view('adminDashB')->with('tl_admin', $total_admin)->with('ttlArch', $total_arch)->with('ttlStud', $total_student)->with('tl_fac', $total_faculty)->with('arch', $archDesc);
-    }
+        return view('adminDashB')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
+        }
 
     public function checker()
     {

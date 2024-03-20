@@ -107,76 +107,92 @@ Admin Dashboard
                         $i = 0;
 
                         @endphp
-                        @foreach ($arch as $archive)
-                        @include('modal.ViewArch')
+                      @foreach ($viewss as $view)
+
+                      <tr>
+                          @php
+
+
+                          $i = $i + 1;
+                          $archive=\App\Models\TURNED_OVER_ARCHIVES::where('id', $view->TRND_ID)->first();
+                          $adviserName=\App\Models\EMPLOYEE::where('EMP_ID', $archive->ADVISER_ID)->value("NAME");
+                          $grp_name=\App\Models\group::where('id', $archive->GROUP_ID)->value("GRP_NAME");
+                          $dept=\App\Models\department::where('id', $archive->DEPT_ID)->value("DEPT_NAME");
+
+                          @endphp
+                          @include('modal.ViewArch')
+
+                          <td scope="row">
+                              @if ($i==1)
+                              <h2 style="text-align: center; color:gold;">{{$i}} <i class="fa-solid fa-crown"
+                                      style="text-align: center; color:gold;"></i> </h2>
+                              @elseif ($i==2)
+                              <h2 style="text-align: center;color:silver;">{{$i}} <i class="fa-solid fa-crown"></i>
+                              </h2>
+                              @elseif ($i==3)
+                              <h2 style="text-align: center;color:rgb(129, 83, 22);">{{$i}} <i
+                                      class="fa-solid fa-crown"></i> </h2>
+                              @endif
+                          </td>
+                          <td scope="row">
+                              <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                  onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
+                                  {{ $archive->ARCH_ID }}
+                              </a>
+
+                          </td>
+                          <td scope="row">
+                              {{ $grp_name}}
+                          </td>
+                          <td scope="row">
+                              <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                  onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
+                                  {{ $archive->TITLE }}
+                              </a>
+                          </td>
+                          <td scope="row">
+                              {{$dept}}
+                          </td>
+
+
+                          <td> {{ $adviserName}}</td>
+                          <td> {{ $archive->updated_at}}</td>
+
+                          <td scope="row">
+                              <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
+                                  onclick="incrementViewCount('{{ $archive->id }}')">
+                                  <i class="fa-solid fa-eye"></i></a>
+                          </td>
+                          <td>
+                              <h4>{{ $view->VIEWS}}</h4>
+                          </td>
+
+                          <script>
+                              function incrementViewCount(archiveId) {
+                                       $.ajax({
+                                          url: `/viewCnt/${archiveId}`,
+                                          type: 'GET',
+                                          success: function(response) {
+                                              console.log(response);
+                                          },
+                                          error: function(error) {
+                                              console.error(error);
+                                          }
+                                      });
+                                  }
+                          </script>
 
 
 
-                        <tr>
-                            @php
-
-                            $i = $i + 1;
-
-                            @endphp
-                            <td scope="row">
-                                @if ($i==1)
-                                <h2 style="text-align: center; color:gold;">{{$i}} <i class="fa-solid fa-crown"
-                                        style="text-align: center; color:gold;"></i> </h2>
-                                @elseif ($i==2)
-                                <h2 style="text-align: center;color:silver;">{{$i}} <i class="fa-solid fa-crown"></i>
-                                </h2>
-                                @elseif ($i==3)
-                                <h2 style="text-align: center;color:rgb(129, 83, 22);">{{$i}} <i
-                                        class="fa-solid fa-crown"></i> </h2>
-                                @endif
-                            </td>
-                            <td scope="row">
-                                <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
-                                    onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
-                                    {{ $archive->ARCH_ID }}</a>
-
-                            </td>
-                            <td scope="row">
-                                <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
-                                    onclick="incrementViewCount('{{ $archive->ARCH_ID }}')">
-                                    {{ $archive->ARCH_NAME }}</a>
-                            </td>
-                            <td scope="row"><a href="#"
-                                    onclick="openPDF('{{ asset('storage/pdfs/' . $archive->PDF_FILE) }}');">{{
-                                    $archive->PDF_FILE }}</a>
-                            </td>
-                            <td scope="row">{{ $archive->GITHUB_LINK }}</td>
-                            <td scope="row"> {{ $archive->viewCount }}</td>
-
-                            <script>
-                                function incrementViewCount(archiveId) {
-                                             $.ajax({
-                                                url: `/superAdmin/viewCnt/${archiveId}`,
-                                                type: 'GET',
-                                                success: function(response) {
-                                                    console.log(response);
-                                                },
-                                                error: function(error) {
-                                                    console.error(error);
-                                                }
-                                            });
-                                        }
-                            </script>
-                            <td scope="row">
-
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function() {
-                                                new MultiSelectTag("countries{{ $i }}");
-                                            });
-                                </script>
-
-
-
-
-                            </td>
-
-                        </tr>
-                        @endforeach
+                          <td scope="row">
+                              <script>
+                                  document.addEventListener("DOMContentLoaded", function() {
+                                              new MultiSelectTag("countries{{ $i }}");
+                                          });
+                              </script>
+                          </td>
+                      </tr>
+                      @endforeach
                     </tbody>
                 </table>
 
