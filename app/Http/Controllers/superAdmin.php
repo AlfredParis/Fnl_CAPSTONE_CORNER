@@ -468,6 +468,17 @@ class superAdmin extends Controller
         return redirect()->back()->with('alert', 'Created a program.')->withInput();
     }
 
+    public function delStud(){
+
+        $stud = STUDENT::where('S_ID',)->delete();
+        $studAcc = student_acc::where('S_ID',)->delete();
+        if ($record) {
+
+            $record->delete();
+        }
+        return redirect()->back()->with('alert', 'Student successfully deleted.')->withInput();
+
+    }
 
 
 }

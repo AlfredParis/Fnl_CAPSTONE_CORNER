@@ -207,64 +207,7 @@
                     @section('topnav')
                     @parent
                     @show
-
-                    </ul>
-
-                    @if ($accT = Session::get('accT') == 'superAdmin')
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <div class="container-fluid">
-
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item dropdown">
-                                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
-                                            data-bs-auto-close="outside" aria-expanded="false">
-                                            Programs
-                                        </button>
-
-                                        <ul class="dropdown-menu dropdown-menu-dark hihi">
-
-                                            @php
-                                            // $depts = \App\Models\department::all();
-                                            $progs = \App\Models\program::all();
-
-                                            @endphp
-                                            @foreach ($progs as $prog)
-                                            <li class="dropend DD">
-                                                <a class="dropdown-item dropdown-toggle"
-                                                    href="{{ route('superAdmin.specAdminTB', ['id' =>  $prog->id]) }}">{{$prog->PROG_ABBR}}</a>
-                                                <ul class="dropdown-menu dropdown-menu-dark DDhover">
-                                                    @php
-                                                    $depts = \App\Models\department::where('PROG_ID', $prog->id)->get();
-                                                    @endphp
-
-                                                    <li>
-
-                                                        @foreach ($depts as $dept)
-                                                        <a href="" class="dropdown-item">{{$dept->DEPT_NAME}}</a>
-
-                                                        @endforeach
-
-                                                    </li>
-                                                </ul>
-                                            </li>
-
-                                            @endforeach
-
-
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-                    @endif
+                </ul>
 
                     @section('logout')
 

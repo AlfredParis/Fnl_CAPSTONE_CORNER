@@ -7,10 +7,11 @@ laravel=
 copy the file .env.example and rename the new copied file to .env
 
 composer install
+php artisan storage:link
+
 php artisan key:generate
 php artisan migrate
 
-php artisan storage:link
 
 php artisan db:seed --class=courseSeed
 php artisan db:seed --class=adminAcc
@@ -29,7 +30,7 @@ composer require barryvdh/laravel-dompdf
 
 
 additional steps:
-Remove this is the php.ini of the xampp : ;extension=gd & ;extension=zip 
+Remove this is the php.ini of the xampp : ;extension=gd & ;extension=zip
 This is for the excel import
 and then run this command in the project
 composer require phpoffice/phpspreadsheet
