@@ -68,10 +68,11 @@ Student Dashboard
 
     <table class="table table-striped">
         <thead>
-            <th scope="col">Archive ID</th>
-            <th scope="col">Similar Titles</th>
-            <th scope="col">Similarity Percentage</th>
-            <th scope="col">view</th>
+            <tr>
+                <th scope="col">Archive ID</th>
+                <th scope="col">Similar Titles</th>
+                <th scope="col">Similarity Percentage</th>
+                <th scope="col">view</th>
             </tr>
         </thead>
         <tbody>
@@ -83,20 +84,14 @@ Student Dashboard
             $archive=\App\Models\TURNED_OVER_ARCHIVES::where('id', $similarTitle['id'])->first();
             @endphp
             <tr>
-
                 <td> {{ $similarTitle['ARCH_ID']}}</td>
-
-                <th scope="row">{{ $similarTitle['title'] }}
-                </th>
-
+                <th scope="row">{{ $similarTitle['title'] }}</th>
                 <th scope="row">{{ $similarTitle['average_similarity_percentage'] }}%</th>
-
                 <td scope="row">
                     <a class="btn" href="#archView{{ $archive->ARCH_ID }}" data-bs-toggle="modal"
                         onclick="incrementViewCount('{{ $archive->id }}')">
                         <i class="fa-solid fa-eye"></i></a>
                 </td>
-
             </tr>
 
             <script>

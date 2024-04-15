@@ -24,8 +24,7 @@ Archive Table
     </li>
 </ul>
 @endsection
-{{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add archives
---}}
+
 @section('main')
 <h1>Archives</h1>
 
@@ -36,8 +35,6 @@ Archive Table
             <th scope="col">Archive ID</th>
             <th scope="col">Title</th>
             <th scope="col">Group Name</th>
-
-
             <th scope="col">Adviser</th>
             <th scope="col">Date</th>
             <th scope="col">View</th>
