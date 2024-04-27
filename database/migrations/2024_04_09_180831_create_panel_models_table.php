@@ -18,10 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('GRP_ID');
             $table->unsignedBigInteger('PANEL_ID');
-            $table->primary(['PANEL_ID', 'GRP_ID']);
 
-            $table->foreign('PANEL_ID')->references('id')->on('panelists')->onDelete('cascade');
-            $table->foreign('GRP_ID')->references('id')->on('groups')->onDelete('cascade');
             $table->timestamps();
         });
 

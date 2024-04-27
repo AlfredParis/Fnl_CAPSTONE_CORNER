@@ -26,10 +26,7 @@ class studentController extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-       $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
        $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
-
-
 
         return view('studentDB')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
     }
