@@ -82,7 +82,7 @@ $allStat=\App\Models\archStatus::get() ;
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
 
-        <h6 class="group-nav-content">
+        <h6 class="grp-title">
             {{
             $GRP_det->GRP_NAME }}
         </h6>
