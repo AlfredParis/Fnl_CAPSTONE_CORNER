@@ -1,9 +1,9 @@
-<div class="modal fade" id="memAdd{{$GRP_det->id}}" tabindex="-1" aria-labelledby="memAdd{{$GRP_det->id}}"
+<div class="modal fade" id="panAdd{{$GRP_det->id}}" tabindex="-1" aria-labelledby="panAdd{{$GRP_det->id}}"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="memAdd">Add Member</h1>
+                <h1 class="modal-title fs-5" id="memAdd">Add Panel</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -11,9 +11,9 @@
                 $id = Session::get('course');
 
                 // $grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
-                //$grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->value('GRP_ID');
+                $nonPanel= \App\Models\panelModel::where('GRP_ID', $GRP_det->id)->get();
 
-                $addmmbr= \App\Models\STUDENT::where('GROUP_ID','N/A')->Get();
+                $panelS= \App\Models\EMPLOYEE::whereNotIn('id',$nonPanel)->Get();
                 @endphp
                 <form class="" action="{{ route('faculty.updateMember',['advisory' => $GRP_det->id]) }}" method="POST"
                     enctype="multipart/form-data">
@@ -23,9 +23,9 @@
 
                     <label for="Author" class="form-label">Choose Members</label>
 
-                    <select name="S_ID[]" id="countries" multiple>
-                        @foreach ($addmmbr as $mmbr)
-                        <option value="{{ $mmbr->S_ID }}"><u>{{ $mmbr->NAME}}</u> </option>
+                    <select name="pan[]" id="pan" multiple>
+                        @foreach ($panelS as $panel)
+                        <option value="{{ $panel->id }}"><u>{{ $panel->NAME}}</u> </option>
                         @endforeach
                     </select>
 

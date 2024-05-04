@@ -558,5 +558,33 @@ public function userEdit($id)
             abort(404);
         }
     }
+        public function panel(Request $request){
+            $id = Session::get('userID');
 
+        $logGroup = group::where('ADVSR_ID', $id)->value('id');
+        $members = $request->input("S_ID");
+
+        $rem=Session::get('userID');
+
+        $remName=STUDENT::where('S_ID',$request->input("S_ID"))->value('NAME');
+        $remover=EMPLOYEE::where('EMP_ID',$rem)->value('NAME');
+
+
+
+        if (is_array($members )) {
+            foreach ($members  as $member) {
+                $rem=Session::get('userID');
+
+                $addComment=new messages;
+                $addComment->OP_ID =$logGroup;
+                $addComment->COMMENTOR =  $remover;
+                $addComment->MESSAGE = $remName." has been added by ".$remover;
+                $addComment->save();
+                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
+
+
+            }
+        }
+        return redirect()->back()->with('alert', 'Member Successfully added.');
+        }
 }

@@ -130,6 +130,38 @@ $allStat=\App\Models\archStatus::get() ;
                 <li class="nav-item dropdown" style="10vw">
                     <button style="" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
+                        Panels
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        @foreach ( $mmbrs as $mmbr)
+                        <li style="padding-left:10px; padding-right:10px; width:auto; ">
+                            <form class="" action="{{route('subAdmin.removeMem', ['S_ID' => $mmbr->S_ID])}}"
+                                method="POST" enctype="multipart/form-data">
+                                {{$mmbr->NAME}}
+                                @csrf
+                                @method('PUT')
+                                <button type="submit"
+                                    style="position:absolute; border:none; background-color:rgba(0, 0, 255, 0); color:aliceblue;  right:1px;">
+                                    <i class="fs-7 fa fa-trash"></i></button>
+
+                            </form>
+                        </li>
+                        @endforeach
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li> <button type="button" data-bs-toggle="modal" data-bs-target="#panAdd{{$GRP_det->id}}"
+                                style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;">
+                                Add panel</button></li>
+
+                    </ul>
+
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown" style="10vw">
+                    <button style="" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Change Status
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
@@ -156,6 +188,7 @@ $allStat=\App\Models\archStatus::get() ;
 
 <div class="pddingForBody">
     @include('subAdmin.modal.addMember')
+    @include('modal.addPanel')
     <div style="margin-top: 60px ">
 
         <table class="table table-striped">
@@ -221,7 +254,11 @@ $allStat=\App\Models\archStatus::get() ;
     </div>
 </form>
 
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+                new MultiSelectTag("pan");
+            });
+</script>
 @endif
 
 @endsection

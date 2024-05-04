@@ -21,8 +21,8 @@ class forSubAdmin
         $acc = Session::get('fullNs');
 
         if ($accT == null) {
-            // return redirect()->route('root');
-            return dd($accT );
+            return redirect()->route('root');
+            // return dd($accT );
         } elseif ($accT == 'faculty') {
             return redirect()->route('faculty.index');
         } elseif ($accT == 'admin') {
