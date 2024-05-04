@@ -97,8 +97,6 @@ $allStat=\App\Models\archStatus::get() ;
 
                 </li>
             </ul>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown" style="width:15vw;">
                     <button style="width:10vw;" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
@@ -120,6 +118,9 @@ $allStat=\App\Models\archStatus::get() ;
 
                 </li>
             </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+
         </div>
     </div>
 </nav>
