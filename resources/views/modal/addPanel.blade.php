@@ -8,15 +8,16 @@
             </div>
             <div class="modal-body">
                 @php
-                $id = Session::get('course');
 
                 // $grpid= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
                 $nonPanel= \App\Models\panelModel::where('GRP_ID', $GRP_det->id)->get();
 
-                $panelS= \App\Models\EMPLOYEE::whereNotIn('id',$nonPanel)->Get();
+                $nonPanelIds = $nonPanel->pluck('PANEL_ID')->toArray();
+
+                $panelS= \App\Models\EMPLOYEE::whereNotIn('id',$nonPanelIds)->get();
+
                 @endphp
-                <form class="" action="{{ route('faculty.updateMember',['advisory' => $GRP_det->id]) }}" method="POST"
-                    enctype="multipart/form-data">
+                <form class="" action="{{ route('panel',['grp_id' => $GRP_det->id]) }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -25,6 +26,7 @@
 
                     <select name="pan[]" id="pan" multiple>
                         @foreach ($panelS as $panel)
+
                         <option value="{{ $panel->id }}"><u>{{ $panel->NAME}}</u> </option>
                         @endforeach
                     </select>

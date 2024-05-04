@@ -19,6 +19,8 @@ use App\Models\OP_Archive;
 use App\Models\messages;
 use App\Models\TURNED_OVER_ARCHIVES;
 use App\Models\User;
+use App\Models\panelModel;
+
 use Illuminate\Support\Str;
 use SimilarText\Finder;
 
@@ -558,33 +560,20 @@ public function userEdit($id)
             abort(404);
         }
     }
-        public function panel(Request $request){
+        public function panel(Request $request, $grp_id){
+
             $id = Session::get('userID');
-
-        $logGroup = group::where('ADVSR_ID', $id)->value('id');
-        $members = $request->input("S_ID");
-
-        $rem=Session::get('userID');
-
-        $remName=STUDENT::where('S_ID',$request->input("S_ID"))->value('NAME');
-        $remover=EMPLOYEE::where('EMP_ID',$rem)->value('NAME');
-
-
-
-        if (is_array($members )) {
-            foreach ($members  as $member) {
-                $rem=Session::get('userID');
-
-                $addComment=new messages;
-                $addComment->OP_ID =$logGroup;
-                $addComment->COMMENTOR =  $remover;
-                $addComment->MESSAGE = $remName." has been added by ".$remover;
-                $addComment->save();
-                $stud = STUDENT::where('S_ID', $member)->update(['GROUP_ID' => $logGroup]);
-
+            foreach ($request->input('pan') as $panel) {
+                if (!empty($panel)) {
+                    // dd($panel);
+                    $newPM= new panelModel;
+                    $newPM->PANEL_ID=$panel;
+                    $newPM->GRP_ID=$grp_id;
+                    $newPM->SAVE();
+                }
 
             }
-        }
-        return redirect()->back()->with('alert', 'Member Successfully added.');
+
+        return redirect()->back()->with('alert', 'Panel Successfully added.');
         }
 }

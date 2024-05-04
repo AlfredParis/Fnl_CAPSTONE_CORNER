@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class panelModel extends Model
 {
+    protected $fillable = ['GRP_ID'];
     use HasFactory;
+
 }

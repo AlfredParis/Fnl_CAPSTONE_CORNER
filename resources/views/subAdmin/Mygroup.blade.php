@@ -75,6 +75,9 @@ My Group
 
 $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first();
 $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
+$panel= \App\Models\panelModel::where('GRP_ID', $GRP_det->id)->Get();
+// $panelNames= \App\Models\EMPLOYEE::where('id', $GRP_det->id)->Get();
+
 $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
 $allStat=\App\Models\archStatus::get() ;
 @endphp
@@ -133,11 +136,14 @@ $allStat=\App\Models\archStatus::get() ;
                         Panels
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        @foreach ( $mmbrs as $mmbr)
+                        @foreach ( $panel as $mmbr)
                         <li style="padding-left:10px; padding-right:10px; width:auto; ">
-                            <form class="" action="{{route('subAdmin.removeMem', ['S_ID' => $mmbr->S_ID])}}"
+                            <form class="" action="{{route('subAdmin.removeMem', ['S_ID' => $mmbr->id])}}"
                                 method="POST" enctype="multipart/form-data">
-                                {{$mmbr->NAME}}
+                                @php
+                                $advicername= \App\Models\EMPLOYEE::where('id', $mmbr->PANEL_ID)->first();
+                                @endphp
+                                {{$advicername->NAME}}
                                 @csrf
                                 @method('PUT')
                                 <button type="submit"

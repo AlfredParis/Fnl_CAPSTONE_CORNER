@@ -37,6 +37,7 @@ Route::get('updateProg/{S_ID}/{G_ID}/', [extraCtrl::class, 'updateProg'])->name(
 Route::post('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
 Route::post('/check-similarity', [extraCtrl::class, 'checkSimilarity'])->name('check_similarity');
 Route::post('/words', [extraCtrl::class, 'findSimilarWords'])->name('words');
+Route::post('panel/{grp_id}/', [extraCtrl::class, 'panel'])->name('panel');
 
 
 
