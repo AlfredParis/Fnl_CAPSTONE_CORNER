@@ -29,6 +29,9 @@ use App\Models\department;
 use App\Models\group;
 use App\Models\TURNED_OVER_ARCHIVES;
 use App\Models\viewsForTrnd;
+use App\Models\archStatus;
+
+
 
 
 
@@ -479,6 +482,14 @@ class superAdmin extends Controller
         return redirect()->back()->with('alert', 'Student successfully deleted.')->withInput();
 
     }
+    public function archStat(){
+
+        $status = archStatus::get();
+
+        return view('superAdmin.archStat')->with('stats',$status);
+
+    }
+
 
 
 }

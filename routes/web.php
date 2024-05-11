@@ -172,6 +172,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::get('{id}/specAdminTB', [superAdmin::class, 'specAdminTB'])->name('specAdminTB');
         Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
         Route::post('/storeProg', [superAdmin::class, 'storeProg'])->name('storeProg');
+        Route::get('/archStat', [superAdmin::class, 'archStat'])->name('archStat');
+
 
     });
 
