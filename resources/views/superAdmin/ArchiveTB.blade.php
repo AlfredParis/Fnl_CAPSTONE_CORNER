@@ -52,6 +52,12 @@ Archive Table
                 emplopyies</span>
         </a>
     </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('superAdmin.archStat') }}">
+            <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Group Stat</span>
+        </a>
+    </li>
+</ul>
     @endsection
     {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add
     archives --}}

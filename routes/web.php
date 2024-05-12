@@ -173,6 +173,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
         Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
         Route::post('/storeProg', [superAdmin::class, 'storeProg'])->name('storeProg');
         Route::get('/archStat', [superAdmin::class, 'archStat'])->name('archStat');
+        Route::put('/updateCourse/{S_ID}', [superAdmin::class, 'updateCourse'])->name('updateCourse');
+        Route::post('/archStatAdd', [superAdmin::class, 'archStatAdd'])->name('archStatAdd');
 
 
     });

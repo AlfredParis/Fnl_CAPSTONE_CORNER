@@ -19,13 +19,13 @@
             <div class="modal-body">
 
 
-                <form action="{{ route('superAdmin.updatePosition', ['S_ID' => $pro->id]) }}" method="POST">
+                <form action="{{ route('superAdmin.updateCourse', ['S_ID' => $pro->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
 
                     @foreach ($isStudent as $item)
                     <div class="form-group" style="padding-bottom: 10px;">
-
+                        <input type="text" name="id" value="{{ old('NAME', $item->id) }}">
                         <input class="form-control" type="text" name="NAME" value="{{ old('NAME', $item->DEPT_NAME) }}"
                             id="fullname" required>
                     </div>

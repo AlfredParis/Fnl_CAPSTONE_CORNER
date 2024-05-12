@@ -43,9 +43,14 @@ Student Table
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white active" href="{{ route('superAdmin.faculty') }}">
+        <a class="nav-link text-white " href="{{ route('superAdmin.faculty') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Faculties and
                 profilelopyies</span>
+        </a>
+    </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white active" href="{{ route('superAdmin.archStat') }}">
+            <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Group Stat</span>
         </a>
     </li>
     @endsection
@@ -57,7 +62,7 @@ Student Table
     $userAdd = 'faculty';
     @endphp
     <table class="table table-striped">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adduser">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#archAdd">
             Add Status
         </button>
 
@@ -92,7 +97,7 @@ Student Table
                     <a href="#editUser_{{ $id }}" data-bs-toggle="modal">
                         <i class="fs-5 fa fa-pen-to-square"></i></a>
 
-                    {{-- @include('modal.editUser') --}}
+                    @include('superAdmin.SAmodal.aarchStatAdd')
 
                 </td>
 

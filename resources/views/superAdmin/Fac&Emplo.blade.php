@@ -52,6 +52,12 @@ Student Table
                 profilelopyies</span>
         </a>
     </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('superAdmin.archStat') }}">
+            <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Group Stat</span>
+        </a>
+    </li>
+</ul>
     @endsection
 
     @section('main')
@@ -85,10 +91,11 @@ Student Table
 
                 $i = $i + 1;
 
+                $dept = \App\Models\department::where('id', $profile->EMP_DEPT)->value('DEPT_NAME');
                 @endphp
+                <td scope="row">{{ $profile->EMP_ID }}</td>
                 <td scope="row">{{ $profile->NAME }}</td>
-                <td scope="row">{{ $profile->profile_ID }}</td>
-                <td scope="row">{{ $profile->profile_DEPT }}</td>
+                <td scope="row">{{ $dept }}</td>
                 <td scope="row">
                     @php
                     $id = $profile->S_ID;

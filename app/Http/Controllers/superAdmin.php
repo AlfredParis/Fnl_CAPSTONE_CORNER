@@ -489,7 +489,29 @@ class superAdmin extends Controller
         return view('superAdmin.archStat')->with('stats',$status);
 
     }
+    public function archStatAdd(Request $request){
+
+        $status = new archStatus;
+        $status->arch_stat =$request->input("STAT_NAME");
+        $status->SAVE();
+        return redirect()->back()->with('alert', 'Status succesfully added.')->withInput();
+
+    }
 
 
+    public function updateCourse(Request $request,$S_ID){
+
+        $isStudent = department::where('PROG_ID', $S_ID)->get();
+
+        $archNW = ARCHIVES::where('ARCH_ID', $ARCH_ID)->first();
+        $archNW->where('ARCH_ID', $ARCH_ID)->update([
+                                   'viewCount' => $total + 1,
+                                   'updated_at' => now(), // or use a specific timestamp if needed
+                               ]);
+
+
+        redirect()->back()->with('alert', 'course successfully Edited.')->withInput();
+
+    }
 
 }

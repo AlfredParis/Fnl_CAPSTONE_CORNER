@@ -565,7 +565,7 @@ public function userEdit($id)
             $id = Session::get('userID');
             foreach ($request->input('pan') as $panel) {
                 if (!empty($panel)) {
-                    // dd($panel);
+
                     $newPM= new panelModel;
                     $newPM->PANEL_ID=$panel;
                     $newPM->GRP_ID=$grp_id;

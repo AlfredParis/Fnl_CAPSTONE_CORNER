@@ -49,9 +49,15 @@ Student Table
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('superAdmin.faculty') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Faculties and
-                emplopyies</span>
+                employies</span>
         </a>
     </li>
+    <li class="nav-item py-2 py-sm-0">
+        <a class="nav-link text-white" href="{{ route('superAdmin.archStat') }}">
+            <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Group Stat</span>
+        </a>
+    </li>
+</ul>
     @endsection
 
     @section('main')
