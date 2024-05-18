@@ -57,6 +57,8 @@ $advicername= \App\Models\EMPLOYEE::where('EMP_ID', $GRP_det->ADVSR_ID)->first()
 $mmbrs= \App\Models\STUDENT::where('GROUP_ID', $GRP_det->id)->Get();
 $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat");
 $allStat=\App\Models\archStatus::get() ;
+$panel= \App\Models\panelModel::where('GRP_ID', $GRP_det->id)->Get();
+
 @endphp
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="margin-left:-10px; position:fixed; Top:0; width:90vw;">
     <div class="container-fluid">
@@ -98,6 +100,41 @@ $allStat=\App\Models\archStatus::get() ;
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <li class="nav-item dropdown" style="10vw">
+                    <button style="" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Panels
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        @foreach ( $panel as $mmbr)
+                        <li style="padding-left:10px; padding-right:10px; width:auto; ">
+                            <form class="" action="{{route('subAdmin.removeMem', ['S_ID' => $mmbr->id])}}"
+                                method="POST" enctype="multipart/form-data">
+                                @php
+                                $advicername= \App\Models\EMPLOYEE::where('id', $mmbr->PANEL_ID)->first();
+                                @endphp
+                                {{$advicername->NAME}}
+                                @csrf
+                                @method('PUT')
+                                <button type="submit"
+                                    style="position:absolute; border:none; background-color:rgba(0, 0, 255, 0); color:aliceblue;  right:1px;">
+                                    <i class="fs-7 fa fa-trash"></i></button>
+
+                            </form>
+                        </li>
+                        @endforeach
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li> <button type="button" data-bs-toggle="modal" data-bs-target="#panAdd{{$GRP_det->id}}"
+                                style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;">
+                                Add panel</button></li>
+
+                    </ul>
+
+                </li>
+            </ul>
+            <ul class="navbar-nav">
                 <li class="nav-item dropdown" style="width:15vw;">
                     <button style="width:10vw;" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -127,6 +164,7 @@ $allStat=\App\Models\archStatus::get() ;
 
 <div class="pddingForBody">
     @include('facultyModal.addMember')
+    @include('modal.addPanel')
     <div style="margin-top: 60px; margin-bottom: 10vh; ">
 
         <table class="table table-striped">
@@ -193,6 +231,16 @@ $allStat=\App\Models\archStatus::get() ;
 
     </div>
 </form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+                new MultiSelectTag("pan");
+            });
+
+            document.addEventListener("DOMContentLoaded", function() {
+                new MultiSelectTag("S_ID");
+            });
+</script>
 
 
 @endif

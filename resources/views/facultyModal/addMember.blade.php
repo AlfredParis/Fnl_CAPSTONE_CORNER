@@ -23,7 +23,7 @@
 
                     <label for="Author" class="form-label">Choose Members</label>
 
-                    <select name="S_ID[]" id="countries" multiple>
+                    <select name="S_ID[]" id="S_ID" multiple>
                         @foreach ($addmmbr as $mmbr)
                         <option value="{{ $mmbr->S_ID }}"><u>{{ $mmbr->NAME}}</u> </option>
                         @endforeach
