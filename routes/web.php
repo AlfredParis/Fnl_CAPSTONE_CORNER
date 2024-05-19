@@ -7,6 +7,8 @@ use App\Http\Controllers\superAdmin;
 use App\Http\Controllers\subAdmin;
 use App\Http\Controllers\studentCC;
 use App\Http\Controllers\extraCtrl;
+use App\Http\Controllers\plagiarism;
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeEmail;
 use App\Http\Controllers\studentController;
@@ -208,8 +210,10 @@ Route::group(['prefix' => 'substituteAdmin', 'as' => 'subAdmin.', 'middleware' =
 
 });
 
+Route::group(['prefix' => 'plagiarism', 'as' => 'plagiarism.', 'middleware' => 'forPlagiarism'], function () {
+    Route::get('/', [plagiarism::class, 'index'])->name('index');
 
-
+});
 
 
 

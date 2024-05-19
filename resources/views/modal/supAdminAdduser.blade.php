@@ -64,6 +64,8 @@
                         $CHMBAC=App\Models\department::where('PROG_ID', 2)->get();
                         $CTE=App\Models\department::where('PROG_ID', 1)->get();
                         $AGRI=App\Models\department::where('PROG_ID', 3)->get();
+                        $NT=App\Models\department::where('PROG_ID', 4)->get();
+
 
                         @endphp
                         <label for="DEPT_ID">Course</label>
@@ -76,6 +78,9 @@
                             <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
                             @endforeach
                             @foreach ($AGRI as $item)
+                            <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
+                            @endforeach
+                            @foreach ($NT as $item)
                             <option value="{{$item->id}}">{{$item->DEPT_NAME}}</option>
                             @endforeach
                         </select>
