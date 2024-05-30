@@ -109,7 +109,15 @@ class adminDet extends Seeder
                 'POSITION_ID' => '1',
                 'PROG_ID'=>'2'
             ],
+            [
 
+                'EMP_ID' => 'plagiarism',
+                'NAME' => 'plagiarism',
+                'EMP_DEPT' => '10',
+                'ADVICER_STATUS'=>'plagiarism',
+                'POSITION_ID' => '1',
+                'PROG_ID'=>'4'
+            ],
 
 
 

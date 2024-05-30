@@ -90,6 +90,12 @@ class adminAcc extends Seeder
                 'ACCTYPE' => 'superAdmin',
 
             ],
+            [
+                'PASSWORD' => encrypt('P@ssw0rd'),
+                'EMP_ID' => 'plagiarism',
+                'ACCTYPE' => 'plagiarism',
+
+            ],
         ];
 
 

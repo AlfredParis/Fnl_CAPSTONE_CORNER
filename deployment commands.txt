@@ -46,3 +46,15 @@ Instead, first try using the MySQL backup folder which is included with XAMPP. S
 3 Copy all your database folders from mysql/data_old into mysql/data (except mysql, performance_schema, and phpmyadmin folders)
 4 Copy mysql/data_old/ibdata1 file into mysql/data folder
 5 Start MySQL from XAMPP control panel
+
+
+
+php artisan optimize
+
+php artisan route:clear
+
+php artisan config:clear
+
+php artisan cache:clear
+
+php artisan view:clear
