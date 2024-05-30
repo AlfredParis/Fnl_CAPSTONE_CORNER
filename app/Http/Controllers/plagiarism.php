@@ -49,7 +49,7 @@ class plagiarism extends Controller
     public function Archives()
     {
 
-       return view('plag.dashboard');
+       return view('plag.archives');
 
 
     }
@@ -57,21 +57,21 @@ class plagiarism extends Controller
     public function FPC()
     {
 
-       return view('plag.dashboard');
+       return view('plag.For-plagiarism-checking');
 
 
     }
     public function PC()
     {
 
-       return view('plag.dashboard');
+       return view('plag.plagiarism-checked');
 
 
     }
     public function Cert()
     {
 
-       return view('plag.dashboard');
+       return view('plag.Certificates');
 
 
     }
