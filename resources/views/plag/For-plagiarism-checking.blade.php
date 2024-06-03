@@ -8,17 +8,17 @@ Substitute Admin Dashboard
 
 <ul class="nav nav-pills flex-column mt-4" style="gap: 1vh;">
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white active" aria-current="true" href="{{ route('plagiarism.index') }}">
+        <a class="nav-link text-white " aria-current="true" href="{{ route('plagiarism.index') }}">
             <i class="fs-7 fa fa-house"></i><span class="fs-6 d-none ms-2 d-sm-inline">Dashboard</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('plagiarism.Archives') }}">
-            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
+            <i class="fs-7 fa fa-book"></i><span class="fs-6 d-none ms-2 d-sm-inline">Archives</span>
         </a>
     </li>
     <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('plagiarism.For-plagiarism-checking') }}">
+        <a class="nav-link text-white active" href="{{ route('plagiarism.For-plagiarism-checking') }}">
             <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">For plagiarism
                 checking</span>
         </a>
@@ -30,7 +30,7 @@ Substitute Admin Dashboard
     </li>
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('plagiarism.Certificates') }}">
-            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Certificates</span>
+            <i class="fs-7 fa fa-certificate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Certificates</span>
         </a>
     </li>
 </ul>

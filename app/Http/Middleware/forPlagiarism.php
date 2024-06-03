@@ -30,6 +30,8 @@ class forPlagiarism
         }
          elseif ($accT == 'subAdmin') {
             return redirect()->route('subAdmin.index');
+        }elseif ($accT == '')  {
+            return redirect()->route('root');
         }
         return $next($request);
     }

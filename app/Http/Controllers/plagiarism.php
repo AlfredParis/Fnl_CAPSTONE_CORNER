@@ -48,8 +48,8 @@ class plagiarism extends Controller
 
     public function Archives()
     {
-
-       return view('plag.archives');
+        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
+       return view('plag.archives')->with('trnd',$trndOver);
 
 
     }

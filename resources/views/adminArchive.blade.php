@@ -16,38 +16,15 @@ Archive Table
             <i class="fs-7 fa fa-box-archive"></i><span class="fs-6 d-none ms-2 d-sm-inline ">Archives</span>
         </a>
     </li>
-    {{-- <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.checker') }}">
-            <i class="fs-7 fa fa-check"></i><span class="fs-6 d-none ms-2 d-sm-inline">Checker</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.student') }}">
-            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Student</span>
-        </a>
-    </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.faculty') }}">
-            <i class="fs-7 fa fa-users"></i><span class="fs-6 d-none ms-2 d-sm-inline">Faculty</span>
-        </a>
-    </li> --}}
-    {{-- <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('admin.admin') }}">
-            <i class="fs-7 fa fa-user-gear"></i><span class="fs-6 d-none ms-2 d-sm-inline">Admin</span>
-        </a>
-    </li> --}}
+
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('admin.audit') }}">
             <i class="fs-7 fa fa-clipboard"></i><span class="fs-6 d-none ms-2    d-sm-inline">Audit</span>
         </a>
     </li>
     @endsection
-    {{-- TODO: dapat naka display dito yung mga archives tapos may add button na nandoon yung form dapat nang add
-    archives --}}
+
     @section('main')
-    {{-- <a href="{{ route('admin.addArch') }}" class="btn btn-primary">Add Archive</a> --}}
-
-
     <div class="container" style="margin-left: 0;">
         <div class="row">
             <div class="col auto">
@@ -58,28 +35,21 @@ Archive Table
             <div class="col">
                 <form action="{{ route('admin.archives') }}" method="get">
                     <div class="input-group">
-
                         <input type="search" class="form-control rounded"
                             placeholder="Search arvhive name or publish date" aria-label="Search"
                             aria-describedby="search-addon" name="search" />
                         <button type="submit" class="btn btn-outline-primary">Search</button>
-
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-
-
-
-
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Archive ID</th>
+                <th scope="col">Archivesss ID</th>
                 <th scope="col">Archive Title</th>
-
                 <th scope="col"> Documentation</th>
                 <th scope="col"> GitHub Repository</th>
                 <th scope="col"> View </th>
@@ -96,7 +66,6 @@ Archive Table
                 @php
 
                 $i = $i + 1;
-
                 @endphp
                 <td scope="row">{{ $archive->ARCH_ID }}</td>
                 <td scope="row">{{ $archive->ARCH_NAME }}</td>
