@@ -20,11 +20,16 @@ class arch_stat extends Seeder
             [
                 'arch_stat' => 'Proposal',
             ],
+
             [
                 'arch_stat' => 'Final Defense',
             ],
+
             [
                 'arch_stat' => 'Defended',
+            ],
+            [
+                'arch_stat' => 'For Plagiarism',
             ],
 
 

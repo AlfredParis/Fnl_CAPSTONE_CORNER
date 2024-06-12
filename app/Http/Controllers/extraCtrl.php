@@ -48,6 +48,24 @@ class extraCtrl extends Controller
 
         return $pdf->stream('pdf_filename.pdf');
     }
+
+
+    public function generateCert($id)
+    {
+        // Retrieve the user data by ID
+        $user = User::find($id);
+
+        if (!$user) {
+            return abort(404); // Handle the case where the user doesn't exist
+        }
+
+
+        $pdf = PDF::loadView('pdf.template', compact('user'));
+
+
+        return $pdf->stream('pdf_filename.pdf');
+    }
+
     public function importExcelSTUDENT(Request $request)
 {
     $this->validate($request, [
@@ -428,12 +446,9 @@ public function userEdit($id)
         public function turnOver(Request $request, $grp_id){
 
             $userid=Session::get('userID');
-             $latestArch=group::where('id', $grp_id)->first();
-
+            $latestArch=group::where('id', $grp_id)->first();
             $crs="";
             $course=EMPLOYEE::where('EMP_ID', $userid)->value('EMP_DEPT');
-
-
             $total_arch=OP_Archive::where('GRP_ID',$grp_id)->count();
             $yawa = "Archive Update #".$total_arch;
 

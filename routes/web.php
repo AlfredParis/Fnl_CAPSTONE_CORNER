@@ -57,6 +57,7 @@ Route::resource('/usercc', userCCcontroller::class)->names([
 ])->middleware('forQuery');
 
 Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF');
+Route::get('/generate-pdf/{id}', [extraCtrl::class,'generateCert'])->name('genCert');
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
     Route::post('/opArch', [studentController::class, 'opArch'])->name('opArch');

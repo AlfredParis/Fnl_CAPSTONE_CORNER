@@ -56,8 +56,8 @@ class plagiarism extends Controller
 
     public function FPC()
     {
-
-       return view('plag.For-plagiarism-checking');
+        $forPlag=group::where('STATUS_ID',4)->paginate(10);
+       return view('plag.For-plagiarism-checking')->with('groups',$forPlag);
 
 
     }
