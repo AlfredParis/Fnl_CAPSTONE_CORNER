@@ -93,7 +93,8 @@ Substitute Admin Dashboard
                                 @endif
 
                             </td>
-                            <td> <a href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}"> <i
+                            <td>
+                                <a href="{{ route('downloadFile',['grp_id' => $archive->id]) }}"> <i
                                         class="fs-7 fa fa-download"></i></a>
                             </td>
                             <td> <a class="btn btn-primary"

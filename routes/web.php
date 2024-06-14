@@ -30,11 +30,14 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/testmail', [extraCtrl::class,'mail'])->name('testMail');
-Route::view('/genpdf','pdf/printing_accounts')->name('pdftest');
+
+Route::get('/downloadFile/{grp_id}', [extraCtrl::class, 'downloadFile'])->name('downloadFile');
+
+Route::get('/testmail', [extraCtrl::class, 'mail'])->name('testMail');
+Route::view('/genpdf', 'pdf/printing_accounts')->name('pdftest');
 Route::redirect('/', '/usercc')->name('root');
 Route::view('Aboutus', 'aboutUs')->name('AU')->middleware('forQuery');
-Route::get('/get-suggestions',[extraCtrl::class,'getSuggestions'] )->name('get-suggestions');
+Route::get('/get-suggestions', [extraCtrl::class, 'getSuggestions'])->name('get-suggestions');
 Route::get('updateProg/{S_ID}/{G_ID}/', [extraCtrl::class, 'updateProg'])->name('updateProg');
 Route::post('turnOver/{grp_id}', [extraCtrl::class, 'turnOver'])->name('turnOver');
 Route::post('/check-similarity', [extraCtrl::class, 'checkSimilarity'])->name('check_similarity');
@@ -56,8 +59,8 @@ Route::resource('/usercc', userCCcontroller::class)->names([
     'store' => 'userCC.store',
 ])->middleware('forQuery');
 
-Route::get('/generate-pdf/{id}', [extraCtrl::class,'generatePDF'])->name('genPDF');
-Route::get('/generate-pdf/{id}', [extraCtrl::class,'generateCert'])->name('genCert');
+Route::get('/generate-pdf/{id}', [extraCtrl::class, 'generatePDF'])->name('genPDF');
+Route::get('/generate-pdf/{id}', [extraCtrl::class, 'generateCert'])->name('genCert');
 
 Route::group(['prefix' => 'student', 'as' => 'studentt.', 'middleware' => 'forStudent'], function () {
     Route::post('/opArch', [studentController::class, 'opArch'])->name('opArch');
@@ -86,7 +89,7 @@ Route::group(['prefix' => 'faculty', 'as' => 'faculty.', 'middleware' => 'forFac
     Route::get('/facChecker', [facultyController::class, 'Checker'])->name('Checker');
     Route::get('/facStudTB', [facultyController::class, 'student'])->name('student');
     Route::post('/facArch', [facultyController::class, 'storeArch'])->name('storeArch');
-    Route::post('/imprt-excel', [extraCtrl::class,'importExcelSTUDENTFac'])->name('import.excel');
+    Route::post('/imprt-excel', [extraCtrl::class, 'importExcelSTUDENTFac'])->name('import.excel');
     Route::put('/{ARCH_ID}', [facultyController::class, 'archUpdate'])->name('updateArch'); //user edit store
     Route::post('/find-similar', [facultyController::class, 'findSimilarWords'])->name('words');
     Route::post('/{user}/storeEmps', [facultyController::class, 'storeEmp'])->name('storeEmp'); //user add function
@@ -111,7 +114,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
 
 
     Route::get('/turnedOverArch', [adminController::class, 'turnedOverArch'])->name('turnedOverArch');
-    Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
+    Route::post('/import-excel', [extraCtrl::class, 'importExcelSTUDENT'])->name('import.excel');
     //excel import end
 
     // Admin Tables
@@ -150,37 +153,37 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'forAdmin']
 
 
 
-    Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => 'forSuperAdmin'], function () {
-        Route::get('/', [superAdmin::class, 'index'])->name('index');
-        Route::get('/adminTable', [superAdmin::class, 'adminTB'])->name('adminTB');
-        Route::get('/audit', [superAdmin::class, 'audit'])->name('audit');
-        Route::get('/archives', [superAdmin::class, 'archives'])->name('archives');
-        Route::get('/student', [superAdmin::class, 'student'])->name('student');
-        Route::get('/department', [superAdmin::class, 'department'])->name('department');
-        Route::put('/updProg/{id}', [superAdmin::class, 'updateProg'])->name('updateProg');
-        Route::put('/updatePosition', [superAdmin::class, 'updatePosition'])->name('updatePosition');
-        Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
-        Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
-        Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
-        Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch');
-        Route::post('/import-excel', [extraCtrl::class,'importExcelSTUDENT'])->name('import.excel');
-        Route::post('/{user}/storeEmp', [superAdmin::class, 'storeEmp'])->name('storeEmp'); //user add function
-        Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
-        Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
-        Route::get('/faculty', [superAdmin::class, 'faculty'])->name('faculty');
-        Route::get('/viewCnt/{ARCH_ID}', [superAdmin::class, 'viewCnt'])->name('viewCnt');
-        Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
-        Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
-        Route::get('/group', [superAdmin::class, 'group'])->name('group');
-        Route::get('{id}/specAdminTB', [superAdmin::class, 'specAdminTB'])->name('specAdminTB');
-        Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
-        Route::post('/storeProg', [superAdmin::class, 'storeProg'])->name('storeProg');
-        Route::get('/archStat', [superAdmin::class, 'archStat'])->name('archStat');
-        Route::put('/updateCourse/{S_ID}', [superAdmin::class, 'updateCourse'])->name('updateCourse');
-        Route::post('/archStatAdd', [superAdmin::class, 'archStatAdd'])->name('archStatAdd');
+Route::group(['prefix' => 'superAdmin', 'as' => 'superAdmin.', 'middleware' => 'forSuperAdmin'], function () {
+    Route::get('/', [superAdmin::class, 'index'])->name('index');
+    Route::get('/adminTable', [superAdmin::class, 'adminTB'])->name('adminTB');
+    Route::get('/audit', [superAdmin::class, 'audit'])->name('audit');
+    Route::get('/archives', [superAdmin::class, 'archives'])->name('archives');
+    Route::get('/student', [superAdmin::class, 'student'])->name('student');
+    Route::get('/department', [superAdmin::class, 'department'])->name('department');
+    Route::put('/updProg/{id}', [superAdmin::class, 'updateProg'])->name('updateProg');
+    Route::put('/updatePosition', [superAdmin::class, 'updatePosition'])->name('updatePosition');
+    Route::get('/my-archive', [superAdmin::class, 'myArchive'])->name('myArchive');
+    Route::get('/addArch', [superAdmin::class, 'addArch'])->name('addArch');
+    Route::post('/storeArch', [superAdmin::class, 'storeArch'])->name('storeArch');
+    Route::put('/{ARCH_ID}', [superAdmin::class, 'archUpdate'])->name('updateArch');
+    Route::post('/import-excel', [extraCtrl::class, 'importExcelSTUDENT'])->name('import.excel');
+    Route::post('/{user}/storeEmp', [superAdmin::class, 'storeEmp'])->name('storeEmp'); //user add function
+    Route::get('/{ARCH_ID}/editArch', [superAdmin::class, 'archEdit'])->name('editArch');
+    Route::delete('/{id}', [superAdmin::class, 'delArch'])->name('delArch');
+    Route::get('/faculty', [superAdmin::class, 'faculty'])->name('faculty');
+    Route::get('/viewCnt/{ARCH_ID}', [superAdmin::class, 'viewCnt'])->name('viewCnt');
+    Route::get('/checker', [superAdmin::class, 'Checker'])->name('Checker');
+    Route::post('/find-similar-words', [superAdmin::class, 'findSimilarWords'])->name('words');
+    Route::get('/group', [superAdmin::class, 'group'])->name('group');
+    Route::get('{id}/specAdminTB', [superAdmin::class, 'specAdminTB'])->name('specAdminTB');
+    Route::post('/{id}/addCourse', [superAdmin::class, 'addCourse'])->name('addCourse');
+    Route::post('/storeProg', [superAdmin::class, 'storeProg'])->name('storeProg');
+    Route::get('/archStat', [superAdmin::class, 'archStat'])->name('archStat');
+    Route::put('/updateCourse/{S_ID}', [superAdmin::class, 'updateCourse'])->name('updateCourse');
+    Route::post('/archStatAdd', [superAdmin::class, 'archStatAdd'])->name('archStatAdd');
 
 
-    });
+});
 
 
 
