@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-
+Route::post('addCert/{grp_id}', [extraCtrl::class, 'addCert'])->name('addCert');
 Route::get('/downloadFile/{grp_id}', [extraCtrl::class, 'downloadFile'])->name('downloadFile');
 
 Route::get('/testmail', [extraCtrl::class, 'mail'])->name('testMail');

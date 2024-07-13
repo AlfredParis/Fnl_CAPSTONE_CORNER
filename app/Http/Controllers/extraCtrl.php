@@ -593,4 +593,11 @@ class extraCtrl extends Controller
 
         return response()->download($file_path, $file);
     }
+
+    public function addCert(Request $request, $grp_id)
+    {
+
+
+        return redirect()->back();
+    }
 }

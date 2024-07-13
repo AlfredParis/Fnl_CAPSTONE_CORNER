@@ -97,9 +97,10 @@ Substitute Admin Dashboard
                                 <a href="{{ route('downloadFile',['grp_id' => $archive->id]) }}"> <i
                                         class="fs-7 fa fa-download"></i></a>
                             </td>
-                            <td> <a class="btn btn-primary"
-                                    href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}">Issue Plagirism
+                            <td> <a class="btn btn-primary" href="#issue_cert{{$archive->id}}"
+                                    data-bs-toggle="modal">Issue Plagirism
                                     Certificate</a>
+                                @include('plag.modal.issue_cert')
                             </td>
                         </tr>
                         @endforeach
