@@ -1,6 +1,8 @@
+n
 <?php
 
 namespace App\Http\Controllers;
+
 // library for year
 use Carbon\Carbon;
 
@@ -34,11 +36,11 @@ class adminController extends Controller
         $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
         $total_student = student_acc::where('ACCTYPE', 'student')->count();
         $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-       $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
-       $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
+        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+        $views = viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
         return view('adminDashB')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
-        }
+    }
 
     public function checker()
     {
@@ -48,9 +50,9 @@ class adminController extends Controller
 
     public function archives(Request $request)
     {
-        
-        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
-        return view('turnedOverArchAdmin')->with('trnd',$trndOver);
+
+        $trndOver = TURNED_OVER_ARCHIVES::where('PUB_STAT', 2)->paginate(10);
+        return view('turnedOverArchAdmin')->with('trnd', $trndOver);
 
     }
     public function audit()
@@ -78,11 +80,11 @@ class adminController extends Controller
     }
     public function faculty()
     {
- $facultyPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
-    ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
-    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty')
-    ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
-    ->paginate(10);
+        $facultyPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
+            ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+            ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'faculty')
+            ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD', 'u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
+            ->paginate(10);
         // $facultyPage = USER_ACC_EMP::where('ACCTYPE', 'faculty')->paginate(2);
         return view('adminFacultyTB')->with('faculty', $facultyPage);
     }
@@ -92,10 +94,10 @@ class adminController extends Controller
 
 
         $adminPage = DB::table('u_s_e_r__a_c_c__e_m_p_s')
-    ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
-    ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
-    ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD','u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
-    ->paginate(10);
+            ->join('e_m_p_l_o_y_e_e_s', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', '=', 'e_m_p_l_o_y_e_e_s.EMP_ID')
+            ->where('u_s_e_r__a_c_c__e_m_p_s.ACCTYPE', '=', 'admin')
+            ->select('e_m_p_l_o_y_e_e_s.NAME', 'u_s_e_r__a_c_c__e_m_p_s.EMP_ID', 'u_s_e_r__a_c_c__e_m_p_s.PASSWORD', 'u_s_e_r__a_c_c__e_m_p_s.USER_ID_EMP')
+            ->paginate(10);
 
         return view('adminAdminTB')->with('admin', $adminPage);
     }
@@ -112,76 +114,76 @@ class adminController extends Controller
         $isStudent = student_acc::where('S_ID', $userID)->exists();
         $isAdmin = USER_ACC_EMP::where('EMP_ID', $userID)->exists();
 
-        if ($isAdmin==NULL && $isStudent==NULL) {
+        if ($isAdmin == NULL && $isStudent == NULL) {
 
-                if ($userac == 'admin') {
-$name = Session::get('fullNs');
+            if ($userac == 'admin') {
+                $name = Session::get('fullNs');
 
-                    $user = new USER_ACC_EMP;
+                $user = new USER_ACC_EMP;
 
-                    $user->EMP_ID = $request->input("userID");
+                $user->EMP_ID = $request->input("userID");
+                $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                $user->ACCTYPE = 'admin';
+                $user->save();
+                $EMP = new EMPLOYEE;
+                $EMP->NAME = $request->input("fullname");
+                $EMP->EMP_ID = $request->input("userID");
+                $EMP->save();
+                $added = $request->input("userID");
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this account: $added a admin";
+                $notif->suspect = $name;
+
+                $notif->save();
+
+                Log::alert("$name has been added this account: $userID a admin");
+                return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
+
+            } elseif ($userac == 'faculty') {
+                $name = Session::get('fullNs');
+                $user = new USER_ACC_EMP;
+                $user->EMP_ID = $request->input("userID");
+                $user->PASSWORD = encrypt($request->input("PASSWORD"));
+                $user->ACCTYPE = 'faculty';
+                $user->save();
+
+                $EMP = new EMPLOYEE;
+                $EMP->NAME = $request->input("fullname");
+                $EMP->EMP_ID = $request->input("userID");
+                $EMP->save();
+
+                $added = $request->input("userID");
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this account: $added a faculty ";
+                $notif->suspect = $name;
+
+                $notif->save();
+
+                Log::alert("$name has been added this account: $userID a faculty");
+                return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
+
+
+
+            } else {
+                if ($request->input("ARCH_ID") == null) {
+                    $user = new student_acc;
+                    $user->S_ID = $request->input("userID");
+                    $user->ACCTYPE = $userac;
                     $user->PASSWORD = encrypt($request->input("PASSWORD"));
-                    $user->ACCTYPE = 'admin';
-                    $user->save();
-                    $EMP = new EMPLOYEE;
-                    $EMP->NAME = $request->input("fullname");
-                    $EMP->EMP_ID=$request->input("userID");
-                    $EMP->save();
-                    $added=$request->input("userID");
-                    $notif = new notif;
-                    $notif->category = "Add";
-                    $notif->content="$name has been added this account: $added a admin";
-                    $notif->suspect=$name ;
 
-                    $notif->save();
-
-                    Log::alert("$name has been added this account: $userID a admin");
-                    return redirect()->route('admin.admin')->with('alert', 'Admin account succesfully added!');
-
-                } elseif ($userac == 'faculty') {
-                    $name = Session::get('fullNs');
-                    $user = new USER_ACC_EMP;
-                    $user->EMP_ID = $request->input("userID");
-                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
-                    $user->ACCTYPE = 'faculty';
                     $user->save();
 
-                    $EMP = new EMPLOYEE;
+                    $EMP = new STUDENT;
                     $EMP->NAME = $request->input("fullname");
-                    $EMP->EMP_ID=$request->input("userID");
+                    $EMP->S_ID = $request->input("userID");
+                    $EMP->C_ID = '1';
+                    $EMP->ARCH_ID = 'N/A';
                     $EMP->save();
-
-                    $added=$request->input("userID");
-                    $notif = new notif;
-                    $notif->category = "Add";
-                    $notif->content="$name has been added this account: $added a faculty ";
-                    $notif->suspect=$name ;
-
-                    $notif->save();
-
-                    Log::alert("$name has been added this account: $userID a faculty");
-                    return redirect()->route('admin.faculty')->with('alert', 'Faculty account succesfully added!');
-
 
 
                 } else {
-                    if ($request->input("ARCH_ID") == null) {
-                    $user = new student_acc;
-                    $user->S_ID = $request->input("userID");
-                    $user->ACCTYPE = $userac;
-                    $user->PASSWORD = encrypt($request->input("PASSWORD"));
-
-                    $user->save();
-
-                    $EMP = new STUDENT;
-                    $EMP->NAME = $request->input("fullname");
-                    $EMP->S_ID=$request->input("userID");
-                    $EMP->C_ID='1';
-                    $EMP->ARCH_ID='N/A';
-                    $EMP->save();
-
-
-                    }else{
 
                     $user = new student_acc;
                     $user->S_ID = $request->input("userID");
@@ -192,28 +194,28 @@ $name = Session::get('fullNs');
 
                     $EMP = new STUDENT;
                     $EMP->NAME = $request->input("fullname");
-                    $EMP->S_ID=$request->input("userID");
-                    $EMP->C_ID='1';
-                    $EMP->ARCH_ID=$request->input("ARCH_ID");
+                    $EMP->S_ID = $request->input("userID");
+                    $EMP->C_ID = '1';
+                    $EMP->ARCH_ID = $request->input("ARCH_ID");
                     $EMP->save();
 
 
-                    }
-
-
-                    $name = Session::get('fullNs');
-
-                    $added=$request->input("userID");
-                    $notif = new notif;
-                    $notif->category = "Add";
-                    $notif->content="$name has been added this account: $added a student ";
-                    $notif->suspect=$name ;
-
-                    $notif->save();
-
-                    Log::alert("$name has been added this account: $userID a student");
-                    return redirect()->route('admin.student')->with('alert', 'Student Account added!');
                 }
+
+
+                $name = Session::get('fullNs');
+
+                $added = $request->input("userID");
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this account: $added a student ";
+                $notif->suspect = $name;
+
+                $notif->save();
+
+                Log::alert("$name has been added this account: $userID a student");
+                return redirect()->route('admin.student')->with('alert', 'Student Account added!');
+            }
 
         } else {
             return back()->with('alert', 'Id already exist!')->withInput();
@@ -226,25 +228,22 @@ $name = Session::get('fullNs');
         $isStudent = student_acc::where('S_ID', $id)->first();
         $isDontAcc = STUDENT::where('S_ID', $id)->first();
 
-      if (!isset($isStudent)&&isset($isDontAcc)) {
+        if (!isset($isStudent) && isset($isDontAcc)) {
 
 
-          $profile = STUDENT::where('S_ID', $id)->first();
+            $profile = STUDENT::where('S_ID', $id)->first();
 
-          return view('adminEditUser', compact('profile'));
-        }
+            return view('adminEditUser', compact('profile'));
+        } else if (isset($isStudent)) {
 
-        else if(isset($isStudent)){
-
-            $Users=$isStudent;
+            $Users = $isStudent;
             $profile = STUDENT::where('S_ID', $id)->first();
 
             return view('adminEditUser', compact('Users', 'profile'));
 
-         }
-        else if(isset($isAdmin)){
+        } else if (isset($isAdmin)) {
 
-            $Users=$isAdmin;
+            $Users = $isAdmin;
             $profile = EMPLOYEE::where('EMP_ID', $id)->first();
             return view('adminEditUser', compact('Users', 'profile'));
 
@@ -260,8 +259,8 @@ $name = Session::get('fullNs');
             $studAcc = USER_ACC_EMP::where('EMP_ID', $id)->first();
 
             $studAcc->where('EMP_ID', $id)->update([
-                'PASSWORD' =>  encrypt($request->PASSWORD),
-             'ACCTYPE' => $request->ACCTYPE,
+                'PASSWORD' => encrypt($request->PASSWORD),
+                'ACCTYPE' => $request->ACCTYPE,
             ]);
 
 
@@ -275,8 +274,8 @@ $name = Session::get('fullNs');
 
             $notif = new notif;
             $notif->category = "Update";
-            $notif->content="$name has been updated this account: $id a admin ";
-            $notif->suspect=$name ;
+            $notif->content = "$name has been updated this account: $id a admin ";
+            $notif->suspect = $name;
 
             $notif->save();
             Log::alert("Admin account is updated Successfully by: $name!");
@@ -296,8 +295,8 @@ $name = Session::get('fullNs');
 
             $notif = new notif;
             $notif->category = "Update";
-            $notif->content="$name has been updated this account: $id a faculty ";
-            $notif->suspect=$name ;
+            $notif->content = "$name has been updated this account: $id a faculty ";
+            $notif->suspect = $name;
 
             $notif->save();
             Log::alert("Faculty account is updated Successfully by: $name!");
@@ -317,8 +316,8 @@ $name = Session::get('fullNs');
             ]);
             $notif = new notif;
             $notif->category = "Update";
-            $notif->content="$name has been updated this account: $id a student ";
-            $notif->suspect=$name ;
+            $notif->content = "$name has been updated this account: $id a student ";
+            $notif->suspect = $name;
 
             $notif->save();
             Log::alert("Student account is updated Successfully by: $name!");
@@ -327,25 +326,27 @@ $name = Session::get('fullNs');
 
     }
 
-    public function addArch(){
-  $authFetchs = $profile = STUDENT::where('ARCH_ID','N/A' )->paginate(10);
-  $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
+    public function addArch()
+    {
+        $authFetchs = $profile = STUDENT::where('ARCH_ID', 'N/A')->paginate(10);
+        $auth = STUDENT::where('ARCH_ID', 'N/A')->get();
 
 
-        return view('adminAddarch')->with('authFetch',$authFetchs)->with( 'auths',$auth);
+        return view('adminAddarch')->with('authFetch', $authFetchs)->with('auths', $auth);
 
     }
 
-    public function storeArch(Request $request){
+    public function storeArch(Request $request)
+    {
 
         $name = Session::get('fullNs');
         $arch = new ARCHIVES;
-        $total_arch=ARCHIVES::count();
-        $archID=  "IT-".$total_arch+1;
-        $arch->ARCH_ID =$archID;
+        $total_arch = ARCHIVES::count();
+        $archID = "IT-" . $total_arch + 1;
+        $arch->ARCH_ID = $archID;
 
-        $selectedCountries  = $request->input("countries");
-        $gh= $request->input("gh");
+        $selectedCountries = $request->input("countries");
+        $gh = $request->input("gh");
 
 
         $arch->ARCH_NAME = $request->input("name");
@@ -353,52 +354,51 @@ $name = Session::get('fullNs');
         $arch->IS_APPROVED = $request->input("stat");
         $arch->YEAR_PUB = $request->input("pubYear");
 
-            if ($request->hasFile('pdf_file')) {
+        if ($request->hasFile('pdf_file')) {
 
-                    $pdfFile = $request->file('pdf_file');
-                    $fileName = time() . '_' . $pdfFile->getClientOriginalName();
-                    $pdfFile->storeAs('pdfs', $fileName, 'public');
+            $pdfFile = $request->file('pdf_file');
+            $fileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfFile->storeAs('pdfs', $fileName, 'public');
 
-                    $selectedCountries  = $request->input("countries");
-
-
-                    if (isset($gh)) {
-                        $arch->PDF_FILE =  $fileName;
-                        $arch->GITHUB_LINK = $request->input("gh");
-                        $arch->IS_APPROVED = $request->input("stat");
-                        if (is_array($selectedCountries)) {
-                        foreach ($selectedCountries as $ID) {
-
-                            $country = STUDENT::where('S_ID', $ID)->first();
-                              $country->where('S_ID', $ID)->update(['ARCH_ID' => $archID,]);
+            $selectedCountries = $request->input("countries");
 
 
-                        }
+            if (isset($gh)) {
+                $arch->PDF_FILE = $fileName;
+                $arch->GITHUB_LINK = $request->input("gh");
+                $arch->IS_APPROVED = $request->input("stat");
+                if (is_array($selectedCountries)) {
+                    foreach ($selectedCountries as $ID) {
+
+                        $country = STUDENT::where('S_ID', $ID)->first();
+                        $country->where('S_ID', $ID)->update(['ARCH_ID' => $archID,]);
+
+
                     }
-                        $arch->save();
-
-                        $notif = new notif;
-                        $notif->category = "Add";
-                        $notif->content="$name has been added this archive: $archID ";
-                        $notif->suspect=$name ;
-                        return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
-                    } else {
-                        $arch->gh = 'There is no GitHub repository For this archive!';
-                        $arch->save();
-
-                        Log::alert("Archive has been added $name !");
-                        $notif = new notif;
-                        $notif->category = "Add";
-                        $notif->content="$name has been added this archive: $archID  ";
-                        $notif->suspect=$name ;
-                        return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
-                    }
-
                 }
-            else{
+                $arch->save();
 
-                return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
-                }
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this archive: $archID ";
+                $notif->suspect = $name;
+                return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
+            } else {
+                $arch->gh = 'There is no GitHub repository For this archive!';
+                $arch->save();
+
+                Log::alert("Archive has been added $name !");
+                $notif = new notif;
+                $notif->category = "Add";
+                $notif->content = "$name has been added this archive: $archID  ";
+                $notif->suspect = $name;
+                return redirect()->route('admin.archives')->with('alert', 'An archive succesfully added !');
+            }
+
+        } else {
+
+            return redirect()->back()->with('alert', 'No PDF file selected.')->withInput();
+        }
 
 
 
@@ -406,14 +406,16 @@ $name = Session::get('fullNs');
 
     }
 
-    public function archEdit($ARCH_ID){
+    public function archEdit($ARCH_ID)
+    {
 
-        $archs =DB::table('a_r_c_h_i_v_e_s')->where('ARCH_ID', $ARCH_ID)->first();
+        $archs = DB::table('a_r_c_h_i_v_e_s')->where('ARCH_ID', $ARCH_ID)->first();
 
         return view('adminEditArch')->with('archive', $archs);
     }
 
-    public function archUpdate(Request $request, string $id){
+    public function archUpdate(Request $request, string $id)
+    {
 
         $arch = ARCHIVES::where('ARCH_ID', $id)->first();
 
@@ -425,23 +427,23 @@ $name = Session::get('fullNs');
 
             $arch->where('ARCH_ID', $id)->update([
                 'PDF_FILE' => $fileName,
-               ]);
-            }
+            ]);
+        }
 
 
         if (isset($gh) && isset($request->PDF_FILE)) {
             $arch->where('ARCH_ID', $id)->update([
 
-            'ARCH_ID' => $request->ARCH_ID,
-            'ARCH_NAME' => $request->ARCH_NAME,
-            'ABSTRACT' => $request->ABSTRACT,
-            'GITHUB_LINK' => $request->GITHUB_LINK,
-            'IS_APPROVED' => $request->IS_APPROVED,
-            'PDF_FILE' => $request->PDF_FILE,
-           ]);
+                'ARCH_ID' => $request->ARCH_ID,
+                'ARCH_NAME' => $request->ARCH_NAME,
+                'ABSTRACT' => $request->ABSTRACT,
+                'GITHUB_LINK' => $request->GITHUB_LINK,
+                'IS_APPROVED' => $request->IS_APPROVED,
+                'PDF_FILE' => $request->PDF_FILE,
+            ]);
 
 
-        }elseif(isset($gh) && !isset($request->PDF_FILE) ){
+        } elseif (isset($gh) && !isset($request->PDF_FILE)) {
             $arch->where('ARCH_ID', $id)->update([
 
                 'ARCH_ID' => $request->ARCH_ID,
@@ -450,8 +452,8 @@ $name = Session::get('fullNs');
                 'GITHUB_LINK' => $request->GITHUB_LINK,
                 'IS_APPROVED' => $request->IS_APPROVED,
 
-               ]);
-           }elseif (!isset($gh) && isset($request->PDF_FILE)) {
+            ]);
+        } elseif (!isset($gh) && isset($request->PDF_FILE)) {
             $arch->where('ARCH_ID', $id)->update([
 
                 'ARCH_ID' => $request->ARCH_ID,
@@ -460,8 +462,8 @@ $name = Session::get('fullNs');
 
                 'IS_APPROVED' => $request->IS_APPROVED,
                 'PDF_FILE' => $request->PDF_FILE,
-               ]);
-           }else{
+            ]);
+        } else {
             $arch->where('ARCH_ID', $id)->update([
 
                 'ARCH_ID' => $request->ARCH_ID,
@@ -470,13 +472,13 @@ $name = Session::get('fullNs');
 
                 'IS_APPROVED' => $request->IS_APPROVED,
 
-               ]);
-           }
-           $selectedCountries  = $request->input("countries");
+            ]);
+        }
+        $selectedCountries = $request->input("countries");
 
 
 
-           if (isset($selectedCountries)) {
+        if (isset($selectedCountries)) {
             $auth = STUDENT::where('ARCH_ID', $id)->get();
 
             foreach ($auth as $a) {
@@ -486,7 +488,7 @@ $name = Session::get('fullNs');
 
                     'ARCH_ID' => 'N/A',
 
-                   ]);
+                ]);
 
 
             }
@@ -500,7 +502,7 @@ $name = Session::get('fullNs');
 
                         'ARCH_ID' => $request->ARCH_ID
 
-                       ]);
+                    ]);
 
                 }
             }
@@ -510,8 +512,8 @@ $name = Session::get('fullNs');
         Log::alert("Archive has been added $name !");
         $notif = new notif;
         $notif->category = "Update";
-        $notif->content="$name has been updated this archive: $id  ";
-        $notif->suspect=$name ;
+        $notif->content = "$name has been updated this archive: $id  ";
+        $notif->suspect = $name;
 
 
         $notif->save();
@@ -528,120 +530,120 @@ $name = Session::get('fullNs');
     //     return redirect()->route('admin.archives')->with('alert', 'The Archive has been Deleted Successfully!');
     // }
 
-   public function findSimilarWords(Request $request)
-{
-    $userInput = $request->input('user_input');
-    $abs = $request->input('abs');
-  if (empty($userInput) || is_null($userInput)) {
-        return view('adminChecker')->with('similarTitles', []);
-    }
-    // Split the user input into individual words
-    $inputWords = explode(' ', $userInput);
+    public function findSimilarWords(Request $request)
+    {
+        $userInput = $request->input('user_input');
+        $abs = $request->input('abs');
+        if (empty($userInput) || is_null($userInput)) {
+            return view('adminChecker')->with('similarTitles', []);
+        }
+        // Split the user input into individual words
+        $inputWords = explode(' ', $userInput);
 
-    // Retrieve all titles from the database
-    $titles = DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
+        // Retrieve all titles from the database
+        $titles = DB::table('a_r_c_h_i_v_e_s')->pluck('ARCH_NAME');
 
-     $similarTitles = [];
+        $similarTitles = [];
 
 
-    foreach ($titles as $title) {
-        $titleWords = explode(' ', $title);
+        foreach ($titles as $title) {
+            $titleWords = explode(' ', $title);
 
-        $totalSimilarityPercentage = 0;
-        $wordCount = count($inputWords);
-        $similarWords = [];
+            $totalSimilarityPercentage = 0;
+            $wordCount = count($inputWords);
+            $similarWords = [];
 
-        foreach ($inputWords as $inputWord) {
-            $maxSimilarityPercentage = 0;
-            $inputWordFound = false; // Flag to track if input word is found in the title
+            foreach ($inputWords as $inputWord) {
+                $maxSimilarityPercentage = 0;
+                $inputWordFound = false; // Flag to track if input word is found in the title
 
-            foreach ($titleWords as $titleWord) {
+                foreach ($titleWords as $titleWord) {
 
-                $distance = levenshtein($inputWord, $titleWord);
+                    $distance = levenshtein($inputWord, $titleWord);
 
-                $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($titleWord))) * 100;
-                if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
-                    $maxSimilarityPercentage = $wordSimilarityPercentage;
-                      if (stripos($titleWord, $inputWord) !== false) {
-                        $inputWordFound = true;
+                    $wordSimilarityPercentage = 100 - ($distance / max(strlen($inputWord), strlen($titleWord))) * 100;
+                    if ($wordSimilarityPercentage > $maxSimilarityPercentage) {
+                        $maxSimilarityPercentage = $wordSimilarityPercentage;
+                        if (stripos($titleWord, $inputWord) !== false) {
+                            $inputWordFound = true;
 
-                         }
+                        }
+                    }
                 }
+                if ($inputWordFound) {
+                    $similarWords[] = $inputWord;
+                }
+
+                $totalSimilarityPercentage += $maxSimilarityPercentage;
             }
-            if ($inputWordFound) {
-                $similarWords[] = $inputWord;
+
+            // Calculate the average similarity percentage for the title
+            if ($wordCount > 0) {
+                $averageSimilarityPercentage = $totalSimilarityPercentage / count($inputWords);
+
+            } else {
+                $averageSimilarityPercentage = 0;
             }
 
-            $totalSimilarityPercentage += $maxSimilarityPercentage;
+            // If the average similarity percentage is at least 50%, and there are similar words, add the title to the result
+            if ($averageSimilarityPercentage >= 10 && !empty($similarWords)) {
+                $similarTitles[] = [
+                    'title' => $title,
+                    'average_similarity_percentage' => round($averageSimilarityPercentage, 2),
+                    'similar_words' => array_unique($similarWords) // Remove duplicates from the list
+                ];
+            }
         }
 
-        // Calculate the average similarity percentage for the title
-        if ($wordCount > 0) {
-            $averageSimilarityPercentage = $totalSimilarityPercentage / count($inputWords);
+        // Sort the results by average similarity percentage in descending order
+        usort($similarTitles, function ($a, $b) {
+            return $b['average_similarity_percentage'] - $a['average_similarity_percentage'];
+        });
 
-        } else {
-            $averageSimilarityPercentage = 0;
-        }
-
-        // If the average similarity percentage is at least 50%, and there are similar words, add the title to the result
-        if ($averageSimilarityPercentage >= 10 && !empty($similarWords)) {
-            $similarTitles[] = [
-                'title' => $title,
-                'average_similarity_percentage' => round($averageSimilarityPercentage, 2),
-                'similar_words' => array_unique($similarWords) // Remove duplicates from the list
-            ];
-        }
+        // return dd( $wordSimilarityPercentage);
+        return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel', $userInput)->with('absract', $abs);
     }
 
-    // Sort the results by average similarity percentage in descending order
-    usort($similarTitles, function ($a, $b) {
-        return $b['average_similarity_percentage'] - $a['average_similarity_percentage'];
-    });
 
-// return dd( $wordSimilarityPercentage);
- return view('adminChecker')->with('similarTitles', $similarTitles)->with('titel',$userInput)->with('absract',$abs);
-}
-
-
-public function view($id)
+    public function view($id)
     {
-         // Fetch student data from the database based on $studentId
-    $show = userCC::find($id);
+        // Fetch student data from the database based on $studentId
+        $show = userCC::find($id);
 
-  return view('adminAccView')->with($show);
+        return view('adminAccView')->with($show);
     }
 
-public function srch(Request $request)
-    {
-        
-      }
-
-      
-      public function turnedOverArch()
+    public function srch(Request $request)
     {
 
-        $userID=Session::get('userID');
-        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',1)->paginate(10);
+    }
 
-            return view('turnedOverArch')->with('groups',$trndOver);
+
+    public function turnedOverArch()
+    {
+
+        $userID = Session::get('userID');
+        $trndOver = TURNED_OVER_ARCHIVES::where('PUB_STAT', 1)->paginate(10);
+
+        return view('turnedOverArch')->with('groups', $trndOver);
     }
 
     public function toPublish($trndID)
     {
-        $userID=Session::get('userID');
-        $idTRND=TURNED_OVER_ARCHIVES::where('id',$trndID)->value('id');
+        $userID = Session::get('userID');
+        $idTRND = TURNED_OVER_ARCHIVES::where('id', $trndID)->value('id');
         $stud = TURNED_OVER_ARCHIVES::find($trndID);
         if ($stud) {
             $stud->update(['PUB_STAT' => 2]);
         } else {
-           
+
         }
 
         viewsForTrnd::create([
             'TRND_ID' => $idTRND,
             'VIEWS' => 0
         ]);
-        
+
         return redirect()->back()->with('alert', "Succesfully published an archive.");
     }
 

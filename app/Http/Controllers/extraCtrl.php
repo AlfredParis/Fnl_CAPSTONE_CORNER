@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\certificate;
 use App\Models\userCC;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Http\Request;
@@ -482,7 +483,14 @@ class extraCtrl extends Controller
         $trnd->GROUP_ID = $grp_id;
         $trnd->ADVISER_ID = $userid;
         $trnd->TITLE = $request->input('TITLE');
-        $trnd->ABS = $request->input('ABS');
+        // if (!empty($request->input('ABS'))) {
+        //     $trnd->ABS = $request->input('ABS');
+
+        // } else {
+        //     return redirect()->back()->with('alert', 'Please put an abstract');
+
+        // }
+
         $trnd->DEPT_ID = $course;
         $trnd->DOCU = $file;
 
@@ -589,15 +597,26 @@ class extraCtrl extends Controller
         $yawa = "Archive Update #" . $total_arch;
         $file = OP_Archive::where('ARCH_NAME', $yawa)->where('GRP_ID', $grp_id)->value('PDF_FILE');
         $file_path = public_path('storage/pdfs/' . $file);
-        // $file_name = $file;
 
         return response()->download($file_path, $file);
     }
 
     public function addCert(Request $request, $grp_id)
     {
+        $grp_name = group::where('id', $grp_id)->value('GRP_NAME');
+        $cert_num = certificate::where('id', $grp_id)->count();
+        $cert_num_add = $cert_num + 1;
 
+        $newcert = new certificate;
+        $newcert->group_id = $grp_id;
+        $newcert->feedback = $request->input("feedback");
+        $newcert->status = $request->input("stat");
+        $pdfFile = $request->file('file');
+        $fileName = time() . '_grp_name_' . 'Grammarly_result_#' . $cert_num_add;
+        $pdfFile->storeAs('pdfs', $fileName, 'public');
+        $newcert->fileName = $fileName;
 
+        $newcert->SAVE();
         return redirect()->back();
     }
 }

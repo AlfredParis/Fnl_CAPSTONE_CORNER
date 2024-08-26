@@ -3,65 +3,41 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="issue_cert{{ $archive->id }}">Issue Certificate</h1>
+                <h1 class="modal-title fs-5" id="issue_cert{{ $archive->id }}"><strong> {{$archive->GRP_NAME}}</strong>
+                    Certificate Form
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
 
                 <form class="" action="{{ route('addCert',['grp_id' => $archive->id]) }}" method="POST"
                     enctype="multipart/form-data">
 
                     @csrf
 
+                    <div class="custom-file">
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Archive Title</label>
-                        <input type="text" class="form-control" placeholder="Enter Title" name="name"
-                            value="{{ old('name') }}" required>
-
+                        <label class="form-label" for="file">Result:(PDF report)</label>
+                        <input class="form-control" type="file" name="file" id="file" accept=".pdf">
                     </div>
 
-
-
-                    <div class="mb-3">
-
-
-                        <label for="pdf_file" class="form-label">Documentation</label>
-                        <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf"
-                            value="{{ old('pdf_file') }}" id="pdf" class="form-control">
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="pubYear" class="form-label">Approved Year</label>
-                        <input type="text" class="form-control" placeholder="Ex: JUNE 2023" name="pubYear"
-                            value="{{ old('pubYear') }}" required>
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="gh" class="form-label">GitHub Repository</label>
-                        <input type="text" class="form-control" placeholder="Enter Link" name="gh" id="gh"
-                            value="{{ old('gh') }}">
-
-                    </div>
 
                     <div class="dropdown">
                         <label for="Status" class="form-label">Status:</label>
                         <select id="stat" name="stat" class="form-select" aria-label="Default select example">
-                            <option value="approved">approved</option>
-                            <option value="not approved">not approved</option>
-
+                            <option value="passed">Passed</option>
+                            <option value="failed">Failed</option>
                         </select>
 
 
                         <br>
                     </div>
-                    <div class="form-floating">
-
-                        <textarea class="form-control" placeholder="Leave a abstract here" name="abs"
+                    <div class="input-group">
+                        <span class="input-group-text">feedback</span>
+                        <textarea class="form-control" placeholder="Leave a feedback here" name="feedback"
                             id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="floatingTextarea2">Abstract</label>
+
                     </div>
 
 
@@ -70,8 +46,11 @@
             </div>
 
             <div class="modal-footer">
+                <a href="https://www.grammarly.com/plagiarism-checker" class="btn btn-success" target="_blank">Open
+                    plagiarism checker</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Add Archive</button>
+
             </div>
             </form>
         </div>

@@ -23,11 +23,7 @@ Substitute Admin Dashboard
                 checking</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('plagiarism.plagiarism-checked') }}">
-            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">plagiarism checked</span>
-        </a>
-    </li>
+
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('plagiarism.Certificates') }}">
             <i class="fs-7 fa fa-certificate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Certificates</span>
@@ -48,8 +44,11 @@ Substitute Admin Dashboard
                     <thead>
                         <tr>
                             <th scope="col">Group Name</th>
-                            <th scope="col">Open Group</th>
-                            <th scope="col">Ready for turn over</th>
+                            {{-- <th scope="col">Open Group</th> --}}
+                            <th scope="col">Status</th>
+                            <th scope="col">Download</th>
+                            <th scope="col">Issue Certificate</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -68,9 +67,9 @@ Substitute Admin Dashboard
                             @endphp
 
                             <td> {{ $archive->GRP_NAME}}</td>
-                            <td> <a class="btn btn-primary"
-                                    href="{{ route('faculty.myGroup',['advisory' => $archive->id]) }}">open</a>
-                            </td>
+                            {{-- <td> <a class="btn btn-primary"
+                                    href="{{ route('plagiarism.myGroup',['advisory' => $archive->id]) }}">open</a>
+                            </td> --}}
 
                             <td>
                                 @if ($isTurned==4)

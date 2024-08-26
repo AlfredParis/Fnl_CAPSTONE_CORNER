@@ -22,11 +22,7 @@ My Advisory
                 checking</span>
         </a>
     </li>
-    <li class="nav-item py-2 py-sm-0">
-        <a class="nav-link text-white" href="{{ route('plagiarism.plagiarism-checked') }}">
-            <i class="fs-7 fa fa-user-graduate"></i><span class="fs-6 d-none ms-2 d-sm-inline">plagiarism checked</span>
-        </a>
-    </li>
+
     <li class="nav-item py-2 py-sm-0">
         <a class="nav-link text-white" href="{{ route('plagiarism.Certificates') }}">
             <i class="fs-7 fa fa-certificate"></i><span class="fs-6 d-none ms-2 d-sm-inline">Certificates</span>

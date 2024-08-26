@@ -207,7 +207,7 @@
                     @section('topnav')
                     @parent
                     @show
-                </ul>
+                    </ul>
 
                     @section('logout')
 

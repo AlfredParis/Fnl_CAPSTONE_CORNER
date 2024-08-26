@@ -10,16 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->string('GRP_NAME');
-            $table->string('ADVSR_ID');
-            $table->string('ARCH_ID');
-            $table->string('STATUS_ID');
-            $table->string('ABS')->nullable();
+            $table->string('group_id');
+            $table->text('feedback');
+            $table->text('status');
+            $table->string('image')->nullable();
+
             $table->timestamps();
         });
-
     }
 
     /**
@@ -27,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('certificates');
     }
 };

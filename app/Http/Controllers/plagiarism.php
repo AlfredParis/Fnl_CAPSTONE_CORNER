@@ -21,6 +21,8 @@ use App\Models\notif;
 use App\Models\OP_Archive;
 use App\Models\TURNED_OVER_ARCHIVES;
 use App\Models\viewsForTrnd;
+use App\Models\certificate;
+use App\Models\department;
 
 
 
@@ -33,45 +35,48 @@ class plagiarism extends Controller
     {
 
 
-       $total_arch = ARCHIVES::count();
-       $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
-       $total_student = student_acc::where('ACCTYPE', 'student')->count();
-       $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
-       $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
-       $views=viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
+        $total_arch = ARCHIVES::count();
+        $total_admin = USER_ACC_EMP::where('ACCTYPE', 'admin')->count();
+        $total_student = student_acc::where('ACCTYPE', 'student')->count();
+        $total_faculty = USER_ACC_EMP::where('ACCTYPE', 'faculty')->count();
+        $archDesc = ARCHIVES::orderBy('viewCount', 'desc')->paginate(3);
+        $views = viewsForTrnd::orderBy('VIEWS', 'desc')->paginate(3);
 
 
-       return view('plag.dashboard')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
+        return view('plag.dashboard')->with('viewss', $views)->with('ttlStud', $total_student)->with('ttlArch', $total_arch);
 
 
     }
 
     public function Archives()
     {
-        $trndOver=TURNED_OVER_ARCHIVES::where('PUB_STAT',2)->paginate(10);
-       return view('plag.archives')->with('trnd',$trndOver);
+        $trndOver = TURNED_OVER_ARCHIVES::where('PUB_STAT', 2)->paginate(10);
+        return view('plag.archives')->with('trnd', $trndOver);
 
 
     }
+    public function myGroup(string $advisory)
+    {
 
+
+        $myGRP = group::where('id', $advisory)->first();
+        $archives = OP_Archive::where('GRP_ID', $advisory)->get();
+
+        return view('plag.Mygroup')->with('isGrouped', $advisory)->with('GRP_det', $myGRP)->with('arch', $archives);
+
+    }
     public function FPC()
     {
-        $forPlag=group::where('STATUS_ID',4)->paginate(10);
-       return view('plag.For-plagiarism-checking')->with('groups',$forPlag);
+        $forPlag = group::where('STATUS_ID', 4)->paginate(10);
+        return view('plag.For-plagiarism-checking')->with('groups', $forPlag);
 
 
     }
-    public function PC()
-    {
 
-       return view('plag.plagiarism-checked');
-
-
-    }
     public function Cert()
     {
-
-       return view('plag.Certificates');
+        $certificate = certificate::where('status', 'passed')->paginate(10);
+        return view('plag.Certificates')->with('certificates', $certificate);
 
 
     }

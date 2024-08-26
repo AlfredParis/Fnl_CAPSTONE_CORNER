@@ -58,6 +58,9 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
         <h6 class="group-nav-content"> {{ $GRP_det->GRP_NAME }} </h6>
         <h6 class="group-nav-content"> Adviser: {{ $advicername->NAME }}</h6>
         <h6 class="group-nav-content"> Status: {{ $stat }}</h6>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#abs{{$GRP_det->id}}"
+            style="border:none;background-color:rgba(0, 0, 255, 0); color:aliceblue; padding-left:20px;">
+            Abstract</button>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
             aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -95,11 +98,14 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                 </li>
             </ul>
         </div>
+
     </div>
+
 </nav>
 
 <div class="pddingForBody">
     @include('studentModal.addMember')
+    @include('modal.abstract')
     <div style="margin-top: 60px; margin-bottom: 10vh;">
 
         <table class="table table-striped">
@@ -123,8 +129,8 @@ $stat=\App\Models\archStatus::where('id', $GRP_det->STATUS_ID)->value("arch_stat
                     <td scope="row">{{$oparch->UPLOADER}}</td>
                     <td scope="row">{{$oparch->DESCRIPTION}}</td>
                     <td scope="row">
-                        <a href="#"
-                            onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');" class="btn btn-primary">Open Document</a>
+                        <a href="#" onclick="openPDF('{{ asset('storage/pdfs/' . $oparch->PDF_FILE) }}');"
+                            class="btn btn-primary">Open Document</a>
                     </td>
                     <td> <a class="btn btn-primary" href="#comment{{ $oparch->id }}" data-bs-toggle="modal">Comments</a>
                     </td>

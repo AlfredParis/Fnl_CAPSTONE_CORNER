@@ -218,8 +218,9 @@ Route::group(['prefix' => 'plagiarism', 'as' => 'plagiarism.', 'middleware' => '
     Route::get('/', [plagiarism::class, 'index'])->name('index');
     Route::get('Archives', [plagiarism::class, 'Archives'])->name('Archives');
     Route::get('For-plagiarism-checking', [plagiarism::class, 'FPC'])->name('For-plagiarism-checking');
-    Route::get('plagiarism-checked', [plagiarism::class, 'PC'])->name('plagiarism-checked');
     Route::get('Certificates', [plagiarism::class, 'Cert'])->name('Certificates');
+    Route::get('{advisory}myGroup', [plagiarism::class, 'myGroup'])->name('myGroup');
+
 });
 
 
